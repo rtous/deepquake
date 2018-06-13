@@ -1,0 +1,63 @@
+1. Follow instructions in INFRAESTRUCTURE/arvei.txt
+
+2. ConvNetQuake virtualenv: 
+
+cd /scratch/nas/4/rtous
+source convnetquake/bin/activate
+virtualenv convnetquake
+
+#NOTA: Algunes fallen ja que depenen de llibreries no especificades aquí de les que s'instal·la una versió massa nova. Es poden instal·lar manualment.
+
+pip install -U pip wheel setuptools
+pip install singledispatch
+pip install llvmlite
+pip install funcsigs
+pip install numpy==1.11.2
+pip install cython==0.25.2 &&
+pip install pandas==0.19.0
+pip install matplotlib==1.5.3
+pip install protobuf==3.1.0
+pip install EQcorrscan==0.1.6
+pip install obspy==1.0.2
+pip install librosa==0.4.3
+pip install -e git+https://github.com/gem/oq-hazardlib.git@589fa31ddca3697e6b167082136dc0174a77bc16#egg=openquake.hazardlib
+pip install scikit-image==0.12.3
+pip install scikit-learn==0.18 
+pip install scipy==0.18.1
+pip install seaborn==0.7.1
+pip install setproctitle==1.1.10
+pip install tensorflow==0.12.0
+pip install Tornado==4.0.0
+pip install terminado==0.6
+pip install tqdm==4.9.0
+pip install python-gflags
+
+3. Prepare the code and the data within the scratch folder
+
+3.1 
+(within /scratch/nas/4/rtous)
+git clone https://github.com/tperol/ConvNetQuake.git
+cd ConvNetQuake
+mkdir -p data/streams
+mkdir -p models/convnetquake
+mkdir -p data/6_clusters
+mkdir -p data/catalogs
+
+3.2 
+
+FROM YOUR LOCAL MACHINE (your own ConvNetQuake dir):
+(previously you need to download the data from the Dropbox link that appears on the repo)
+scp data/streams/GSOK027_8-2014.mseed rtous@gw.ac.upc.edu:/scratch/nas/4/rtous/ConvNetQuake/data/streams
+scp models/convnetquake/* rtous@gw.ac.upc.edu:/scratch/nas/4/rtous/ConvNetQuake/models/convnetquake
+scp data/catalogs/* rtous@gw.ac.upc.edu:/scratch/nas/4/rtous/ConvNetQuake/data/catalogs
+#NOTE: This one need to be generated locally (it uses matplotlib)
+scp data/6_clusters/catalog_with_cluster_ids.csv rtous@gw.ac.upc.edu:/scratch/nas/4/rtous/ConvNetQuake/data/6_clusters
+
+4. things to do by the execution scripts
+
+(Note: try before within an interactive execution node)
+
+source convnetquake/bin/activate
+export PYTHONPATH=.
+
+

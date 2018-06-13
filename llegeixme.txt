@@ -1,0 +1,11 @@
+
+1 .mseed -> N windows of 10 seconds each
+
+
+
+
+--------------
+python read_mseed.py --stream_path data/streams/GSOK027_3-2015.mseed \
+--output_dir data/tfrecord \
+--window_size 10 --window_step 11 \
+--max_windows 5000

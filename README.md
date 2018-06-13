@@ -45,7 +45,7 @@ pip install -r requirements.txt
 
 	(takes about 3-5 minutes, results within the output dir)
 
-#### Test 2: Train
+#### Test 2: Train 
 	
 	mkdir -p data/6_clusters
 	#DOWNLOAD data/6_clusters/detection/train into data/6_clusters (Note: +4GB!!)
@@ -61,7 +61,7 @@ pip install -r requirements.txt
 	#This outputs in data/6_clusters: catalog_with_cluster_ids.csv: catalog of labeled events + clusters_metadata.json: number of events per clusters.
 
 	b) Match training data to clusters (regions)
-	./bin/preprocess/create_dataset_events.py --stream_dir data/streams --catalog data/6_clusters/catalog_with_cluster_ids.csv --output_dir data/6_clusters/events --save_mseed True --plot True
+	./bin/preprocess/create_dataset_events.py --stream_dir data/streams --catalog data/6_clusters/catalog_with_cluster_ids.csv --output_dir data/6_clusters/events --save_mseed True --plot False
 	#A data/6_clusters/events deixa les dades per a l'entrenament
 
 	c) Data augmentation
@@ -71,5 +71,13 @@ pip install -r requirements.txt
 	#DOWNLOAD data/catalogs/OK_2014-Benz_catalog-2016.csv into data/catalogs
 	./bin/preprocess/create_dataset_noise.py --stream_path data/streams/GSOK027_8-2014.mseed --catalog data/catalogs/Benz_catalog.csv --output_dir data/noise_OK029/noise_august
 
+	The training data should be within a directory with this structure:
+	
+	train
+		|- positive 
+		|- negative
+
 TROUBLESHOOTING:
 - "tensorflow.python.framework.errors_impl.InternalError: Unable to get element from the feed as bytes." -> cannot find the checkpoint file
+
+- "ValueError: string_input_producer requires a non-null input tensor" -> the training directoris should be "positive" and "negative" without "s" at the end.
