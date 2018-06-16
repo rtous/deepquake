@@ -58,6 +58,9 @@ def main(args):
     print '+ Preprocessing stream'
     stream = preprocess_stream(stream)
 
+    #debug: plot all
+    stream.plot(outfile="stream.png")
+
     # Dictionary of nb of events per tfrecords
     metadata = {}
     output_metadata = os.path.join(args.output_dir,"metadata.json")
