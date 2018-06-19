@@ -1,0 +1,91 @@
+ 2015  2 5 0538 57.9 L   8.181 -72.302  5.0F FUN 29 1.0 4.6WFUN                1
+  173.4700   83.2800  -18.8800                               1    FUN FOCMEC   F
+ SPEC AVERAGE  MO 16.1 ST277.4 OM  4.5 f0 2.23 R0.6230 AL 1.18 WI 40.1 MW  4.6 3
+ SPEC SD       MO  0.1 ST200.6 OM  0.1 f00.433 R0.1282 AL      WI      MW  0.1 3
+ GAP=233        2.53       6.5     7.0  0.0  0.1367E+02  0.0000E+00  0.0000E+00E
+ SPEC TURVHH N MO 16.0 ST 76.9 OM  4.5 f0 1.56 R0.8538 AL 0.85 WI 46.5 MW  4.6 3
+ SPEC TURVHH N T 541 1 K 0.000 GD  234 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC SOCVHH N MO 16.1 ST559.1 OM  4.8 f0 2.95 R0.4515 AL 0.95 WI 19.3 MW  4.7 3
+ SPEC SOCVHH N T 53940 K 0.000 GD  126 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC SIQVHH N MO 16.1 ST 76.5 OM  4.6 f0 1.53 R0.8706 AL 1.49 WI 37.1 MW  4.7 3
+ SPEC SIQVHH N T 54026 K 0.000 GD  196 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC SANVHH N MO 16.1 ST282.2 OM  4.7 f0 2.24 R0.5946 AL 1.35 WI 35.7 MW  4.7 3
+ SPEC SANVHH N T 54015 K 0.000 GD  183 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC RIOVHH N MO 16.1 ST458.7 OM  4.4 f0 2.70 R0.4933 AL 1.05 WI 60.0 MW  4.7 3
+ SPEC RIOVHH N T 54321 K 0.000 GD  340 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC PCRVHH N MO 16.2 ST190.7 OM  4.6 f0 1.81 R0.7359 AL 1.53 WI 56.2 MW  4.8 3
+ SPEC PCRVHH N T 54158 K 0.000 GD  295 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC MAPVHH N MO 15.9 ST158.7 OM  4.4 f0 2.21 R0.6027 AL 2.29 WI 35.2 MW  4.5 3
+ SPEC MAPVHH N T 54047 K 0.000 GD  214 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC DABVHH N MO 15.9 ST159.1 OM  4.5 f0 2.14 R0.6224 AL 1.42 WI 29.7 MW  4.6 3
+ SPEC DABVHH N T 54022 K 0.000 GD  188 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC CURVHH N MO 15.9 ST311.1 OM  4.5 f0 2.71 R0.4915 AL 1.38 WI 27.5 MW  4.6 3
+ SPEC CURVHH N T 54014 K 0.000 GD  181 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC CRUVHH N MO 16.0 ST189.3 OM  4.3 f0 2.21 R0.6027 AL 0.00 WI 47.7 MW  4.6 3
+ SPEC CRUVHH N T 54247 K 0.000 GD  322 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC CARVHH N MO 16.0 ST143.4 OM  4.4 f0 2.02 R0.6594 AL 0.20 WI 47.6 MW  4.6 3
+ SPEC CARVHH N T 54127 K 0.000 GD  253 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC BIRVHH N MO 16.1 ST209.9 OM  4.5 f0 2.09 R0.6373 AL 1.12 WI 52.9 MW  4.7 3
+ SPEC BIRVHH N T 54138 K 0.000 GD  266 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ SPEC BAUVHH N MO 16.3 ST790.6 OM  4.8 f0 2.76 R0.4826 AL 1.72 WI 26.3 MW  4.8 3
+ SPEC BAUVHH N T 54048 K 0.000 GD  218 VS 3.60 DE 3.00 Q0440.0 QA 0.70 VS 3.60 3
+ ACTION:UP  15-02-05 12:44 OP:leo  STATUS:               ID:20150205053800     I
+ OLDACT:UP  15-02-05 01:30 OP:re   STATUS:               ID:20150205053800     3
+ OLDACT:UP  15-02-05 01:27 OP:re   STATUS:               ID:20150205053800     3
+ OLDACT:UP  15-02-05 01:23 OP:re   STATUS:               ID:20150205053800     3
+ OLDACT:UP  15-02-05 01:20 OP:re   STATUS:               ID:20150205053800     3
+ OLDACT:REG 15-02-05 01:20 OP:re   STATUS:               ID:20150205053800     3
+ 2015-02-05-0538-00S.MAN___161                                                 6
+ STAT SP IPHASW D HRMM SECON CODA AMPLIT PERI AZIMU VELO AIN AR TRES W  DIS CAZ7
+ TACV HZ EP        540 19.35                              43                    
+ TACV HN ES        541 18.69                              43                    
+ SOCV HZ EP     D  539 22.46                              43   -1.7810  160  86 
+ SOCV HN ES        539 42.19                              43   -1.5210  160  86 
+ AGIV EZ EP     D  539 25.11                              43   -1.9610  179  65 
+ SDV  BZ EP     D  539 28.41                              43   -0.7910  200  67 
+ MCQV HZ EP     C  539 30.69                              43    0.6310  208 353 
+ MCQV HN ES        539 55.98                              43    2.1410  208 353 
+ TORV EZ EP        539 36.23                              43   -0.6110  263  55 
+ TORV EN ES        540  6.14                              43    0.5010  263  55 
+ CURV HZ EP     C  539 43.62                              43   -0.8910  328  52 
+ CURV HN ES        540 18.01                              43   -0.9810  328  52 
+ SANV HZ EP     C  539 45.55                              43   -0.2010  337  64 
+ SANV HN ES        540 20.65                              43   -0.5010  337  64 
+ ELOV HZ EP     D  539 46.64                              43    1.0310  337 113 
+ ELOV HN ES        540 19.93                              43   -0.9610  337 113 
+ DABV HZ EP     C  539 46.99                              43   -0.6410  354  31 
+ DABV HN ES        540 24.48                              43    0.0710  354  31 
+ SIQV HZ EP     C  539 50.78                              43   -0.8210  387  45 
+ SIQV HN ES        540 33.00                              43    1.6810  387  45 
+ MAPV HZ EP     D  540  0.73                              43    0.2610  460  66 
+ MAPV HN ES        540 46.45                              43   -0.3110  460  66 
+ BAUV HN ES        540 50.48                              43    0.4010  477  79 
+ MONV HZ EP        540  2.32                              43   -1.6210  489  31 
+ JACV HZ EP        540  5.24                              43    0.1810  499  50 
+ AUA1 BZ EP        540 10.32                              43    0.2910  540  27 
+ TURV HZ EP     C  540 10.13                              43   -1.1810  551  63 
+ TURV HN ES        541  4.46                              43   -1.1610  551  63 
+ PAYV HZ EP     D  540 17.75                              43    0.8110  597 120 
+ PAYV HN ES        541 16.75                              43    1.3310  597 120 
+ CARV HZ EP        540 23.31                              43    0.6710  644  66 
+ CARV HN ES        541 25.22                              43   -0.1210  644  66 
+ FUNV HZ EP     D  540 23.92                              43    0.0310  654  67 
+ FUNV HN ES        541 27.78                              43    0.2710  654  67 
+ MERV HZ EP     C  540 25.43                              43   -0.4210  671  79 
+ MERV HN ES        541 32.42                              43    1.5010  671  79 
+ BIRV HZ EP     D  540 30.33                              43   -0.1510  710  69 
+ BIRV HN ES        541 38.81                              43   -0.1710  710  69 
+ PCRV HZ EP        540 49.67                              43   -0.8010  876  75 
+ PCRV HN ES        542 14.77                              43    1.0210  876  75 
+ CUMV EZ EP        540 58.42                              43    2.0410  925  74 
+ CUMV EN ES        542 23.46                              43   -0.5810  925  74 
+ MAN  EZ EP        540 57.99                              43    1.0810  929  73 
+ MAN  EN ES        542 26.84                              43    1.8810  929  73 
+ ORIV HZ EP        541  2.15                              43   -1.3410  984  84 
+ CRUV HZ EP        541 10.33                              43    0.3410 1037  74 
+ CRUV HN ES        542 46.95                              43   -0.7710 1037  74 
+ RIOV HZ EP        541 24.57                              43    0.35 9 1156  90 
+ RIOV HN ES        543 14.59                              43    2.10 9 1156  90 
+ LUEV HZ EP        541 33.42                              43    0.66 9 1225 101 
+ BAUV HZ EP        540  1.82                              43   -0.5610  477  79 
+                                                                                

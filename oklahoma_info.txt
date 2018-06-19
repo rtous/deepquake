@@ -1,0 +1,40 @@
+
+PREDICTING:
+--------------------
+(deepquake) Rubens-MacBook-Pro:ConvNetQuake rtous$ ./bin/predict_from_stream.py --stream_path data/streams/GSOK027_8-2014.mseed --checkpoint_dir models/convnetquake --n_clusters 6 --window_step 11 --output output/july_detections/from_stream --max_windows 8640
++ Loading Stream GSOK027_8-2014.mseed
++ Preprocessing stream
+Catalog created to store events output/july_detections/from_stream/GSOK027_8-2014.csv
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:VARIABLES collection name is deprecated, please use GLOBAL_VARIABLES instead; VARIABLES will be removed after 2017-03-02.
+WARNING:tensorflow:From /Users/rtous/DockerVolume/ConvNetQuake/tflib/model.py:35 in __init__.: all_variables (from tensorflow.python.ops.variables) is deprecated and will be removed after 2017-03-02.
+Instructions for updating:
+Please use tf.global_variables instead.
+Loaded model at step 32000 from snapshot models/convnetquake/model-32000.
+Predicting using model at step 32000
+Analyzing 2014-08-01T00:00:00.000000Z records
+Analyzing 2014-08-01T03:03:20.000000Z records
+Analyzing 2014-08-01T06:06:40.000000Z records
+Analyzing 2014-08-01T09:10:00.000000Z records
+Analyzing 2014-08-01T12:13:20.000000Z records
+Analyzing 2014-08-01T15:16:40.000000Z records
+Analyzing 2014-08-01T18:20:00.000000Z records
+Analyzing 2014-08-01T21:23:20.000000Z records
+Analyzing 2014-08-02T00:26:40.000000Z records
+stopped after 8640 windows
+found 118 events
+Run time:  219.084998846

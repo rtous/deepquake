@@ -1,0 +1,79 @@
+ 2015  2 5 0421 50.5 L   8.261 -72.186  0.0  TES 33 1.0 5.2WTES                1
+ SPEC AVERAGE  MO 16.9 ST707.7 OM  5.4 f0 1.81 R0.7929 AL 1.38 WI 46.7 MW  5.2 3
+ SPEC SD       MO  0.1 ST335.9 OM  0.2 f00.453 R0.2434 AL      WI      MW  0.1 3
+ GAP=268        2.60      12.7    14.1 21.5  0.7932E+02 -0.1856E+03 -0.1760E+03E
+   22.1300   50.7300   77.0400                               3    TES FOCMEC   F
+ SPEC TURVHH N MO 16.8 ST999.9 OM  5.3 f0 2.25 R0.5920 AL 1.81 WI 51.1 MW  5.2 3
+ SPEC TURVHH N T 42353 K 0.000 GD  231 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00 3
+ SPEC SOCVHH N MO 16.9 ST999.9 OM  5.7 f0 2.43 R0.5481 AL 2.18 WI 26.4 MW  5.2 3
+ SPEC SOCVHH N T 42227 K 0.000 GD  121 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00 3
+ SPEC SANVHH N MO 17.1 ST999.9 OM  5.7 f0 1.84 R0.7239 AL 1.23 WI 44.2 MW  5.4 3
+ SPEC SANVHH N T 423 7 K 0.000 GD  179 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00 3
+ SPEC MONVHH N MO 16.7 ST423.4 OM  5.2 f0 1.65 R0.8073 AL 0.43 WI 73.3 MW  5.1 3
+ SPEC MONVHH N T 42347 K 0.000 GD  217 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00 3
+ SPEC BIRVHH N MO 16.8 ST124.6 OM  5.2 f0 1.03 R1.2932 AL 1.32 WI 60.3 MW  5.1 3
+ SPEC BIRVHH N T 42422 K 0.000 GD  263 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00 3
+ SPEC BAUVHH N MO 16.9 ST698.6 OM  5.4 f0 1.68 R0.7929 AL 1.33 WI 24.7 MW  5.2 3
+ SPEC BAUVHH N T 42343 K 0.000 GD  214 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00 3
+ ACTION:UP  15-02-06 13:39 OP:leo  STATUS:               ID:20150205042000     I
+ OLDACT:UP  15-02-06 13:20 OP:leo  STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-06 11:10 OP:leo  STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-06 10:44 OP:leo  STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 11:08 OP:leo  STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 10:43 OP:leo  STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 10:10 OP:leo  STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 09:23 OP:leo  STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 08:30 OP:leo  STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 00:04 OP:re   STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 00:03 OP:re   STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 00:03 OP:re   STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 00:01 OP:re   STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-05 00:00 OP:re   STATUS:               ID:20150205042000     3
+ OLDACT:UP  15-02-04 23:58 OP:re   STATUS:               ID:20150205042000     3
+ OLDACT:REG 15-02-04 23:58 OP:re   STATUS:               ID:20150205042000     3
+ 2015-02-05-0420-00S.MAN___161                                                 6
+ 2015-02-05-0409-59S.COL___018                                                 6
+ STAT SP IPHASW D HRMM SECON CODA AMPLIT PERI AZIMU VELO AIN AR TRES W  DIS CAZ7
+ FUNV HZ EP     C  423 14.73                              43                    
+ TACV HZ EP     C  423 10.09                              43                    
+ CARV HZ EP        423 13.77                              43                    
+ URI  HZ EP        422 41.10                              43                    
+ TACV HN ES        424  9.61                              43                    
+ MAPV HZ EP     C  422 51.31                              43                    
+ CUMV EZ EP     D  423 48.41                              43                    
+ AUA1 BZ EP        422 59.90                              43                    
+ MCQV HZ EP     C  422 21.63                              43                    
+ MCQV HN ES        422 47.32                              43                    
+ SOCV HZ EP     D  422 13.32                              70   -0.7110  147  89 
+ SOCV HN ES        422 29.88                              70   -1.5810  147  89 
+ SDV  BZ EP     D  422 19.73                              50    0.7510  184  68 
+ TORV EZ EP     C  422 27.34                              50   -0.8410  259  56 
+ CURV HZ EP     C  422 34.30                              50   -0.4510  312  51 
+ CURV HN ES        423 10.00                              50    2.4810  312  51 
+ SANV HZ EP     C  422 36.04                              50   -0.0010  322  65 
+ SANV HN ES        423 10.40                              50    0.6310  322  65 
+ ELOV HZ EP     D  422 37.95                              50    1.1310  329 115 
+ DABV HZ EP     C  422 37.54                              50   -0.6210  340  30 
+ SIQV HZ EP        422 41.54                              50   -0.5610  371  44 
+ BAUV HZ EP     D  422 53.00                              49   -0.2710  462  80 
+ BAUV HN ES        423 38.86                              49   -0.8810  462  80 
+ MONV HZ EP     C  422 53.54                              49   -1.2910  475  31 
+ MONV HN ES        423 42.29                              49   -0.1710  475  31 
+ JACV HZ EP     C  422 55.69                              49   -0.1210  483  49 
+ TURV HZ EP     C  423  1.61                              49   -0.4910  535  63 
+ TURV HN ES        423 55.54                              49    0.4410  535  63 
+ PAYV HZ EP     D  423  8.95                              49    0.0910  591 122 
+ MERV HZ EP     C  423 16.37                              49   -0.5110  657  80 
+ BIRV HZ EP     C  423 21.22                              49   -0.2010  695  69 
+ BIRV HN ES        424 28.61                              49   -0.1010  695  69 
+ PCRV HZ EP        423 40.77                              47    0.2610  856  75 
+ ORIV HZ EP        423 53.47                              47   -0.4010  970  84 
+ CRUV HZ EP     D  424  1.99                              47    2.4510 1018  74 
+ RIOV HZ EP     D  424 15.30                              47    1.0510 1143  90 
+ BRR  HZ EP     C  422 25.52                              47   -99.9 0 3805 333 
+ TAM  HZ EP     C  422 23.56                              47   -99.9 0 8411  69 
+ SML  HZ EP     C  422 23.83                              47   -99.9 0 8485 332 
+ HEL  HZ EP        422 53.25                              47   -99.9 0 9622  30 
+ RUS  HZ EP     C  422 33.71                              47   -99.9 011768 331 
+ AGIV EZ EP     D  422 15.60                              65                    
+                                                                                

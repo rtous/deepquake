@@ -45,3 +45,17 @@ python plot_mseed.py --stream_path /Users/rtous/DockerVolume/deepquake_data/sfil
 python read_metadata.py --stream_path /Users/rtous/DockerVolume/deepquake_data/20150110_0517/10-0517-00L.S201501
 
 python create_dataset_events.py --stream_dir data/streams --catalog data/6_clusters/catalog_with_cluster_ids.csv --output_dir data/6_clusters/events --save_mseed False --plot True
+
+
+4. Transforming FUNVISIS mseed to OKLAHOMA-like mseed (selecting one station)
+
+python funvisis2oklahoma.py
+
+5. Predict with ConvNetQuake over transformed FUNVISIS mseed
+
+cd ..
+cd ConvNetQuake 
+./bin/predict_from_stream.py --stream_path ../deepquake/funvisis/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161.mseed \
+--checkpoint_dir models/convnetquake --n_clusters 6 \
+--window_step 11 --output output/funvisis \
+--max_windows 8640 --plot
