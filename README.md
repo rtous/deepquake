@@ -183,6 +183,7 @@ This utility splits the data of all the events for one station (harcoded).
 
 ## TODO
 
+* metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
 * Check the real duration of funvisis events
 * Extract Funvisis data for ALL stations
 * DUBTE: Coincideix el temps d'inici de l'event amb l'inici de l'stream?

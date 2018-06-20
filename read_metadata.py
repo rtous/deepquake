@@ -24,6 +24,7 @@ def main(args):
             print comment
         for pick in event.picks:
             print pick
+            print pick.waveform_id.station_code
         for origin in event.origins:
             print origin
         for magnitude in event.magnitudes:
