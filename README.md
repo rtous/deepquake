@@ -55,9 +55,9 @@ Get the repo:
 	#DOWNLOAD models/convnetquake/model-32000 into folder models/convnetquake
 	#DOWNLOAD models/convnetquake/checkpoint into folder models/convnetquake
 	./bin/predict_from_stream.py --stream_path data/streams/GSOK027_8-2014.mseed \
---checkpoint_dir models/convnetquake --n_clusters 6 \
---window_step 11 --output output/july_detections/from_stream \
---max_windows 8640
+	--checkpoint_dir models/convnetquake --n_clusters 6 \
+	--window_step 11 --output output/july_detections/from_stream \
+	--max_windows 8640
 
 	(takes about 3-5 minutes, results within the output dir)
 
@@ -90,7 +90,7 @@ Data augmentation:
 Noise windows:
 
 	#DOWNLOAD data/catalogs/OK_2014-Benz_catalog-2016.csv into data/catalogs
-	./bin/preprocess/create_dataset_noise.py --stream_path data/streams/GSOK027_8-2014.mseed --catalog data/catalogs/Benz_catalog.csv --output_dir data/noise_OK029/noise_august
+	./bin/preprocess/create_dataset_noise.py --stream_path data/streams/GSOK027_8-2014.mseed --catalog data/catalogs/Benz_catalog.csv --output_dir data/noise_OK029/noise_august --plot
 
 The training data should be within a directory with this structure:
 	
@@ -109,12 +109,11 @@ Now you can run step 2.2 again to train with your own data.
 * Also sampled at 100Hz, also 3-channels
 * Data for 5 events but for many stations, +50 (AGIV, AUA1, BAUV, BBGH...).
 * Event time windows is higher than 10s:
-
-	**2015-01-10-0517-00S (total time 449.0s)
-	**2015-02-05-0420-00S (total time 1199.0s)
-	**2015-02-05-0538-00S (total time 1199.0s)
-	**2015-02-05-0703-00S (total time 1199.0s)
-	**2015-02-14-1027-00S (total time 449.0s)
+	*2015-01-10-0517-00S (total time 449.0s)
+	*2015-02-05-0420-00S (total time 1199.0s)
+	*2015-02-05-0538-00S (total time 1199.0s)
+	*2015-02-05-0703-00S (total time 1199.0s)
+	*2015-02-14-1027-00S (total time 449.0s)
 
 * Each event has a .mseed for all the stations and a metadata in Nordic Format (easy process if translated to obspy with seisobs) 
 * Provides also .mseed splits by station and channel (useless).
@@ -130,11 +129,11 @@ Plotting the 3 channels of one station (harcoded):
 
 The following utility allows to read the S-File metadata:
 
-	python read_metadata.py --stream_path /Users/rtous/DockerVolume/deepquake_data/20150110_0517/10-0517-00L.S201501
+	python read_metadata.py --stream_path funvisis/sfiles_nordicformat/10-0517-00L.S201501 
 
 This is a tuned version of the ConvNetQuake (works over ConvNetQuake data) that allows to plot the samples that ConvNetQuake selects for training:
 
-	python create_dataset_events.py --stream_dir data/streams --catalog data/6_clusters/catalog_with_cluster_ids.csv --output_dir data/6_clusters/events --save_mseed False --plot True
+	python create_dataset_events_OLD.py --stream_dir data/streams --catalog data/6_clusters/catalog_with_cluster_ids.csv --output_dir data/6_clusters/events --save_mseed False --plot True
 
 This is a tuned version of the same ConvNetQuake .py (works over ConvNetQuake data) that allows to plot the 10s windows that ConvNetQuake used during PREDICTION:
 
@@ -148,15 +147,41 @@ This is a tuned version of the same ConvNetQuake .py (works over ConvNetQuake da
 
 This utility splits the data of all the events for one station (harcoded).
 
-	python funvisis2oklahoma_v2.py
+	python funvisis2oklahoma.py
 
 ### 3.4 Predicting with ConvNetQuake over transformed FUNVISIS mseed
+
+	(from the ConvNetQuake repo)
 
 	cd ..
 	cd ConvNetQuake 
 	./bin/predict_from_stream.py --stream_path ../deepquake/funvisis/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161.mseed \
 	--checkpoint_dir models/convnetquake --n_clusters 6 \
 	--window_step 11 --output output/funvisis \
+	--max_windows 8640 --plot
+
+### 3.5 Training with FUNVISIS data
+
+(back to the deepquake repo)
+
+We convert the 10s streams to tfrecords this way:
+
+	python create_dataset_events.py
+
+We copy some noise windows to the negative folder and then: (TODO: generate our own noise)
+
+	python train.py
+
+	create_dataset_noise.py --stream_path data/streams/GSOK027_8-2014.mseed --catalog data/catalogs/Benz_catalog.csv --output_dir data/noise_OK029/noise_august --plot
+
+
+### 3.6 Predicting with FUNVISIS model and FUNVISIS mseed
+
+	(from the ConvNetQuake repo)
+
+	python predict_from_stream.py --stream_path funvisis/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161_CRUV.mseed \
+	--checkpoint_dir output_funvisis/checkpoints/ConvNetQuake --n_clusters 1 \
+	--window_step 11 --output output_funvisis/prediction \
 	--max_windows 8640 --plot
 
 ### 3.? Preliminary conclusions
@@ -181,9 +206,16 @@ This utility splits the data of all the events for one station (harcoded).
 
 	"ValueError: string_input_producer requires a non-null input tensor" -> the training directoris should be "positive" and "negative" without "s" at the end.
 
+	"InvalidArgumentError (see above for traceback): Name: <unknown>, Feature: end_time is required but could not be found." -> Using old positives/negatives (downloaded), generate new ones
+
 ## TODO
 
+* Prepare my own noise and see how it looks like
 * metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
+* data from stations HEL and URI is flat. Some signals from other stations are not complete
 * Check the real duration of funvisis events
+* DUBTE: Coincideix el temps d'inici de l'event amb l'inici de l'stream? Diria que no, però com s'estableix??
+
+DONE
+
 * Extract Funvisis data for ALL stations
-* DUBTE: Coincideix el temps d'inici de l'event amb l'inici de l'stream?

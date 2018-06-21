@@ -1,88 +1,88 @@
 <?xml version='1.0' encoding='utf-8'?>
 <q:quakeml xmlns:my_ns="http://test.org/xmlns/0.1" xmlns:q="http://quakeml.org/xmlns/quakeml/1.2" xmlns="http://quakeml.org/xmlns/bed/1.2">
-  <eventParameters publicID="smi:local/7d570005-22ff-4887-b298-a2c5189e52d6">
+  <eventParameters publicID="smi:local/c0047f23-09dd-4867-bc3c-afdb855a028d">
     <event publicID="smi:local/2015-01-10T05-17-00">
-      <preferredOriginID>smi:local/3afe630a-d62e-4539-94c1-53a53d01fbe4</preferredOriginID>
-      <preferredMagnitudeID>smi:local/167fcb8e-082f-44a1-9b2f-be059830ba60</preferredMagnitudeID>
+      <preferredOriginID>smi:local/a281948a-7981-4b2c-9ff0-6ea947ed0ef8</preferredOriginID>
+      <preferredMagnitudeID>smi:local/b9aecbd7-97a3-462d-abad-12418568e0f6</preferredMagnitudeID>
       <description>
         <text>L</text>
       </description>
-      <comment id="smi:local/f44c29ef-9fb1-4b0f-a430-9c923acfd2b5">
+      <comment id="smi:local/eccfdd57-8356-4d62-a49a-632e275e4b0d">
         <text>SPEC AVERAGE  MO 15.0 ST 21.3 OM  3.4 f0 2.17 R0.6500 AL 3.33 WI 31.4 MW  4.0</text>
       </comment>
-      <comment id="smi:local/0e363410-1207-477f-b82c-f13bded0dd5b">
+      <comment id="smi:local/15bd37eb-1a87-4123-b35b-5861b9e153ba">
         <text>SPEC SD       MO  0.2 ST 10.1 OM  0.4 f00.510 R0.1566 AL      WI      MW  0.1</text>
       </comment>
-      <comment id="smi:local/e4593292-2bfb-4895-9e6e-863eae35cf2f">
+      <comment id="smi:local/f39016d2-0c90-4e5f-9a6d-505c90a7b405">
         <text>SPEC TURVHH N MO 14.9 ST 19.0 OM  3.0 f0 2.28 R0.5842 AL 3.42 WI 35.7 MW  3.9</text>
       </comment>
-      <comment id="smi:local/2fe31cd9-cb22-42df-a180-71e6c9ecbc46">
+      <comment id="smi:local/3bd5fb29-d552-4d7c-82ca-2177c33542bd">
         <text>SPEC TURVHH N T 51941 K 0.000 GD  588 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00</text>
       </comment>
-      <comment id="smi:local/537d39e2-8811-4211-8ea3-fa8e4857b5c5">
+      <comment id="smi:local/ecd54f1d-dea9-4ac8-8570-6fd943088704">
         <text>SPEC TACVHH N MO 15.0 ST 11.4 OM  3.1 f0 1.88 R0.7085 AL 2.26 WI 36.1 MW  3.9</text>
       </comment>
-      <comment id="smi:local/457f3e69-021d-4de7-b02c-f6d842c1f85b">
+      <comment id="smi:local/9c9ac39e-b1db-4570-8592-587d26c834b6">
         <text>SPEC TACVHH N T 51921 K 0.000 GD  500 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00</text>
       </comment>
-      <comment id="smi:local/4ad68431-09d3-4f70-bce4-550b8052df85">
+      <comment id="smi:local/cf397fb1-23dc-4875-bdc0-620b312f5f63">
         <text>SPEC RIOVHH N MO 14.7 ST 27.8 OM  3.1 f0 3.13 R0.4256 AL 3.07 WI 22.9 MW  3.7</text>
       </comment>
-      <comment id="smi:local/0149eef8-12b4-40cc-b07e-b808cce9ddbb">
+      <comment id="smi:local/c183324b-d192-4728-89e0-30238c3ddac9">
         <text>SPEC RIOVHH N T 51834 K 0.000 GD  263 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00</text>
       </comment>
-      <comment id="smi:local/789531fa-ca3f-4504-95c4-1bb8330c65f1">
+      <comment id="smi:local/e3fd2f95-adce-4694-ac25-067ba07eb04e">
         <text>SPEC PCRVHH N MO 15.2 ST  8.6 OM  3.7 f0 1.39 R0.9583 AL 4.09 WI 37.4 MW  4.1</text>
       </comment>
-      <comment id="smi:local/52872ead-2255-470e-a99e-959e5b10cecb">
+      <comment id="smi:local/671388ee-77a9-4c29-b444-b0c54d7fd891">
         <text>SPEC PCRVHH N T 51823 K 0.000 GD  233 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00</text>
       </comment>
-      <comment id="smi:local/0aa6d821-fd2e-400d-9ebb-fed55493b885">
+      <comment id="smi:local/fb102ef9-c1d0-4d55-9b96-eda43b02af33">
         <text>SPEC ORIVHH N MO 15.3 ST 39.0 OM  3.9 f0 2.17 R0.6138 AL 3.08 WI 36.5 MW  4.2</text>
       </comment>
-      <comment id="smi:local/3d63b472-8152-4dc3-8ef4-6e9d092eec85">
+      <comment id="smi:local/cc15da87-8bc5-4d74-9b85-509f349c987b">
         <text>SPEC ORIVHH N T 51815 K 0.000 GD  176 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00</text>
       </comment>
-      <comment id="smi:local/d97e11d2-770a-4a93-8fd5-654164ee1c29">
+      <comment id="smi:local/f20fadf6-001e-404c-9f9c-a80d6fc0e122">
         <text>SPEC MERVHH N MO 15.0 ST 28.5 OM  3.2 f0 2.47 R0.5393 AL 3.65 WI 24.7 MW  3.9</text>
       </comment>
-      <comment id="smi:local/b732647a-ad3d-4616-b2be-b45c28fe275c">
+      <comment id="smi:local/247b8c1c-a477-4ce4-ab0e-00670654cfdd">
         <text>SPEC MERVHH N T 51912 K 0.000 GD  437 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00</text>
       </comment>
-      <comment id="smi:local/6554944a-6e2f-4b11-b66e-03a25f665395">
+      <comment id="smi:local/c2e6b6fa-2d6c-470c-a98c-265c376fee30">
         <text>SPEC CRUVHH N MO 15.1 ST 14.8 OM  4.0 f0 1.85 R0.7200 AL 3.72 WI 26.4 MW  4.0</text>
       </comment>
-      <comment id="smi:local/7bf808f7-ee4b-478d-ba11-1027038c25d3">
+      <comment id="smi:local/2018e031-3f81-4dcd-8df8-51ed4601674d">
         <text>SPEC CRUVHH N T 51752 K 0.000 GD 85.4 VS 3.60 DE 3.00 Q0440.0 QA 0.70 Q1 0.00</text>
       </comment>
-      <comment id="smi:local/defec5be-f32a-4149-8a34-fbc25014ef73">
+      <comment id="smi:local/49011fb0-2c4b-4aba-89f7-9751466e8eaa">
         <text>OLDACT:UP  15-06-26 14:18 OP:leo  STATUS:               ID:20150110051700</text>
       </comment>
-      <comment id="smi:local/6c727645-20fb-46a4-979e-2027f9e2af4b">
+      <comment id="smi:local/21c65f8e-f45a-4053-9de5-044311bc857f">
         <text>OLDACT:UP  15-01-10 01:15 OP:mu   STATUS:               ID:20150110051700</text>
       </comment>
-      <comment id="smi:local/3cb92c4d-9aa8-4357-81fb-6c3b86612732">
+      <comment id="smi:local/a5da08aa-11cf-4395-8f6d-59c4cb4445f2">
         <text>OLDACT:UP  15-01-10 01:11 OP:mu   STATUS:               ID:20150110051700</text>
       </comment>
-      <comment id="smi:local/053f32c8-0809-4b9e-9b20-a0fb4f73f8c2">
+      <comment id="smi:local/5e8ea4fa-2ff0-4084-bd0d-4c416d3aca12">
         <text>OLDACT:UP  15-01-10 01:10 OP:mu   STATUS:               ID:20150110051700</text>
       </comment>
-      <comment id="smi:local/e5c81f11-06ed-4776-945f-b97ff6710037">
+      <comment id="smi:local/dc1e1937-bd5e-483a-b009-80d2e9bc69a0">
         <text>OLDACT:UP  15-01-10 01:08 OP:mu   STATUS:               ID:20150110051700</text>
       </comment>
-      <comment id="smi:local/bc160e3a-26b3-4474-80b3-fd0593d3cdf7">
+      <comment id="smi:local/7f4d95df-d5dc-443a-9411-5270489a3cbc">
         <text>OLDACT:UP  15-01-10 01:06 OP:mu   STATUS:               ID:20150110051700</text>
       </comment>
-      <comment id="smi:local/8d222168-aa96-4012-9ba1-04fb99fb1dac">
+      <comment id="smi:local/6e0f7960-3c38-4bbb-80d7-5129cb9bff6d">
         <text>OLDACT:UP  15-01-10 01:05 OP:mu   STATUS:               ID:20150110051700</text>
       </comment>
-      <comment id="smi:local/4777bf0f-e8dc-46ea-befa-e5e303f6da98">
+      <comment id="smi:local/46dc44c9-05cc-4e6a-9192-38124be3890e">
         <text>OLDACT:UP  15-01-10 01:03 OP:mu   STATUS:               ID:20150110051700</text>
       </comment>
-      <comment id="smi:local/e88d54c7-a28d-40d4-9802-34c661c556d7">
+      <comment id="smi:local/232a8b4a-37f4-4887-9f83-575c88e0869f">
         <text>OLDACT:REG 15-01-10 01:02 OP:mu   STATUS:               ID:20150110051700</text>
       </comment>
-      <origin publicID="smi:local/3afe630a-d62e-4539-94c1-53a53d01fbe4">
+      <origin publicID="smi:local/a281948a-7981-4b2c-9ff0-6ea947ed0ef8">
         <time>
           <value>2015-01-10T05:17:30.400000Z</value>
         </time>
@@ -105,246 +105,246 @@
           <author>leo</author>
           <creationTime>2015-01-10T05:17:00.000000Z</creationTime>
         </creationInfo>
-        <arrival publicID="smi:local/6586d473-69a4-45fb-8d49-cef520c40d36">
-          <pickID>smi:local/a47328ee-83e7-4d0a-a544-10f943fd4921</pickID>
+        <arrival publicID="smi:local/564ad258-70f8-40de-a7a4-02e723e3a99d">
+          <pickID>smi:local/e2dd0cff-a780-4a2c-87fb-69c6f2c9ca4d</pickID>
           <phase>P</phase>
           <azimuth>291.0</azimuth>
           <timeResidual>-0.8</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/a174d434-4030-4e6e-a5fc-196667a66d87">
-          <pickID>smi:local/2ac4547e-cb1a-41d7-9d8c-721a7ad24053</pickID>
+        <arrival publicID="smi:local/355fdf1d-c188-4493-9f05-e5501122d4fe">
+          <pickID>smi:local/deb51779-bebd-4297-af87-3020dc1ce656</pickID>
           <phase>S</phase>
           <azimuth>291.0</azimuth>
           <timeResidual>-0.16</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/4346d29f-502f-4b67-8870-8901d7252f0a">
-          <pickID>smi:local/d09770b7-59eb-4df9-b665-76b5d8670bc8</pickID>
+        <arrival publicID="smi:local/de44a52c-9e9d-4634-a8e7-27d1befb01aa">
+          <pickID>smi:local/9f0cce3d-0161-454e-bbd3-d9d03be4cce8</pickID>
           <phase>P</phase>
           <azimuth>74.0</azimuth>
           <timeResidual>-0.18</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/e63033dc-9c77-48d3-a9ce-59fc6ae2b6ba">
-          <pickID>smi:local/703191c1-6feb-4c8d-ada0-e10f43fb7010</pickID>
+        <arrival publicID="smi:local/4f7a9ebc-3578-4bc5-b870-06b5ca55ec25">
+          <pickID>smi:local/165ee7d8-8c3c-4cc9-bd76-c9630efa8964</pickID>
           <phase>S</phase>
           <azimuth>74.0</azimuth>
           <timeResidual>-0.32</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/fd709baa-fbe5-4b50-9910-40dfc1cba52d">
-          <pickID>smi:local/079826eb-e577-4df8-b174-71e812dd4c13</pickID>
+        <arrival publicID="smi:local/44f66ad5-a0da-415f-a2f9-4bc2a3322483">
+          <pickID>smi:local/3a410b70-061d-40be-932d-d7ccade8d63f</pickID>
           <phase>P</phase>
           <azimuth>216.0</azimuth>
           <timeResidual>-0.08</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/99c52c19-fb80-4b2c-8850-82b795bf46fc">
-          <pickID>smi:local/32ba8f65-5bd8-4d79-a65a-b5f953c737c6</pickID>
+        <arrival publicID="smi:local/d3a6c46d-af80-4c33-8c81-ed40c367d4bb">
+          <pickID>smi:local/e336ac9c-391c-4947-a0e9-dc6f7ae180bd</pickID>
           <phase>S</phase>
           <azimuth>216.0</azimuth>
           <timeResidual>0.01</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/f3681aac-a450-4f2e-891c-5833005cf1e6">
-          <pickID>smi:local/81c4d484-62f3-4947-8e2b-483c0216ceb6</pickID>
+        <arrival publicID="smi:local/0fad0e17-10d0-4651-8e57-07df6da6e333">
+          <pickID>smi:local/1e0bfeed-1cd4-45ff-b8bd-9dcf86b275ba</pickID>
           <phase>P</phase>
           <azimuth>277.0</azimuth>
           <timeResidual>0.03</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/198a4f9a-126c-4730-a1eb-e02fe8753334">
-          <pickID>smi:local/b7efd8ee-7a12-422c-a0d3-79ad0a2f7397</pickID>
+        <arrival publicID="smi:local/ca18ab2e-1568-457a-91db-39bfe5d50505">
+          <pickID>smi:local/5ca0925d-2e55-49dc-8c9f-d7ba9ebad56d</pickID>
           <phase>P</phase>
           <azimuth>273.0</azimuth>
           <timeResidual>-0.52</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/1a2d7380-48a8-4d10-9527-02edc09cce92">
-          <pickID>smi:local/524fcfd1-97d1-4c33-8bfb-78d2994f3bae</pickID>
+        <arrival publicID="smi:local/f9fa2355-a304-42e8-b194-65feb659936a">
+          <pickID>smi:local/b9b32abc-0e0f-4197-a1d1-417308de08f4</pickID>
           <phase>S</phase>
           <azimuth>273.0</azimuth>
           <timeResidual>-0.37</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/dc016792-6207-4cc0-b65d-f6dfa0e07c92">
-          <pickID>smi:local/0654ff20-1f56-4151-a294-a5225d00c5c3</pickID>
+        <arrival publicID="smi:local/b2bcb2b4-e490-4bd0-a979-e402d7a5882e">
+          <pickID>smi:local/09cc1fc6-bde1-48cf-b240-2827f5182228</pickID>
           <phase>P</phase>
           <azimuth>24.0</azimuth>
           <timeResidual>0.53</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/e20c3bd2-d6bd-4255-9d8e-41bbbdb1398e">
-          <pickID>smi:local/dbdeecde-7115-4a19-a95a-cf5f6ff688a1</pickID>
+        <arrival publicID="smi:local/3b0870eb-3cf1-45d9-bea8-9ef721b24587">
+          <pickID>smi:local/e848f511-925b-4618-ada0-b2c0bd150cb3</pickID>
           <phase>P</phase>
           <azimuth>265.0</azimuth>
           <timeResidual>-0.9</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/940aaeaa-d99b-40e7-b8fa-887f7ea13459">
-          <pickID>smi:local/6d807dab-bc90-48ac-990b-28dbaf56bffa</pickID>
+        <arrival publicID="smi:local/9519b2ff-b663-4407-96e0-537d3280728f">
+          <pickID>smi:local/155ef0ff-51ae-46e6-9521-2f46a48b309d</pickID>
           <phase>S</phase>
           <azimuth>265.0</azimuth>
           <timeResidual>-0.41</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/0f9c3e37-8b3f-4c40-9835-037254f2aa9e">
-          <pickID>smi:local/0e7b85c0-00a7-4311-a085-23689f2c13f6</pickID>
+        <arrival publicID="smi:local/8adffdf2-3df7-4e3f-9b46-adf80a5e4e00">
+          <pickID>smi:local/4ad9d10f-96f6-4c03-afbc-67c229db0d20</pickID>
           <phase>P</phase>
           <azimuth>164.0</azimuth>
           <timeResidual>-0.5</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/8ae0fa4e-d337-4ff0-a3b2-39ab28d6f7ef">
-          <pickID>smi:local/edbc7733-de12-4516-b788-1d6112258df4</pickID>
+        <arrival publicID="smi:local/0929c57c-5ea5-40b1-abe4-299c6edd21c1">
+          <pickID>smi:local/3c991bc2-c399-45e0-a96b-483ecb3edf88</pickID>
           <phase>S</phase>
           <azimuth>164.0</azimuth>
           <timeResidual>-0.05</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/5a7456d9-7cd8-4e86-985a-51bb3deb03e7">
-          <pickID>smi:local/e5d65d32-8f09-4bef-9921-ed5367c37d71</pickID>
+        <arrival publicID="smi:local/1a6934a7-df1c-4746-8e7a-61b861d36950">
+          <pickID>smi:local/a31c2ed7-399c-4490-aa3c-3dbc836f9064</pickID>
           <phase>P</phase>
           <azimuth>272.0</azimuth>
           <timeResidual>0.73</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/587625bd-5e87-4125-a7dc-3b76e29a388a">
-          <pickID>smi:local/0892a236-0346-41e0-9274-5eb39042a004</pickID>
+        <arrival publicID="smi:local/7851cc36-02c8-4de5-b6b2-91efdae0f685">
+          <pickID>smi:local/fb7d6bde-1b5b-4e8e-86dc-afbc5cd39992</pickID>
           <phase>S</phase>
           <azimuth>272.0</azimuth>
           <timeResidual>0.23</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/798a864c-7640-4eac-84fd-4b79a62ab7b9">
-          <pickID>smi:local/7b9fdddb-2295-4685-a941-86132cd25192</pickID>
+        <arrival publicID="smi:local/49d622ca-c479-4e9f-bbe3-bedf74fd4d6c">
+          <pickID>smi:local/33784e49-561b-48ec-8246-71fb7cc7d64a</pickID>
           <phase>P</phase>
           <azimuth>254.0</azimuth>
           <timeResidual>0.13</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/64804056-c637-4a78-9b6c-5b4b84eb1050">
-          <pickID>smi:local/2ec75b03-a02e-47c7-8e03-c7dd0cab0510</pickID>
+        <arrival publicID="smi:local/ce8aaabc-6526-4817-98eb-8c7c0b7017c8">
+          <pickID>smi:local/6b24167b-1b51-4660-95bd-a6f2a1ccbc67</pickID>
           <phase>S</phase>
           <azimuth>254.0</azimuth>
           <timeResidual>-0.39</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/2683de0f-0985-4cd4-a673-50c225d29080">
-          <pickID>smi:local/3648637d-7909-425e-8672-72a0605ecd56</pickID>
+        <arrival publicID="smi:local/8343a4f3-1f2f-4891-81c9-f5a5fc9352d4">
+          <pickID>smi:local/e23cf054-ecfc-459c-add6-394c76bf8688</pickID>
           <phase>P</phase>
           <azimuth>272.0</azimuth>
           <timeResidual>0.03</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/7ecdbf49-9149-46ea-8251-424d0774d253">
-          <pickID>smi:local/ac77775e-1390-4572-bf6b-db684c9e1fac</pickID>
+        <arrival publicID="smi:local/3072a6d3-db33-4899-8c8b-398a37383c93">
+          <pickID>smi:local/78f23d32-8d5c-4a92-b5d1-755af976ba4a</pickID>
           <phase>P</phase>
           <azimuth>268.0</azimuth>
           <timeResidual>0.01</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/2d7a8233-0c45-4a9e-a22e-73a3cddd9741">
-          <pickID>smi:local/790a7ee4-5f21-42d9-bd3b-20cf5ddf8199</pickID>
+        <arrival publicID="smi:local/eba08463-9cab-4f1b-9078-6980e829f824">
+          <pickID>smi:local/56dc5bd7-940c-4007-99df-d4d6489d506a</pickID>
           <phase>S</phase>
           <azimuth>268.0</azimuth>
           <timeResidual>-0.62</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/77e4b451-edb1-4115-9bb3-9c40bcdd32ec">
-          <pickID>smi:local/b20b103b-7eef-42f2-b46c-3767c77b2cc8</pickID>
+        <arrival publicID="smi:local/d5f9f862-be1e-4a0c-b985-b06e377a5302">
+          <pickID>smi:local/19554410-32d0-49d6-b0af-b04848c1c58f</pickID>
           <phase>P</phase>
           <azimuth>167.0</azimuth>
           <timeResidual>-0.78</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/05e273dd-978a-4c61-982f-0f5ea9ea9781">
-          <pickID>smi:local/8ba91714-d32a-4203-ab4a-3f1e63b039ed</pickID>
+        <arrival publicID="smi:local/b30abf98-8c70-4665-8bf8-980aedf24144">
+          <pickID>smi:local/10bef50a-5f25-41da-b14f-909f02f40905</pickID>
           <phase>P</phase>
           <azimuth>272.0</azimuth>
           <timeResidual>-0.2</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/be4faec4-a839-4a1a-9845-24bc59c75ca8">
-          <pickID>smi:local/eb0dbdc0-911a-49ef-bec5-e0640023fb10</pickID>
+        <arrival publicID="smi:local/e2b6c27e-57fe-484b-a7ff-a14620e8b09b">
+          <pickID>smi:local/1d8195c7-55a4-485d-b462-923ce9b8b37d</pickID>
           <phase>S</phase>
           <azimuth>272.0</azimuth>
           <timeResidual>-0.9</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/cd9b1206-ffae-4c6c-859a-7352ec75deb1">
-          <pickID>smi:local/96acbc52-a382-4da7-a9e9-df99df5193c2</pickID>
+        <arrival publicID="smi:local/2214be69-db3f-40b7-ba48-ca9dc62fb169">
+          <pickID>smi:local/97dbad90-8706-4032-bc1a-215865444e3e</pickID>
           <phase>P</phase>
           <azimuth>256.0</azimuth>
           <timeResidual>-0.26</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/96f6a9e8-3028-411d-a28a-ff7f72a30419">
-          <pickID>smi:local/dc086b52-144a-4731-b137-a95b206e37fe</pickID>
+        <arrival publicID="smi:local/08f77dca-37cc-4aa8-8f6c-be473f4b0514">
+          <pickID>smi:local/711fa5e2-6eb2-4b07-ab03-c2eae4927783</pickID>
           <phase>P</phase>
           <azimuth>266.0</azimuth>
           <timeResidual>0.01</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/af2aa6d8-3118-41a5-8314-6eea0e4c1a68">
-          <pickID>smi:local/8a432729-a8f8-410c-b720-0d07e1c730cc</pickID>
+        <arrival publicID="smi:local/b742c1a4-8883-42c7-a717-16f573895cd5">
+          <pickID>smi:local/566c17bd-b1e7-44eb-be40-917207bcb6b7</pickID>
           <phase>P</phase>
           <azimuth>277.0</azimuth>
           <timeResidual>-0.4</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/00d11989-6f1c-4edc-95f9-f7b0c5d5426c">
-          <pickID>smi:local/4754da26-e0a9-42f9-8163-5691d478f720</pickID>
+        <arrival publicID="smi:local/f997b0c1-7a0a-43e1-a229-5d5f1efae7bf">
+          <pickID>smi:local/a3be19b4-51f8-435b-99dd-8c009ffa015f</pickID>
           <phase>P</phase>
           <azimuth>264.0</azimuth>
           <timeResidual>1.7</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/c7696919-f9d4-4888-b9e1-3244182cab3c">
-          <pickID>smi:local/c7b6e69a-905c-40ce-be54-75b7ca099f3c</pickID>
+        <arrival publicID="smi:local/31f9b520-590e-4f49-be61-6e68a1541e40">
+          <pickID>smi:local/889b2067-86eb-4e9b-aae8-b5642fcf59a4</pickID>
           <phase>P</phase>
           <azimuth>227.0</azimuth>
           <timeResidual>0.23</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/3cfb0a0e-87d9-487d-a247-f51c3adbb398">
-          <pickID>smi:local/a73bb034-b64b-4087-803c-98bafcf521d4</pickID>
+        <arrival publicID="smi:local/2e8dea91-0eaa-42af-b9f0-2648c6703687">
+          <pickID>smi:local/f620e6ac-9bf2-4ec9-a099-1db2b815e861</pickID>
           <phase>P</phase>
           <azimuth>245.0</azimuth>
           <timeResidual>1.04</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/136d935e-f474-4336-8769-39798b3fcab5">
-          <pickID>smi:local/15f51588-8a91-4fc2-82ca-250becbbf2fe</pickID>
+        <arrival publicID="smi:local/d2fa5b87-a8ec-47ac-92ae-2bbf4a8fe8ee">
+          <pickID>smi:local/c514a874-725f-4b0d-ab53-aa49b34f5432</pickID>
           <phase>P</phase>
           <azimuth>265.0</azimuth>
           <timeResidual>1.67</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/3e6f7f0a-46c6-45ce-909b-a5cb00183746">
-          <pickID>smi:local/32653dec-9e5d-458c-81ab-b348c0ab24ef</pickID>
+        <arrival publicID="smi:local/a96527b7-a2d4-47e7-99a3-ffbce1f6cff9">
+          <pickID>smi:local/2dc596a1-2f59-459d-9c34-1b302cbbeb9d</pickID>
           <phase>P</phase>
           <azimuth>260.0</azimuth>
           <timeResidual>0.66</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/e712a64b-dabe-41ca-8287-ba0c3c14bd15">
-          <pickID>smi:local/9d6368d7-f9d6-44b0-a3b2-d4cd79d65346</pickID>
+        <arrival publicID="smi:local/45358699-c323-4d37-82b9-c4c2ae90015a">
+          <pickID>smi:local/9ea1d044-2a90-490f-b6e7-dbcd4ab4f726</pickID>
           <phase>P</phase>
           <azimuth>248.0</azimuth>
           <timeResidual>1.08</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
-        <arrival publicID="smi:local/8a434955-4fd6-4ebd-9f37-3d7b6a7eca79">
-          <pickID>smi:local/90df0150-7875-404b-95c2-59612b129588</pickID>
+        <arrival publicID="smi:local/41d7cb37-7469-436b-9b89-dcae7a1aab82">
+          <pickID>smi:local/6c1927e0-5fac-4116-937c-f7eac4a37fb0</pickID>
           <phase>P</phase>
           <azimuth>260.0</azimuth>
           <timeResidual>-0.16</timeResidual>
           <timeWeight>1.0</timeWeight>
         </arrival>
       </origin>
-      <magnitude publicID="smi:local/167fcb8e-082f-44a1-9b2f-be059830ba60">
+      <magnitude publicID="smi:local/b9aecbd7-97a3-462d-abad-12418568e0f6">
         <mag>
           <value>4.0</value>
         </mag>
@@ -353,7 +353,7 @@
           <agencyID>FUN</agencyID>
         </creationInfo>
       </magnitude>
-      <pick publicID="smi:local/a47328ee-83e7-4d0a-a544-10f943fd4921">
+      <pick publicID="smi:local/e2dd0cff-a780-4a2c-87fb-69c6f2c9ca4d">
         <time>
           <value>2015-01-10T05:17:43.700000Z</value>
         </time>
@@ -363,7 +363,7 @@
         <polarity>negative</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/2ac4547e-cb1a-41d7-9d8c-721a7ad24053">
+      <pick publicID="smi:local/deb51779-bebd-4297-af87-3020dc1ce656">
         <time>
           <value>2015-01-10T05:17:54.760000Z</value>
         </time>
@@ -373,7 +373,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/d09770b7-59eb-4df9-b665-76b5d8670bc8">
+      <pick publicID="smi:local/9f0cce3d-0161-454e-bbd3-d9d03be4cce8">
         <time>
           <value>2015-01-10T05:17:50.300000Z</value>
         </time>
@@ -383,7 +383,7 @@
         <polarity>negative</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/703191c1-6feb-4c8d-ada0-e10f43fb7010">
+      <pick publicID="smi:local/165ee7d8-8c3c-4cc9-bd76-c9630efa8964">
         <time>
           <value>2015-01-10T05:18:04.990000Z</value>
         </time>
@@ -393,7 +393,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/079826eb-e577-4df8-b174-71e812dd4c13">
+      <pick publicID="smi:local/3a410b70-061d-40be-932d-d7ccade8d63f">
         <time>
           <value>2015-01-10T05:17:56.920000Z</value>
         </time>
@@ -403,7 +403,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/32ba8f65-5bd8-4d79-a65a-b5f953c737c6">
+      <pick publicID="smi:local/e336ac9c-391c-4947-a0e9-dc6f7ae180bd">
         <time>
           <value>2015-01-10T05:18:16.680000Z</value>
         </time>
@@ -413,7 +413,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/81c4d484-62f3-4947-8e2b-483c0216ceb6">
+      <pick publicID="smi:local/1e0bfeed-1cd4-45ff-b8bd-9dcf86b275ba">
         <time>
           <value>2015-01-10T05:17:58.730000Z</value>
         </time>
@@ -423,7 +423,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/b7efd8ee-7a12-422c-a0d3-79ad0a2f7397">
+      <pick publicID="smi:local/5ca0925d-2e55-49dc-8c9f-d7ba9ebad56d">
         <time>
           <value>2015-01-10T05:17:58.100000Z</value>
         </time>
@@ -433,7 +433,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/524fcfd1-97d1-4c33-8bfb-78d2994f3bae">
+      <pick publicID="smi:local/b9b32abc-0e0f-4197-a1d1-417308de08f4">
         <time>
           <value>2015-01-10T05:18:19.110000Z</value>
         </time>
@@ -443,7 +443,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/0654ff20-1f56-4151-a294-a5225d00c5c3">
+      <pick publicID="smi:local/09cc1fc6-bde1-48cf-b240-2827f5182228">
         <time>
           <value>2015-01-10T05:18:02.490000Z</value>
         </time>
@@ -453,7 +453,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/dbdeecde-7115-4a19-a95a-cf5f6ff688a1">
+      <pick publicID="smi:local/e848f511-925b-4618-ada0-b2c0bd150cb3">
         <time>
           <value>2015-01-10T05:18:03.070000Z</value>
         </time>
@@ -463,7 +463,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/6d807dab-bc90-48ac-990b-28dbaf56bffa">
+      <pick publicID="smi:local/155ef0ff-51ae-46e6-9521-2f46a48b309d">
         <time>
           <value>2015-01-10T05:18:28.390000Z</value>
         </time>
@@ -473,7 +473,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/0e7b85c0-00a7-4311-a085-23689f2c13f6">
+      <pick publicID="smi:local/4ad9d10f-96f6-4c03-afbc-67c229db0d20">
         <time>
           <value>2015-01-10T05:18:07.140000Z</value>
         </time>
@@ -483,7 +483,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/edbc7733-de12-4516-b788-1d6112258df4">
+      <pick publicID="smi:local/3c991bc2-c399-45e0-a96b-483ecb3edf88">
         <time>
           <value>2015-01-10T05:18:35.140000Z</value>
         </time>
@@ -493,7 +493,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/e5d65d32-8f09-4bef-9921-ed5367c37d71">
+      <pick publicID="smi:local/a31c2ed7-399c-4490-aa3c-3dbc836f9064">
         <time>
           <value>2015-01-10T05:18:26.760000Z</value>
         </time>
@@ -503,7 +503,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/0892a236-0346-41e0-9274-5eb39042a004">
+      <pick publicID="smi:local/fb7d6bde-1b5b-4e8e-86dc-afbc5cd39992">
         <time>
           <value>2015-01-10T05:19:07.410000Z</value>
         </time>
@@ -513,7 +513,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/7b9fdddb-2295-4685-a941-86132cd25192">
+      <pick publicID="smi:local/33784e49-561b-48ec-8246-71fb7cc7d64a">
         <time>
           <value>2015-01-10T05:18:28.670000Z</value>
         </time>
@@ -523,7 +523,7 @@
         <polarity>negative</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/2ec75b03-a02e-47c7-8e03-c7dd0cab0510">
+      <pick publicID="smi:local/6b24167b-1b51-4660-95bd-a6f2a1ccbc67">
         <time>
           <value>2015-01-10T05:19:11.160000Z</value>
         </time>
@@ -533,7 +533,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/3648637d-7909-425e-8672-72a0605ecd56">
+      <pick publicID="smi:local/e23cf054-ecfc-459c-add6-394c76bf8688">
         <time>
           <value>2015-01-10T05:18:33.280000Z</value>
         </time>
@@ -543,7 +543,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/ac77775e-1390-4572-bf6b-db684c9e1fac">
+      <pick publicID="smi:local/78f23d32-8d5c-4a92-b5d1-755af976ba4a">
         <time>
           <value>2015-01-10T05:18:36.140000Z</value>
         </time>
@@ -553,7 +553,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/790a7ee4-5f21-42d9-bd3b-20cf5ddf8199">
+      <pick publicID="smi:local/56dc5bd7-940c-4007-99df-d4d6489d506a">
         <time>
           <value>2015-01-10T05:19:24.140000Z</value>
         </time>
@@ -563,7 +563,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/b20b103b-7eef-42f2-b46c-3767c77b2cc8">
+      <pick publicID="smi:local/19554410-32d0-49d6-b0af-b04848c1c58f">
         <time>
           <value>2015-01-10T05:18:36.830000Z</value>
         </time>
@@ -573,7 +573,7 @@
         <polarity>positive</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/8ba91714-d32a-4203-ab4a-3f1e63b039ed">
+      <pick publicID="smi:local/10bef50a-5f25-41da-b14f-909f02f40905">
         <time>
           <value>2015-01-10T05:18:46.510000Z</value>
         </time>
@@ -583,7 +583,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/eb0dbdc0-911a-49ef-bec5-e0640023fb10">
+      <pick publicID="smi:local/1d8195c7-55a4-485d-b462-923ce9b8b37d">
         <time>
           <value>2015-01-10T05:19:42.260000Z</value>
         </time>
@@ -593,7 +593,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/96acbc52-a382-4da7-a9e9-df99df5193c2">
+      <pick publicID="smi:local/97dbad90-8706-4032-bc1a-215865444e3e">
         <time>
           <value>2015-01-10T05:18:51.630000Z</value>
         </time>
@@ -603,7 +603,7 @@
         <polarity>negative</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/dc086b52-144a-4731-b137-a95b206e37fe">
+      <pick publicID="smi:local/711fa5e2-6eb2-4b07-ab03-c2eae4927783">
         <time>
           <value>2015-01-10T05:18:55.280000Z</value>
         </time>
@@ -613,7 +613,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/8a432729-a8f8-410c-b720-0d07e1c730cc">
+      <pick publicID="smi:local/566c17bd-b1e7-44eb-be40-917207bcb6b7">
         <time>
           <value>2015-01-10T05:18:59.890000Z</value>
         </time>
@@ -623,7 +623,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/4754da26-e0a9-42f9-8163-5691d478f720">
+      <pick publicID="smi:local/a3be19b4-51f8-435b-99dd-8c009ffa015f">
         <time>
           <value>2015-01-10T05:19:11.740000Z</value>
         </time>
@@ -633,7 +633,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/c7b6e69a-905c-40ce-be54-75b7ca099f3c">
+      <pick publicID="smi:local/889b2067-86eb-4e9b-aae8-b5642fcf59a4">
         <time>
           <value>2015-01-10T05:19:11.290000Z</value>
         </time>
@@ -643,7 +643,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/a73bb034-b64b-4087-803c-98bafcf521d4">
+      <pick publicID="smi:local/f620e6ac-9bf2-4ec9-a099-1db2b815e861">
         <time>
           <value>2015-01-10T05:19:20.050000Z</value>
         </time>
@@ -653,7 +653,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/15f51588-8a91-4fc2-82ca-250becbbf2fe">
+      <pick publicID="smi:local/c514a874-725f-4b0d-ab53-aa49b34f5432">
         <time>
           <value>2015-01-10T05:19:22.380000Z</value>
         </time>
@@ -663,7 +663,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/32653dec-9e5d-458c-81ab-b348c0ab24ef">
+      <pick publicID="smi:local/2dc596a1-2f59-459d-9c34-1b302cbbeb9d">
         <time>
           <value>2015-01-10T05:19:26.420000Z</value>
         </time>
@@ -673,7 +673,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/9d6368d7-f9d6-44b0-a3b2-d4cd79d65346">
+      <pick publicID="smi:local/9ea1d044-2a90-490f-b6e7-dbcd4ab4f726">
         <time>
           <value>2015-01-10T05:19:51.210000Z</value>
         </time>
@@ -683,7 +683,7 @@
         <polarity>undecidable</polarity>
         <evaluationMode>automatic</evaluationMode>
       </pick>
-      <pick publicID="smi:local/90df0150-7875-404b-95c2-59612b129588">
+      <pick publicID="smi:local/6c1927e0-5fac-4116-937c-f7eac4a37fb0">
         <time>
           <value>2015-01-10T05:19:28.490000Z</value>
         </time>

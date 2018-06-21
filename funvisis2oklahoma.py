@@ -34,6 +34,13 @@ import argparse
 from tqdm import tqdm
 import time
 import pandas as pd
+import seisobs #https://github.com/d-chambers/seisobs
+
+INPUT_STREAM_DIR = "funvisis/mseed"
+INPUT_METADATA_DIR = "funvisis/sfiles_nordicformat"
+OUTPUT_MSEED_DIR = "funvisis/funvisis2oklahoma/mseed"
+OUTPUT_PNG_DIR = "funvisis/funvisis2oklahoma/png"
+WINDOW_SIZE = 10
 
 def preprocess_stream(stream):
     stream = stream.detrend('constant')
@@ -45,24 +52,47 @@ def write_json(metadata,output_metadata):
 
 def main(args):
 
-    stream_dir = "funvisis/mseed"
-    output_mseed_dir = "funvisis/funvisis2oklahoma/mseed"
-    output_png_dir = "funvisis/funvisis2oklahoma/png"
+    
 
-    stream_files = [file for file in os.listdir(stream_dir) if
+    stream_files = [file for file in os.listdir(INPUT_STREAM_DIR) if
                     fnmatch.fnmatch(file, '*.MAN___161')]
     print "List of streams to anlayze", stream_files
 
     # Create dir to store oklahoma style mseed
-    if not os.path.exists(output_mseed_dir):
-        os.makedirs(output_mseed_dir)
-    if not os.path.exists(output_png_dir):
-        os.makedirs(output_png_dir)
+    if not os.path.exists(OUTPUT_MSEED_DIR):
+        os.makedirs(OUTPUT_MSEED_DIR)
+    if not os.path.exists(OUTPUT_PNG_DIR):
+        os.makedirs(OUTPUT_PNG_DIR)
 
-    for stream_file in stream_files:
+    metadata_files = [file for file in os.listdir(INPUT_METADATA_DIR) if
+                    fnmatch.fnmatch(file, '*')]
+    for metadata_file in metadata_files:
+        #1. Process metadata
+        print("Reading metadata file "+os.path.join(INPUT_METADATA_DIR, metadata_file))
+        obspyCatalogMeta = seisobs.seis2cat(os.path.join(INPUT_METADATA_DIR, metadata_file)) 
+        eventOriginTime = obspyCatalogMeta.events[0].origins[0].time
+        
+
+        #yearStr = "%04d" % eventOriginTime.year
+        #monthStr = "%02d" % eventOriginTime.month
+        #dayStr = "%02d" % eventOriginTime.day
+        #hourStr = "%02d" % eventOriginTime.hour
+        #minuteStr = "%02d" % eventOriginTime.minute
+        # print(yearStr+"-"+monthStr+"-"+dayStr+
+        #    "-"+hourStr+minuteStr+"-00S.MAN___161")
+        
+        # metadata filename = 10-0517-00L.S201501
+        # mseedFileName = 2015-02-14-1027-00S.MAN___161
+        mseedFileName = metadata_file.split(".")[1][1:5]+"-"+metadata_file.split(".")[1][5:7]+"-"+metadata_file.split(".")[0][:-1]+"S.MAN___161"
+
+        processMseed(mseedFileName, obspyCatalogMeta)
+
+
+def processMseed(stream_file, obspyCatalogMeta):
+        #2. Process .mseed
         print("Processing stream "+stream_file)
         # Load stream
-        stream_path = os.path.join(stream_dir, stream_file)
+        stream_path = os.path.join(INPUT_STREAM_DIR, stream_file)
         print "+ Loading Stream {}".format(stream_file)
         stream = read(stream_path)
         print '+ Preprocessing stream'
@@ -72,14 +102,23 @@ def main(args):
         print(stream[-1].stats.starttime)
         print(stream[0].stats.endtime)
 
-
         #debug: plot all
-        substream = stream.select(station="CUM*")
-        substream.plot(outfile=output_png_dir+"/"+stream_file+".png")
+        for pick in obspyCatalogMeta.events[0].picks:
+            if pick.phase_hint == 'P':
+                station_code = pick.waveform_id.station_code
+                print("Processing sample from "+stream_file+" and station"+station_code)
+                substream = stream.select(station=station_code)
+                substream.plot(outfile=OUTPUT_PNG_DIR+"/"+stream_file+"_"+station_code+".png")
+                print ("Saving file "+OUTPUT_MSEED_DIR+"/"+stream_file+"_"+station_code+".mseed")
+                substream.write(OUTPUT_MSEED_DIR+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
 
-        print ("Saving file "+output_mseed_dir+"/"+stream_file+".mseed")
-        substream.write(output_mseed_dir+"/"+stream_file+".mseed", format="MSEED") 
-
+                #Now a 10s window from the P wave
+                timeP = pick.time
+                print("P time = "+str(timeP))
+                win = substream.slice(UTCDateTime(timeP), UTCDateTime(timeP) + WINDOW_SIZE).copy()
+                win.plot(outfile=OUTPUT_PNG_DIR+"_10s/"+stream_file+"_"+station_code+".png")
+                print ("Saving file "+OUTPUT_MSEED_DIR+"_10s/"+stream_file+"_"+station_code+".mseed")
+                win.write(OUTPUT_MSEED_DIR+"_10s/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
