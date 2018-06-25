@@ -1,2 +1,4 @@
-model_checkpoint_path: "model-404"
-all_model_checkpoint_paths: "model-404"
+model_checkpoint_path: "model-1061"
+all_model_checkpoint_paths: "model-500"
+all_model_checkpoint_paths: "model-1000"
+all_model_checkpoint_paths: "model-1061"
