@@ -145,9 +145,13 @@ This is a tuned version of the same ConvNetQuake .py (works over ConvNetQuake da
 
 ### 3.3 Converting FUNVISIS to ConvNetQuake
 
-This utility splits the data of all the events for one station (harcoded).
+The utility (resultis into the output folder)
 
-	python funvisis2oklahoma.py
+	python funvisis2oklahoma.py --input input --output output
+
+1. splits the data of all the events into station-level mseed
+2. Extracts windows noise from all the events
+3. Saves .png for everything
 
 ### 3.4 Predicting with ConvNetQuake over transformed FUNVISIS mseed
 
