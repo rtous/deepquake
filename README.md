@@ -183,9 +183,14 @@ We copy some noise windows to the negative folder and then: (TODO: generate our 
 
 	(from the ConvNetQuake repo)
 
-	python predict_from_stream.py --stream_path funvisis/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161_CRUV.mseed \
-	--checkpoint_dir output_funvisis/checkpoints/ConvNetQuake --n_clusters 1 \
-	--window_step 11 --output output_funvisis/prediction \
+	python predict.py --stream_path output/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161_CRUV.mseed \
+	--checkpoint_dir output/checkpoints/ConvNetQuake --n_clusters 1 \
+	--window_step 11 --output output/prediction \
+	--max_windows 8640 --plot
+
+	python predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_TACV.mseed \
+	--checkpoint_dir output/checkpoints/ConvNetQuake --n_clusters 1 \
+	--window_step 11 --output output/prediction \
 	--max_windows 8640 --plot
 
 ### 3.? Preliminary conclusions
@@ -211,6 +216,8 @@ We copy some noise windows to the negative folder and then: (TODO: generate our 
 	"ValueError: string_input_producer requires a non-null input tensor" -> the training directoris should be "positive" and "negative" without "s" at the end.
 
 	"InvalidArgumentError (see above for traceback): Name: <unknown>, Feature: end_time is required but could not be found." -> Using old positives/negatives (downloaded), generate new ones
+
+	"_tkinter.TclError: no display name and no $DISPLAY environment variable" -> NO RESOLT (GENERO ELS FITXERS LOCALMENT)
 
 ## TODO
 

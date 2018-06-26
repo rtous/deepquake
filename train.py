@@ -72,8 +72,8 @@ def main(args):
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('--model', type=str, default='ConvNetQuake')
-  parser.add_argument('--checkpoint_dir', type=str, default='output_funvisis/checkpoints')
-  parser.add_argument('--dataset', type=str, default='output_funvisis')
+  parser.add_argument('--checkpoint_dir', type=str, default='output/checkpoints')
+  parser.add_argument('--dataset', type=str, default='output')
   parser.add_argument('--batch_size', type=int, default=64)
   parser.add_argument('--learning_rate', type=float, default=1e-4)
   parser.add_argument('--resume', action='store_true')
