@@ -13,7 +13,125 @@ Let's first create a Python's virtualenv:
 	curl https://bootstrap.pypa.io/get-pip.py | python
 	pip install -r requirements.txt
 
-## 2. Running tperol/ConvNetQuake
+## 2.1 Funvisis dataset
+
+* Only data for the events 
+* Also sampled at 100Hz, also 3-channels
+* Data for 5 events but for many stations, +50 (AGIV, AUA1, BAUV, BBGH...).
+* Event time windows is higher than 10s:
+	*2015-01-10-0517-00S (total time 449.0s)
+	*2015-02-05-0420-00S (total time 1199.0s)
+	*2015-02-05-0538-00S (total time 1199.0s)
+	*2015-02-05-0703-00S (total time 1199.0s)
+	*2015-02-14-1027-00S (total time 449.0s)
+
+* Each event has a .mseed for all the stations and a metadata in Nordic Format (easy process if translated to obspy with seisobs) 
+* Provides also .mseed splits by station and channel (useless).
+
+## 2.2 Inspecting the data
+
+Plotting the 3 channels of one station (harcoded):
+
+	cd 
+	cd deepquake
+	export PYTHONPATH=.
+	python plot_mseed.py --stream_path /Users/rtous/DockerVolume/deepquake_data/sfiles/2015-01-10-0517-00S.MAN___161
+
+The following utility allows to read the S-File metadata:
+
+	python read_metadata.py --stream_path funvisis/sfiles_nordicformat/10-0517-00L.S201501 
+
+This is a tuned version of the ConvNetQuake (works over ConvNetQuake data) that allows to plot the samples that ConvNetQuake selects for training:
+
+	python create_dataset_events_OLD.py --stream_dir data/streams --catalog data/6_clusters/catalog_with_cluster_ids.csv --output_dir data/6_clusters/events --save_mseed False --plot True
+
+This is a tuned version of the same ConvNetQuake .py (works over ConvNetQuake data) that allows to plot the 10s windows that ConvNetQuake used during PREDICTION:
+
+	python read_mseed.py --stream_path data/streams/GSOK027_3-2015.mseed \
+	--output_dir data/tfrecord \
+	--window_size 10 --window_step 11 \
+	--max_windows 5000 \
+	--plot True
+
+## 2.3 Converting FUNVISIS to ConvNetQuake
+
+The utility (resultis into the output folder)
+
+	python funvisis2oklahoma.py --input input --output output
+
+1. splits the data of all the events into station-level mseed
+2. Extracts windows noise from all the events
+3. Saves .png for everything
+
+## 2.4 Predicting with ConvNetQuake over transformed FUNVISIS mseed
+
+	(from the ConvNetQuake repo)
+
+	cd ..
+	cd ConvNetQuake 
+	./bin/predict_from_stream.py --stream_path ../deepquake/funvisis/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161.mseed \
+	--checkpoint_dir models/convnetquake --n_clusters 6 \
+	--window_step 11 --output output/funvisis \
+	--max_windows 8640 --plot
+
+## 2.5 Training with FUNVISIS data
+
+(back to the deepquake repo)
+
+We convert the 10s streams to tfrecords this way:
+
+	python create_dataset_events.py
+
+We copy some noise windows to the negative folder and then: (TODO: generate our own noise)
+
+	python train.py
+
+	create_dataset_noise.py --stream_path data/streams/GSOK027_8-2014.mseed --catalog data/catalogs/Benz_catalog.csv --output_dir data/noise_OK029/noise_august --plot
+
+
+## 2.6 Predicting with FUNVISIS model and FUNVISIS mseed
+
+	(from the ConvNetQuake repo)
+
+	python predict.py --stream_path output/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161_CRUV.mseed \
+	--checkpoint_dir output/checkpoints/ConvNetQuake --n_clusters 1 \
+	--window_step 11 --output output/prediction \
+	--max_windows 8640 --plot
+
+	python predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_TACV.mseed \
+	--checkpoint_dir output/checkpoints/ConvNetQuake --n_clusters 1 \
+	--window_step 11 --output output/prediction \
+	--max_windows 8640 --plot
+
+## 2.7 Preliminary conclusions
+
+* 500s windows from funvisis >>> 10s windows from ConvNetQuake
+* Predicting with ConvNetQuake model over funvisis finds too much events
+
+## 2.8 Troubleshooting
+
+	"tensorflow.python.framework.errors_impl.InternalError: Unable to get element from the feed as bytes." -> cannot find the checkpoint file
+
+	"ValueError: string_input_producer requires a non-null input tensor" -> the training directoris should be "positive" and "negative" without "s" at the end.
+
+	"InvalidArgumentError (see above for traceback): Name: <unknown>, Feature: end_time is required but could not be found." -> Using old positives/negatives (downloaded), generate new ones
+
+	"_tkinter.TclError: no display name and no $DISPLAY environment variable" -> NO RESOLT (GENERO ELS FITXERS LOCALMENT)
+
+## 2.9 TODO
+
+* Prepare my own noise and see how it looks like
+* metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
+* data from stations HEL and URI is flat. Some signals from other stations are not complete
+* Check the real duration of funvisis events
+* DUBTE: Coincideix el temps d'inici de l'event amb l'inici de l'stream? Diria que no, però com s'estableix??
+
+DONE:
+
+* Extract Funvisis data for ALL stations
+
+
+## ANNEX 1. Running tperol/ConvNetQuake
 
 Input:
 
@@ -46,7 +164,7 @@ Get the repo:
 	git clone https://github.com/tperol/ConvNetQuake.git
 	cd /vol/ConvNetQuake
 
-### 2.1 Predict
+### A1.1 Predict
 
 	mkdir -p data/streams
 	#DOWNLOAD data/streams/GS0K029_5-2015.mseed into data/streams
@@ -61,7 +179,7 @@ Get the repo:
 
 	(takes about 3-5 minutes, results within the output dir)
 
-### 2.2 Train with already preprocessed data 
+### A1.2 Train with already preprocessed data 
 	
 	mkdir -p data/6_clusters
 	#DOWNLOAD data/6_clusters/detection/train into data/6_clusters (Note: +4GB!!)
@@ -69,7 +187,7 @@ Get the repo:
 
 	(takes few hours but with less than 5 minuts you can see that it works)
 
-### 2.3 Preprocess the data your own
+### A1.3 Preprocess the data your own
 
 Cluster events (generate region centroids):
 
@@ -100,105 +218,7 @@ The training data should be within a directory with this structure:
 
 Now you can run step 2.2 again to train with your own data.
 
-
-## 3. Deepquake (Funvisis dataset)
-
-### 3.1 Deepquake (Funvisis dataset)
-
-* Only data for the events 
-* Also sampled at 100Hz, also 3-channels
-* Data for 5 events but for many stations, +50 (AGIV, AUA1, BAUV, BBGH...).
-* Event time windows is higher than 10s:
-	*2015-01-10-0517-00S (total time 449.0s)
-	*2015-02-05-0420-00S (total time 1199.0s)
-	*2015-02-05-0538-00S (total time 1199.0s)
-	*2015-02-05-0703-00S (total time 1199.0s)
-	*2015-02-14-1027-00S (total time 449.0s)
-
-* Each event has a .mseed for all the stations and a metadata in Nordic Format (easy process if translated to obspy with seisobs) 
-* Provides also .mseed splits by station and channel (useless).
-
-### 3.2 Inspecting the data
-
-Plotting the 3 channels of one station (harcoded):
-
-	cd 
-	cd deepquake
-	export PYTHONPATH=.
-	python plot_mseed.py --stream_path /Users/rtous/DockerVolume/deepquake_data/sfiles/2015-01-10-0517-00S.MAN___161
-
-The following utility allows to read the S-File metadata:
-
-	python read_metadata.py --stream_path funvisis/sfiles_nordicformat/10-0517-00L.S201501 
-
-This is a tuned version of the ConvNetQuake (works over ConvNetQuake data) that allows to plot the samples that ConvNetQuake selects for training:
-
-	python create_dataset_events_OLD.py --stream_dir data/streams --catalog data/6_clusters/catalog_with_cluster_ids.csv --output_dir data/6_clusters/events --save_mseed False --plot True
-
-This is a tuned version of the same ConvNetQuake .py (works over ConvNetQuake data) that allows to plot the 10s windows that ConvNetQuake used during PREDICTION:
-
-	python read_mseed.py --stream_path data/streams/GSOK027_3-2015.mseed \
-	--output_dir data/tfrecord \
-	--window_size 10 --window_step 11 \
-	--max_windows 5000 \
-	--plot True
-
-### 3.3 Converting FUNVISIS to ConvNetQuake
-
-The utility (resultis into the output folder)
-
-	python funvisis2oklahoma.py --input input --output output
-
-1. splits the data of all the events into station-level mseed
-2. Extracts windows noise from all the events
-3. Saves .png for everything
-
-### 3.4 Predicting with ConvNetQuake over transformed FUNVISIS mseed
-
-	(from the ConvNetQuake repo)
-
-	cd ..
-	cd ConvNetQuake 
-	./bin/predict_from_stream.py --stream_path ../deepquake/funvisis/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161.mseed \
-	--checkpoint_dir models/convnetquake --n_clusters 6 \
-	--window_step 11 --output output/funvisis \
-	--max_windows 8640 --plot
-
-### 3.5 Training with FUNVISIS data
-
-(back to the deepquake repo)
-
-We convert the 10s streams to tfrecords this way:
-
-	python create_dataset_events.py
-
-We copy some noise windows to the negative folder and then: (TODO: generate our own noise)
-
-	python train.py
-
-	create_dataset_noise.py --stream_path data/streams/GSOK027_8-2014.mseed --catalog data/catalogs/Benz_catalog.csv --output_dir data/noise_OK029/noise_august --plot
-
-
-### 3.6 Predicting with FUNVISIS model and FUNVISIS mseed
-
-	(from the ConvNetQuake repo)
-
-	python predict.py --stream_path output/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161_CRUV.mseed \
-	--checkpoint_dir output/checkpoints/ConvNetQuake --n_clusters 1 \
-	--window_step 11 --output output/prediction \
-	--max_windows 8640 --plot
-
-	python predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_TACV.mseed \
-	--checkpoint_dir output/checkpoints/ConvNetQuake --n_clusters 1 \
-	--window_step 11 --output output/prediction \
-	--max_windows 8640 --plot
-
-### 3.? Preliminary conclusions
-
-* 500s windows from funvisis >>> 10s windows from ConvNetQuake
-* Predicting with ConvNetQuake model over funvisis finds too much events
-
-## ANNEX 1. Using a Docker container 
+## ANNEX 2. Using a Docker container 
 
 	(I'm not actually using this because of memory constraints)
 
@@ -209,24 +229,4 @@ We copy some noise windows to the negative folder and then: (TODO: generate our 
 
 	(Note: basic tests require about 8GB of memory so using Docker may not be a good idea depending on your hardware. Be sure to change the memory limit on Docker preferences.)
 
-## Troubleshooting
 
-	"tensorflow.python.framework.errors_impl.InternalError: Unable to get element from the feed as bytes." -> cannot find the checkpoint file
-
-	"ValueError: string_input_producer requires a non-null input tensor" -> the training directoris should be "positive" and "negative" without "s" at the end.
-
-	"InvalidArgumentError (see above for traceback): Name: <unknown>, Feature: end_time is required but could not be found." -> Using old positives/negatives (downloaded), generate new ones
-
-	"_tkinter.TclError: no display name and no $DISPLAY environment variable" -> NO RESOLT (GENERO ELS FITXERS LOCALMENT)
-
-## TODO
-
-* Prepare my own noise and see how it looks like
-* metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
-* data from stations HEL and URI is flat. Some signals from other stations are not complete
-* Check the real duration of funvisis events
-* DUBTE: Coincideix el temps d'inici de l'event amb l'inici de l'stream? Diria que no, però com s'estableix??
-
-DONE
-
-* Extract Funvisis data for ALL stations
