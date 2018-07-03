@@ -35,18 +35,17 @@ from tqdm import tqdm
 import time
 import pandas as pd
 
+OUTPUT_DIR = "output"
+
 def preprocess_stream(stream):
     stream = stream.detrend('constant')
     return stream.normalize()
 
-def write_json(metadata,output_metadata):
-    with open(output_metadata, 'w') as outfile:
-        json.dump(metadata, outfile)
-
 def main(args):
-    setproctitle.setproctitle('quakenet_predict_from_tfrecords')
+    # Create dir to store the plot
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
 
-    
     # Load stream
     stream_path = args.stream_path
     stream_file = os.path.split(stream_path)[-1]
@@ -59,8 +58,7 @@ def main(args):
     print "total time {}s".format(total_time)
 
     #debug: plot all
-    stream.plot(outfile="stream.png")
-
+    stream.plot(outfile=OUTPUT_DIR+"/stream.png")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

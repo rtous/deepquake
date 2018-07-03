@@ -2,22 +2,48 @@
 
 ## 1 Setup environment (local machine)
 
-According to the ConvNetQuake repo they used tensorflow 0.11. I tried with 0.12 and it works. However, this version are very old (currently 1.8) and we should consider updating at some point. I tried the setup both on Mac and Linux. Each one required its own tricks, which are probably not well documented here, but nothing extraordinary. 
+NOTE: I tried the setup both on Mac (El Capitan) and Linux. Each one required its own tricks, which are probably not well documented here, but nothing extraordinary. 
 
-Let's first create a Python's virtualenv:
+Let's first create and activate a Python's virtualenv (let's assume you save your Python virtualenvs within MY_VIRTUALENVS folder, e.g. $HOME/virtualenvs):
+ 
+	virtualenv MY_VIRTUALENVS/deepquake
+	source MY_VIRTUALENVS/deepquake/bin/activate
 
-	cd 
-	virtualenv Virtualenvs/deepquake
-	source Virtualenvs/deepquake/bin/activate
-	cd DockerVolume/deepquake
+Now download the repository from GiHub into your home directory or wherever you prefer: 
+
+	cd
+	git clone https://github.com/rtous/deepquake.git
+	cd deepquake
+
+WARNING: An "ouput" directory will be created after running some of the programs. This directory will not be part of the repository (is listed within .gitignore).
+
+In case you don't have pip installed let's install it:
+
 	curl https://bootstrap.pypa.io/get-pip.py | python
+
+Install all the dependencies listed within requirements.txt:
+
 	pip install -r requirements.txt
 
-## 2.1 Funvisis dataset
+NOTE: According to the ConvNetQuake repo they used tensorflow 0.11. I tried with 0.12 and it works. However, this version are very old (currently 1.8) and we should consider updating at some point. 
 
-* Only data for the events 
-* Also sampled at 100Hz, also 3-channels
-* Data for 5 events but for many stations, +50 (AGIV, AUA1, BAUV, BBGH...).
+## 2.1 Prepare the input data (FUNVISIS dataset)
+
+The input data must be located within the input folder (from the root of the repo):
+
+```
+input
+	|-funvisis
+		|-mseed
+		|-sfiles_nordicformat
+```
+
+Currently the input data is part of the repository for convenience. If these data would become too big we would remove them. 
+
+Currently the data includes:
+
+* Data for 5 events and many stations, +50 (AGIV, AUA1, BAUV, BBGH...).
+* Sampled at 100Hz, 3-channels
 * Event time windows is higher than 10s:
 	*2015-01-10-0517-00S (total time 449.0s)
 	*2015-02-05-0420-00S (total time 1199.0s)
@@ -26,89 +52,60 @@ Let's first create a Python's virtualenv:
 	*2015-02-14-1027-00S (total time 449.0s)
 
 * Each event has a .mseed for all the stations and a metadata in Nordic Format (easy process if translated to obspy with seisobs) 
-* Provides also .mseed splits by station and channel (useless).
+* Provides also .mseed splits by station and channel (not using them now).
 
-## 2.2 Inspecting the data
+## 2.2 Utils for inspecting the data
 
-Plotting the 3 channels of one station (harcoded):
+Plotting a complete mseed file (all stations, all channels):
 
 	cd 
 	cd deepquake
 	export PYTHONPATH=.
-	python plot_mseed.py --stream_path /Users/rtous/DockerVolume/deepquake_data/sfiles/2015-01-10-0517-00S.MAN___161
+	python util_plot_mseed.py --stream_path input/funvisis/mseed/2015-01-10-0517-00S.MAN___161
 
-The following utility allows to read the S-File metadata:
+NOTE: Results within the output directory.
 
-	python read_metadata.py --stream_path funvisis/sfiles_nordicformat/10-0517-00L.S201501 
+The following utility allows to read the S-File metadata (shows some from the terminal, write them to output/metadata.xml):
 
-This is a tuned version of the ConvNetQuake (works over ConvNetQuake data) that allows to plot the samples that ConvNetQuake selects for training:
+	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/10-0517-00L.S201501 
 
-	python create_dataset_events_OLD.py --stream_dir data/streams --catalog data/6_clusters/catalog_with_cluster_ids.csv --output_dir data/6_clusters/events --save_mseed False --plot True
+## 2.3 Step 1. Preprocessing 1. Converting FUNVISIS to ConvNetQuake format
 
-This is a tuned version of the same ConvNetQuake .py (works over ConvNetQuake data) that allows to plot the 10s windows that ConvNetQuake used during PREDICTION:
+The following utility will:
 
-	python read_mseed.py --stream_path data/streams/GSOK027_3-2015.mseed \
-	--output_dir data/tfrecord \
-	--window_size 10 --window_step 11 \
-	--max_windows 5000 \
-	--plot True
+1. split the data of all the events into station-level mseed
+2. Extract windows noise from all the events
+3. Save .png for everything
 
-## 2.3 Converting FUNVISIS to ConvNetQuake
+	python step1_preprocess1_funvisis2oklahoma.py
 
-The utility (resultis into the output folder)
+NOTE: Results within output/funvisis2oklahoma
 
-	python funvisis2oklahoma.py --input input --output output
+## 2.4 Step 2. Preprocessing 2. Generating tfrecords for positives
 
-1. splits the data of all the events into station-level mseed
-2. Extracts windows noise from all the events
-3. Saves .png for everything
+	python step2_preprocess2_create_tfrecords_positives.py
 
-## 2.4 Predicting with ConvNetQuake over transformed FUNVISIS mseed
+## 2.5 Step 3. Preprocessing 3. Generating tfrecords for negatives
 
-	(from the ConvNetQuake repo)
+	python step3_preprocess3_create_tfrecords_negatives.py
 
-	cd ..
-	cd ConvNetQuake 
-	./bin/predict_from_stream.py --stream_path ../deepquake/funvisis/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161.mseed \
-	--checkpoint_dir models/convnetquake --n_clusters 6 \
-	--window_step 11 --output output/funvisis \
-	--max_windows 8640 --plot
+## 2.6 Step 4. Train
 
-## 2.5 Training with FUNVISIS data
+	python step4_train.py
 
-(back to the deepquake repo)
+## 2.7 Step 5. Predict
 
-We convert the 10s streams to tfrecords this way:
-
-	python create_dataset_events.py
-
-We copy some noise windows to the negative folder and then: (TODO: generate our own noise)
-
-	python train.py
-
-	create_dataset_noise.py --stream_path data/streams/GSOK027_8-2014.mseed --catalog data/catalogs/Benz_catalog.csv --output_dir data/noise_OK029/noise_august --plot
-
-
-## 2.6 Predicting with FUNVISIS model and FUNVISIS mseed
-
-	(from the ConvNetQuake repo)
-
-	python predict.py --stream_path output/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161_CRUV.mseed \
+	python step5_predict.py --stream_path output/funvisis2oklahoma/mseed/mseed/2015-02-05-0420-00S.MAN___161_FUNV.mseed \
 	--checkpoint_dir output/checkpoints/ConvNetQuake --n_clusters 1 \
 	--window_step 11 --output output/prediction \
 	--max_windows 8640 --plot
 
-	python predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_TACV.mseed \
-	--checkpoint_dir output/checkpoints/ConvNetQuake --n_clusters 1 \
-	--window_step 11 --output output/prediction \
-	--max_windows 8640 --plot
-
-## 2.7 Preliminary conclusions
+## 2.8 Preliminary conclusions
 
 * 500s windows from funvisis >>> 10s windows from ConvNetQuake
 * Predicting with ConvNetQuake model over funvisis finds too much events
 
-## 2.8 Troubleshooting
+## 2.9 Troubleshooting
 
 	"tensorflow.python.framework.errors_impl.InternalError: Unable to get element from the feed as bytes." -> cannot find the checkpoint file
 
@@ -118,18 +115,19 @@ We copy some noise windows to the negative folder and then: (TODO: generate our 
 
 	"_tkinter.TclError: no display name and no $DISPLAY environment variable" -> NO RESOLT (GENERO ELS FITXERS LOCALMENT)
 
-## 2.9 TODO
+## 2.10 TODO
 
-* Prepare my own noise and see how it looks like
+* Try with larger windows
+* Try with pure noise
 * metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
 * data from stations HEL and URI is flat. Some signals from other stations are not complete
-* Check the real duration of funvisis events
-* DUBTE: Coincideix el temps d'inici de l'event amb l'inici de l'stream? Diria que no, però com s'estableix??
 
 DONE:
 
 * Extract Funvisis data for ALL stations
+* Prepare my own noise and see how it looks like
 
+/* ——————————————————————————————————- */
 
 ## ANNEX 1. Running tperol/ConvNetQuake
 

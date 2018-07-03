@@ -13,7 +13,7 @@ def main(args):
     print(cat)
 
     #write to .xml
-    cat.write('my_catalog.xml', format='QUAKEML', nsmap={'my_ns': 'http://test.org/xmlns/0.1'})
+    cat.write('output/metadata.xml', format='QUAKEML', nsmap={'my_ns': 'http://test.org/xmlns/0.1'})
 
     print("Resource ID = "+str(cat.resource_id))
     for event in cat.events:
