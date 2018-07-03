@@ -27,8 +27,8 @@ import fnmatch
 import json
 import argparse
 
-INPUT_STREAM_DIR = "funvisis2oklahoma/mseed_10s"
-OUTPUT_TFRECORDS_DIR = "positive"
+INPUT_STREAM_DIR = "output/funvisis2oklahoma/mseed_10s"
+OUTPUT_TFRECORDS_DIR = "output/positive"
 WINDOW_SIZE = 10
 
 def preprocess_stream(stream):
@@ -40,8 +40,8 @@ def main(_):
     global INPUT_STREAM_DIR
     global OUTPUT_TFRECORDS_DIR
 
-    INPUT_STREAM_DIR = args.input_dir+"/"+INPUT_STREAM_DIR
-    OUTPUT_TFRECORDS_DIR = args.output_dir+"/"+OUTPUT_TFRECORDS_DIR
+    INPUT_STREAM_DIR = args.data_dir+"/"+INPUT_STREAM_DIR
+    OUTPUT_TFRECORDS_DIR = args.data_dir+"/"+OUTPUT_TFRECORDS_DIR
 
     stream_files = [file for file in os.listdir(INPUT_STREAM_DIR) if
                     fnmatch.fnmatch(file, '*.mseed')]
@@ -83,9 +83,7 @@ def main(_):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_dir",type=str,default="output",
-                        help="path to mseed to analyze")
-    parser.add_argument("--output_dir",type=str,default="output",
-                        help="path to mseed to analyze")
+    parser.add_argument("--data_dir",type=str,default=".",
+                        help="path to the directory below the input and output dirs")
     args = parser.parse_args()
     tf.app.run()
