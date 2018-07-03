@@ -26,10 +26,7 @@ from openquake.hazardlib.geo.geodetic import distance
 import fnmatch
 import json
 import argparse
-
-INPUT_STREAM_DIR = "output/funvisis2oklahoma/mseed_noise"
-OUTPUT_TFRECORDS_DIR = "output/negative"
-WINDOW_SIZE = 10
+import config as config
 
 def preprocess_stream(stream):
     stream = stream.detrend('constant')
@@ -37,25 +34,19 @@ def preprocess_stream(stream):
 
 def main(_):
 
-    global INPUT_STREAM_DIR
-    global OUTPUT_TFRECORDS_DIR
-
-    INPUT_STREAM_DIR = args.data_dir+"/"+INPUT_STREAM_DIR
-    OUTPUT_TFRECORDS_DIR = args.data_dir+"/"+OUTPUT_TFRECORDS_DIR
-
-    stream_files = [file for file in os.listdir(INPUT_STREAM_DIR) if
+    stream_files = [file for file in os.listdir(cfg.OUTPUT_MSEED_NOISE_DIR) if
                     fnmatch.fnmatch(file, '*.mseed')]
 
     # Create dir to store tfrecords
-    if not os.path.exists(OUTPUT_TFRECORDS_DIR):
-        os.makedirs(OUTPUT_TFRECORDS_DIR)
+    if not os.path.exists(cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES):
+        os.makedirs(cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES)
 
     # Write event waveforms and cluster_id in .tfrecords
     output_name = "negatives.tfrecords"
-    output_path = os.path.join(OUTPUT_TFRECORDS_DIR, output_name)
+    output_path = os.path.join(cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES, output_name)
     writer = DataWriter(output_path)
     for stream_file in stream_files:
-        stream_path = os.path.join(INPUT_STREAM_DIR, stream_file)
+        stream_path = os.path.join(cfg.OUTPUT_MSEED_NOISE_DIR, stream_file)
         print "+ Loading Stream {}".format(stream_file)
         st_event = read(stream_path)
         print '+ Preprocessing stream'
@@ -68,9 +59,9 @@ def main(_):
         if n_traces == 0:
             continue
         n_samples = len(st_event[0].data)
-        n_pts = st_event[0].stats.sampling_rate * WINDOW_SIZE + 1
+        n_pts = st_event[0].stats.sampling_rate * cfg.WINDOW_SIZE + 1
         if (len(st_event) == 3) and (n_pts == n_samples) and (st_event[0].stats.sampling_rate == 100.0):
-            print("Writing sample with dimensions "+str(WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
+            print("Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
             # Write tfrecords
             writer.write(st_event, cluster_id) 
         else:
@@ -79,11 +70,11 @@ def main(_):
     # Cleanup writer
     print("Number of events written={}".format(writer._written))
     writer.close()
-    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_dir",type=str,default=".",
                         help="path to the directory below the input and output dirs")
     args = parser.parse_args()
+    cfg = config.Config(args.data_dir)
     tf.app.run()

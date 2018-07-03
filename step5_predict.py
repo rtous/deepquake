@@ -28,7 +28,8 @@ import time
 from obspy.core import read
 import quakenet.models as models
 from quakenet.data_pipeline import DataPipeline
-import quakenet.config as config
+#import quakenet.config as config
+import config
 from quakenet.data_io import load_stream
 
 # def fetch_streams_list(datadir):
@@ -64,9 +65,9 @@ def main(args):
     setproctitle.setproctitle('quakenet_predict')
 
 
-    ckpt = tf.train.get_checkpoint_state(args.checkpoint_dir)
+    ckpt = tf.train.get_checkpoint_state(cfg.CHECKPOINT_DIR)
 
-    cfg = config.Config()
+    #cfg = config.Config()
     cfg.batch_size = 1
     cfg.n_clusters = args.n_clusters
     cfg.add = 1
@@ -110,19 +111,19 @@ def main(args):
                  "clusters_prob": []}
 
     # Windows generator
-    win_gen = stream.slide(window_length=args.window_size,
-                           step=args.window_step,
+    win_gen = stream.slide(window_length=cfg.WINDOW_SIZE,
+                           step=cfg.WINDOW_STEP_PREDICT,
                            include_partial_windows=False)
     if args.max_windows is None:
         total_time_in_sec = stream[0].stats.endtime - stream[0].stats.starttime
-        max_windows = (total_time_in_sec - args.window_size) / args.window_step
+        max_windows = (total_time_in_sec - cfg.WINDOW_SIZE) / cfg.WINDOW_STEP_PREDICT
     else:
         max_windows = args.max_windows
 
     # stream data with a placeholder
     samples = {
             'data': tf.placeholder(tf.float32,
-                                   shape=(cfg.batch_size, 1001, 3),
+                                   shape=(cfg.batch_size, cfg.win_size, 3),
                                    name='input_data'),
             'cluster_id': tf.placeholder(tf.int64,
                                          shape=(cfg.batch_size,),
@@ -131,7 +132,7 @@ def main(args):
 
     # set up model and validation metrics
     model = models.get(args.model, samples, cfg,
-                       args.checkpoint_dir,
+                       cfg.CHECKPOINT_DIR,
                        is_training=False)
 
     with tf.Session() as sess:
@@ -216,20 +217,22 @@ def main(args):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("--data_dir",type=str,default=".",
+                        help="path to mseed to analyze")
     parser.add_argument("--stream_path",type=str,default=None,
                         help="path to mseed to analyze")
-    parser.add_argument("--checkpoint_dir",type=str,default=None,
-                        help="path to directory of chekpoints")
+    #parser.add_argument("--checkpoint_dir",type=str,default=None,
+    #                    help="path to directory of chekpoints")
     parser.add_argument("--step",type=int,default=None,
                         help="step to load, if None the final step is loaded")
     parser.add_argument("--n_clusters",type=int,default=None,
                         help= 'n of clusters')
     parser.add_argument("--model",type=str,default="ConvNetQuake",
                         help="model to load")
-    parser.add_argument("--window_size",type=int,default=10,
-                        help="size of the window to analyze")
-    parser.add_argument("--window_step",type=int,default=10,
-                        help="step between windows to analyze")
+    #parser.add_argument("--window_size",type=int,default=10,
+    #                    help="size of the window to analyze")
+    #parser.add_argument("--window_step",type=int,default=10,
+    #                    help="step between windows to analyze")
     parser.add_argument("--max_windows",type=int,default=None,
                         help="number of windows to analyze")
     parser.add_argument("--output",type=str,default="output_funvisis/predict",
@@ -239,5 +242,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_sac",action="store_true",
                      help="pass flag to save windows of events in sac files")
     args = parser.parse_args()
+
+    cfg = config.Config(args.data_dir)
 
     main(args)

@@ -95,9 +95,9 @@ NOTE: Results within output/funvisis2oklahoma
 
 ## 2.7 Step 5. Predict
 
-	python step5_predict.py --stream_path output/funvisis2oklahoma/mseed/mseed/2015-02-05-0420-00S.MAN___161_FUNV.mseed \
-	--checkpoint_dir output/checkpoints/ConvNetQuake --n_clusters 1 \
-	--window_step 11 --output output/prediction \
+	python step5_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_FUNV.mseed \
+	--n_clusters 1 \
+	--output output/prediction \
 	--max_windows 8640 --plot
 
 ## 2.8 Preliminary conclusions
