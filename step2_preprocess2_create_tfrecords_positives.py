@@ -33,6 +33,8 @@ def preprocess_stream(stream):
     stream = stream.detrend('constant')
     return stream.normalize()
 
+
+
 def main(_):
 
     stream_files = [file for file in os.listdir(cfg.OUTPUT_MSEED_EVENT_DIR) if

@@ -32,3 +32,4 @@ class Config(object):
 
     #predict
     self.WINDOW_STEP_PREDICT = 51
+    self.OUTPUT_PREDICT_BASE_DIR = data_dir+"/"+"output/predict"
