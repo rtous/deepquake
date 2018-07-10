@@ -30,10 +30,57 @@ import time
 import pandas as pd
 import seisobs #https://github.com/d-chambers/seisobs
 import config as config
+import matplotlib.pyplot as plt
+import obspy
+import datetime as dt
 
 def preprocess_stream(stream):
     stream = stream.detrend('constant')
     return stream.normalize()
+
+def obspyDateTime2PythonDateTime(odt):
+    return dt.datetime(odt.year, odt.month, odt.day, odt.hour, odt.minute, odt.second)
+
+def customPlot(st, timeP):
+    print("timeP = " + str(timeP))
+    fig = plt.figure()
+    st.plot(fig=fig)
+    plt.axvline(x=obspyDateTime2PythonDateTime(timeP), linewidth=2, color='g')
+    plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.WINDOW_AVOID_NEGATIVES), linewidth=2, color='g')
+    
+    total_time = st[-1].stats.endtime - st[0].stats.starttime
+    max_windows = int((total_time - cfg.WINDOW_SIZE) / cfg.WINDOW_STEP_NEGATIVES)
+    print(max_windows)
+    for i in range(0, max_windows):
+        plt.axvline(x=obspyDateTime2PythonDateTime(st[0].stats.starttime+i*cfg.WINDOW_STEP_NEGATIVES), linewidth=1, color='r', linestyle='dashed')
+    plt.show()
+
+def customPlotPureMatplotlib(st, timeP):
+    tr = st[0]
+    data = tr.data
+    npts = tr.stats.npts
+    samprate = tr.stats.sampling_rate
+    times = [(tr.stats.starttime + t).datetime for t in tr.times()]
+    print(times)
+    plt.plot(times, tr.data)
+    print("npts = "+str(npts))
+    #xpoints = np.arange(0, npts / samprate, 1 / samprate)
+    #plt.plot(xpoints, tr.data, 'k')
+    
+    #plt.plot(t, data_envelope, 'k:')
+    plt.title(tr.stats.starttime)
+    plt.ylabel('Filtered Data w/ Envelope')
+    plt.xlabel('Time [s]')
+    #plt.xlim(0, 2000)
+    #plt.xlim(80, 90)
+    #plt.axvline(x=0.22058956)
+    #plt.axvline(x=0, linewidth=1, color='r', linestyle='dashed')
+    #plt.axvline(x=0.1, linewidth=1, color='r', linestyle='dashed')
+    for i in range(10):
+        plt.axvline(x=i*50, linewidth=1, color='r', linestyle='dashed')
+    plt.grid()
+    plt.legend()
+    plt.show()
 
 def main(args):
 
@@ -63,7 +110,6 @@ def main(args):
         obspyCatalogMeta = seisobs.seis2cat(os.path.join(cfg.INPUT_METADATA_DIR, metadata_file)) 
         eventOriginTime = obspyCatalogMeta.events[0].origins[0].time
         
-
         #yearStr = "%04d" % eventOriginTime.year
         #monthStr = "%02d" % eventOriginTime.month
         #dayStr = "%02d" % eventOriginTime.day
@@ -96,16 +142,17 @@ def processMseed(stream_file, obspyCatalogMeta):
         #debug: plot all
         for pick in obspyCatalogMeta.events[0].picks:
             if pick.phase_hint == 'P':
+                timeP = pick.time
+                print("P time = "+str(timeP))
                 station_code = pick.waveform_id.station_code
                 print("Processing sample from "+stream_file+" and station"+station_code)
                 substream = stream.select(station=station_code)
-                substream.plot(outfile=cfg.OUTPUT_PNG_DIR+"/"+stream_file+"_"+station_code+".png")
+                #substream.plot(outfile=cfg.OUTPUT_PNG_DIR+"/"+stream_file+"_"+station_code+".png")
+                customPlot(substream, timeP)
                 print ("Saving file "+cfg.OUTPUT_MSEED_DIR+"/"+stream_file+"_"+station_code+".mseed")
                 substream.write(cfg.OUTPUT_MSEED_DIR+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
 
-                #Now a 10s window from the P wave
-                timeP = pick.time
-                print("P time = "+str(timeP))
+                #Now a WINDOW_SIZE seconds window from the P wave
                 win = substream.slice(UTCDateTime(timeP), UTCDateTime(timeP) + cfg.WINDOW_SIZE).copy()
                 win.plot(outfile=cfg.OUTPUT_PNG_EVENT_DIR+"/"+stream_file+"_"+station_code+".png")
                 print ("Saving file "+cfg.OUTPUT_MSEED_EVENT_DIR+"/"+stream_file+"_"+station_code+".mseed")

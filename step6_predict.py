@@ -63,8 +63,7 @@ def preprocess_stream(stream):
 
 def main(args):
     setproctitle.setproctitle('quakenet_predict')
-
-
+    
     ckpt = tf.train.get_checkpoint_state(cfg.CHECKPOINT_DIR)
 
     #cfg = config.Config()
@@ -89,6 +88,10 @@ def main(args):
     stream = read(stream_path)
     print '+ Preprocessing stream'
     stream = preprocess_stream(stream)
+
+    if args.metadata_path is not None: #This is groundtruth data
+        print("Reading metadata file "+args.metadata_path)
+        obspyCatalogMeta = seisobs.seis2cat(args.metadata_path) 
 
     # # TODO: change and look at all streams
     # stream_path = args.stream_path
@@ -146,6 +149,7 @@ def main(args):
 
         n_events = 0
         time_start = time.time()
+
         try:
             for idx, win in enumerate(win_gen):
 
@@ -179,7 +183,6 @@ def main(args):
                     events_dic["end_time"].append(win[0].stats.endtime)
                     events_dic["cluster_id"].append(cluster_id[0])
                     events_dic["clusters_prob"].append(list(clusters_prob))
-
 
                 if idx % 1000 ==0:
                     print "Analyzing {} records".format(win[0].stats.starttime)
@@ -241,6 +244,9 @@ if __name__ == "__main__":
                      help="pass flag to plot detected events in output")
     parser.add_argument("--save_sac",action="store_true",
                      help="pass flag to save windows of events in sac files")
+    parser.add_argument("--metadata_path",type=str,default=None,
+                        help="path to metadata to analyze (optional)")
+
     args = parser.parse_args()
 
     cfg = config.Config(args.data_dir)

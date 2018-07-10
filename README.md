@@ -95,14 +95,20 @@ NOTE: Results within output/funvisis2oklahoma
 
 ## 2.7 Step 5. Eval
 
-	python step5_eval.py --n_clusters 1 --max_windows 8640 --plot
+	python step5_eval.py --n_clusters 1 --plot
 
-## 2.7 Step 5. Predict
+## 2.7 Step 6. Predict
 
-	python step5_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CRUV.mseed \
+	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CRUV.mseed \
 	--n_clusters 1 \
 	--output output/prediction \
 	--max_windows 8640 --plot
+
+	python step6_predict_v2.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CRUV.mseed \
+	--n_clusters 1 \
+	--output output/prediction \
+	--max_windows 8640 --plot
+	--metadata_path input/funvisis/sfiles_nordicformat/05-0420-00L.S201502
 
 ## 2.8 Preliminary conclusions
 
