@@ -41,19 +41,22 @@ def preprocess_stream(stream):
 def obspyDateTime2PythonDateTime(odt):
     return dt.datetime(odt.year, odt.month, odt.day, odt.hour, odt.minute, odt.second)
 
-def customPlot(st, timeP):
+def customPlot(st, timeP, outfile):
     print("timeP = " + str(timeP))
     fig = plt.figure()
     st.plot(fig=fig)
     plt.axvline(x=obspyDateTime2PythonDateTime(timeP), linewidth=2, color='g')
+    plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.WINDOW_SIZE), linewidth=2, color='g')
     plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.WINDOW_AVOID_NEGATIVES), linewidth=2, color='g')
-    
+
     total_time = st[-1].stats.endtime - st[0].stats.starttime
     max_windows = int((total_time - cfg.WINDOW_SIZE) / cfg.WINDOW_STEP_NEGATIVES)
     print(max_windows)
     for i in range(0, max_windows):
         plt.axvline(x=obspyDateTime2PythonDateTime(st[0].stats.starttime+i*cfg.WINDOW_STEP_NEGATIVES), linewidth=1, color='r', linestyle='dashed')
-    plt.show()
+    #plt.show()
+    fig.savefig(outfile)   # save the figure to file
+    plt.close(fig) 
 
 def customPlotPureMatplotlib(st, timeP):
     tr = st[0]
@@ -148,7 +151,7 @@ def processMseed(stream_file, obspyCatalogMeta):
                 print("Processing sample from "+stream_file+" and station"+station_code)
                 substream = stream.select(station=station_code)
                 #substream.plot(outfile=cfg.OUTPUT_PNG_DIR+"/"+stream_file+"_"+station_code+".png")
-                customPlot(substream, timeP)
+                customPlot(substream, timeP, cfg.OUTPUT_PNG_DIR+"/"+stream_file+"_"+station_code+".png")
                 print ("Saving file "+cfg.OUTPUT_MSEED_DIR+"/"+stream_file+"_"+station_code+".mseed")
                 substream.write(cfg.OUTPUT_MSEED_DIR+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
 
