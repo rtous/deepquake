@@ -30,6 +30,8 @@ import time
 import pandas as pd
 import seisobs #https://github.com/d-chambers/seisobs
 import config as config
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import obspy
 import datetime as dt
@@ -183,10 +185,10 @@ def processMseed(stream_file, obspyCatalogMeta):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_dir",type=str,default=".",
-                        help="path to mseed to analyze")
+    parser.add_argument("--config_file_path",type=str,default="config_default.ini",
+                        help="path to .ini file with all the parameters")
     args = parser.parse_args()
 
-    cfg = config.Config(args.data_dir)
+    cfg = config.Config(args.config_file_path)
 
     main(args)

@@ -1,39 +1,46 @@
+import configparser
+
 class Config(object):
-  def __init__(self, data_dir):
-    self.WINDOW_SIZE = 50
-    self.WINDOW_STEP_NEGATIVES = 10 #The step between the start times of two successive windows in seconds.
-    self.WINDOW_AVOID_NEGATIVES = 200
-    self.INPUT_STREAM_DIR = data_dir+"/"+"input/funvisis/mseed"
-    self.INPUT_METADATA_DIR = data_dir+"/"+"input/funvisis/sfiles_nordicformat"
-    self.OUTPUT_MSEED_DIR = data_dir+"/"+"output/funvisis2oklahoma/mseed"
-    self.OUTPUT_MSEED_EVENT_DIR = data_dir+"/"+"output/funvisis2oklahoma/mseed_10s"
-    self.OUTPUT_MSEED_NOISE_DIR = data_dir+"/"+"output/funvisis2oklahoma/mseed_noise"
-    self.OUTPUT_PNG_DIR = data_dir+"/"+"output/funvisis2oklahoma/png"
-    self.OUTPUT_PNG_EVENT_DIR = data_dir+"/"+"output/funvisis2oklahoma/png_10s"
-    self.OUTPUT_PNG_NOISE_DIR = data_dir+"/"+"output/funvisis2oklahoma/png_noise"
-    self.OUTPUT_TFRECORDS_DIR_POSITIVES = data_dir+"/"+"output/positive"
-    self.OUTPUT_TFRECORDS_DIR_NEGATIVES = data_dir+"/"+"output/negative"
-    self.CHECKPOINT_DIR = data_dir+"/"+"output/checkpoints"
-    self.DATASET = data_dir+"/"+"output"
+  def __init__(self, config_file_path):
+    config = configparser.ConfigParser()
+    config.read(config_file_path)
+    
+    self.SAMPLING_RATE = config.getfloat('main', 'SAMPLING_RATE')
+    self.WINDOW_SIZE = config.getint('main', 'WINDOW_SIZE')
+    self.WINDOW_STEP_NEGATIVES = config.getint('main', 'WINDOW_STEP_NEGATIVES') #The step between the start times of two successive windows in seconds.
+    self.WINDOW_AVOID_NEGATIVES = config.getint('main', 'WINDOW_AVOID_NEGATIVES')
+    self.INPUT_STREAM_DIR = config.get('main', 'INPUT_STREAM_DIR')
+    self.INPUT_METADATA_DIR = config.get('main', 'INPUT_METADATA_DIR')
+    self.OUTPUT_MSEED_DIR = config.get('main', 'OUTPUT_MSEED_DIR')
+    self.OUTPUT_MSEED_EVENT_DIR = config.get('main', 'OUTPUT_MSEED_EVENT_DIR')
+    self.OUTPUT_MSEED_NOISE_DIR = config.get('main', 'OUTPUT_MSEED_NOISE_DIR')
+    self.OUTPUT_PNG_DIR = config.get('main', 'OUTPUT_PNG_DIR')
+    self.OUTPUT_PNG_EVENT_DIR = config.get('main', 'OUTPUT_PNG_EVENT_DIR')
+    self.OUTPUT_PNG_NOISE_DIR = config.get('main', 'OUTPUT_PNG_NOISE_DIR')
+    self.OUTPUT_TFRECORDS_DIR_POSITIVES = config.get('main', 'OUTPUT_TFRECORDS_DIR_POSITIVES')
+    self.OUTPUT_TFRECORDS_DIR_NEGATIVES = config.get('main', 'OUTPUT_TFRECORDS_DIR_NEGATIVES')
+    self.CHECKPOINT_DIR = config.get('main', 'CHECKPOINT_DIR')
+    self.DATASET = config.get('main', 'DATASET')
 
     #train
-    self.learning_rate = 0.001
-    self.batch_size = 128
-    #self.win_size = 1001
-    self.win_size = (self.WINDOW_SIZE * 100) + 1
-    self.n_traces = 3
-    self.display_step = 50
-    self.n_threads = 2
-    self.n_epochs = None
-    self.regularization = 1e-3
-    self.n_clusters = None
-    # Number of epochs, None is infinite
-    n_epochs = None
-
+    self.learning_rate = config.getfloat('main', 'learning_rate')
+    self.batch_size = config.getint('main', 'batch_size')
+    self.win_size = int((self.WINDOW_SIZE * self.SAMPLING_RATE) + 1)
+    self.n_traces = config.getint('main', 'n_traces')
+    self.display_step = config.getint('main', 'display_step')
+    self.n_threads = config.getint('main', 'n_threads')
+    self.n_epochs = config.getint('main', 'n_epochs')
+    self.regularization = config.getfloat('main', 'regularization')
+    self.n_clusters = config.getint('main', 'n_clusters')
+    self.model = config.get('main', 'model')
+    self.resume = config.getboolean('main', 'resume')
+    self.profiling = config.getboolean('main', 'profiling')
+    self.add = config.getint('main', 'add')
+    
     #eval
-    self.WINDOW_STEP_PREDICT = 51 #The step between the start times of two successive windows in seconds.
-    self.OUTPUT_EVAL_BASE_DIR = data_dir+"/"+"output/eval"
+    self.OUTPUT_EVAL_BASE_DIR = config.get('main', 'OUTPUT_EVAL_BASE_DIR')
 
     #predict
-    self.WINDOW_STEP_PREDICT = 51
-    self.OUTPUT_PREDICT_BASE_DIR = data_dir+"/"+"output/predict"
+    self.WINDOW_STEP_PREDICT = config.getint('main', 'WINDOW_STEP_PREDICT')
+    self.OUTPUT_PREDICT_BASE_DIR = config.get('main', 'OUTPUT_PREDICT_BASE_DIR')
+    self.save_sac = config.getboolean('main', 'save_sac')

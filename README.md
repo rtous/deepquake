@@ -66,7 +66,10 @@ Plotting a complete mseed file (all stations, all channels):
 NOTE: Results within the output directory.
 
 The following utility allows to read the S-File metadata (shows some from the terminal, write them to output/metadata.xml):
-
+	
+	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0420-00L.S201502
+	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0538-00L.S201502
+	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0703-00L.S201502
 	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/10-0517-00L.S201501 
 
 ## 2.3 Step 1. Preprocessing 1. Converting FUNVISIS to ConvNetQuake format
@@ -95,20 +98,22 @@ NOTE: Results within output/funvisis2oklahoma
 
 ## 2.7 Step 5. Eval
 
-	python step5_eval.py --n_clusters 1 --plot
+	python step5_eval.py --plot
 
 ## 2.7 Step 6. Predict
 
-	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CRUV.mseed \
-	--n_clusters 1 \
-	--output output/prediction \
-	--max_windows 8640 --plot
-
-	python step6_predict_v2.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CRUV.mseed \
-	--n_clusters 1 \
-	--output output/prediction \
-	--max_windows 8640 --plot \
-	--metadata_path input/funvisis/sfiles_nordicformat/05-0420-00L.S201502
+	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CRUV.mseed
+	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CURV.mseed
+	...
+	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_CRUV.mseed
+	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_CURV.mseed
+	...
+	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0703-00S.MAN___161_CRUV.mseed
+	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_CURV.mseed
+	...
+	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161_CRUV.mseed
+	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_CURV.mseed
+	...
 
 ## 2.8 Preliminary conclusions
 
@@ -123,7 +128,9 @@ NOTE: Results within output/funvisis2oklahoma
 
 	"InvalidArgumentError (see above for traceback): Name: <unknown>, Feature: end_time is required but could not be found." -> Using old positives/negatives (downloaded), generate new ones
 
-	"_tkinter.TclError: no display name and no $DISPLAY environment variable" -> NO RESOLT (GENERO ELS FITXERS LOCALMENT)
+	"_tkinter.TclError: no display name and no $DISPLAY environment variable" -> Add this code to the start of your script (before importing pyplot) and try again:
+			import matplotlib
+			matplotlib.use('Agg')
 
 ## 2.10 TODO
 

@@ -27,6 +27,7 @@ import fnmatch
 import json
 import argparse
 import config as config
+import utils
 
 
 def preprocess_stream(stream):
@@ -57,18 +58,25 @@ def main(_):
 
         #cluster_id = filtered_catalog.cluster_id.values[event_n]
         cluster_id = 0 #We work with only one location for the moment (cluster id = 0)
+
         n_traces = len(st_event)
-        # If there is not trace skip this waveform
-        if n_traces == 0:
-            continue
-        n_samples = len(st_event[0].data)
-        n_pts = st_event[0].stats.sampling_rate * cfg.WINDOW_SIZE + 1
-        if (len(st_event) == 3) and (n_pts == n_samples) and (st_event[0].stats.sampling_rate == 100.0):
+        if utils.check_stream(st_event, cfg):
             print("Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
             # Write tfrecords
             writer.write(st_event, cluster_id) 
-        else:
-            print ("\033[91m WARNING!!\033[0m Missing waveform for event in "+stream_file)
+
+        #n_traces = len(st_event)
+        # If there is not trace skip this waveform
+        #if n_traces == 0:
+        #    continue
+        #n_samples = len(st_event[0].data)
+        #n_pts = st_event[0].stats.sampling_rate * cfg.WINDOW_SIZE + 1
+        #if (len(st_event) == 3) and (n_pts == n_samples) and (st_event[0].stats.sampling_rate == 100.0):
+        #    print("Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
+            # Write tfrecords
+        #    writer.write(st_event, cluster_id) 
+        #else:
+        #    print ("\033[91m WARNING!!\033[0m Missing waveform for event in "+stream_file)
 
     # Cleanup writer
     print("Number of events written={}".format(writer._written))
@@ -76,8 +84,8 @@ def main(_):
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_dir",type=str,default=".",
-                        help="path to the directory below the input and output dirs")
+    parser.add_argument("--config_file_path",type=str,default="config_default.ini",
+                        help="path to .ini file with all the parameters")
     args = parser.parse_args()
-    cfg = config.Config(args.data_dir)
+    cfg = config.Config(args.config_file_path)
     tf.app.run()

@@ -17,6 +17,8 @@ import os
 import setproctitle
 import argparse
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
@@ -39,16 +41,6 @@ falsePositives = 0
 trueNegatives = 0
 falseNegatives = 0
 
-
-
-# def fetch_streams_list(datadir):
-#     """Get the list of streams to analyze"""
-#     fnames = []
-#     for root, dirs, files in os.walk(datadir):
-#         for f in files:
-#             if f.endswith(".mseed"):
-#                 fnames.append(os.path.join(root, f))
-#     return fnames
 
 def fetch_window_data(stream):
     """fetch data from a stream window and dump in np array"""
@@ -111,8 +103,6 @@ def predict(path, stream_file, sess, model, samples, isPositive):
     os.makedirs(output_dir)
     if args.plot:
         os.makedirs(os.path.join(output_dir,"viz"))
-    if args.save_sac:
-        os.makedirs(os.path.join(output_dir,"sac"))
     # Create catalog name in which the events are stored
     #catalog_name = os.path.split(stream_file)[-1].split(".mseed")[0] + ".csv"
     #output_catalog = os.path.join(output_dir, catalog_name)
@@ -200,12 +190,6 @@ def predict(path, stream_file, sess, model, samples, isPositive):
             win_filtered.plot(outfile=os.path.join(output_dir, "viz",
                             "event_cluster_{}.png".format(cluster_id)))
 
-        if args.save_sac and is_event:
-            win_filtered = win.copy()
-            win_filtered.write(os.path.join(output_dir, "sac",
-                    "event_cluster_{}.sac".format(cluster_id)),
-                    format="SAC")
-
         print "found {} events".format(n_events)
         return
 
@@ -230,11 +214,6 @@ def main(args):
     #General config
     setproctitle.setproctitle('quakenet_predict')
     ckpt = tf.train.get_checkpoint_state(cfg.CHECKPOINT_DIR)
-    cfg.batch_size = 1
-    cfg.n_clusters = args.n_clusters
-    cfg.add = 1
-    cfg.n_clusters += 1
-
     
 
     #Load model just once
@@ -246,11 +225,11 @@ def main(args):
                                          shape=(1,),
                                          name='input_label')
         }
-    model = models.get(args.model, samples, cfg,
+    model = models.get(cfg.model, samples, cfg,
                        cfg.CHECKPOINT_DIR,
                        is_training=False)
     sess = tf.Session() 
-    model.load(sess, args.step)
+    model.load(sess)
     print 'Evaluating using model at step {}'.format(
             sess.run(model.global_step))
 
@@ -274,39 +253,18 @@ def main(args):
     print("true negatives = "+str(falseNegatives))
     print("precission = "+str(100*float(truePositives)/(truePositives+falsePositives))+"%")
     print("recall = "+str(100*float(truePositives)/(truePositives+falseNegatives))+"%")
-    #print("fall out (negatives recall) = "+str(100*float(trueNegatives)/(falsePositives+trueNegatives))+"%")
     print("accuracy = "+str(100*float(truePositives+trueNegatives)/(truePositives+falsePositives+trueNegatives+falseNegatives))+"%")
 
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_dir",type=str,default=".",
-                        help="path to mseed to analyze")
-    #parser.add_argument("--stream_path",type=str,default=None,
-    #                    help="path to mseed to analyze")
-    #parser.add_argument("--checkpoint_dir",type=str,default=None,
-    #                    help="path to directory of chekpoints")
-    parser.add_argument("--step",type=int,default=None,
-                        help="step to load, if None the final step is loaded")
-    parser.add_argument("--n_clusters",type=int,default=None,
-                        help= 'n of clusters')
-    parser.add_argument("--model",type=str,default="ConvNetQuake",
-                        help="model to load")
-    #parser.add_argument("--window_size",type=int,default=10,
-    #                    help="size of the window to analyze")
-    #parser.add_argument("--window_step",type=int,default=10,
-    #                    help="step between windows to analyze")
-    parser.add_argument("--max_windows",type=int,default=None,
-                        help="number of windows to analyze")
-    parser.add_argument("--output",type=str,default="output_funvisis/predict",
-                        help="dir of predicted events")
+    parser.add_argument("--config_file_path",type=str,default="config_default.ini",
+                        help="path to .ini file with all the parameters")
     parser.add_argument("--plot", action="store_true",
                      help="pass flag to plot detected events in output")
-    parser.add_argument("--save_sac",action="store_true",
-                     help="pass flag to save windows of events in sac files")
     args = parser.parse_args()
 
-    cfg = config.Config(args.data_dir)
+    cfg = config.Config(args.config_file_path)
 
     main(args)

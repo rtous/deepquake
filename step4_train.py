@@ -14,32 +14,27 @@
 import argparse
 import os
 import time
-
 import numpy as np
 import tensorflow as tf
 import setproctitle
-
 import quakenet.models as models
 import quakenet.data_pipeline as dp
-#import quakenet.config as config
 import config as config
+import sys
 
 def main(args):
   setproctitle.setproctitle('quakenet')
 
   tf.set_random_seed(1234)
 
-  if args.n_clusters == None:
-    raise ValueError('Define the number of clusters with --n_clusters')
-
-  
-  cfg.batch_size = args.batch_size
-  cfg.add = 1
-  cfg.n_clusters = args.n_clusters
-  cfg.n_clusters += 1
-
   pos_path = os.path.join(cfg.DATASET,"positive")
+  if not os.path.exists(pos_path):
+    print ("\033[91m ERROR!!\033[0m Missing directory "+cfg.DATASET+"/positive. Run step 2 first.")
+    sys.exit(0)
   neg_path = os.path.join(cfg.DATASET,"negative")
+  if not os.path.exists(neg_path):
+    print ("\033[91m ERROR!!\033[0m Missing directory "+cfg.DATASET+"/negative. Run step 3 first.")
+    sys.exit(0)
 
   # data pipeline for positive and negative examples
   pos_pipeline = dp.DataPipeline(pos_path, cfg, True)
@@ -60,32 +55,21 @@ def main(args):
     }
 
   # model
-  model = models.get(args.model, samples, cfg, cfg.CHECKPOINT_DIR, is_training=True)
+  model = models.get(cfg.model, samples, cfg, cfg.CHECKPOINT_DIR, is_training=True)
 
   # train loop
   model.train(
-    args.learning_rate,
-    resume=args.resume,
-    profiling=args.profiling,
+    cfg.learning_rate,
+    resume=cfg.resume,
+    profiling=cfg.profiling,
     summary_step=10)
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
-  parser.add_argument('--data_dir', type=str, default='.')
-  parser.add_argument('--model', type=str, default='ConvNetQuake')
-  #parser.add_argument('--checkpoint_dir', type=str, default='output/checkpoints')
-  #parser.add_argument('--dataset', type=str, default='output')
-  parser.add_argument('--batch_size', type=int, default=64)
-  parser.add_argument('--learning_rate', type=float, default=1e-4)
-  parser.add_argument('--resume', action='store_true')
-  parser.set_defaults(resume=False)
-  parser.add_argument('--profiling', action='store_true')
-  parser.add_argument('--n_clusters',type=int,default=1)
-  parser.set_defaults(profiling=False)
+  parser.add_argument("--config_file_path",type=str,default="config_default.ini",
+                        help="path to .ini file with all the parameters")
   args = parser.parse_args()
 
-  #args.checkpoint_dir = os.path.join(args.checkpoint_dir, args.model)
-
-  cfg = config.Config(args.data_dir)
+  cfg = config.Config(args.config_file_path)
 
   main(args)

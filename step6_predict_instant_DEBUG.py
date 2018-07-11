@@ -17,8 +17,6 @@ import os
 import setproctitle
 import argparse
 
-import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
@@ -35,7 +33,7 @@ import config
 from quakenet.data_io import load_stream
 import sys
 import utils
-
+from obspy.core.utcdatetime import UTCDateTime
 
 def customPlot(st, outfile, predictions):
     fig = plt.figure()
@@ -105,13 +103,7 @@ def main(args):
                  "cluster_id": [],
                  "clusters_prob": []}
 
-    # Windows generator
-    win_gen = stream.slide(window_length=cfg.WINDOW_SIZE,
-                           step=cfg.WINDOW_STEP_PREDICT,
-                           include_partial_windows=False)
-
     total_time_in_sec = stream[0].stats.endtime - stream[0].stats.starttime
-    max_windows = (total_time_in_sec - cfg.WINDOW_SIZE) / cfg.WINDOW_STEP_PREDICT
 
     # stream data with a placeholder
     samples = {
@@ -141,58 +133,53 @@ def main(args):
         time_start = time.time()
 
         try:
-            for idx, win in enumerate(win_gen):
+            fromTime = UTCDateTime(2015, 2, 5, 5, 40, 18, 10000)
+            win = stream.slice(fromTime, fromTime + cfg.WINDOW_SIZE).copy()
+            win.plot(outfile=cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file+"_input_window_.png")
+            idx = 0
 
-                # Fetch class_proba and label
-                to_fetch = [samples['data'],
-                            model.layers['class_prob'],
-                            model.layers['class_prediction']]
-                # Feed window and fake cluster_id (needed by the net) but
-                # will be predicted
-                if utils.check_stream(win, cfg):
-                    feed_dict = {samples['data']: utils.fetch_window_data(win, cfg),
-                                samples['cluster_id']: np.array([0])}
-                    sample, class_prob_, cluster_id = sess.run(to_fetch,
-                                                            feed_dict)
-                else:
-                    continue
+            # Fetch class_proba and label
+            to_fetch = [samples['data'],
+                        model.layers['class_prob'],
+                        model.layers['class_prediction']]
+            # Feed window and fake cluster_id (needed by the net) but
+            # will be predicted
+            if utils.check_stream(win, cfg):
+                feed_dict = {samples['data']: utils.fetch_window_data(win, cfg),
+                            samples['cluster_id']: np.array([0])}
+                sample, class_prob_, cluster_id = sess.run(to_fetch,
+                                                        feed_dict)
+            else:
+                print ("\033[91m ERROR!!\033[0m Incomplete data.")
+                sys.exit(0)
 
-                # # Keep only clusters proba, remove noise proba
-                clusters_prob = class_prob_[0,1::]
-                cluster_id -= 1
+            # # Keep only clusters proba, remove noise proba
+            clusters_prob = class_prob_[0,1::]
+            cluster_id -= 1
 
-                # label for noise = -1, label for cluster \in {0:n_clusters}
+            # label for noise = -1, label for cluster \in {0:n_clusters}
 
-                is_event = cluster_id[0] > -1
-                if is_event:
-                    n_events += 1
-                # print "event {} ,cluster id {}".format(is_event,class_prob_)
+            is_event = cluster_id[0] > -1
+            if is_event:
+                n_events += 1
+            # print "event {} ,cluster id {}".format(is_event,class_prob_)
 
-                if is_event:
-                    events_dic["start_time"].append(win[0].stats.starttime)
-                    events_dic["end_time"].append(win[0].stats.endtime)
-                    events_dic["cluster_id"].append(cluster_id[0])
-                    events_dic["clusters_prob"].append(list(clusters_prob))
+            if is_event:
+                events_dic["start_time"].append(win[0].stats.starttime)
+                events_dic["end_time"].append(win[0].stats.endtime)
+                events_dic["cluster_id"].append(cluster_id[0])
+                events_dic["clusters_prob"].append(list(clusters_prob))
 
-                if idx % 1000 ==0:
-                    print "Analyzing {} records".format(win[0].stats.starttime)
+            if idx % 1000 ==0:
+                print "Analyzing {} records".format(win[0].stats.starttime)
 
-                if is_event:
-                    win_filtered = win.copy()
-                    # win_filtered.filter("bandpass",freqmin=4.0, freqmax=16.0)
-                    win_filtered.plot(outfile=os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR,"viz",
-                                    "event_{}_cluster_{}.png".format(idx,cluster_id)))
+            if is_event:
+                win_filtered = win.copy()
+                # win_filtered.filter("bandpass",freqmin=4.0, freqmax=16.0)
+                win_filtered.plot(outfile=os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR,"viz",
+                                "event_{}_cluster_{}.png".format(idx,cluster_id)))
 
-                if cfg.save_sac and is_event:
-                    win_filtered = win.copy()
-                    win_filtered.write(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR,"sac",
-                            "event_{}_cluster_{}.sac".format(idx,cluster_id)),
-                            format="SAC")
-
-                if idx >= max_windows:
-                    print "stopped after {} windows".format(max_windows)
-                    print "found {} events".format(n_events)
-                    break
+            print "found {} events".format(n_events)
 
         except KeyboardInterrupt:
             print 'Interrupted at time {}.'.format(win[0].stats.starttime)
@@ -209,13 +196,13 @@ def main(args):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_file_path",type=str,default="config_default.ini",
-                        help="path to .ini file with all the parameters")
+    parser.add_argument("--data_dir",type=str,default=".",
+                        help="path to mseed to analyze")
     parser.add_argument("--stream_path",type=str,default=None,
                         help="path to mseed to analyze")
 
     args = parser.parse_args()
 
-    cfg = config.Config(args.config_file_path)
+    cfg = config.Config(args.data_dir)
 
     main(args)
