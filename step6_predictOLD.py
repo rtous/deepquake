@@ -35,7 +35,6 @@ import config
 from quakenet.data_io import load_stream
 import sys
 import utils
-import fnmatch
 
 
 def customPlot(st, outfile, predictions):
@@ -59,13 +58,10 @@ def customPlot(st, outfile, predictions):
 
 
 def main(args):
-    if not os.path.exists(cfg.OUTPUT_PREDICT_BASE_DIR):
-        os.makedirs(cfg.OUTPUT_PREDICT_BASE_DIR)
-    if not os.path.exists(cfg.CHECKPOINT_DIR):
-        print ("\033[91m ERROR!!\033[0m Missing directory "+cfg.CHECKPOINT_DIR+". Run step 4 first.")
-        sys.exit(0)
+    
     ckpt = tf.train.get_checkpoint_state(cfg.CHECKPOINT_DIR)
     
+
     #Load model just once
     samples = {
             'data': tf.placeholder(tf.float32,
@@ -86,15 +82,30 @@ def main(args):
     stream_files = [file for file in os.listdir(args.stream_path) if
                     fnmatch.fnmatch(file, '*.mseed')]
     for stream_file in stream_files:
-        predict(args.stream_path, stream_file, sess, model, samples)
+        predict(args.stream_path, stream_file, sess, model)
 
     sess.close()
 
     
-def predict(path, stream_file, sess, model, samples):
+def predict(path, stream_file, sess, model):
+    setproctitle.setproctitle('quakenet_predict')
+
+    if not os.path.exists(cfg.CHECKPOINT_DIR):
+	    print ("\033[91m ERROR!!\033[0m Missing directory "+cfg.CHECKPOINT_DIR+". Run step 4 first.")
+	    sys.exit(0)
+    
+    ckpt = tf.train.get_checkpoint_state(cfg.CHECKPOINT_DIR)
+
+    # Remove previous output directory
+    #if os.path.exists(cfg.OUTPUT_PREDICT_BASE_DIR):
+    #    shutil.rmtree(cfg.OUTPUT_PREDICT_BASE_DIR)
+    if not os.path.exists(cfg.OUTPUT_PREDICT_BASE_DIR):
+        os.makedirs(cfg.OUTPUT_PREDICT_BASE_DIR)
+    
+
 
     # Load stream
-    stream_path = path+"/"+stream_file #TODO join
+    stream_path = args.stream_path
     stream_file = os.path.split(stream_path)[-1]
     stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
     print "+ Loading Stream {}".format(stream_file)
@@ -102,8 +113,6 @@ def predict(path, stream_file, sess, model, samples):
     print '+ Preprocessing stream'
     stream = utils.preprocess_stream(stream)
 
-    if os.path.exists(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR, stream_file_without_extension)):
-        shutil.rmtree(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR, stream_file_without_extension))
     os.makedirs(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR, stream_file_without_extension))
     os.makedirs(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file_without_extension,"viz"))
     if cfg.save_sac:
@@ -141,71 +150,91 @@ def predict(path, stream_file, sess, model, samples):
     total_time_in_sec = stream[0].stats.endtime - stream[0].stats.starttime
     max_windows = (total_time_in_sec - cfg.WINDOW_SIZE) / cfg.WINDOW_STEP_PREDICT
 
-    
+    # stream data with a placeholder
+    samples = {
+            'data': tf.placeholder(tf.float32,
+                                   shape=(1, cfg.win_size, 3),
+                                   name='input_data'),
+            'cluster_id': tf.placeholder(tf.int64,
+                                         shape=(1,),
+                                         name='input_label')
+        }
 
-    step = tf.train.global_step(sess, model.global_step)
+    # set up model and validation metrics
+    model = models.get(cfg.model, samples, cfg,
+                       cfg.CHECKPOINT_DIR,
+                       is_training=False)
+
+    with tf.Session() as sess:
+
+        model.load(sess)
+        print 'Predicting using model at step {}'.format(
+                sess.run(model.global_step))
+
+        step = tf.train.global_step(sess, model.global_step)
 
 
-    n_events = 0
-    time_start = time.time()
+        n_events = 0
+        time_start = time.time()
 
-    try:
-        for idx, win in enumerate(win_gen):
-            # Fetch class_proba and label
-            to_fetch = [samples['data'],
-                        model.layers['class_prob'],
-                        model.layers['class_prediction']]
-            # Feed window and fake cluster_id (needed by the net) but
-            # will be predicted
-            if utils.check_stream(win, cfg):
-                feed_dict = {samples['data']: utils.fetch_window_data(win, cfg),
-                            samples['cluster_id']: np.array([0])}
-                sample, class_prob_, cluster_id = sess.run(to_fetch,
-                                                        feed_dict)
-            else:
-                continue
+        try:
+            for idx, win in enumerate(win_gen):
 
-            # # Keep only clusters proba, remove noise proba
-            clusters_prob = class_prob_[0,1::]
-            cluster_id -= 1
+                # Fetch class_proba and label
+                to_fetch = [samples['data'],
+                            model.layers['class_prob'],
+                            model.layers['class_prediction']]
+                # Feed window and fake cluster_id (needed by the net) but
+                # will be predicted
+                if utils.check_stream(win, cfg):
+                    feed_dict = {samples['data']: utils.fetch_window_data(win, cfg),
+                                samples['cluster_id']: np.array([0])}
+                    sample, class_prob_, cluster_id = sess.run(to_fetch,
+                                                            feed_dict)
+                else:
+                    continue
 
-            # label for noise = -1, label for cluster \in {0:n_clusters}
+                # # Keep only clusters proba, remove noise proba
+                clusters_prob = class_prob_[0,1::]
+                cluster_id -= 1
 
-            is_event = cluster_id[0] > -1
-            if is_event:
-                n_events += 1
-            # print "event {} ,cluster id {}".format(is_event,class_prob_)
+                # label for noise = -1, label for cluster \in {0:n_clusters}
 
-            if is_event:
-                events_dic["start_time"].append(win[0].stats.starttime)
-                events_dic["end_time"].append(win[0].stats.endtime)
-                events_dic["cluster_id"].append(cluster_id[0])
-                events_dic["clusters_prob"].append(list(clusters_prob))
+                is_event = cluster_id[0] > -1
+                if is_event:
+                    n_events += 1
+                # print "event {} ,cluster id {}".format(is_event,class_prob_)
 
-            if idx % 1000 ==0:
-                print "Analyzing {} records".format(win[0].stats.starttime)
+                if is_event:
+                    events_dic["start_time"].append(win[0].stats.starttime)
+                    events_dic["end_time"].append(win[0].stats.endtime)
+                    events_dic["cluster_id"].append(cluster_id[0])
+                    events_dic["clusters_prob"].append(list(clusters_prob))
 
-            if is_event:
-                win_filtered = win.copy()
-                # win_filtered.filter("bandpass",freqmin=4.0, freqmax=16.0)
-                win_filtered.plot(outfile=os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file_without_extension,"viz",
-                                "event_{}_cluster_{}.png".format(idx,cluster_id)))
+                if idx % 1000 ==0:
+                    print "Analyzing {} records".format(win[0].stats.starttime)
 
-            if cfg.save_sac and is_event:
-                win_filtered = win.copy()
-                win_filtered.write(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR,"sac",
-                        "event_{}_cluster_{}.sac".format(idx,cluster_id)),
-                        format="SAC")
+                if is_event:
+                    win_filtered = win.copy()
+                    # win_filtered.filter("bandpass",freqmin=4.0, freqmax=16.0)
+                    win_filtered.plot(outfile=os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file_without_extension,"viz",
+                                    "event_{}_cluster_{}.png".format(idx,cluster_id)))
 
-            if idx >= max_windows:
-                print "stopped after {} windows".format(max_windows)
-                print "found {} events".format(n_events)
-                break
+                if cfg.save_sac and is_event:
+                    win_filtered = win.copy()
+                    win_filtered.write(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR,"sac",
+                            "event_{}_cluster_{}.sac".format(idx,cluster_id)),
+                            format="SAC")
 
-    except KeyboardInterrupt:
-        print 'Interrupted at time {}.'.format(win[0].stats.starttime)
-        print "processed {} windows, found {} events".format(idx+1,n_events)
-        print "Run time: ", time.time() - time_start
+                if idx >= max_windows:
+                    print "stopped after {} windows".format(max_windows)
+                    print "found {} events".format(n_events)
+                    break
+
+        except KeyboardInterrupt:
+            print 'Interrupted at time {}.'.format(win[0].stats.starttime)
+            print "processed {} windows, found {} events".format(idx+1,n_events)
+            print "Run time: ", time.time() - time_start
 
     df = pd.DataFrame.from_dict(events_dic)
     df.to_csv(output_catalog)

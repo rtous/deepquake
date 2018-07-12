@@ -213,6 +213,9 @@ def main(args):
 
     #General config
     setproctitle.setproctitle('quakenet_predict')
+    if not os.path.exists(cfg.CHECKPOINT_DIR):
+        print ("\033[91m ERROR!!\033[0m Missing directory "+cfg.CHECKPOINT_DIR+". Run step 4 first.")
+        sys.exit(0)
     ckpt = tf.train.get_checkpoint_state(cfg.CHECKPOINT_DIR)
     
 
