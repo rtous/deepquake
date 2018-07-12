@@ -132,6 +132,8 @@ NOTE: Results within output/funvisis2oklahoma
 			import matplotlib
 			matplotlib.use('Agg')
 
+	"tf.errors.OutOfRangeError" -> a parameter from config .ini is not being passed correctly. Harcode it in config.py instead.
+
 ## 2.10 TODO
 
 * Try with larger windows

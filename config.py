@@ -29,8 +29,10 @@ class Config(object):
     self.n_traces = config.getint('main', 'n_traces')
     self.display_step = config.getint('main', 'display_step')
     self.n_threads = config.getint('main', 'n_threads')
-    self.n_epochs = config.getint('main', 'n_epochs')
-    self.regularization = config.getfloat('main', 'regularization')
+    #self.n_epochs = config.getint('main', 'n_epochs')
+    self.n_epochs = None
+    #self.regularization = config.getfloat('main', 'regularization')s
+    self.regularization = 1e-3
     self.n_clusters = config.getint('main', 'n_clusters')
     self.model = config.get('main', 'model')
     self.resume = config.getboolean('main', 'resume')
