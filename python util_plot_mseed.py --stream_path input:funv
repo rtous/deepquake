@@ -1,0 +1,26 @@
+python util_plot_mseed.py --stream_path input/funvisis/other/CAPV/CAPV.VE..HHN.2017.322
+python util_plot_mseed.py --stream_path input/funvisis/other/CAPV/CAPV.VE..HHE.2017.322
+python util_plot_mseed.py --stream_path input/funvisis/other/CAPV/CAPV.VE..HHZ.2017.322
+
+python util_plot_mseed.py --stream_path input/funvisis/other/CAPV/CAPV.VE..HHN.2017.323
+python util_plot_mseed.py --stream_path input/funvisis/other/CAPV/CAPV.VE..HHE.2017.323
+python util_plot_mseed.py --stream_path input/funvisis/other/CAPV/CAPV.VE..HHZ.2017.323
+
+
+CAPV.VE..HHE.2017.322  
+CAPV.VE..HHE.2017.323  
+CAPV.VE..HHE.2017.324  
+CAPV.VE..HHN.2017.322  
+CAPV.VE..HHN.2017.323  
+CAPV.VE..HHN.2017.324  
+CAPV.VE..HHZ.2017.322  
+CAPV.VE..HHZ.2017.323  
+CAPV.VE..HHZ.2017.324
+
+python util_join_components.py \
+--streamHHN_path input/funvisis/other/CAPV/CAPV.VE..HHN.2017.323 \
+--streamHHE_path input/funvisis/other/CAPV/CAPV.VE..HHE.2017.323 \
+--streamHHZ_path input/funvisis/other/CAPV/CAPV.VE..HHZ.2017.323 \
+--output_stream_path input/funvisis/other/CAPV.VE.2017.323
+
+python util_plot_mseed.py --stream_path input/funvisis/other/CAPV.VE.2017.323

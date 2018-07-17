@@ -38,7 +38,7 @@ import utils
 import fnmatch
 
 
-def customPlot(st, outfile, predictions):
+def customPlot(st, outfile, predictions, windowsMissed):
     fig = plt.figure()
     st.plot(fig=fig)
     #plt.axvline(x=obspyDateTime2PythonDateTime(timeP), linewidth=2, color='g')
@@ -47,12 +47,16 @@ def customPlot(st, outfile, predictions):
 
     total_time = st[-1].stats.endtime - st[0].stats.starttime
     max_windows = int((total_time - cfg.WINDOW_SIZE) / cfg.WINDOW_STEP_PREDICT)
-    print(max_windows)
+    #print(max_windows)
     for i in range(0, max_windows):
         plt.axvline(x=utils.obspyDateTime2PythonDateTime(st[0].stats.starttime+i*cfg.WINDOW_STEP_PREDICT), linewidth=1, color='b', linestyle='dashed')
 
     for prediction in predictions:
         plt.axvline(x=utils.obspyDateTime2PythonDateTime(prediction), linewidth=cfg.WINDOW_SIZE, color='r', alpha=0.5)
+
+    for windowMissed in windowsMissed:
+        plt.axvline(x=utils.obspyDateTime2PythonDateTime(windowMissed), linewidth=cfg.WINDOW_SIZE, color='y', alpha=0.5)
+
     #plt.show()
     fig.savefig(outfile)   # save the figure to file
     plt.close(fig) 
@@ -102,9 +106,12 @@ def predict(path, stream_file, sess, model, samples):
     print '+ Preprocessing stream'
     stream = utils.preprocess_stream(stream)
 
-    if os.path.exists(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR, stream_file_without_extension)):
-        shutil.rmtree(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR, stream_file_without_extension))
-    os.makedirs(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR, stream_file_without_extension))
+    outputSubdir = os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR, stream_file_without_extension)
+    if os.path.exists(outputSubdir):
+        shutil.rmtree(outputSubdir)
+    os.makedirs(outputSubdir)
+    outputSubdirSubplots = os.path.join(outputSubdir, "subPlots")    
+    os.makedirs(outputSubdirSubplots) 
     os.makedirs(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file_without_extension,"viz"))
     if cfg.save_sac:
         os.makedirs(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file_without_extension,"sac"))
@@ -129,6 +136,11 @@ def predict(path, stream_file, sess, model, samples):
 
     # Dictonary to store info on detected events
     events_dic ={"start_time": [],
+                 "end_time": [],
+                 "cluster_id": [],
+                 "clusters_prob": []}
+
+    missed_dic ={"start_time": [],
                  "end_time": [],
                  "cluster_id": [],
                  "clusters_prob": []}
@@ -163,6 +175,7 @@ def predict(path, stream_file, sess, model, samples):
                 sample, class_prob_, cluster_id = sess.run(to_fetch,
                                                         feed_dict)
             else:
+                missed_dic["start_time"].append(win[0].stats.starttime)
                 continue
 
             # # Keep only clusters proba, remove noise proba
@@ -210,8 +223,16 @@ def predict(path, stream_file, sess, model, samples):
     df = pd.DataFrame.from_dict(events_dic)
     df.to_csv(output_catalog)
 
-    customPlot(stream, cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file+".png", events_dic["start_time"])
-
+    #Plot everything
+    customPlot(stream, cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file+"_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
+    #Plot only 10min sections with events
+    max_secs_to_show = 600
+    win_gen = stream.slide(window_length=max_secs_to_show,
+                           step=max_secs_to_show,
+                           include_partial_windows=False)
+    for idx, win in enumerate(win_gen):
+        customPlot(win, outputSubdirSubplots+"/win_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
+    #win = substream.slice(UTCDateTime(timeP), UTCDateTime(timeP) + cfg.WINDOW_SIZE).copy()    
     print "Run time: ", time.time() - time_start
 
 if __name__ == "__main__":

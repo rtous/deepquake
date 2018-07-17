@@ -72,6 +72,14 @@ The following utility allows to read the S-File metadata (shows some from the te
 	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0703-00L.S201502
 	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/10-0517-00L.S201501 
 
+The following utility allows to join .mseed files containing the different components:
+
+python util_join_components.py \
+--streamHHN_path input/funvisis/other/CAPV/CAPV.VE..HHN.2017.323 \
+--streamHHE_path input/funvisis/other/CAPV/CAPV.VE..HHE.2017.323 \
+--streamHHZ_path input/funvisis/other/CAPV/CAPV.VE..HHZ.2017.323 \
+--output_stream_path input/funvisis/other/CAPV.VE.2017.323
+
 ## 2.3 Step 1. Preprocessing 1. Converting FUNVISIS to ConvNetQuake format
 
 The following utility will:
@@ -245,5 +253,4 @@ Now you can run step 2.2 again to train with your own data.
 	cd vol
 
 	(Note: basic tests require about 8GB of memory so using Docker may not be a good idea depending on your hardware. Be sure to change the memory limit on Docker preferences.)
-
 
