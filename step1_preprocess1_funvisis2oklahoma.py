@@ -87,54 +87,55 @@ def customPlotPureMatplotlib(st, timeP):
     plt.legend()
     plt.show()
 
-def main(args):
+def main(input_stream, input_metadata, output_dir):
+    createDirectories(output_dir)
+    if os.path.isdir(input_stream):
+        processDirectory(input_stream, input_metadata, output_dir) 
+    else:
+        processSingleFile(input_stream, input_metadata, output_dir)
 
-    stream_files = [file for file in os.listdir(cfg.INPUT_STREAM_DIR) if
+def createDirectories(base_dir):
+    if not os.path.exists(os.path.join(base_dir, cfg.MSEED_DIR)):
+        os.makedirs(os.path.join(base_dir, cfg.MSEED_DIR))
+    if not os.path.exists(os.path.join(base_dir, cfg.PNG_DIR)):
+        os.makedirs(os.path.join(base_dir, cfg.PNG_DIR))
+    if not os.path.exists(os.path.join(base_dir, cfg.MSEED_EVENT_DIR)):
+        os.makedirs(os.path.join(base_dir, cfg.MSEED_EVENT_DIR))
+    if not os.path.exists(os.path.join(base_dir, cfg.PNG_EVENT_DIR)):
+        os.makedirs(os.path.join(base_dir, cfg.PNG_EVENT_DIR))
+    if not os.path.exists(os.path.join(base_dir, cfg.MSEED_NOISE_DIR)):
+        os.makedirs(os.path.join(base_dir, cfg.MSEED_NOISE_DIR))
+    if not os.path.exists(os.path.join(base_dir, cfg.PNG_NOISE_DIR)):
+        os.makedirs(os.path.join(base_dir, cfg.PNG_NOISE_DIR))
+
+def processSingleFile(input_stream, input_metadata, output_dir):
+    #1. Process metadata
+    print("Reading metadata file "+input_metadata)
+    obspyCatalogMeta = seisobs.seis2cat(input_metadata) 
+    eventOriginTime = obspyCatalogMeta.events[0].origins[0].time
+    processMseed(input_stream, obspyCatalogMeta, output_dir)
+
+def processDirectory(input_stream_dir, input_metadata_dir, output_dir): 
+    #os.path.join(output_dir, cfg.PNG_NOISE_DIR)
+    stream_files = [file for file in os.listdir(input_stream_dir) if
                     fnmatch.fnmatch(file, '*.MAN___161')]
     print "List of streams to anlayze", stream_files
 
-    # Create dir to store oklahoma style mseed
-    if not os.path.exists(cfg.OUTPUT_MSEED_DIR):
-        os.makedirs(cfg.OUTPUT_MSEED_DIR)
-    if not os.path.exists(cfg.OUTPUT_PNG_DIR):
-        os.makedirs(cfg.OUTPUT_PNG_DIR)
-    if not os.path.exists(cfg.OUTPUT_MSEED_EVENT_DIR):
-        os.makedirs(cfg.OUTPUT_MSEED_EVENT_DIR)
-    if not os.path.exists(cfg.OUTPUT_PNG_EVENT_DIR):
-        os.makedirs(cfg.OUTPUT_PNG_EVENT_DIR)
-    if not os.path.exists(cfg.OUTPUT_MSEED_NOISE_DIR):
-        os.makedirs(cfg.OUTPUT_MSEED_NOISE_DIR)
-    if not os.path.exists(cfg.OUTPUT_PNG_NOISE_DIR):
-        os.makedirs(cfg.OUTPUT_PNG_NOISE_DIR)
-
-    metadata_files = [file for file in os.listdir(cfg.INPUT_METADATA_DIR) if
+    metadata_files = [file for file in os.listdir(input_metadata_dir) if
                     fnmatch.fnmatch(file, '*')]
     for metadata_file in metadata_files:
         #1. Process metadata
-        print("Reading metadata file "+os.path.join(cfg.INPUT_METADATA_DIR, metadata_file))
-        obspyCatalogMeta = seisobs.seis2cat(os.path.join(cfg.INPUT_METADATA_DIR, metadata_file)) 
+        print("Reading metadata file "+os.path.join(input_metadata_dir, metadata_file))
+        obspyCatalogMeta = seisobs.seis2cat(os.path.join(input_metadata_dir, metadata_file)) 
         eventOriginTime = obspyCatalogMeta.events[0].origins[0].time
-        
-        #yearStr = "%04d" % eventOriginTime.year
-        #monthStr = "%02d" % eventOriginTime.month
-        #dayStr = "%02d" % eventOriginTime.day
-        #hourStr = "%02d" % eventOriginTime.hour
-        #minuteStr = "%02d" % eventOriginTime.minute
-        # print(yearStr+"-"+monthStr+"-"+dayStr+
-        #    "-"+hourStr+minuteStr+"-00S.MAN___161")
-        
-        # metadata filename = 10-0517-00L.S201501
-        # mseedFileName = 2015-02-14-1027-00S.MAN___161
         mseedFileName = metadata_file.split(".")[1][1:5]+"-"+metadata_file.split(".")[1][5:7]+"-"+metadata_file.split(".")[0][:-1]+"S.MAN___161"
+        processMseed(os.path.join(input_stream_dir, mseedFileName), obspyCatalogMeta, output_dir)
 
-        processMseed(mseedFileName, obspyCatalogMeta)
-
-
-def processMseed(stream_file, obspyCatalogMeta):
+def processMseed(stream_path, obspyCatalogMeta, output_dir):
+        stream_file = os.path.basename(stream_path)
         #2. Process .mseed
         print("Processing stream "+stream_file)
         # Load stream
-        stream_path = os.path.join(cfg.INPUT_STREAM_DIR, stream_file)
         print "+ Loading Stream {}".format(stream_file)
         stream = read(stream_path)
         print '+ Preprocessing stream'
@@ -153,15 +154,31 @@ def processMseed(stream_file, obspyCatalogMeta):
                 print("Processing sample from "+stream_file+" and station"+station_code)
                 substream = stream.select(station=station_code)
                 #substream.plot(outfile=cfg.OUTPUT_PNG_DIR+"/"+stream_file+"_"+station_code+".png")
-                customPlot(substream, timeP, cfg.OUTPUT_PNG_DIR+"/"+stream_file+"_"+station_code+".png")
-                print ("Saving file "+cfg.OUTPUT_MSEED_DIR+"/"+stream_file+"_"+station_code+".mseed")
-                substream.write(cfg.OUTPUT_MSEED_DIR+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
+                customPlot(substream, timeP, os.path.join(output_dir, cfg.PNG_DIR)+"/"+stream_file+"_"+station_code+".png")
+                print ("Saving file "+os.path.join(output_dir, cfg.MSEED_DIR)+"/"+stream_file+"_"+station_code+".mseed")
+                print("stream_file="+stream_file)
+                print("output_dir="+output_dir)
+                print("cfg.MSEED_DIR="+cfg.MSEED_DIR)
+                substream.write(os.path.join(output_dir, cfg.MSEED_DIR)+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
 
                 #Now a WINDOW_SIZE seconds window from the P wave
                 win = substream.slice(UTCDateTime(timeP), UTCDateTime(timeP) + cfg.WINDOW_SIZE).copy()
-                win.plot(outfile=cfg.OUTPUT_PNG_EVENT_DIR+"/"+stream_file+"_"+station_code+".png")
-                print ("Saving file "+cfg.OUTPUT_MSEED_EVENT_DIR+"/"+stream_file+"_"+station_code+".mseed")
-                win.write(cfg.OUTPUT_MSEED_EVENT_DIR+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
+                win.plot(outfile=os.path.join(output_dir, cfg.PNG_EVENT_DIR)+"/"+stream_file+"_"+station_code+".png")
+                print ("Saving file "+os.path.join(output_dir, cfg.MSEED_EVENT_DIR)+"/"+stream_file+"_"+station_code+".mseed")
+                win.write(os.path.join(output_dir, cfg.MSEED_EVENT_DIR)+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
+
+                # Create catalog name in which the events are stored
+                output_catalog = os.path.join(output_dir, cfg.MSEED_DIR)+"/"+stream_file+"_"+station_code+".csv"
+                events_dic ={"start_time": [],
+                 "end_time": [],
+                 "cluster_id": [],
+                 "clusters_prob": []}
+                events_dic["start_time"].append(UTCDateTime(timeP) - cfg.PWAVE_WINDOW/2)
+                events_dic["end_time"].append(UTCDateTime(timeP) + cfg.PWAVE_WINDOW/2)
+                events_dic["cluster_id"].append(0) #TODO
+                events_dic["clusters_prob"].append(1) #manually annotated event
+                df = pd.DataFrame.from_dict(events_dic)
+                df.to_csv(output_catalog)
 
                 #Save noise windows (exclude from P wave and 20s later)
                 win_gen = substream.slide(window_length=cfg.WINDOW_SIZE,
@@ -177,9 +194,9 @@ def processMseed(stream_file, obspyCatalogMeta):
                         (window_start > timeP+cfg.WINDOW_AVOID_NEGATIVES)
                         ):
                         print("Noise window selected")
-                        print ("Saving file "+cfg.OUTPUT_MSEED_NOISE_DIR+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".mseed")
-                        win.write(cfg.OUTPUT_MSEED_NOISE_DIR+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".mseed", format="MSEED") 
-                        win.plot(outfile=cfg.OUTPUT_PNG_NOISE_DIR+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".png")
+                        print ("Saving file "+os.path.join(output_dir, cfg.MSEED_NOISE_DIR)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".mseed")
+                        win.write(os.path.join(output_dir, cfg.MSEED_NOISE_DIR)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".mseed", format="MSEED") 
+                        win.plot(outfile=os.path.join(output_dir, cfg.PNG_NOISE_DIR)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".png")
                     else:
                         print("Noise window avoided: "+stream_file+"_"+station_code)
 
@@ -187,9 +204,25 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")
-    args = parser.parse_args()
+    parser.add_argument("--input_stream",type=str, default=None)
+    parser.add_argument("--input_metadata",type=str, default=None)
+    parser.add_argument("--output_dir",type=str, default=None)
     args = parser.parse_args()
 
     cfg = config.Config(args.config_file_path)
 
-    main(args)
+    #If arguments not set, switch to default values in conf
+    if args.input_stream is None:
+        input_stream = cfg.INPUT_STREAM_DIR
+    else:
+        input_stream = args.input_stream
+    if args.input_metadata is None:
+        input_metadata = cfg.INPUT_METADATA_DIR
+    else:
+        input_metadata = args.input_metadata
+    if args.output_dir is None:
+        output_dir = cfg.DATASET_BASE_DIR
+    else:
+        output_dir = args.output_dir
+
+    main(input_stream, input_metadata, output_dir)

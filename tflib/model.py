@@ -155,7 +155,7 @@ class BaseModel(object):
         coord.join(threads)
 
   def train(self, learning_rate, resume=False, summary_step=100,
-            checkpoint_step=500, profiling=False):
+            checkpoint_step=500, profiling=False, max_checkpoint_step=20000):
     """Main training loop.
 
     Args:
@@ -222,6 +222,8 @@ class BaseModel(object):
               step > 0) and step % checkpoint_step == 0:
             print 'Step {} | Saving checkpoint.'.format(step)
             self.save(sess)
+            if checkpoint_step >= max_checkpoint_step:
+              coord.request_stop()
 
       except KeyboardInterrupt:
         print 'Interrupted training at step {}.'.format(step)

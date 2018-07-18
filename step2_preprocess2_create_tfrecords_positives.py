@@ -35,25 +35,30 @@ def preprocess_stream(stream):
     return stream.normalize()
 
 
-
 def main(_):
+    print("[tfrecords positives] Converting .mseed files into tfrecords...")
+    print("[tfrecords positives] Input directory: "+os.path.join(dataset_dir, cfg.MSEED_NOISE_DIR))
+    print("[tfrecords positives] Output directory: "+os.path.join(output_dir, cfg.OUTPUT_TFRECORDS_DIR_POSITIVES))
+    print("[tfrecords positives] File pattern: "+args.pattern)
 
-    stream_files = [file for file in os.listdir(cfg.OUTPUT_MSEED_EVENT_DIR) if
-                    fnmatch.fnmatch(file, '*.mseed')]
-
+    stream_files = [file for file in os.listdir(os.path.join(dataset_dir, cfg.MSEED_EVENT_DIR)) if
+                    fnmatch.fnmatch(file, args.pattern)]
+    print("[tfrecords negatives] Matching files: "+str(len(stream_files)))
     # Create dir to store tfrecords
-    if not os.path.exists(cfg.OUTPUT_TFRECORDS_DIR_POSITIVES):
-        os.makedirs(cfg.OUTPUT_TFRECORDS_DIR_POSITIVES)
+    if not os.path.exists(os.path.join(output_dir, cfg.OUTPUT_TFRECORDS_DIR_POSITIVES)):
+        os.makedirs(os.path.join(output_dir, cfg.OUTPUT_TFRECORDS_DIR_POSITIVES))
 
     # Write event waveforms and cluster_id in .tfrecords
-    output_name = "positives.tfrecords"
-    output_path = os.path.join(cfg.OUTPUT_TFRECORDS_DIR_POSITIVES, output_name)
+    #output_name = "positives.tfrecords"  
+    output_name = args.file_name
+    output_path = os.path.join(os.path.join(output_dir, cfg.OUTPUT_TFRECORDS_DIR_POSITIVES), output_name)
     writer = DataWriter(output_path)
     for stream_file in stream_files:
-        stream_path = os.path.join(cfg.OUTPUT_MSEED_EVENT_DIR, stream_file)
-        print "+ Loading Stream {}".format(stream_file)
+
+        stream_path = os.path.join(os.path.join(dataset_dir, cfg.MSEED_EVENT_DIR), stream_file)
+        #print "[tfrecords positives] Loading Stream {}".format(stream_file)
         st_event = read(stream_path)
-        print '+ Preprocessing stream'
+        #print '[tfrecords positives] Preprocessing stream'
         st_event = preprocess_stream(st_event)   
 
         #cluster_id = filtered_catalog.cluster_id.values[event_n]
@@ -61,22 +66,9 @@ def main(_):
 
         n_traces = len(st_event)
         if utils.check_stream(st_event, cfg):
-            print("Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
+            #print("[tfrecords positives] Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
             # Write tfrecords
             writer.write(st_event, cluster_id) 
-
-        #n_traces = len(st_event)
-        # If there is not trace skip this waveform
-        #if n_traces == 0:
-        #    continue
-        #n_samples = len(st_event[0].data)
-        #n_pts = st_event[0].stats.sampling_rate * cfg.WINDOW_SIZE + 1
-        #if (len(st_event) == 3) and (n_pts == n_samples) and (st_event[0].stats.sampling_rate == 100.0):
-        #    print("Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
-            # Write tfrecords
-        #    writer.write(st_event, cluster_id) 
-        #else:
-        #    print ("\033[91m WARNING!!\033[0m Missing waveform for event in "+stream_file)
 
     # Cleanup writer
     print("Number of events written={}".format(writer._written))
@@ -86,6 +78,19 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")
+    parser.add_argument("--dataset_dir",type=str, default=None)
+    parser.add_argument("--pattern",type=str, default="*.mseed")
+    parser.add_argument("--output_dir",type=str, default=None)
+    parser.add_argument("--file_name",type=str, default="positives.tfrecords")
     args = parser.parse_args()
     cfg = config.Config(args.config_file_path)
+    #If arguments not set, switch to default values in conf
+    if args.dataset_dir is None:
+        dataset_dir = cfg.DATASET_BASE_DIR
+    else:
+        dataset_dir = args.dataset_dir
+    if args.output_dir is None:
+        output_dir = dataset_dir
+    else:
+        output_dir = args.output_dir
     tf.app.run()

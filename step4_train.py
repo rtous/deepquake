@@ -27,13 +27,14 @@ def main(args):
 
   tf.set_random_seed(1234)
 
-  pos_path = os.path.join(cfg.DATASET,"positive")
+  #pos_path = os.path.join(cfg.DATASET,"positive")
+  pos_path = os.path.join(dataset_dir, cfg.OUTPUT_TFRECORDS_DIR_POSITIVES)
   if not os.path.exists(pos_path):
-    print ("\033[91m ERROR!!\033[0m Missing directory "+cfg.DATASET+"/positive. Run step 2 first.")
+    print ("\033[91m ERROR!!\033[0m Missing directory "+pos_path+". Run step 2 first.")
     sys.exit(0)
-  neg_path = os.path.join(cfg.DATASET,"negative")
+  neg_path = os.path.join(dataset_dir, cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES)
   if not os.path.exists(neg_path):
-    print ("\033[91m ERROR!!\033[0m Missing directory "+cfg.DATASET+"/negative. Run step 3 first.")
+    print ("\033[91m ERROR!!\033[0m Missing directory "+neg_path+". Run step 3 first.")
     sys.exit(0)
 
   # data pipeline for positive and negative examples
@@ -55,21 +56,34 @@ def main(args):
     }
 
   # model
-  model = models.get(cfg.model, samples, cfg, cfg.CHECKPOINT_DIR, is_training=True)
+  model = models.get(cfg.model, samples, cfg, checkpoint_dir, is_training=True)
 
   # train loop
   model.train(
     cfg.learning_rate,
     resume=cfg.resume,
     profiling=cfg.profiling,
-    summary_step=10)
+    summary_step=10,
+    checkpoint_step=cfg.checkpoint_step,
+    max_checkpoint_step=cfg.max_checkpoint_step
+    )
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")
+  parser.add_argument("--dataset_dir",type=str, default=None)
+  parser.add_argument("--checkpoint_dir",type=str, default=None)
   args = parser.parse_args()
 
   cfg = config.Config(args.config_file_path)
-
+  #If arguments not set, switch to default values in conf
+  if args.dataset_dir is None:
+      dataset_dir = cfg.DATASET_BASE_DIR
+  else:
+      dataset_dir = args.dataset_dir
+  if args.checkpoint_dir is None:
+      checkpoint_dir = cfg.CHECKPOINT_DIR
+  else:
+      checkpoint_dir = args.checkpoint_dir
   main(args)

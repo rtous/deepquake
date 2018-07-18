@@ -33,6 +33,7 @@ from quakenet.data_pipeline import DataPipeline
 #import quakenet.config as config
 import config
 from quakenet.data_io import load_stream
+from quakenet.data_io import load_catalog
 import sys
 import utils
 import fnmatch
@@ -63,12 +64,12 @@ def customPlot(st, outfile, predictions, windowsMissed):
 
 
 def main(args):
-    if not os.path.exists(cfg.OUTPUT_PREDICT_BASE_DIR):
-        os.makedirs(cfg.OUTPUT_PREDICT_BASE_DIR)
-    if not os.path.exists(cfg.CHECKPOINT_DIR):
-        print ("\033[91m ERROR!!\033[0m Missing directory "+cfg.CHECKPOINT_DIR+". Run step 4 first.")
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    if not os.path.exists(checkpoint_dir):
+        print ("\033[91m ERROR!!\033[0m Missing directory "+checkpoint_dir+". Run step 4 first.")
         sys.exit(0)
-    ckpt = tf.train.get_checkpoint_state(cfg.CHECKPOINT_DIR)
+    ckpt = tf.train.get_checkpoint_state(checkpoint_dir)
     
     #Load model just once
     samples = {
@@ -80,7 +81,7 @@ def main(args):
                                          name='input_label')
         }
     model = models.get(cfg.model, samples, cfg,
-                       cfg.CHECKPOINT_DIR,
+                       checkpoint_dir,
                        is_training=False)
     sess = tf.Session() 
     model.load(sess)
@@ -88,10 +89,29 @@ def main(args):
             sess.run(model.global_step))
 
     stream_files = [file for file in os.listdir(args.stream_path) if
-                    fnmatch.fnmatch(file, '*.mseed')]
+                    fnmatch.fnmatch(file, args.pattern)]
     for stream_file in stream_files:
-        predict(args.stream_path, stream_file, sess, model, samples)
-
+        predictions = predict(args.stream_path, stream_file, sess, model, samples)
+        stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
+        metadata_path = os.path.join(args.stream_path, stream_file_without_extension+".csv")
+        if os.path.isfile(metadata_path):
+            print("Found groundtruth metadata in "+metadata_path+".")  
+            cat = pd.read_csv(metadata_path)
+            for idx, start_time in enumerate(predictions["start_time"]):
+                #print(prediction["end_time"][idx])
+                #print(prediction["start_time"][idx])
+                #filtered_catalog = cat[
+                #    ((cat.start_time >= prediction["start_time"])
+                #    & (cat.end_time <= prediction["end_time"]))]  
+                #print(filtered_catalog)
+                filtered_catalog = cat[
+                    ((cat.start_time >= predictions["start_time"][idx])
+                    & (cat.end_time <= predictions["end_time"][idx]))]
+                print(str(len(filtered_catalog["start_time"])))   
+        else:
+            print("Not found groundtruth metadata in "+metadata_path+".")     
+        #cat = load_catalog(metadata_path)
+        #cat = filter_catalog(cat)
     sess.close()
 
     
@@ -106,15 +126,15 @@ def predict(path, stream_file, sess, model, samples):
     print '+ Preprocessing stream'
     stream = utils.preprocess_stream(stream)
 
-    outputSubdir = os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR, stream_file_without_extension)
+    outputSubdir = os.path.join(output_dir, stream_file_without_extension)
     if os.path.exists(outputSubdir):
         shutil.rmtree(outputSubdir)
     os.makedirs(outputSubdir)
     outputSubdirSubplots = os.path.join(outputSubdir, "subPlots")    
     os.makedirs(outputSubdirSubplots) 
-    os.makedirs(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file_without_extension,"viz"))
+    os.makedirs(os.path.join(output_dir+"/"+stream_file_without_extension,"viz"))
     if cfg.save_sac:
-        os.makedirs(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file_without_extension,"sac"))
+        os.makedirs(os.path.join(output_dir+"/"+stream_file_without_extension,"sac"))
 
     #if args.metadata_path is not None: #This is groundtruth data
     #    print("Reading metadata file "+args.metadata_path)
@@ -131,7 +151,7 @@ def predict(path, stream_file, sess, model, samples):
 
     # Create catalog name in which the events are stored
     catalog_name = os.path.split(stream_file)[-1].split(".mseed")[0] + ".csv"
-    output_catalog = os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR, catalog_name)
+    output_catalog = os.path.join(output_dir, catalog_name)
     print 'Catalog created to store events', output_catalog
 
     # Dictonary to store info on detected events
@@ -201,12 +221,12 @@ def predict(path, stream_file, sess, model, samples):
             if is_event:
                 win_filtered = win.copy()
                 # win_filtered.filter("bandpass",freqmin=4.0, freqmax=16.0)
-                win_filtered.plot(outfile=os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file_without_extension,"viz",
+                win_filtered.plot(outfile=os.path.join(output_dir+"/"+stream_file_without_extension,"viz",
                                 "event_{}_cluster_{}.png".format(idx,cluster_id)))
 
             if cfg.save_sac and is_event:
                 win_filtered = win.copy()
-                win_filtered.write(os.path.join(cfg.OUTPUT_PREDICT_BASE_DIR,"sac",
+                win_filtered.write(os.path.join(output_dir,"sac",
                         "event_{}_cluster_{}.sac".format(idx,cluster_id)),
                         format="SAC")
 
@@ -224,7 +244,7 @@ def predict(path, stream_file, sess, model, samples):
     df.to_csv(output_catalog)
 
     #Plot everything
-    customPlot(stream, cfg.OUTPUT_PREDICT_BASE_DIR+"/"+stream_file+"_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
+    customPlot(stream, output_dir+"/"+stream_file+"_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
     #Plot only 10min sections with events
     max_secs_to_show = 600
     win_gen = stream.slide(window_length=max_secs_to_show,
@@ -235,6 +255,8 @@ def predict(path, stream_file, sess, model, samples):
     #win = substream.slice(UTCDateTime(timeP), UTCDateTime(timeP) + cfg.WINDOW_SIZE).copy()    
     print "Run time: ", time.time() - time_start
 
+    return events_dic
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
@@ -242,9 +264,19 @@ if __name__ == "__main__":
                         help="path to .ini file with all the parameters")
     parser.add_argument("--stream_path",type=str,default=None,
                         help="path to mseed to analyze")
-
+    parser.add_argument("--pattern",type=str, default="*.mseed")
+    parser.add_argument("--output_dir",type=str, default=None)
+    parser.add_argument("--checkpoint_dir",type=str, default=None)
     args = parser.parse_args()
 
     cfg = config.Config(args.config_file_path)
 
+    if args.output_dir is None:
+        output_dir = cfg.OUTPUT_PREDICT_BASE_DIR
+    else:
+        output_dir = args.output_dir
+    if args.checkpoint_dir is None:
+      checkpoint_dir = cfg.CHECKPOINT_DIR
+    else:
+      checkpoint_dir = args.checkpoint_dir
     main(args)

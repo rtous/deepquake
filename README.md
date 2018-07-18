@@ -90,25 +90,63 @@ The following utility will:
 
 	python step1_preprocess1_funvisis2oklahoma.py
 
-NOTE: Results within output/funvisis2oklahoma
+NOTE: By default it processes all the files in input directory.
+NOTE: By default results within output/funvisis2oklahoma.
+
+In order to use the utility over specific files, you may do:
+
+	python step1_preprocess1_funvisis2oklahoma.py \
+	--input_stream ./input/funvisis/mseed/2015-01-10-0517-00S.MAN___161 \
+	--input_metadata ./input/funvisis/sfiles_nordicformat/10-0517-00L.S201501 \
+	--output_dir ./output/inputdata50
+
+	python step1_preprocess1_funvisis2oklahoma.py \
+	--input_stream ./input/funvisis/mseed/2015-02-05-0420-00S.MAN___161 \
+	--input_metadata ./input/funvisis/sfiles_nordicformat/05-0420-00L.S201502 \
+	--output_dir ./output/inputdata50
 
 ## 2.4 Step 2. Preprocessing 2. Generating tfrecords for positives
 
 	python step2_preprocess2_create_tfrecords_positives.py
 
+Or 
+	python step2_preprocess2_create_tfrecords_positives.py \
+	--pattern 2015-02-05-0420-00S*.mseed \
+	--output_dir ./output/experiment1/tfrecords1 \
+	--file_name 2015-02-05-0420-00S.tfrecords
+
 ## 2.5 Step 3. Preprocessing 3. Generating tfrecords for negatives
 
 	python step3_preprocess3_create_tfrecords_negatives.py
 
+Or 
+	python step3_preprocess3_create_tfrecords_negatives.py \
+	--pattern 2015-02-05-0420-00S-00S*.mseed \
+	--output_dir ./output/experiment1/tfrecords1 \
+	--file_name 2015-02-05-0420-00S.tfrecords
+
 ## 2.6 Step 4. Train
 
 	python step4_train.py
+Or 
+	python step4_train.py \
+	--dataset_dir ./output/experiment1/tfrecords1 \
+	--checkpoint_dir ./output/experiment1/checkpoints1
 
 ## 2.7 Step 5. Eval
 
 	python step5_eval.py --plot
 
 ## 2.7 Step 6. Predict
+
+	python step6_predict.py \
+	--stream_path ./output/inputdata50/mseed \
+	--pattern 2015-02-05-0420-00S \
+	--output_dir ./output/experiment1/predict1 \
+	--pattern 2015-01-10-0517-00S*.mseed \
+	--checkpoint_dir ./output/experiment1/checkpoints1
+
+or
 
 	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CRUV.mseed
 	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CURV.mseed
