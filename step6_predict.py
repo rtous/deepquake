@@ -37,7 +37,14 @@ from quakenet.data_io import load_catalog
 import sys
 import utils
 import fnmatch
+from obspy.core.utcdatetime import UTCDateTime
 
+
+evaluation = False
+truePositives = 0
+falsePositives = 0
+trueNegatives = 0
+falseNegatives = 0
 
 def customPlot(st, outfile, predictions, windowsMissed):
     fig = plt.figure()
@@ -63,7 +70,9 @@ def customPlot(st, outfile, predictions, windowsMissed):
     plt.close(fig) 
 
 
-def main(args):
+def main(args):    
+    global evaluation
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     if not os.path.exists(checkpoint_dir):
@@ -91,31 +100,48 @@ def main(args):
     stream_files = [file for file in os.listdir(args.stream_path) if
                     fnmatch.fnmatch(file, args.pattern)]
     for stream_file in stream_files:
-        predictions = predict(args.stream_path, stream_file, sess, model, samples)
-        stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
+    	stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
         metadata_path = os.path.join(args.stream_path, stream_file_without_extension+".csv")
-        if os.path.isfile(metadata_path):
+    	if os.path.isfile(metadata_path):
             print("Found groundtruth metadata in "+metadata_path+".")  
             cat = pd.read_csv(metadata_path)
-            for idx, start_time in enumerate(predictions["start_time"]):
-                #print(prediction["end_time"][idx])
-                #print(prediction["start_time"][idx])
-                #filtered_catalog = cat[
-                #    ((cat.start_time >= prediction["start_time"])
-                #    & (cat.end_time <= prediction["end_time"]))]  
-                #print(filtered_catalog)
-                filtered_catalog = cat[
-                    ((cat.start_time >= predictions["start_time"][idx])
-                    & (cat.end_time <= predictions["end_time"][idx]))]
-                print(str(len(filtered_catalog["start_time"])))   
+            evaluation = True
         else:
-            print("Not found groundtruth metadata in "+metadata_path+".")     
+            print("Not found groundtruth metadata in "+metadata_path+".")
+            cat = None
+        predictions = predict(args.stream_path, stream_file, sess, model, samples, cat)
+        #stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
+        #metadata_path = os.path.join(args.stream_path, stream_file_without_extension+".csv")
+        #if os.path.isfile(metadata_path):
+            #print("Found groundtruth metadata in "+metadata_path+".")  
+            #cat = pd.read_csv(metadata_path)
+            #for idx, start_time in enumerate(predictions["start_time"]):
+            #    filtered_catalog = cat[
+            #        ((cat.start_time >= predictions["start_time"][idx])
+            #        & (cat.end_time <= predictions["end_time"][idx]))]
+            #    print(str(len(filtered_catalog["start_time"])))   
+        #else:
+        #    print("Not found groundtruth metadata in "+metadata_path+".")     
         #cat = load_catalog(metadata_path)
         #cat = filter_catalog(cat)
     sess.close()
 
+    if evaluation:
+	    print("true positives = "+str(truePositives))
+	    print("false positives = "+str(falsePositives))
+	    print("true negatives = "+str(trueNegatives))
+	    print("false negatives = "+str(falseNegatives))
+	    print("precission = "+str(100*float(truePositives)/(truePositives+falsePositives))+"%")
+	    print("recall = "+str(100*float(truePositives)/(truePositives+falseNegatives))+"%")
+	    print("accuracy = "+str(100*float(truePositives+trueNegatives)/(truePositives+falsePositives+trueNegatives+falseNegatives))+"%")
+
+
     
-def predict(path, stream_file, sess, model, samples):
+def predict(path, stream_file, sess, model, samples, cat):
+    global truePositives
+    global falsePositives
+    global trueNegatives
+    global falseNegatives
 
     # Load stream
     stream_path = path+"/"+stream_file #TODO join
@@ -125,7 +151,7 @@ def predict(path, stream_file, sess, model, samples):
     stream = read(stream_path)
     print '+ Preprocessing stream'
     stream = utils.preprocess_stream(stream)
-
+    print("evaluation="+str(evaluation))
     outputSubdir = os.path.join(output_dir, stream_file_without_extension)
     if os.path.exists(outputSubdir):
         shutil.rmtree(outputSubdir)
@@ -183,10 +209,23 @@ def predict(path, stream_file, sess, model, samples):
 
     try:
         for idx, win in enumerate(win_gen):
+
+            #Check the groundtruth
+            isPositive = False
+            if cat is not None:
+            	#print("win[0].stats.starttime ="+str(win[0].stats.starttime))
+            	#print("win[0].stats.endtime ="+str(win[0].stats.endtime))
+            	#print("cat.start_time[0] ="+str(cat.start_time[0]))
+            	#print("cat.end_time[0] ="+str(cat.end_time[0]))
+            	for i in range(0, len(cat.start_time)):
+	            	if (UTCDateTime(cat.start_time[i]) >= UTCDateTime(win[0].stats.starttime)) and (UTCDateTime(cat.end_time[i]) <= UTCDateTime(win[0].stats.endtime)):# and (cat.end_time[0] <= win[0].stats.endtime):
+		            	isPositive = True
+		                #print("\033[92m isPositive = True\033[0m")
+	                else:
+	                    isPositive = False
+                         
             # Fetch class_proba and label
-            to_fetch = [samples['data'],
-                        model.layers['class_prob'],
-                        model.layers['class_prediction']]
+            to_fetch = [samples['data'], model.layers['class_prob'], model.layers['class_prediction']]
             # Feed window and fake cluster_id (needed by the net) but
             # will be predicted
             if utils.check_stream(win, cfg):
@@ -208,12 +247,24 @@ def predict(path, stream_file, sess, model, samples):
             if is_event:
                 n_events += 1
             # print "event {} ,cluster id {}".format(is_event,class_prob_)
-
             if is_event:
                 events_dic["start_time"].append(win[0].stats.starttime)
                 events_dic["end_time"].append(win[0].stats.endtime)
                 events_dic["cluster_id"].append(cluster_id[0])
                 events_dic["clusters_prob"].append(list(clusters_prob))
+                if evaluation and isPositive:
+	                sys.stdout.write("\033[92m HIT\033[0m (positive)\n")
+	                truePositives = truePositives+1
+                elif evaluation:
+	                sys.stdout.write("\033[91m MISS\033[0m (false positive)\n")
+	                falsePositives = falsePositives+1
+            else:
+                if evaluation and isPositive:
+	                sys.stdout.write("\033[91m MISS\033[0m (false negative)\n")
+	                falseNegatives = falseNegatives+1
+                elif evaluation:
+	                sys.stdout.write("\033[92m HIT\033[0m (negative)\n")
+	                trueNegatives = trueNegatives+1
 
             if idx % 1000 ==0:
                 print "Analyzing {} records".format(win[0].stats.starttime)

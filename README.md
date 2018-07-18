@@ -146,6 +146,13 @@ Or
 	--pattern 2015-01-10-0517-00S*.mseed \
 	--checkpoint_dir ./output/experiment1/checkpoints1
 
+	python step6_predict.py \
+	--stream_path ./output/inputdata50/mseed \
+	--pattern 2015-02-05-0420-00S \
+	--output_dir ./output/experiment1/predict1 \
+	--pattern 2015-02-05-0420-00S*.mseed \
+	--checkpoint_dir ./output/checkpoints
+
 or
 
 	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CRUV.mseed
