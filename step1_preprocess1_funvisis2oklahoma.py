@@ -193,8 +193,8 @@ def processMseed(stream_path, obspyCatalogMeta, output_dir):
                         or
                         (window_start > timeP+cfg.WINDOW_AVOID_NEGATIVES)
                         ):
-                        print("Noise window selected")
-                        print ("Saving file "+os.path.join(output_dir, cfg.MSEED_NOISE_DIR)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".mseed")
+                        #print("Noise window selected")
+                        #print ("Saving file "+os.path.join(output_dir, cfg.MSEED_NOISE_DIR)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".mseed")
                         win.write(os.path.join(output_dir, cfg.MSEED_NOISE_DIR)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".mseed", format="MSEED") 
                         win.plot(outfile=os.path.join(output_dir, cfg.PNG_NOISE_DIR)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".png")
                     else:

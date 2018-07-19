@@ -189,8 +189,8 @@ or
 
 ## 2.10 TODO
 
-* Try with larger windows
-* Try with pure noise
+* Change step1_preprocess1_funvisis2oklahoma.py to generate training samples trough a pure sliding window
+* Overlapping detections fussion 
 * metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
 * data from stations HEL and URI is flat. Some signals from other stations are not complete
 
