@@ -1,3 +1,12 @@
+!/bin/bash
+
+### Ejecutar
+CURRENT_ENVIRONMENT=`ls -d /scratch/nas/4/rtous`/convnetquake
+source $CURRENT_ENVIRONMENT/bin/activate
+cd /scratch/nas/4/rtous/deepquake/
+#export PYTHONPATH=.
+#./util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0420-00L.S201502
+
 python step1_preprocess1_funvisis2oklahoma.py \
 --output_dir ./output/prepdata_1_50s_nonsliding
 
@@ -16,3 +25,8 @@ python step6_predict.py \
 --stream_path ./output/prepdata_1_50s_nonsliding/mseed \
 --output_dir ./output/experiment1/predict \
 --checkpoint_dir ./output/experiment1/checkpoints
+
+
+
+
+

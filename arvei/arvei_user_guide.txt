@@ -1,0 +1,70 @@
+Computer Architecture Department							R. Tous
+Universitat Politecnica de Catalunya. BarcelonaTech (UPC)                                                                       
+                                                              
+															  
+															  
+					Arvei User Guide
+
+0. (only for OXS users) Configure OSX's SSH client:
+
+	- Preferences/Advanced disable set locale on startup
+	- https://wiki.rc.ucl.ac.uk/wiki/FAQ#Unable_to_run_job:_JSV_stderr:_perl:_warning:_Setting_locale_failed.
+
+1. Enter the gateway (replace 'rtous' with your username)
+
+	ssh rtous@gw.ac.upc.edu 
+
+2. Enter an interactive execution node 
+
+	qrsh 
+
+3. Move to your scratch zone (use the proper path for your user)
+
+	cd /scratch/nas/4/rtous
+
+4. Create and activate a Python virtualenv
+
+	virtualenv deepquake_virtualenv
+	source deepquake_virtualenv/bin/activate
+
+5. Download and enter the repository
+ 
+	git clone https://github.com/rtous/deepquake.git
+	cd deepquake
+
+6. Install the dependencies (can take around 30 mins.)
+
+	xargs -L 1 pip install < requirements.txt 
+
+7. Prepare the submission script
+
+Let's use the example one within arvei/example_experiment_arvei.sh.
+
+8. Try a local version of the script first (to detect premature errors)
+
+	./arvei/example_experiment_arvei.sh
+
+Abort the execution if everything seems to be ok.
+
+9. Submit to tue queue
+
+	qsub -S /bin/bash ./arvei/test.sh
+
+Once finished, it should have created some the following directories within /scratch/nas/4/rtous:
+
+	deepquaque/prepdata_1_50s_nonsliding (all preprocessed data, plots, etc.)
+	deepquaque/experiment1 (training and evaluation results)
+
+10. Debugging
+
+In order to check the stdout/stderr output, you 
+
+	#Check in which node the job is executing)
+	qstat -u rtous
+
+	#Enter the node in which the job is executing to see the error logs
+	qrsh -l h='arvei-145' (el node que ens dona qstat)
+
+
+
+  
