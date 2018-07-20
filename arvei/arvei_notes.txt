@@ -1,0 +1,56 @@
+Computer Architecture Department							R. Tous
+Universitat Politecnica de Catalunya. BarcelonaTech (UPC)                                                                       
+                                                              
+															  
+															  
+					Arvei Notes
+
+1. Information about the cluster:
+
+Index:
+
+	https://www.ac.upc.edu/app/wiki/serveis-tic/Clusters/Users
+
+Queues and nodes: 
+
+	https://www.ac.upc.edu/app/wiki/serveis-tic/Clusters/Users/arvei
+
+Operation:
+
+	https://www.ac.upc.edu/app/wiki/serveis-tic/Clusters/Users/OperacionesComunes
+
+2. Excuting long jobs (up to 60 hours):
+
+	qsub -l big ...
+
+3. Problems installing lxml
+
+Previously I managed to install lxml==4.2.1 but I don't know how... 
+
+
+
+CFLAGS=-I/usr/include/libxml2 pip install lxml
+
+which xml2-config
+which xslt-config
+echo $PATH
+(...):/opt/libxslt-1.1.27/bin:/opt/libxml2-2.6.32/bin:(...)
+
+pip install lxml==4.2.1
+
+-l node2017=1
+
+- copy and keep the virtualenv that works
+
+wget --no-check-certificate https://www.silx.org/pub/wheelhouse/old/lxml-3.4.4-cp27-none-linux_x86_64.whl
+
+pip install lxml-3.4.4-cp27-none-linux_x86_64.whl
+
+https://www.silx.org/pub/wheelhouse/old/lxml-3.4.4-cp27-none-linux_x86_64.whl
+
+
+x. Troubleshooting
+
+- AttributeError: 'module' object has no attribute 'station' -> obspy was not correctly installed (version should be 1.0.2). pip uninstall obspy, pip install obspy.
+
+- 

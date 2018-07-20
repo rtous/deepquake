@@ -5,6 +5,8 @@ pytest-runner
 EQcorrscan==0.1.6
 librosa==0.4.3
 matplotlib==1.5.3
+lxml==4.2.1
+sqlalchemy
 obspy==1.0.2 
 -e git+https://github.com/gem/oq-hazardlib.git@589fa31ddca3697e6b167082136dc0174a77bc16#egg=openquake.hazardlib
 pandas==0.19.0
@@ -20,5 +22,5 @@ tqdm==4.9.0
 python-gflags
 configparser
 requests
-lxml==4.2.1
+
 

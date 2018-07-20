@@ -34,7 +34,7 @@ Universitat Politecnica de Catalunya. BarcelonaTech (UPC)
 
 6. Install the dependencies (can take around 30 mins.)
 
-	xargs -L 1 pip install < requirements.txt 
+	xargs -L 1 pip install < arvei/requirements_arvei.txt 
 
 7. Prepare the submission script
 
@@ -50,7 +50,7 @@ Abort the execution if everything seems to be ok.
 
 NOTE: Ensure that the virtualenv activated within the script is the correct one (deepquake_virtualenv).
 
-	qsub -S /bin/bash ./arvei/test_arvei.sh
+	qsub -S /bin/bash -l big ./arvei/test_arvei.sh
 
 Once finished, it should have created an output directory within /scratch/nas/4/rtous/deepquake with the results.
 
@@ -65,6 +65,11 @@ In order to check the stdout/stderr output:
 	qrsh -l h='arvei-145' (el node que ens dona qstat)
 
 NOTE: You would not be able to access the node if the node is too busy (which is ok as means your job is still running and has not crashed).
+
+11. Troubleshooting
+
+- Error when "virtualenv deepquake_virtualenv" -> Try freeing some disk space and/or change to another interactive node.
+
 
 
 
