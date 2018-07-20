@@ -42,7 +42,7 @@ Let's use the example one within arvei/example_experiment_arvei.sh.
 
 8. Try a local version of the script first (to detect premature errors)
 
-	./arvei/example_experiment_arvei.sh
+	./arvei/test_arvei.sh
 
 Abort the execution if everything seems to be ok.
 
