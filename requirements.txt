@@ -20,5 +20,5 @@ tqdm==4.9.0
 python-gflags
 configparser
 requests
-lxml
+lxml==4.2.1
 

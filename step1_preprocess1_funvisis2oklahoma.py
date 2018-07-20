@@ -129,7 +129,7 @@ def processDirectory(input_stream_dir, input_metadata_dir, output_dir, pattern):
 
     metadata_files = [file for file in os.listdir(input_metadata_dir) if
                     fnmatch.fnmatch(file, pattern)]
-    print "[obtain training windows] List of metadata files to anlayze: ", stream_files
+    print "[obtain training windows] List of metadata files to anlayze: ", metadata_files
     for metadata_file in metadata_files:
         #1. Process metadata
         print("[obtain training windows] Reading metadata file "+os.path.join(input_metadata_dir, metadata_file))
