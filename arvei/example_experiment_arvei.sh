@@ -27,23 +27,25 @@ cd /scratch/nas/4/rtous/deepquake/
 #./util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0420-00L.S201502
 
 python step1_preprocess1_funvisis2oklahoma.py \
---output_dir ./output/prepdata_1_50s_nonsliding
+--pattern 05-0420-00L* \
+--output_dir ./output/test
 
 python step2_preprocess2_create_tfrecords_positives.py \
---dataset_dir ./output/prepdata_1_50s_nonsliding \
---output_dir ./output/prepdata_1_50s_nonsliding/tfrecords
+--dataset_dir ./output/test \
+--output_dir ./output/test/tfrecords
+
 python step3_preprocess3_create_tfrecords_negatives.py \
---dataset_dir ./output/prepdata_1_50s_nonsliding \
---output_dir ./output/prepdata_1_50s_nonsliding/tfrecords
+--dataset_dir ./output/test \
+--output_dir ./output/test/tfrecords
 
 python step4_train.py \
---dataset_dir ./output/prepdata_1_50s_nonsliding/tfrecords \
---checkpoint_dir ./output/experiment1/checkpoints
+--dataset_dir ./output/test/tfrecords \
+--checkpoint_dir ./output/test/checkpoints
 
 python step6_predict.py \
---stream_path ./output/prepdata_1_50s_nonsliding/mseed \
---output_dir ./output/experiment1/predict \
---checkpoint_dir ./output/experiment1/checkpoints
+--stream_path ./output/test/mseed \
+--output_dir ./output/test/predict \
+--checkpoint_dir ./output/test/checkpoints
 
 ### Copiar salida (comprimida)
 #gzip -c $DATA/output-$1-$2 > $CSCRATCH/out/output-$1-$2.gz
