@@ -42,28 +42,29 @@ Let's use the example one within arvei/example_experiment_arvei.sh.
 
 8. Try a local version of the script first (to detect premature errors)
 
-	./arvei/test_arvei.sh
+	./test.sh
 
 Abort the execution if everything seems to be ok.
 
-9. Submit to tue queue
+9. Submit a "special" version of the script to tue queue
 
-	qsub -S /bin/bash ./arvei/test.sh
+NOTE: Ensure that the virtualenv activated within the script is the correct one (deepquake_virtualenv).
 
-Once finished, it should have created some the following directories within /scratch/nas/4/rtous:
+	qsub -S /bin/bash ./arvei/test_arvei.sh
 
-	deepquaque/prepdata_1_50s_nonsliding (all preprocessed data, plots, etc.)
-	deepquaque/experiment1 (training and evaluation results)
+Once finished, it should have created an output directory within /scratch/nas/4/rtous/deepquake with the results.
 
 10. Debugging
 
-In order to check the stdout/stderr output, you 
+In order to check the stdout/stderr output:
 
 	#Check in which node the job is executing)
 	qstat -u rtous
 
 	#Enter the node in which the job is executing to see the error logs
 	qrsh -l h='arvei-145' (el node que ens dona qstat)
+
+NOTE: You would not be able to access the node if the node is too busy (which is ok as means your job is still running and has not crashed).
 
 
 
