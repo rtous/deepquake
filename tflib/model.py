@@ -107,7 +107,7 @@ class BaseModel(object):
       checkpoint_path = os.path.join(self.checkpoint_dir,"model-"+str(step))
     self.saver.restore(sess, checkpoint_path)
     step = tf.train.global_step(sess, self.global_step)
-    print 'Loaded model at step {} from snapshot {}.'.format(step, checkpoint_path)
+    print '[train] Loaded model at step {} from snapshot {}.'.format(step, checkpoint_path)
 
   def save(self, sess):
     """Saves a checkpoint to disk.
@@ -188,17 +188,17 @@ class BaseModel(object):
     with tf.Session() as sess:
       self.summary_writer = tf.train.SummaryWriter(self.checkpoint_dir, sess.graph)
 
-      print 'Initializing all variables.'
+      print '[train] Initializing all variables.'
       tf.initialize_local_variables().run()
       tf.initialize_all_variables().run()
       if resume:
         self.load(sess)
 
-      print 'Starting data threads coordinator.'
+      print '[train] Starting data threads coordinator.'
       coord = tf.train.Coordinator()
       threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
-      print 'Starting optimization.'
+      print '[train] Starting optimization.'
       start_time = time.time()
       try:
         while not coord.should_stop():  # Training loop
@@ -220,26 +220,26 @@ class BaseModel(object):
           # Save checkpoint every `checkpoint_step`
           if checkpoint_step is not None and (
               step > 0) and step % checkpoint_step == 0:
-            print 'Step {} | Saving checkpoint.'.format(step)
+            print '[train] Step {} | Saving checkpoint.'.format(step)
             self.save(sess)
             if checkpoint_step >= max_checkpoint_step:
               coord.request_stop()
 
       except KeyboardInterrupt:
-        print 'Interrupted training at step {}.'.format(step)
+        print '[train] Interrupted training at step {}.'.format(step)
         self.save(sess)
 
       except tf.errors.OutOfRangeError:
-        print 'Training completed (tf.errors.OutOfRangeError)'
+        print '[train] Training completed (tf.errors.OutOfRangeError)'
         self.save(sess)
 
       finally:
-        print 'Shutting down data threads.'
+        print '[train] Shutting down data threads.'
         coord.request_stop()
         self.summary_writer.close()
 
       # Wait for data threads
-      print 'Waiting for all threads.'
+      print '[train] Waiting for all threads.'
       coord.join(threads)
 
-      print 'Optimization done.'
+      print '[train] Optimization done.'

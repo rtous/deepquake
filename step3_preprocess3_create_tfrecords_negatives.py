@@ -67,7 +67,7 @@ def main(_):
             writer.write(st_event, cluster_id) 
             
     # Cleanup writer
-    print("[tfrecords negatives] Number of events written={}".format(writer._written))
+    print("[tfrecords negatives] Number of windows written={}".format(writer._written))
     writer.close()
 
 if __name__ == "__main__":

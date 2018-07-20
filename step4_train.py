@@ -30,11 +30,11 @@ def main(args):
   #pos_path = os.path.join(cfg.DATASET,"positive")
   pos_path = os.path.join(dataset_dir, cfg.OUTPUT_TFRECORDS_DIR_POSITIVES)
   if not os.path.exists(pos_path):
-    print ("\033[91m ERROR!!\033[0m Missing directory "+pos_path+". Run step 2 first.")
+    print ("[train] \033[91m ERROR!!\033[0m Missing directory "+pos_path+". Run step 2 first.")
     sys.exit(0)
   neg_path = os.path.join(dataset_dir, cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES)
   if not os.path.exists(neg_path):
-    print ("\033[91m ERROR!!\033[0m Missing directory "+neg_path+". Run step 3 first.")
+    print ("[train] \033[91m ERROR!!\033[0m Missing directory "+neg_path+". Run step 3 first.")
     sys.exit(0)
 
   # data pipeline for positive and negative examples

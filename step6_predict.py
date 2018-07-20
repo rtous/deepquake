@@ -76,7 +76,7 @@ def main(args):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     if not os.path.exists(checkpoint_dir):
-        print ("\033[91m ERROR!!\033[0m Missing directory "+checkpoint_dir+". Run step 4 first.")
+        print ("[classify] \033[91m ERROR!!\033[0m Missing directory "+checkpoint_dir+". Run step 4 first.")
         sys.exit(0)
     ckpt = tf.train.get_checkpoint_state(checkpoint_dir)
     
@@ -94,7 +94,7 @@ def main(args):
                        is_training=False)
     sess = tf.Session() 
     model.load(sess)
-    print 'Evaluating using model at step {}'.format(
+    print '[classify] Evaluating using model at step {}'.format(
             sess.run(model.global_step))
 
     stream_files = [file for file in os.listdir(args.stream_path) if
@@ -103,11 +103,11 @@ def main(args):
     	stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
         metadata_path = os.path.join(args.stream_path, stream_file_without_extension+".csv")
     	if os.path.isfile(metadata_path):
-            print("Found groundtruth metadata in "+metadata_path+".")  
+            print("[classify] Found groundtruth metadata in "+metadata_path+".")  
             cat = pd.read_csv(metadata_path)
             evaluation = True
         else:
-            print("Not found groundtruth metadata in "+metadata_path+".")
+            print("[classify] Not found groundtruth metadata in "+metadata_path+".")
             cat = None
         predictions = predict(args.stream_path, stream_file, sess, model, samples, cat)
         #stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
@@ -127,13 +127,13 @@ def main(args):
     sess.close()
 
     if evaluation:
-	    print("true positives = "+str(truePositives))
-	    print("false positives = "+str(falsePositives))
-	    print("true negatives = "+str(trueNegatives))
-	    print("false negatives = "+str(falseNegatives))
-	    print("precission = "+str(100*float(truePositives)/(truePositives+falsePositives))+"%")
-	    print("recall = "+str(100*float(truePositives)/(truePositives+falseNegatives))+"%")
-	    print("accuracy = "+str(100*float(truePositives+trueNegatives)/(truePositives+falsePositives+trueNegatives+falseNegatives))+"%")
+	    print("[classify] true positives = "+str(truePositives))
+	    print("[classify] false positives = "+str(falsePositives))
+	    print("[classify] true negatives = "+str(trueNegatives))
+	    print("[classify] false negatives = "+str(falseNegatives))
+	    print("[classify] precission = "+str(100*float(truePositives)/(truePositives+falsePositives))+"%")
+	    print("[classify] recall = "+str(100*float(truePositives)/(truePositives+falseNegatives))+"%")
+	    print("[classify] accuracy = "+str(100*float(truePositives+trueNegatives)/(truePositives+falsePositives+trueNegatives+falseNegatives))+"%")
 
 
     
@@ -147,11 +147,10 @@ def predict(path, stream_file, sess, model, samples, cat):
     stream_path = path+"/"+stream_file #TODO join
     stream_file = os.path.split(stream_path)[-1]
     stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
-    print "+ Loading Stream {}".format(stream_file)
+    print "[classify] Loading Stream {}".format(stream_file)
     stream = read(stream_path)
-    print '+ Preprocessing stream'
+    print '[classify] Preprocessing stream'
     stream = utils.preprocess_stream(stream)
-    print("evaluation="+str(evaluation))
     outputSubdir = os.path.join(output_dir, stream_file_without_extension)
     if os.path.exists(outputSubdir):
         shutil.rmtree(outputSubdir)
@@ -178,7 +177,7 @@ def predict(path, stream_file, sess, model, samples, cat):
     # Create catalog name in which the events are stored
     catalog_name = os.path.split(stream_file)[-1].split(".mseed")[0] + ".csv"
     output_catalog = os.path.join(output_dir, catalog_name)
-    print 'Catalog created to store events', output_catalog
+    print '[classify] Catalog created to store events', output_catalog
 
     # Dictonary to store info on detected events
     events_dic ={"start_time": [],
@@ -253,21 +252,29 @@ def predict(path, stream_file, sess, model, samples, cat):
                 events_dic["cluster_id"].append(cluster_id[0])
                 events_dic["clusters_prob"].append(list(clusters_prob))
                 if evaluation and isPositive:
-	                sys.stdout.write("\033[92m HIT\033[0m (positive)\n")
-	                truePositives = truePositives+1
+	                #sys.stdout.write("\033[92m HIT\033[0m (positive)\n")
+                    sys.stdout.write("\033[92mP\033[0m")
+                    sys.stdout.flush()
+                    truePositives = truePositives+1
                 elif evaluation:
-	                sys.stdout.write("\033[91m MISS\033[0m (false positive)\n")
-	                falsePositives = falsePositives+1
+	                #sys.stdout.write("\033[91m MISS\033[0m (false positive)\n")
+                    sys.stdout.write("\033[91mP\033[0m")
+                    sys.stdout.flush()
+                    falsePositives = falsePositives+1
             else:
                 if evaluation and isPositive:
-	                sys.stdout.write("\033[91m MISS\033[0m (false negative)\n")
-	                falseNegatives = falseNegatives+1
+                    #sys.stdout.write("\033[91m MISS\033[0m (false negative)\n")
+                    sys.stdout.write("\033[91mN\033[0m")
+                    sys.stdout.flush()
+                    falseNegatives = falseNegatives+1
                 elif evaluation:
-	                sys.stdout.write("\033[92m HIT\033[0m (negative)\n")
-	                trueNegatives = trueNegatives+1
+	                #sys.stdout.write("\033[92m HIT\033[0m (negative)\n")
+                    sys.stdout.write("\033[92mN\033[0m")
+                    sys.stdout.flush()
+                    trueNegatives = trueNegatives+1
 
             if idx % 1000 ==0:
-                print "Analyzing {} records".format(win[0].stats.starttime)
+                print "\n[classify] Analyzing {} records".format(win[0].stats.starttime)
 
             if is_event:
                 win_filtered = win.copy()
@@ -282,14 +289,14 @@ def predict(path, stream_file, sess, model, samples, cat):
                         format="SAC")
 
             if idx >= max_windows:
-                print "stopped after {} windows".format(max_windows)
-                print "found {} events".format(n_events)
+                print "[classify] stopped after {} windows".format(max_windows)
+                print "[classify] found {} events".format(n_events)
                 break
 
     except KeyboardInterrupt:
-        print 'Interrupted at time {}.'.format(win[0].stats.starttime)
-        print "processed {} windows, found {} events".format(idx+1,n_events)
-        print "Run time: ", time.time() - time_start
+        print '[classify] Interrupted at time {}.'.format(win[0].stats.starttime)
+        print "[classify] processed {} windows, found {} events".format(idx+1,n_events)
+        print "[classify] Run time: ", time.time() - time_start
 
     df = pd.DataFrame.from_dict(events_dic)
     df.to_csv(output_catalog)
@@ -304,7 +311,7 @@ def predict(path, stream_file, sess, model, samples, cat):
     for idx, win in enumerate(win_gen):
         customPlot(win, outputSubdirSubplots+"/win_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
     #win = substream.slice(UTCDateTime(timeP), UTCDateTime(timeP) + cfg.WINDOW_SIZE).copy()    
-    print "Run time: ", time.time() - time_start
+    print "[classify] Run time: ", time.time() - time_start
 
     return events_dic
 

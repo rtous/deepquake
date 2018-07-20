@@ -35,16 +35,19 @@ def preprocess_stream(stream):
 def obspyDateTime2PythonDateTime(odt):
     return dt.datetime(odt.year, odt.month, odt.day, odt.hour, odt.minute, odt.second)
 
-def check_stream(stream, cfg):    
+def check_stream(stream, cfg): 
     if len(stream) != 3:
-        print ("\033[91m WARNING!!\033[0m Only "+str(len(stream))+" channels.")
+        if cfg.DEBUG:
+            print ("[check stream] \033[91m WARNING!!\033[0m Only "+str(len(stream))+" channels.")
         return False
     if stream[0].stats.sampling_rate != 100.0:
-        print ("\033[91m WARNING!!\033[0m Wrong sampling rate ("+str(stream[0].stats.sampling_rate)+").")
+        if cfg.DEBUG:
+            print ("[check stream] \033[91m WARNING!!\033[0m Wrong sampling rate ("+str(stream[0].stats.sampling_rate)+").")
         return False
     data_size = len(stream[0].data) + len(stream[1].data) + len(stream[2].data)
     if data_size != cfg.win_size*3:
-        print ("\033[91m WARNING!!\033[0m Not enough data points  ("+str(data_size)+").")
+        if cfg.DEBUG:
+            print ("[check stream] \033[91m WARNING!!\033[0m Not enough data points  ("+str(data_size)+").")
         return False 
     return True
 
@@ -55,6 +58,10 @@ def fetch_window_data(stream, cfg):
         data[:, i] = stream[i].data.astype(np.float32)
     data = np.expand_dims(data, 0)
     return data
+
+#def save_json(data, path):
+#    with open(path, 'w') as outfile:  
+#        json.dump(data, outfile)
 
 
 

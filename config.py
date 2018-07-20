@@ -5,6 +5,7 @@ class Config(object):
     config = configparser.ConfigParser()
     config.read(config_file_path)
     
+    self.DEBUG = config.getboolean('main', 'DEBUG')
     self.SAMPLING_RATE = config.getfloat('main', 'SAMPLING_RATE')
     self.WINDOW_SIZE = config.getint('main', 'WINDOW_SIZE')
     self.PWAVE_WINDOW = config.getint('main', 'PWAVE_WINDOW')
