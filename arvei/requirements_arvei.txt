@@ -2,15 +2,15 @@ numpy==1.11.2
 cython==0.25.2
 pytest==2.8.7
 pytest-runner
+scipy==0.18.1
+matplotlib==1.5.3
+scikit-image==0.12.3
+scikit-learn==0.18
 EQcorrscan==0.1.6
 librosa==0.4.3
-matplotlib==1.5.3 
 -e git+https://github.com/gem/oq-hazardlib.git@589fa31ddca3697e6b167082136dc0174a77bc16#egg=openquake.hazardlib
 pandas==0.19.0
 protobuf==3.1.0
-scikit-image==0.12.3
-scikit-learn==0.18
-scipy==0.18.1 
 seaborn==0.7.1
 setproctitle==1.1.10
 https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.0rc0-cp27-none-linux_x86_64.whl
@@ -22,5 +22,4 @@ requests
 sqlalchemy
 arvei/lxml-3.4.4-cp27-none-linux_x86_64.whl
 obspy==1.0.2
-
 
