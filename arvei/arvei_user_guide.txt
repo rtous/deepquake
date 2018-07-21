@@ -34,6 +34,8 @@ Universitat Politecnica de Catalunya. BarcelonaTech (UPC)
 
 6. Install the dependencies (can take around 30 mins.)
 
+WARNING: Arvei required more complex installation steps. In addition, some of the dependencies stop working at different times during the project development (e.g. "pip install tensorflow==0.12.0" and "pip install lxml"). I fixed them, but it's an unstable environment (python packages within machines which you don't control). Cross your fingers.
+
 	xargs -L 1 pip install < arvei/requirements_arvei.txt 
 
 7. Prepare the submission script
@@ -70,7 +72,7 @@ NOTE: You would not be able to access the node if the node is too busy (which is
 
 - Error when "virtualenv deepquake_virtualenv" -> Try freeing some disk space and/or change to another interactive node.
 
-
+- AttributeError: 'module' object has no attribute 'station' -> obspy was not correctly installed (version should be 1.0.2). pip uninstall obspy, pip install obspy.
 
 
   

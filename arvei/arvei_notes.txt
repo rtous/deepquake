@@ -25,32 +25,15 @@ Operation:
 
 3. Problems installing lxml
 
-Previously I managed to install lxml==4.2.1 but I don't know how... 
-
-
-
-CFLAGS=-I/usr/include/libxml2 pip install lxml
+Initially I managed to install lxml==4.2.1 but I don't know how. Maybe an update in arvei changed the environment. Two dependencies seem to be wrong:
 
 which xml2-config
 which xslt-config
-echo $PATH
-(...):/opt/libxslt-1.1.27/bin:/opt/libxml2-2.6.32/bin:(...)
 
-pip install lxml==4.2.1
+I solved the first one with:
 
--l node2017=1
+	CFLAGS=-I/usr/include/libxml2 pip install lxml
 
-- copy and keep the virtualenv that works
+But not the second one. Finally y downloaded the wheel:
 
 wget --no-check-certificate https://www.silx.org/pub/wheelhouse/old/lxml-3.4.4-cp27-none-linux_x86_64.whl
-
-pip install lxml-3.4.4-cp27-none-linux_x86_64.whl
-
-https://www.silx.org/pub/wheelhouse/old/lxml-3.4.4-cp27-none-linux_x86_64.whl
-
-
-x. Troubleshooting
-
-- AttributeError: 'module' object has no attribute 'station' -> obspy was not correctly installed (version should be 1.0.2). pip uninstall obspy, pip install obspy.
-
-- 
