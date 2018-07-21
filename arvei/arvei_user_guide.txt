@@ -70,9 +70,25 @@ NOTE: You would not be able to access the node if the node is too busy (which is
 
 11. Troubleshooting
 
+- missing dependency: pip install tensorflow==0.12.0 -> https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.0-cp27-none-linux_x86_64.whl
+
+- missing dependency: openquake.hazardlib==0.22.0 -> https://github.com/gem/oq-hazardlib/releases
+
+- missing dependency: OSError: Could not find library geos_c -> see missing dependency: shapely
+
+- missing dependency: shapely -> https://pypi.org/project/Shapely/#files
+
+	- Downloaded from https://pypi.org/project/Shapely/#files
+	- Changed whl name to Shapely-1.6.4.post2-cp27-none-linux_x86_64.whl
+	- pip install Shapely-1.6.4.post2-cp27-none-linux_x86_64.whl
+
+- "Attempting to use uninitialized value conv1/..." -> you are not using the right version of tensorflow (check pip show tensorflow == 0.12.0)
+
 - Error when "virtualenv deepquake_virtualenv" -> Try freeing some disk space and/or change to another interactive node.
 
 - AttributeError: 'module' object has no attribute 'station' -> obspy was not correctly installed (version should be 1.0.2). pip uninstall obspy, pip install obspy.
+
+
 
 
   

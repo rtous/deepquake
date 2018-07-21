@@ -172,6 +172,7 @@ or
 
 * 500s windows from funvisis >>> 10s windows from ConvNetQuake
 * Predicting with ConvNetQuake model over funvisis finds too much events
+* Using 50s windows worked better than 10s. Other values to be tested
 
 ## 2.9 Troubleshooting
 
@@ -190,15 +191,23 @@ or
 ## 2.10 TODO
 
 * Change step1_preprocess1_funvisis2oklahoma.py to generate training samples trough a pure sliding window
+* Intensive testing of different parameters
 * Overlapping detections fussion 
-* metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
-* data from stations HEL and URI is flat. Some signals from other stations are not complete
+* Arvei:
+	- Intermediate results should go to local scratch.
+	- stdout should be saved outside the execution node. 
+* keep tensorflow 0.12.0 wheel somewhere (pip install tensorflow==0.12.0 stop working)
+* keep openquake.hazardlib==0.22.0 from https://github.com/gem/oq-hazardlib/releases
 
 DONE:
 
 * Extract Funvisis data for ALL stations
 * Prepare my own noise and see how it looks like
+* (ignored) metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
+* (ignored) data from stations HEL and URI is flat. Some signals from other stations are not complete
 
+/* ——————————————————————————————————- */
+/* ——————————————————————————————————- */
 /* ——————————————————————————————————- */
 
 ## ANNEX 1. Running tperol/ConvNetQuake

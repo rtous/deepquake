@@ -7,17 +7,17 @@ Universitat Politecnica de Catalunya. BarcelonaTech (UPC)
 
 1. Information about the cluster:
 
-Index:
-
-	https://www.ac.upc.edu/app/wiki/serveis-tic/Clusters/Users
-
-Queues and nodes: 
+Cluster features (nodes, queues, etc.): 
 
 	https://www.ac.upc.edu/app/wiki/serveis-tic/Clusters/Users/arvei
 
-Operation:
+Howto:
 
-	https://www.ac.upc.edu/app/wiki/serveis-tic/Clusters/Users/OperacionesComunes
+	https://www.ac.upc.edu/app/wiki/serveis-tic/Clusters/Users/FuncionamentGeneral
+
+More:
+
+	https://www.ac.upc.edu/app/wiki/serveis-tic/Clusters/Users
 
 2. Excuting long jobs (up to 60 hours):
 
