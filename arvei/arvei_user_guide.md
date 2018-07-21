@@ -34,19 +34,21 @@ WARNING: Arvei required more complex installation steps. In addition, some of th
 
 	xargs -L 1 pip install < arvei/requirements_arvei.txt 
 
-## 7. Prepare the submission script
-
-Let's use the example one within arvei/example_experiment_arvei.sh.
-
-## 8. Try a local version of the script first (to detect premature errors)
+## 7. Try an interactive version of the script first (to detect premature errors)
 
 	./test.sh
 
 Abort the execution if everything seems to be ok.
 
-## 9. Submit a "special" version of the script to tue queue
+## 8. Prepare a version of the script to be submitted to the queue.
+
+Let's use arvei/test_arvei.sh (which is the arvei version of test.sh).
+
+	cat arvei/test_arvei.sh
 
 NOTE: Ensure that the virtualenv activated within the script is the correct one (deepquake_virtualenv).
+
+## 9. Submit the script to tue queue
 
 	qsub -S /bin/bash -l big ./arvei/test_arvei.sh
 
