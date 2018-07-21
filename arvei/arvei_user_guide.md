@@ -1,54 +1,50 @@
-Computer Architecture Department							R. Tous
-Universitat Politecnica de Catalunya. BarcelonaTech (UPC)                                                                       
-                                                              
-															  
-															  
-					Arvei User Guide
+											  															  
+# Arvei User Guide
 
-0. (only for OXS users) Configure OSX's SSH client:
+## 0. (only for OXS users) Configure OSX's SSH client:
 
 	- Preferences/Advanced disable set locale on startup
 	- https://wiki.rc.ucl.ac.uk/wiki/FAQ#Unable_to_run_job:_JSV_stderr:_perl:_warning:_Setting_locale_failed.
 
-1. Enter the gateway (replace 'rtous' with your username)
+## 1. Enter the gateway (replace 'rtous' with your username)
 
 	ssh rtous@gw.ac.upc.edu 
 
-2. Enter an interactive execution node 
+## 2. Enter an interactive execution node 
 
 	qrsh 
 
-3. Move to your scratch zone (use the proper path for your user)
+## 3. Move to your scratch zone (use the proper path for your user)
 
 	cd /scratch/nas/4/rtous
 
-4. Create and activate a Python virtualenv
+## 4. Create and activate a Python virtualenv
 
 	virtualenv deepquake_virtualenv
 	source deepquake_virtualenv/bin/activate
 
-5. Download and enter the repository
+## 5. Download and enter the repository
  
 	git clone https://github.com/rtous/deepquake.git
 	cd deepquake
 
-6. Install the dependencies (can take around 30 mins.)
+## 6. Install the dependencies (can take around 30 mins.)
 
 WARNING: Arvei required more complex installation steps. In addition, some of the dependencies stop working at different times during the project development (e.g. "pip install tensorflow==0.12.0" and "pip install lxml"). I fixed them, but it's an unstable environment (python packages within machines which you don't control). Cross your fingers.
 
 	xargs -L 1 pip install < arvei/requirements_arvei.txt 
 
-7. Prepare the submission script
+## 7. Prepare the submission script
 
 Let's use the example one within arvei/example_experiment_arvei.sh.
 
-8. Try a local version of the script first (to detect premature errors)
+## 8. Try a local version of the script first (to detect premature errors)
 
 	./test.sh
 
 Abort the execution if everything seems to be ok.
 
-9. Submit a "special" version of the script to tue queue
+## 9. Submit a "special" version of the script to tue queue
 
 NOTE: Ensure that the virtualenv activated within the script is the correct one (deepquake_virtualenv).
 
@@ -56,7 +52,7 @@ NOTE: Ensure that the virtualenv activated within the script is the correct one 
 
 Once finished, it should have created an output directory within /scratch/nas/4/rtous/deepquake with the results.
 
-10. Debugging
+## 10. Debugging
 
 In order to check the stdout/stderr output:
 
@@ -68,7 +64,7 @@ In order to check the stdout/stderr output:
 
 NOTE: You would not be able to access the node if the node is too busy (which is ok as means your job is still running and has not crashed).
 
-11. Troubleshooting
+## 11. Troubleshooting
 
 - missing dependency: pip install tensorflow==0.12.0 -> https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.0-cp27-none-linux_x86_64.whl
 

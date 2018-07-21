@@ -1,11 +1,7 @@
-Computer Architecture Department							R. Tous
-Universitat Politecnica de Catalunya. BarcelonaTech (UPC)                                                                       
-                                                              
-															  
-															  
-					Arvei Notes
+														  
+# Arvei Notes
 
-1. Information about the cluster:
+## 1. Information about the cluster:
 
 Cluster features (nodes, queues, etc.): 
 
@@ -19,11 +15,11 @@ More:
 
 	https://www.ac.upc.edu/app/wiki/serveis-tic/Clusters/Users
 
-2. Excuting long jobs (up to 60 hours):
+## 2. Excuting long jobs (up to 60 hours):
 
 	qsub -l big ...
 
-3. Problems installing lxml
+## 3. Problems installing lxml
 
 Initially I managed to install lxml==4.2.1 but I don't know how. Maybe an update in arvei changed the environment. Two dependencies seem to be wrong:
 
