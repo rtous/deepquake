@@ -91,82 +91,89 @@ The following utility will:
 	python step1_preprocess1_funvisis2oklahoma.py
 
 NOTE: By default it processes all the files in input directory.
-NOTE: By default results within output/funvisis2oklahoma.
+NOTE: By default results within output/data_prep_default.
 
 In order to use the utility over specific files, you may do:
 
 	python step1_preprocess1_funvisis2oklahoma.py \
-	--input_stream ./input/funvisis/mseed/2015-01-10-0517-00S.MAN___161 \
-	--input_metadata ./input/funvisis/sfiles_nordicformat/10-0517-00L.S201501 \
-	--output_dir ./output/inputdata50
+	--input_stream ./input/data_raw_default/mseed/2015-01-10-0517-00S.MAN___161 \
+	--input_metadata ./input/data_raw_default/sfiles_nordicformat/10-0517-00L.S201501 \
+	--output_dir ./output/data_prep_sometest
+
+Or you may prefer to use specific config file for the experiment:
 
 	python step1_preprocess1_funvisis2oklahoma.py \
-	--input_stream ./input/funvisis/mseed/2015-02-05-0420-00S.MAN___161 \
-	--input_metadata ./input/funvisis/sfiles_nordicformat/05-0420-00L.S201502 \
-	--output_dir ./output/inputdata50
+	--config_file_path config_test.ini
 
 ## 2.4 Step 2. Preprocessing 2. Generating tfrecords for positives
 
 	python step2_preprocess2_create_tfrecords_positives.py
 
-Or 
+In order to use the utility over specific files, you may do:
+
 	python step2_preprocess2_create_tfrecords_positives.py \
 	--pattern 2015-02-05-0420-00S*.mseed \
-	--output_dir ./output/experiment1/tfrecords1 \
+	--output_dir ./output/data_prep_sometest/tfrecords1 \
 	--file_name 2015-02-05-0420-00S.tfrecords
+
+Or you may prefer to use specific config file for the experiment:
+
+	python step2_preprocess2_create_tfrecords_positives.py \
+	--config_file_path config_test.ini
 
 ## 2.5 Step 3. Preprocessing 3. Generating tfrecords for negatives
 
 	python step3_preprocess3_create_tfrecords_negatives.py
 
-Or 
+In order to use the utility over specific files, you may do:
+
 	python step3_preprocess3_create_tfrecords_negatives.py \
 	--pattern 2015-02-05-0420-00S-00S*.mseed \
-	--output_dir ./output/experiment1/tfrecords1 \
+	--output_dir ./output/data_prep_sometest/tfrecords1 \
 	--file_name 2015-02-05-0420-00S.tfrecords
+
+Or you may prefer to use specific config file for the experiment:
+
+	python step3_preprocess3_create_tfrecords_negatives.py \
+	--config_file_path config_test.ini
 
 ## 2.6 Step 4. Train
 
 	python step4_train.py
-Or 
+
+In order to change the paths you may do:
+
 	python step4_train.py \
-	--dataset_dir ./output/experiment1/tfrecords1 \
-	--checkpoint_dir ./output/experiment1/checkpoints1
+	--dataset_dir ./output/data_prep_sometest/tfrecords \
+	--checkpoint_dir ./output/train_sometest/checkpoints
+
+Or you may prefer to use specific config file for the experiment:
+
+	python step4_train.py \
+	--config_file_path config_test.ini
 
 ## 2.7 Step 5. Eval
 
-	python step5_eval.py --plot
+	python step5_eval.py
 
-## 2.7 Step 6. Predict
+In order to change the paths you may do:
 
-	python step6_predict.py \
-	--stream_path ./output/inputdata50/mseed \
+	python step5_eval.py \
+	--stream_path ./output/test/mseed \
+
+In order to change the defaults you may do:
+
+	python step5_eval.py \
+	--config_file_path config_test.ini \
+	--stream_path ./output/data_prep_sometest/mseed
 	--pattern 2015-02-05-0420-00S \
-	--output_dir ./output/experiment1/predict1 \
-	--pattern 2015-01-10-0517-00S*.mseed \
-	--checkpoint_dir ./output/experiment1/checkpoints1
+	--output_dir ./output/train_sometest/predict \
+	--checkpoint_dir ./output/train_sometest/checkpoints
 
-	python step6_predict.py \
-	--stream_path ./output/inputdata50/mseed \
-	--pattern 2015-02-05-0420-00S \
-	--output_dir ./output/experiment1/predict1 \
-	--pattern 2015-02-05-0420-00S*.mseed \
-	--checkpoint_dir ./output/checkpoints
+Or you may prefer to use specific config file for the experiment:
 
-or
-
-	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CRUV.mseed
-	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0420-00S.MAN___161_CURV.mseed
-	...
-	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_CRUV.mseed
-	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_CURV.mseed
-	...
-	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0703-00S.MAN___161_CRUV.mseed
-	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_CURV.mseed
-	...
-	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-01-10-0517-00S.MAN___161_CRUV.mseed
-	python step6_predict.py --stream_path output/funvisis2oklahoma/mseed/2015-02-05-0538-00S.MAN___161_CURV.mseed
-	...
+	python step5_eval.py \
+	--config_file_path config_test.ini
 
 ## 2.8 Preliminary conclusions
 

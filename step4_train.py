@@ -28,11 +28,11 @@ def main(args):
   tf.set_random_seed(1234)
 
   #pos_path = os.path.join(cfg.DATASET,"positive")
-  pos_path = os.path.join(dataset_dir, cfg.OUTPUT_TFRECORDS_DIR_POSITIVES)
+  pos_path = os.path.join(dataset_dir, cfg.output_tfrecords_dir_positives)
   if not os.path.exists(pos_path):
     print ("[train] \033[91m ERROR!!\033[0m Missing directory "+pos_path+". Run step 2 first.")
     sys.exit(0)
-  neg_path = os.path.join(dataset_dir, cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES)
+  neg_path = os.path.join(dataset_dir, cfg.output_tfrecords_dir_negatives)
   if not os.path.exists(neg_path):
     print ("[train] \033[91m ERROR!!\033[0m Missing directory "+neg_path+". Run step 3 first.")
     sys.exit(0)
@@ -79,11 +79,11 @@ if __name__ == '__main__':
   cfg = config.Config(args.config_file_path)
   #If arguments not set, switch to default values in conf
   if args.dataset_dir is None:
-      dataset_dir = cfg.DATASET_BASE_DIR
+      dataset_dir = cfg.dataset_base_dir
   else:
       dataset_dir = args.dataset_dir
   if args.checkpoint_dir is None:
-      checkpoint_dir = cfg.CHECKPOINT_DIR
+      checkpoint_dir = cfg.checkpoint_dir
   else:
       checkpoint_dir = args.checkpoint_dir
   main(args)

@@ -37,16 +37,16 @@ def obspyDateTime2PythonDateTime(odt):
 
 def check_stream(stream, cfg): 
     if len(stream) != 3:
-        if cfg.DEBUG:
+        if cfg.debug:
             print ("[check stream] \033[91m WARNING!!\033[0m Only "+str(len(stream))+" channels.")
         return False
     if stream[0].stats.sampling_rate != 100.0:
-        if cfg.DEBUG:
+        if cfg.debug:
             print ("[check stream] \033[91m WARNING!!\033[0m Wrong sampling rate ("+str(stream[0].stats.sampling_rate)+").")
         return False
     data_size = len(stream[0].data) + len(stream[1].data) + len(stream[2].data)
     if data_size != cfg.win_size*3:
-        if cfg.DEBUG:
+        if cfg.debug:
             print ("[check stream] \033[91m WARNING!!\033[0m Not enough data points  ("+str(data_size)+").")
         return False 
     return True

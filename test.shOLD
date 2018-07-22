@@ -1,0 +1,28 @@
+python step1_preprocess1_funvisis2oklahoma.py \
+--config_file_path config_test.ini \
+--input_stream ./input/funvisis/mseed \
+--input_metadata ./input/funvisis/sfiles_nordicformat \
+--pattern 05-0420-00L* \
+--output_dir ./output/test
+
+python step2_preprocess2_create_tfrecords_positives.py \
+--config_file_path config_test.ini \
+--dataset_dir ./output/test \
+--output_dir ./output/test/tfrecords
+
+python step3_preprocess3_create_tfrecords_negatives.py \
+--config_file_path config_test.ini \
+--dataset_dir ./output/test \
+--output_dir ./output/test/tfrecords
+
+python step4_train.py \
+--config_file_path config_test.ini \
+--dataset_dir ./output/test/tfrecords \
+--checkpoint_dir ./output/test/checkpoints
+
+python step6_predict.py \
+--config_file_path config_test.ini \
+--stream_path ./output/test/mseed \
+--output_dir ./output/test/predict \
+--checkpoint_dir ./output/test/checkpoints
+

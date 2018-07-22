@@ -1,42 +1,43 @@
 import configparser
+import argparse
 
 class Config(object):
   def __init__(self, config_file_path):
     config = configparser.ConfigParser()
     config.read(config_file_path)
     
-    self.DEBUG = config.getboolean('main', 'DEBUG')
-    self.SAMPLING_RATE = config.getfloat('main', 'SAMPLING_RATE')
-    self.WINDOW_SIZE = config.getint('main', 'WINDOW_SIZE')
-    self.PWAVE_WINDOW = config.getint('main', 'PWAVE_WINDOW')
-    self.WINDOW_STEP_NEGATIVES = config.getint('main', 'WINDOW_STEP_NEGATIVES') #The step between the start times of two successive windows in seconds.
-    self.WINDOW_AVOID_NEGATIVES = config.getint('main', 'WINDOW_AVOID_NEGATIVES')
-    self.INPUT_STREAM_DIR = config.get('main', 'INPUT_STREAM_DIR')
-    self.INPUT_METADATA_DIR = config.get('main', 'INPUT_METADATA_DIR')
+    self.debug = config.getboolean('main', 'debug')
+    self.sampling_rate = config.getfloat('main', 'sampling_rate')
+    self.window_size = config.getint('main', 'window_size')
+    self.pwave_window = config.getint('main', 'pwave_window')
+    self.window_step_negatives = config.getint('main', 'window_step_negatives') #the step between the start times of two successive windows in seconds.
+    self.window_avoid_negatives = config.getint('main', 'window_avoid_negatives')
+    self.input_stream_dir = config.get('main', 'input_stream_dir')
+    self.input_metadata_dir = config.get('main', 'input_metadata_dir')
 
-    self.DATASET_BASE_DIR = config.get('main', 'DATASET_BASE_DIR')
-    self.MSEED_DIR = config.get('main', 'MSEED_DIR')
-    #self.OUTPUT_MSEED_DIR = os.path.join(self.DATASET_BASE_DIR, self.MSEED_DIR)
-    self.MSEED_EVENT_DIR = config.get('main', 'MSEED_EVENT_DIR')
-    #self.OUTPUT_MSEED_EVENT_DIR = os.path.join(self.DATASET_BASE_DIR, self.MSEED_EVENT_DIR)
-    self.MSEED_NOISE_DIR = config.get('main', 'MSEED_NOISE_DIR')
-    #self.OUTPUT_MSEED_NOISE_DIR = os.path.join(self.DATASET_BASE_DIR, self.MSEED_NOISE_DIR)
-    self.PNG_DIR = config.get('main', 'PNG_DIR')
-    #self.OUTPUT_PNG_DIR = os.path.join(self.DATASET_BASE_DIR, self.PNG_DIR)
-    self.PNG_EVENT_DIR = config.get('main', 'PNG_EVENT_DIR')
-    #self.OUTPUT_PNG_EVENT_DIR = os.path.join(self.DATASET_BASE_DIR, self.PNG_EVENT_DIR)
-    self.PNG_NOISE_DIR = config.get('main', 'PNG_NOISE_DIR')
-    #self.OUTPUT_PNG_NOISE_DIR = os.path.join(self.DATASET_BASE_DIR, self.PNG_NOISE_DIR)
+    self.dataset_base_dir = config.get('main', 'dataset_base_dir')
+    self.mseed_dir = config.get('main', 'mseed_dir')
+    #self.output_mseed_dir = os.path.join(self.dataset_base_dir, self.mseed_dir)
+    self.mseed_event_dir = config.get('main', 'mseed_event_dir')
+    #self.output_mseed_event_dir = os.path.join(self.dataset_base_dir, self.mseed_event_dir)
+    self.mseed_noise_dir = config.get('main', 'mseed_noise_dir')
+    #self.output_mseed_noise_dir = os.path.join(self.dataset_base_dir, self.mseed_noise_dir)
+    self.png_dir = config.get('main', 'png_dir')
+    #self.output_png_dir = os.path.join(self.dataset_base_dir, self.png_dir)
+    self.png_event_dir = config.get('main', 'png_event_dir')
+    #self.output_png_event_dir = os.path.join(self.dataset_base_dir, self.png_event_dir)
+    self.png_noise_dir = config.get('main', 'png_noise_dir')
+    #self.output_png_noise_dir = os.path.join(self.dataset_base_dir, self.png_noise_dir)
     
-    self.OUTPUT_TFRECORDS_DIR_POSITIVES = config.get('main', 'OUTPUT_TFRECORDS_DIR_POSITIVES')
-    self.OUTPUT_TFRECORDS_DIR_NEGATIVES = config.get('main', 'OUTPUT_TFRECORDS_DIR_NEGATIVES')
-    self.CHECKPOINT_DIR = config.get('main', 'CHECKPOINT_DIR')
-    #self.DATASET = config.get('main', 'DATASET')
+    self.output_tfrecords_dir_positives = config.get('main', 'output_tfrecords_dir_positives')
+    self.output_tfrecords_dir_negatives = config.get('main', 'output_tfrecords_dir_negatives')
+    self.checkpoint_dir = config.get('main', 'checkpoint_dir')
+    #self.dataset = config.get('main', 'dataset')
 
     #train
     self.learning_rate = config.getfloat('main', 'learning_rate')
     self.batch_size = config.getint('main', 'batch_size')
-    self.win_size = int((self.WINDOW_SIZE * self.SAMPLING_RATE) + 1)
+    self.win_size = int((self.window_size * self.sampling_rate) + 1)
     self.n_traces = config.getint('main', 'n_traces')
     self.display_step = config.getint('main', 'display_step')
     self.n_threads = config.getint('main', 'n_threads')
@@ -53,9 +54,9 @@ class Config(object):
     self.max_checkpoint_step = config.getint('main', 'max_checkpoint_step')
     
     #eval
-    self.OUTPUT_EVAL_BASE_DIR = config.get('main', 'OUTPUT_EVAL_BASE_DIR')
+    self.output_eval_base_dir = config.get('main', 'output_eval_base_dir')
 
     #predict
-    self.WINDOW_STEP_PREDICT = config.getint('main', 'WINDOW_STEP_PREDICT')
-    self.OUTPUT_PREDICT_BASE_DIR = config.get('main', 'OUTPUT_PREDICT_BASE_DIR')
+    self.window_step_predict = config.getint('main', 'window_step_predict')
+    self.output_predict_base_dir = config.get('main', 'output_predict_base_dir')
     self.save_sac = config.getboolean('main', 'save_sac')

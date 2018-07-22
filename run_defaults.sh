@@ -1,0 +1,5 @@
+python step1_preprocess1_funvisis2oklahoma.py
+python step2_preprocess2_create_tfrecords_positives.py
+python step3_preprocess3_create_tfrecords_negatives.py
+python step4_train.py
+python step5_eval.py

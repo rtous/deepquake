@@ -35,24 +35,24 @@ def preprocess_stream(stream):
 
 def main(_):
     print("[tfrecords negatives] Converting .mseed files into tfrecords...")
-    print("[tfrecords negatives] Input directory: "+os.path.join(dataset_dir, cfg.MSEED_NOISE_DIR))
-    print("[tfrecords negatives] Output directory: "+os.path.join(output_dir, cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES))
+    print("[tfrecords negatives] Input directory: "+os.path.join(dataset_dir, cfg.mseed_noise_dir))
+    print("[tfrecords negatives] Output directory: "+os.path.join(output_dir, cfg.output_tfrecords_dir_negatives))
     print("[tfrecords negatives] File pattern: "+args.pattern)
 
-    stream_files = [file for file in os.listdir(os.path.join(dataset_dir, cfg.MSEED_NOISE_DIR)) if
+    stream_files = [file for file in os.listdir(os.path.join(dataset_dir, cfg.mseed_noise_dir)) if
                     fnmatch.fnmatch(file, args.pattern)]
     print("[tfrecords negatives] Matching files: "+str(len(stream_files)))
 
     # Create dir to store tfrecords
-    if not os.path.exists(os.path.join(output_dir, cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES)):
-        os.makedirs(os.path.join(output_dir, cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES))
+    if not os.path.exists(os.path.join(output_dir, cfg.output_tfrecords_dir_negatives)):
+        os.makedirs(os.path.join(output_dir, cfg.output_tfrecords_dir_negatives))
 
     # Write event waveforms and cluster_id in .tfrecords
     output_name = output_name = args.file_name
-    output_path = os.path.join(os.path.join(output_dir, cfg.OUTPUT_TFRECORDS_DIR_NEGATIVES), output_name)
+    output_path = os.path.join(os.path.join(output_dir, cfg.output_tfrecords_dir_negatives), output_name)
     writer = DataWriter(output_path)
     for stream_file in stream_files:
-        stream_path = os.path.join(os.path.join(dataset_dir, cfg.MSEED_NOISE_DIR), stream_file)
+        stream_path = os.path.join(os.path.join(dataset_dir, cfg.mseed_noise_dir), stream_file)
         #print "[tfrecords negatives] Loading Stream {}".format(stream_file)
         st_event = read(stream_path)
         #print '[tfrecords negatives] Preprocessing stream'
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     cfg = config.Config(args.config_file_path)
     #If arguments not set, switch to default values in conf
     if args.dataset_dir is None:
-        dataset_dir = cfg.DATASET_BASE_DIR
+        dataset_dir = cfg.dataset_base_dir
     else:
         dataset_dir = args.dataset_dir
     if args.output_dir is None:
