@@ -36,21 +36,21 @@ WARNING: Arvei required more complex installation steps. In addition, some of th
 
 ## 7. Try an interactive version of the script first (to detect premature errors)
 
-	./test.sh
+	./experiments/experiment1_test.sh
 
 Abort the execution if everything seems to be ok.
 
 ## 8. Prepare a version of the script to be submitted to the queue.
 
-Let's use arvei/test_arvei.sh (which is the arvei version of test.sh).
+Let's use the lightweight experiment1_test_arvei.sh (which is the arvei version of experiment1_test.sh).
 
-	cat arvei/test_arvei.sh
+	cat arvei/experiments/experiment1_test_arvei.sh
 
 NOTE: Ensure that the virtualenv activated within the script is the correct one (deepquake_virtualenv).
 
 ## 9. Submit the script to tue queue
 
-	qsub -S /bin/bash -l big ./arvei/test_arvei.sh
+	qsub -S /bin/bash -l big ./arvei/experiments/experiment1_test_arvei.sh
 
 Once finished, it should have created an output directory within /scratch/nas/4/rtous/deepquake with the results.
 
