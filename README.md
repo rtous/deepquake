@@ -159,13 +159,13 @@ Or you may prefer to use specific config file for the experiment:
 In order to change the paths you may do:
 
 	python step5_eval.py \
-	--stream_path ./output/test/mseed \
+	--stream_path ./output/test/mseed
 
 In order to change the defaults you may do:
 
 	python step5_eval.py \
 	--config_file_path config_test.ini \
-	--stream_path ./output/data_prep_sometest/mseed
+	--stream_path ./output/data_prep_sometest/mseed \
 	--pattern 2015-02-05-0420-00S \
 	--output_dir ./output/train_sometest/predict \
 	--checkpoint_dir ./output/train_sometest/checkpoints

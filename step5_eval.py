@@ -325,6 +325,8 @@ if __name__ == "__main__":
     parser.add_argument("--pattern",type=str, default="*.mseed")
     parser.add_argument("--output_dir",type=str, default=None)
     parser.add_argument("--checkpoint_dir",type=str, default=None)
+    parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
+
     args = parser.parse_args()
 
     cfg = config.Config(args.config_file_path)
@@ -341,4 +343,13 @@ if __name__ == "__main__":
         stream_path = os.path.join(cfg.dataset_base_dir, cfg.mseed_dir) 
     else:
         stream_path = args.stream_path
+
+    if redirect_stdout_stderr:
+        stdout_stderr_file = open(os.path.join(output_dir, 'stdout_stderr_file.txt'), 'w')
+        sys.stdout = stderr = stdout_stderr_file
+    
     main(args)
+
+    if redirect_stdout_stderr:  
+        stdout_stderr_file.close()
+
