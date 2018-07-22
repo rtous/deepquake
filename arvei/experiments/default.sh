@@ -20,7 +20,7 @@ DATA=data.$JOB_ID
 # La otra opción es que la aplicación lea de $CSCRATCH
 
 ### Ejecutar
-CURRENT_ENVIRONMENT=`ls -d /scratch/nas/4/rtous`/convnetquake
+CURRENT_ENVIRONMENT=`ls -d /scratch/nas/4/rtous`/deepquake_virtualenv
 source $CURRENT_ENVIRONMENT/bin/activate
 cd /scratch/nas/4/rtous/deepquake/
 #export PYTHONPATH=.
