@@ -344,12 +344,12 @@ if __name__ == "__main__":
     else:
         stream_path = args.stream_path
 
-    if redirect_stdout_stderr:
+    if args.redirect_stdout_stderr:
         stdout_stderr_file = open(os.path.join(output_dir, 'stdout_stderr_file.txt'), 'w')
         sys.stdout = stderr = stdout_stderr_file
     
     main(args)
 
-    if redirect_stdout_stderr:  
+    if args.redirect_stdout_stderr:  
         stdout_stderr_file.close()
 
