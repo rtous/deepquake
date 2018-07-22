@@ -82,6 +82,8 @@ if __name__ == "__main__":
     parser.add_argument("--pattern",type=str, default="*.mseed")
     parser.add_argument("--output_dir",type=str, default=None)
     parser.add_argument("--file_name",type=str, default="positives.tfrecords")
+    #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
+
     args = parser.parse_args()
     cfg = config.Config(args.config_file_path)
     #If arguments not set, switch to default values in conf
@@ -93,4 +95,11 @@ if __name__ == "__main__":
         output_dir = dataset_dir
     else:
         output_dir = args.output_dir
+    #if args.redirect_stdout_stderr:
+    #    stdout_stderr_file = open(os.path.join(checkpoint_dir, 'stdout_stderr_file.txt'), 'w')
+    #    sys.stdout = stderr = stdout_stderr_file
+
     tf.app.run()
+
+    #if args.redirect_stdout_stderr:  
+    #    stdout_stderr_file.close()   

@@ -26,11 +26,11 @@ cd /scratch/nas/4/rtous/deepquake/
 #export PYTHONPATH=.
 #./util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0420-00L.S201502
 
-python step1_preprocess1_funvisis2oklahoma.py
-python step2_preprocess2_create_tfrecords_positives.py
-python step3_preprocess3_create_tfrecords_negatives.py
-python step4_train.py
-python step5_eval.py
+python step1_preprocess1_funvisis2oklahoma.py > stdout_stderr_default_1prep1.txt
+python step2_preprocess2_create_tfrecords_positives.py > stdout_stderr_default_2prep2.txt
+python step3_preprocess3_create_tfrecords_negatives.py > stdout_stderr_default_3prep3.txt
+python step4_train.py > stdout_stderr_default_4train.txt
+python step5_eval.py > stdout_stderr_default_5eval.txt
 
 ### Copiar salida (comprimida)
 #gzip -c $DATA/output-$1-$2 > $CSCRATCH/out/output-$1-$2.gz

@@ -74,6 +74,8 @@ if __name__ == '__main__':
                         help="path to .ini file with all the parameters")
   parser.add_argument("--dataset_dir",type=str, default=None)
   parser.add_argument("--checkpoint_dir",type=str, default=None)
+  #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
+
   args = parser.parse_args()
 
   cfg = config.Config(args.config_file_path)
@@ -86,4 +88,11 @@ if __name__ == '__main__':
       checkpoint_dir = cfg.checkpoint_dir
   else:
       checkpoint_dir = args.checkpoint_dir
+  #if args.redirect_stdout_stderr:
+  #    stdout_stderr_file = open(os.path.join(checkpoint_dir, 'stdout_stderr_file.txt'), 'w')
+  #    sys.stdout = stderr = stdout_stderr_file
+
   main(args)
+
+  #if args.redirect_stdout_stderr:  
+  #      stdout_stderr_file.close()
