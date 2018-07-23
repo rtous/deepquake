@@ -206,7 +206,7 @@ def processMseed(stream_path, obspyCatalogMeta, output_dir, station, plot_statio
                         #Event window: [timeP-cfg.pwave_window..timeP+cfg.pwave_window]
                         #Do not use negatives 
                         if (window_start <= event_window_start) and (window_end >= event_window_end): #positive
-                            win.write(os.path.join(output_dir, cfg.mseed_event_dir)+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
+                            win.write(os.path.join(output_dir, cfg.mseed_event_dir)+"/"+stream_file+"_"+station_code+"_"+str(idx)+".mseed", format="MSEED") 
                             if plot_positives:
                                 win.plot(outfile=os.path.join(output_dir, cfg.png_event_dir)+"/"+stream_file+"_"+station_code+".png")
                             sys.stdout.write("\033[92m.\033[0m")
