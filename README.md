@@ -105,6 +105,12 @@ Or you may prefer to use specific config file for the experiment:
 	python step1_preprocess1_funvisis2oklahoma.py \
 	--config_file_path config_test.ini
 
+To save plots use:
+
+	--plot_station True
+	--plot_positives True
+	--plot_negatives True
+
 ## 2.4 Step 2. Preprocessing 2. Generating tfrecords for positives
 
 	python step2_preprocess2_create_tfrecords_positives.py
@@ -197,6 +203,8 @@ Or you may prefer to use specific config file for the experiment:
 
 ## 2.10 TODO
 
+* making plotting optional
+* use local scratch in arvei instead of nas
 * Change step1_preprocess1_funvisis2oklahoma.py to generate training samples trough a pure sliding window
 * Intensive testing of different parameters
 * Overlapping detections fussion 
@@ -212,6 +220,10 @@ DONE:
 * Prepare my own noise and see how it looks like
 * (ignored) metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
 * (ignored) data from stations HEL and URI is flat. Some signals from other stations are not complete
+
+## 2.11 Lessons learned
+
+* Ar
 
 /* ——————————————————————————————————- */
 /* ——————————————————————————————————- */

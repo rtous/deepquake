@@ -38,7 +38,7 @@ WARNING: Arvei required more complex installation steps. In addition, some of th
 
 	./experiments/experiment1_test.sh
 
-Abort the execution if everything seems to be ok.
+NOTE: You can await till the script ends (few seconds). The script only processes a small subset of data and has dummy results.
 
 ## 8. Prepare a version of the script to be submitted to the queue.
 

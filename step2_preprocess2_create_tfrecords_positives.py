@@ -75,6 +75,7 @@ def main(_):
     writer.close()
     
 if __name__ == "__main__":
+    print ("\033[92m******************** STEP 2/5. PREPROCESSING STEP 2/3. POSITIVE TRAINING WINDOWS -> TFRECORDS *******************\033[0m ")
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")

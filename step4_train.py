@@ -23,6 +23,7 @@ import config as config
 import sys
 
 def main(args):
+  print ("\033[92m******************** STEP 4/5. TRAINING *******************\033[0m ")
   setproctitle.setproctitle('quakenet')
 
   tf.set_random_seed(1234)

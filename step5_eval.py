@@ -127,13 +127,25 @@ def main(args):
     sess.close()
 
     if evaluation:
-	    print("[classify] true positives = "+str(truePositives))
-	    print("[classify] false positives = "+str(falsePositives))
-	    print("[classify] true negatives = "+str(trueNegatives))
-	    print("[classify] false negatives = "+str(falseNegatives))
-	    print("[classify] precission = "+str(100*float(truePositives)/(truePositives+falsePositives))+"%")
-	    print("[classify] recall = "+str(100*float(truePositives)/(truePositives+falseNegatives))+"%")
-	    print("[classify] accuracy = "+str(100*float(truePositives+trueNegatives)/(truePositives+falsePositives+trueNegatives+falseNegatives))+"%")
+        print("[classify] true positives = "+str(truePositives))
+        print("[classify] false positives = "+str(falsePositives))
+        print("[classify] true negatives = "+str(trueNegatives))
+        print("[classify] false negatives = "+str(falseNegatives))
+
+        if truePositives+falsePositives>0:
+            print("[classify] precission = "+str(100*float(truePositives)/(truePositives+falsePositives))+"%")
+        else:
+            print("[classify] cannot compute precission as truePositives+falsePositives == 0")
+
+        if truePositives+falseNegatives>0:
+            print("[classify] recall = "+str(100*float(truePositives)/(truePositives+falseNegatives))+"%")
+        else:
+            print("[classify] cannot compute recall as truePositives+falseNegatives == 0")
+
+        if truePositives+falsePositives+trueNegatives+falseNegatives>0:
+            print("[classify] accuracy = "+str(100*float(truePositives+trueNegatives)/(truePositives+falsePositives+trueNegatives+falseNegatives))+"%")
+        else:
+            print("[classify] cannot compute accuracy as truePositives+falsePositives+trueNegatives+falseNegatives == 0")
 
 
     
@@ -208,7 +220,6 @@ def predict(path, stream_file, sess, model, samples, cat):
 
     try:
         for idx, win in enumerate(win_gen):
-
             #Check the groundtruth
             isPositive = False
             if cat is not None:
@@ -273,8 +284,8 @@ def predict(path, stream_file, sess, model, samples, cat):
                     sys.stdout.flush()
                     trueNegatives = trueNegatives+1
 
-            if idx % 1000 ==0:
-                print "\n[classify] Analyzing {} records".format(win[0].stats.starttime)
+            #if idx % 1000 ==0:
+            #    print "\n[classify] Analyzing {} records".format(win[0].stats.starttime)
 
             if is_event:
                 win_filtered = win.copy()
@@ -311,11 +322,13 @@ def predict(path, stream_file, sess, model, samples, cat):
     for idx, win in enumerate(win_gen):
         customPlot(win, outputSubdirSubplots+"/win_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
     #win = substream.slice(UTCDateTime(timeP), UTCDateTime(timeP) + cfg.window_size).copy()    
-    print "[classify] Run time: ", time.time() - time_start
+    print "\n[classify] Run time: ", time.time() - time_start
 
     return events_dic
 
 if __name__ == "__main__":
+
+    print ("\033[92m******************** STEP 5/5. EVALUATION *******************\033[0m ")
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file_path",type=str,default="config_default.ini",
