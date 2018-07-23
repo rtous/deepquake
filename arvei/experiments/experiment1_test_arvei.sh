@@ -43,6 +43,10 @@ python step4_train.py \
 python step5_eval.py \
 --config_file_path experiments/config_experiment1_test.ini > stdout_stderr_test_5eval.txt
 
+
+#~{username}/{job-name}.o{job-id}
+#~{username}/{job-name}.e{job-id}
+
 ### Copiar salida (comprimida)
 #gzip -c $DATA/output-$1-$2 > $CSCRATCH/out/output-$1-$2.gz
 

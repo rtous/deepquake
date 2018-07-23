@@ -203,19 +203,18 @@ Or you may prefer to use specific config file for the experiment:
 
 ## 2.10 TODO
 
-* making plotting optional
-* use local scratch in arvei instead of nas
-* Change step1_preprocess1_funvisis2oklahoma.py to generate training samples trough a pure sliding window
+
+* (arvei) use local scratch in arvei instead of nas
+* (arvei) move .out and .err instead of redirecting stderr and stdout
 * Intensive testing of different parameters
 * Overlapping detections fussion 
-* Arvei:
-	- Intermediate results should go to local scratch.
-	- stdout should be saved outside the execution node. 
 * keep tensorflow 0.12.0 wheel somewhere (pip install tensorflow==0.12.0 stop working)
 * keep openquake.hazardlib==0.22.0 from https://github.com/gem/oq-hazardlib/releases
 
 DONE:
 
+* Change step1_preprocess1_funvisis2oklahoma.py to generate training samples trough a pure sliding window
+* making plotting optional
 * Extract Funvisis data for ALL stations
 * Prepare my own noise and see how it looks like
 * (ignored) metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
