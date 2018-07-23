@@ -164,15 +164,24 @@ def processMseed(stream_path, obspyCatalogMeta, output_dir, station, plot_statio
                     continue
                 print ("[obtain training windows] ---------- Station "+station_code+" ---------")
                 print ("[obtain training windows] Extracting full stream and saving into "+os.path.join(output_dir, cfg.mseed_dir)+"/"+stream_file+"_"+station_code+".mseed")
-                
                 #Slice the input stream horizontally, for one station
                 substream = stream.select(station=station_code)
                 if plot_station:
                     customPlot(substream, timeP, os.path.join(output_dir, cfg.png_dir)+"/"+stream_file+"_"+station_code+".png")
                 substream.write(os.path.join(output_dir, cfg.mseed_dir)+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
 
-                event_window_start = timeP - cfg.pwave_window/2
-                event_window_end = timeP + cfg.pwave_window/2
+                #Slice the input stream horizontally, for one station
+
+
+                #Now a WINDOW_SIZE seconds window from the P wave
+                sys.stdout.write("[obtain training windows] Extracting positive windows and saving into "+os.path.join(output_dir, cfg.mseed_event_dir)+": ")
+                win = substream.slice(UTCDateTime(timeP), UTCDateTime(timeP) + cfg.window_size).copy()
+                if plot_positives:
+                    win.plot(outfile=os.path.join(output_dir, cfg.png_event_dir)+"/"+stream_file+"_"+station_code+".png")
+                #print ("[obtain training windows] Extracting positive windows... "+os.path.join(output_dir, cfg.mseed_event_dir)+"/"+stream_file+"_"+station_code+".mseed")
+                win.write(os.path.join(output_dir, cfg.mseed_event_dir)+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
+                sys.stdout.write(". \n")
+                print("[obtain training windows] One positive window obtained.")
 
                 # Create catalog name in which the events are stored
                 output_catalog = os.path.join(output_dir, cfg.mseed_dir)+"/"+stream_file+"_"+station_code+".csv"
@@ -187,48 +196,39 @@ def processMseed(stream_path, obspyCatalogMeta, output_dir, station, plot_statio
                 df = pd.DataFrame.from_dict(events_dic)
                 df.to_csv(output_catalog)
 
-                #Slice the input stream vertically, by time
-                sys.stdout.write("[obtain training windows] Extracting positive and negative windows and saving into "+output_dir+":\n")
+                #Save noise windows (exclude from P wave and 20s later)
+                sys.stdout.write("[obtain training windows] Extracting negative windows and saving into "+os.path.join(output_dir, cfg.mseed_noise_dir)+": ")
                 win_gen = substream.slide(window_length=cfg.window_size,
                            step=cfg.window_step_negatives,
                            include_partial_windows=False)
                 total_time = substream[0].stats.endtime - substream[0].stats.starttime
                 max_windows = (total_time - cfg.window_size) / cfg.window_step_negatives
                 num_negatives = 0
-                num_positives = 0
                 num_errors = 0
-                num_skipped = 0
                 for idx, win in enumerate(win_gen):
                     if utils.check_stream(win, cfg):
                         window_start = win[0].stats.starttime.timestamp
                         window_end = win[-1].stats.endtime.timestamp
-
-                        #Event window: [timeP-cfg.pwave_window..timeP+cfg.pwave_window]
-                        #Do not use negatives 
-                        if (window_start <= event_window_start) and (window_end >= event_window_end): #positive
-                            win.write(os.path.join(output_dir, cfg.mseed_event_dir)+"/"+stream_file+"_"+station_code+".mseed", format="MSEED") 
-                            if plot_positives:
-                                win.plot(outfile=os.path.join(output_dir, cfg.png_event_dir)+"/"+stream_file+"_"+station_code+".png")
-                            sys.stdout.write("\033[92m.\033[0m")
-                            num_positives = num_positives+1
-                        elif (window_end < event_window_start-cfg.window_avoid_negatives) or (window_start > event_window_end+cfg.window_avoid_negatives):# negative
+                        if ((window_start < timeP and window_end < timeP)
+                            or
+                            (window_start > timeP+cfg.window_avoid_negatives)
+                            ):
+                            #print("Noise window selected")
+                            #print ("Saving file "+os.path.join(output_dir, cfg.mseed_noise_dir)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".mseed")
                             win.write(os.path.join(output_dir, cfg.mseed_noise_dir)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".mseed", format="MSEED") 
                             if plot_negatives:
                                 win.plot(outfile=os.path.join(output_dir, cfg.png_noise_dir)+"/"+stream_file+"_"+station_code+"_noise"+str(idx)+".png")
-                            sys.stdout.write("\033[91m.\033[0m")
+                            sys.stdout.write(".")
                             sys.stdout.flush()
                             num_negatives = num_negatives+1
-                        else: # skipped
-                            sys.stdout.write(".")
-                            num_skipped = num_skipped+1
+                        #else:
+                            #print("Noise window avoided: "+stream_file+"_"+station_code)
                     else:
-                        sys.stdout.write("\033[93m.\033[0m")
+                        sys.stdout.write("\033[91m.\033[0m")
                         sys.stdout.flush()
                         num_errors = num_errors+1
 
-                print("\n[obtain training windows] "+str(num_positives)+" positive windows obtained.")
-                print("[obtain training windows] "+str(num_negatives)+" negative windows obtained.")
-                print("[obtain training windows] "+str(num_skipped)+" windows skipped (neither clear positive nor negative).")
+                print("\n[obtain training windows] "+str(num_negatives)+" negative windows obtained.")
                 print("[obtain training windows] "+str(num_errors)+" windows discarded because of errors (config debug=True for details).")
 
 if __name__ == "__main__":
