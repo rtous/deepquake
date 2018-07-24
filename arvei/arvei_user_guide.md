@@ -50,13 +50,13 @@ NOTE: Ensure that the virtualenv activated within the script is the correct one 
 
 ## 9. Submit the script to tue queue
 
-	qsub -S /bin/bash -l big ./arvei/experiments/experiment1_test_arvei.sh
+	qsub -S /bin/bash -N deepquake_experiment1_test -l big ./arvei/experiments/experiment1_test_arvei.sh
 
-Once finished, it should have created an output directory within /scratch/nas/4/rtous/deepquake with the results.
+Once finished, it should have created an output directory within /scratch/nas/4/rtous/deepquake with the results and also a couple of files with the stdout and stderr.
 
 ## 10. Debugging
 
-In order to check the stdout/stderr output:
+Till the end of the exeuction the stdout an stderr files will not be copied to the outpus dir. In order to check the stdout/stderr output before the script ends you can:
 
 	#Check in which node the job is executing)
 	qstat -u rtous
