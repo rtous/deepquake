@@ -222,7 +222,7 @@ class BaseModel(object):
               step > 0) and step % checkpoint_step == 0:
             print '[train] Step {} | Saving checkpoint.'.format(step)
             self.save(sess)
-            if checkpoint_step >= max_checkpoint_step:
+            if step >= max_checkpoint_step:
               coord.request_stop()
 
       except KeyboardInterrupt:
