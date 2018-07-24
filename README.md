@@ -203,16 +203,20 @@ Or you may prefer to use specific config file for the experiment:
 
 ## 2.10 TODO
 
-
-* (arvei) use local scratch in arvei instead of nas
-* (arvei) move .out and .err instead of redirecting stderr and stdout
+* tensorboard traces
+* leave one out cross validation
+* Intensive testing of different parameters
 * Intensive testing of different parameters
 * Overlapping detections fussion 
-* keep tensorflow 0.12.0 wheel somewhere (pip install tensorflow==0.12.0 stop working)
-* keep openquake.hazardlib==0.22.0 from https://github.com/gem/oq-hazardlib/releases
+* (arvei) use local scratch in arvei instead of nas (LOW PRIORITY)
+* preserve the execution environment just in case (specially arvei) (LOW PRIORITY)
+	* keep tensorflow 0.12.0 wheel somewhere (pip install tensorflow==0.12.0 stop working) 
+	* keep openquake.hazardlib==0.22.0 from https://github.com/gem/oq-hazardlib/releases 
+	* keep a full copy of the arvei virtualenv somewhere
 
 DONE:
 
+* (arvei) move .out and .err instead of redirecting stderr and stdout 
 * Change step1_preprocess1_funvisis2oklahoma.py to generate training samples trough a pure sliding window
 * making plotting optional
 * Extract Funvisis data for ALL stations

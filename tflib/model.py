@@ -6,6 +6,8 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.python.client import timeline
 
+import sys
+
 class BaseModel(object):
   """Base model implementing the training loop and general model interface."""
   __metaclass__ = abc.ABCMeta
@@ -215,6 +217,7 @@ class BaseModel(object):
                 fid.write(ctf)
 
             print self._summary_step(step_data)
+            sys.stdout.flush()
             self.summary_writer.add_summary(step_data['summaries'], global_step=step)
 
           # Save checkpoint every `checkpoint_step`

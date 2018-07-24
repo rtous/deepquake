@@ -1,0 +1,22 @@
+1. experiment2_defaults:
+
+
+2. experiment3_20s:
+
+window_size = 20
+pwave_window = 4
+window_step_negatives = 10
+window_avoid_negatives = 10
+learning_rate = 0.001
+batch_size = 128
+n_clusters = 2
+max_checkpoint_step = 5000
+
+[classify] Run time:  5.02463793755
+[classify] true positives = 134
+[classify] false positives = 50
+[classify] true negatives = 9041
+[classify] false negatives = 13
+[classify] precission = 72.8260869565%
+[classify] recall = 91.156462585%
+[classify] accuracy = 99.3180342065%
