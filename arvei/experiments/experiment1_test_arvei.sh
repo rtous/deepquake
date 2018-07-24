@@ -20,32 +20,33 @@ DATA=data.$JOB_ID
 # La otra opción es que la aplicación lea de $CSCRATCH
 
 ### Ejecutar
-CURRENT_ENVIRONMENT=`ls -d /scratch/nas/4/rtous`/deepquake_virtualenv
+CURRENT_ENVIRONMENT=`ls -d $CSCRATCH`/deepquake_virtualenv
 source $CURRENT_ENVIRONMENT/bin/activate
-cd /scratch/nas/4/rtous/deepquake/
+cd $CSCRATCH/deepquake/
 #export PYTHONPATH=.
-#./util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0420-00L.S201502
 
-python step1_preprocess1_funvisis2oklahoma.py \
---config_file_path experiments/config_experiment1_test.ini \
---pattern 05-0420-00L* \
---station CRUV > stdout_stderr_test_1prep1.txt
+#python step1_preprocess1_funvisis2oklahoma.py \
+#--config_file_path experiments/config_experiment1_test.ini \
+#--pattern 05-0420-00L* \
+#--station CRUV > stdout_stderr_test_1prep1.txt
 
-python step2_preprocess2_create_tfrecords_positives.py \
---config_file_path experiments/config_experiment1_test.ini > stdout_stderr_test_2prep2.txt
+#python step2_preprocess2_create_tfrecords_positives.py \
+#--config_file_path experiments/config_experiment1_test.ini > stdout_stderr_test_2prep2.txt
 
-python step3_preprocess3_create_tfrecords_negatives.py \
---config_file_path experiments/config_experiment1_test.ini > stdout_stderr_test_3prep3.txt
+#python step3_preprocess3_create_tfrecords_negatives.py \
+#--config_file_path experiments/config_experiment1_test.ini > stdout_stderr_test_3prep3.txt
 
-python step4_train.py \
---config_file_path experiments/config_experiment1_test.ini > stdout_stderr_test_4train.txt
+#python step4_train.py \
+#--config_file_path experiments/config_experiment1_test.ini > stdout_stderr_test_4train.txt
 
-python step5_eval.py \
---config_file_path experiments/config_experiment1_test.ini > stdout_stderr_test_5eval.txt
+#python step5_eval.py \
+#--config_file_path experiments/config_experiment1_test.ini > stdout_stderr_test_5eval.txt
 
 
-#~{username}/{job-name}.o{job-id}
-#~{username}/{job-name}.e{job-id}
+"experiments/experiment1_test.sh"
+
+cp ~{username}/{job-name}.o{job-id} $CSCRATCH/deepquake/output/
+cp ~{username}/{job-name}.e{job-id} $CSCRATCH/deepquake/output/
 
 ### Copiar salida (comprimida)
 #gzip -c $DATA/output-$1-$2 > $CSCRATCH/out/output-$1-$2.gz
