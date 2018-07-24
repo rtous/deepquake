@@ -44,9 +44,10 @@ cd $CSCRATCH/deepquake/
 
 
 "experiments/experiment1_test.sh"
-
-cp ~{username}/{job-name}.o{job-id} $CSCRATCH/deepquake/output/
-cp ~{username}/{job-name}.e{job-id} $CSCRATCH/deepquake/output/
+echo 
+cp $HOME/* $CSCRATCH/deepquake/output/
+#cp ~{username}/{job-name}.o{job-id} $CSCRATCH/deepquake/output/
+#cp ~{username}/{job-name}.e{job-id} $CSCRATCH/deepquake/output/
 
 ### Copiar salida (comprimida)
 #gzip -c $DATA/output-$1-$2 > $CSCRATCH/out/output-$1-$2.gz

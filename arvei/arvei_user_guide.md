@@ -64,6 +64,9 @@ In order to check the stdout/stderr output:
 	#Enter the node in which the job is executing to see the error logs
 	qrsh -l h='arvei-145' (el node que ens dona qstat)
 
+	#Alternatively you can do
+	scp arvei-30.ac.upc.es:NAMEOFJOB.JOBID .
+
 NOTE: You would not be able to access the node if the node is too busy (which is ok as means your job is still running and has not crashed).
 
 ## 11. Troubleshooting
