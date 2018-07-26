@@ -86,26 +86,14 @@ The following utility will:
 
 1. split the data of all the events into station-level mseed
 2. Extract windows noise from all the events
-3. Save .png for everything
-
-	python step1_preprocess1_funvisis2oklahoma.py
-
-NOTE: By default it processes all the files in input directory.
-NOTE: By default results within output/data_prep_default.
-
-In order to use the utility over specific files, you may do:
 
 	python step1_preprocess1_funvisis2oklahoma.py \
-	--input_stream ./input/data_raw_default/mseed/2015-01-10-0517-00S.MAN___161 \
-	--input_metadata ./input/data_raw_default/sfiles_nordicformat/10-0517-00L.S201501 \
-	--output_dir ./output/data_prep_sometest
+	--config_file_path experiments/config_test.ini \
+	--raw_data_dir input/data_raw_default/mseed \
+	--raw_metadata_dir input/data_raw_default/sfiles_nordicformat \
+	--prep_data_dir output/data_prep_test
 
-Or you may prefer to use specific config file for the experiment:
-
-	python step1_preprocess1_funvisis2oklahoma.py \
-	--config_file_path config_test.ini
-
-To save plots use:
+To save .png plots use:
 
 	--plot_station True
 	--plot_positives True
@@ -113,73 +101,59 @@ To save plots use:
 
 ## 2.4 Step 2. Preprocessing 2. Generating tfrecords for positives
 
-	python step2_preprocess2_create_tfrecords_positives.py
+	python step2_preprocess2_create_tfrecords_positives.py \
+	--config_file_path experiments/config_test.ini \
+	--prep_data_dir output/data_prep_test \
+	--tfrecords_dir output/data_prep_test/tfrecords
 
-In order to use the utility over specific files, you may do:
+In order to convert just a subset of files you may do:
 
 	python step2_preprocess2_create_tfrecords_positives.py \
+	--config_file_path experiments/config_test.ini \
+	--prep_data_dir output/data_prep_test \
 	--pattern 2015-02-05-0420-00S*.mseed \
-	--output_dir ./output/data_prep_sometest/tfrecords1 \
+	--tfrecords_dir output/data_prep_test/tfrecords \
 	--file_name 2015-02-05-0420-00S.tfrecords
-
-Or you may prefer to use specific config file for the experiment:
-
-	python step2_preprocess2_create_tfrecords_positives.py \
-	--config_file_path config_test.ini
 
 ## 2.5 Step 3. Preprocessing 3. Generating tfrecords for negatives
 
-	python step3_preprocess3_create_tfrecords_negatives.py
+	python step2_preprocess2_create_tfrecords_negatives.py \
+	--config_file_path experiments/config_test.ini \
+	--prep_data_dir output/data_prep_test \
+	--tfrecords_dir output/data_prep_test/tfrecords
 
-In order to use the utility over specific files, you may do:
+In order to convert just a subset of files you may do:
 
-	python step3_preprocess3_create_tfrecords_negatives.py \
-	--pattern 2015-02-05-0420-00S-00S*.mseed \
-	--output_dir ./output/data_prep_sometest/tfrecords1 \
+	python step2_preprocess2_create_tfrecords_negatives.py \
+	--config_file_path experiments/config_test.ini \
+	--prep_data_dir output/data_prep_test \
+	--pattern 2015-02-05-0420-00S*.mseed \
+	--tfrecords_dir output/data_prep_test/tfrecords \
 	--file_name 2015-02-05-0420-00S.tfrecords
-
-Or you may prefer to use specific config file for the experiment:
-
-	python step3_preprocess3_create_tfrecords_negatives.py \
-	--config_file_path config_test.ini
 
 ## 2.6 Step 4. Train
 
-	python step4_train.py
-
-In order to change the paths you may do:
-
 	python step4_train.py \
-	--dataset_dir ./output/data_prep_sometest/tfrecords \
-	--checkpoint_dir ./output/train_sometest/checkpoints
-
-Or you may prefer to use specific config file for the experiment:
-
-	python step4_train.py \
-	--config_file_path config_test.ini
+	--config_file_path experiments/config_test.ini \
+	--tfrecords_dir output/data_prep_test/tfrecords \
+	--checkpoint_dir output/train_test/checkpoints
 
 ## 2.7 Step 5. Eval
 
-	python step5_eval.py
+	python step5_eval.py \
+	--config_file_path experiments/config_test.ini \
+	--stream_path output/data_prep_test/mseed \
+	--checkpoint_dir output/train_test/checkpoints \
+	--output_dir output/train_test/eval
 
-In order to change the paths you may do:
+You may specify a filename pattern:
 
 	python step5_eval.py \
-	--stream_path ./output/test/mseed
-
-In order to change the defaults you may do:
-
-	python step5_eval.py \
-	--config_file_path config_test.ini \
-	--stream_path ./output/data_prep_sometest/mseed \
+	--config_file_path experiments/config_test.ini \
+	--stream_path output/data_prep_test/mseed \
+	--checkpoint_dir output/train_test/checkpoints \
 	--pattern 2015-02-05-0420-00S \
-	--output_dir ./output/train_sometest/predict \
-	--checkpoint_dir ./output/train_sometest/checkpoints
-
-Or you may prefer to use specific config file for the experiment:
-
-	python step5_eval.py \
-	--config_file_path config_test.ini
+	--output_dir output/train_test/eval
 
 ## 2.8 Preliminary conclusions
 

@@ -73,22 +73,17 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")
-  parser.add_argument("--dataset_dir",type=str, default=None)
-  parser.add_argument("--checkpoint_dir",type=str, default=None)
+  parser.add_argument("--tfrecords_dir",type=str)
+  parser.add_argument("--checkpoint_dir",type=str)
   #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
 
   args = parser.parse_args()
 
   cfg = config.Config(args.config_file_path)
-  #If arguments not set, switch to default values in conf
-  if args.dataset_dir is None:
-      dataset_dir = cfg.dataset_base_dir
-  else:
-      dataset_dir = args.dataset_dir
-  if args.checkpoint_dir is None:
-      checkpoint_dir = cfg.checkpoint_dir
-  else:
-      checkpoint_dir = args.checkpoint_dir
+  
+  dataset_dir = args.tfrecords_dir
+  checkpoint_dir = args.checkpoint_dir
+  
   #if args.redirect_stdout_stderr:
   #    stdout_stderr_file = open(os.path.join(checkpoint_dir, 'stdout_stderr_file.txt'), 'w')
   #    sys.stdout = stderr = stdout_stderr_file

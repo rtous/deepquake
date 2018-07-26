@@ -75,21 +75,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")
-    parser.add_argument("--dataset_dir",type=str, default=None)
+    parser.add_argument("--prep_data_dir",type=str)
     parser.add_argument("--pattern",type=str, default="*.mseed")
-    parser.add_argument("--output_dir",type=str, default=None)
+    parser.add_argument("--tfrecords_dir",type=str)
     parser.add_argument("--file_name",type=str, default="negatives.tfrecords")
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
 
     args = parser.parse_args()
     cfg = config.Config(args.config_file_path)
-    #If arguments not set, switch to default values in conf
-    if args.dataset_dir is None:
-        dataset_dir = cfg.dataset_base_dir
-    else:
-        dataset_dir = args.dataset_dir
-    if args.output_dir is None:
-        output_dir = dataset_dir
-    else:
-        output_dir = args.output_dir
+    
+    dataset_dir = args.prep_data_dir
+    output_dir = args.tfrecords_dir
+
     tf.app.run()

@@ -333,29 +333,20 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")
-    parser.add_argument("--stream_path",type=str,default=None,
+    parser.add_argument("--stream_path",type=str,
                         help="path to mseed to analyze")
     parser.add_argument("--pattern",type=str, default="*.mseed")
-    parser.add_argument("--output_dir",type=str, default=None)
-    parser.add_argument("--checkpoint_dir",type=str, default=None)
+    parser.add_argument("--output_dir",type=str)
+    parser.add_argument("--checkpoint_dir",type=str)
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
 
     args = parser.parse_args()
 
     cfg = config.Config(args.config_file_path)
 
-    if args.output_dir is None:
-        output_dir = cfg.output_predict_base_dir
-    else:
-        output_dir = args.output_dir
-    if args.checkpoint_dir is None:
-      checkpoint_dir = cfg.checkpoint_dir
-    else:
-      checkpoint_dir = args.checkpoint_dir
-    if args.stream_path is None:
-        stream_path = os.path.join(cfg.dataset_base_dir, cfg.mseed_dir) 
-    else:
-        stream_path = args.stream_path
+    checkpoint_dir = args.checkpoint_dir
+    output_dir = args.output_dir
+    stream_path = args.stream_path
 
     #if args.redirect_stdout_stderr:
     #    stdout_stderr_file = open(os.path.join(output_dir, 'stdout_stderr_file.txt'), 'w')

@@ -12,27 +12,18 @@ class Config(object):
     self.pwave_window = config.getint('main', 'pwave_window')
     self.window_step_negatives = config.getint('main', 'window_step_negatives') #the step between the start times of two successive windows in seconds.
     self.window_avoid_negatives = config.getint('main', 'window_avoid_negatives')
-    self.input_stream_dir = config.get('main', 'input_stream_dir')
-    self.input_metadata_dir = config.get('main', 'input_metadata_dir')
-
-    self.dataset_base_dir = config.get('main', 'dataset_base_dir')
+    #self.input_stream_dir = config.get('main', 'input_stream_dir')
+    #self.input_metadata_dir = config.get('main', 'input_metadata_dir')
+    #self.dataset_base_dir = config.get('main', 'dataset_base_dir')
     self.mseed_dir = config.get('main', 'mseed_dir')
-    #self.output_mseed_dir = os.path.join(self.dataset_base_dir, self.mseed_dir)
     self.mseed_event_dir = config.get('main', 'mseed_event_dir')
-    #self.output_mseed_event_dir = os.path.join(self.dataset_base_dir, self.mseed_event_dir)
     self.mseed_noise_dir = config.get('main', 'mseed_noise_dir')
-    #self.output_mseed_noise_dir = os.path.join(self.dataset_base_dir, self.mseed_noise_dir)
     self.png_dir = config.get('main', 'png_dir')
-    #self.output_png_dir = os.path.join(self.dataset_base_dir, self.png_dir)
     self.png_event_dir = config.get('main', 'png_event_dir')
-    #self.output_png_event_dir = os.path.join(self.dataset_base_dir, self.png_event_dir)
     self.png_noise_dir = config.get('main', 'png_noise_dir')
-    #self.output_png_noise_dir = os.path.join(self.dataset_base_dir, self.png_noise_dir)
-    
     self.output_tfrecords_dir_positives = config.get('main', 'output_tfrecords_dir_positives')
     self.output_tfrecords_dir_negatives = config.get('main', 'output_tfrecords_dir_negatives')
-    self.checkpoint_dir = config.get('main', 'checkpoint_dir')
-    #self.dataset = config.get('main', 'dataset')
+    #self.checkpoint_dir = config.get('main', 'checkpoint_dir')
 
     #train
     self.learning_rate = config.getfloat('main', 'learning_rate')
@@ -41,9 +32,7 @@ class Config(object):
     self.n_traces = config.getint('main', 'n_traces')
     self.display_step = config.getint('main', 'display_step')
     self.n_threads = config.getint('main', 'n_threads')
-    #self.n_epochs = config.getint('main', 'n_epochs')
     self.n_epochs = None
-    #self.regularization = config.getfloat('main', 'regularization')s
     self.regularization = 1e-3
     self.n_clusters = config.getint('main', 'n_clusters')
     self.model = config.get('main', 'model')
@@ -54,9 +43,6 @@ class Config(object):
     self.max_checkpoint_step = config.getint('main', 'max_checkpoint_step')
     
     #eval
-    self.output_eval_base_dir = config.get('main', 'output_eval_base_dir')
-
-    #predict
     self.window_step_predict = config.getint('main', 'window_step_predict')
-    self.output_predict_base_dir = config.get('main', 'output_predict_base_dir')
+    #self.output_predict_base_dir = config.get('main', 'output_predict_base_dir')
     self.save_sac = config.getboolean('main', 'save_sac')

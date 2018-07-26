@@ -236,9 +236,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")
-    parser.add_argument("--input_stream",type=str, default=None)
-    parser.add_argument("--input_metadata",type=str, default=None)
-    parser.add_argument("--output_dir",type=str, default=None)
+    parser.add_argument("--raw_data_dir",type=str)
+    parser.add_argument("--raw_metadata_dir",type=str)
+    parser.add_argument("--prep_data_dir",type=str)
     parser.add_argument("--station",type=str, default=None)
     parser.add_argument("--pattern",type=str, default=None,
                         help="filename pattern for the METADATA files to process.")
@@ -251,18 +251,10 @@ if __name__ == "__main__":
     cfg = config.Config(args.config_file_path)
 
     #If arguments not set, switch to default values in conf
-    if args.input_stream is None:
-        input_stream = cfg.input_stream_dir
-    else:
-        input_stream = args.input_stream
-    if args.input_metadata is None:
-        input_metadata = cfg.input_metadata_dir
-    else:
-        input_metadata = args.input_metadata
-    if args.output_dir is None:
-        output_dir = cfg.dataset_base_dir
-    else:
-        output_dir = args.output_dir
+    input_stream = args.raw_data_dir
+    input_metadata = args.raw_metadata_dir
+    output_dir = args.prep_data_dir
+    
     if args.pattern is None:
         pattern = '*'
     else:
