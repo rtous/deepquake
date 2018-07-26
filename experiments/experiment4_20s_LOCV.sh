@@ -44,7 +44,7 @@ python step3_preprocess3_create_tfrecords_negatives.py \
 python step4_train.py \
 --config_file_path experiments/config_20s.ini \
 --tfrecords_dir output/data_prep_experiment4_20s_LOCV/tfrecords1 \
---checkpoint_dir output/train_experiment4_20s_LOCV/checkpoint1
+--checkpoint_dir output/train_experiment4_20s_LOCV/checkpoints1
 
 python step5_eval.py \
 --stream_path output/data_prep_experiment3_20s/mseed \
@@ -99,7 +99,7 @@ python step3_preprocess3_create_tfrecords_negatives.py \
 python step4_train.py \
 --config_file_path experiments/config_20s.ini \
 --tfrecords_dir output/data_prep_experiment4_20s_LOCV/tfrecords2 \
---checkpoint_dir output/train_experiment4_20s_LOCV/checkpoint2
+--checkpoint_dir output/train_experiment4_20s_LOCV/checkpoints2
 
 python step5_eval.py \
 --stream_path output/data_prep_experiment3_20s/mseed \
@@ -154,7 +154,7 @@ python step3_preprocess3_create_tfrecords_negatives.py \
 python step4_train.py \
 --config_file_path experiments/config_20s.ini \
 --tfrecords_dir output/data_prep_experiment4_20s_LOCV/tfrecords3 \
---checkpoint_dir output/train_experiment4_20s_LOCV/checkpoint3
+--checkpoint_dir output/train_experiment4_20s_LOCV/checkpoints3
 
 python step5_eval.py \
 --stream_path output/data_prep_experiment3_20s/mseed \
@@ -210,7 +210,7 @@ python step3_preprocess3_create_tfrecords_negatives.py \
 python step4_train.py \
 --config_file_path experiments/config_20s.ini \
 --tfrecords_dir output/data_prep_experiment4_20s_LOCV/tfrecords4 \
---checkpoint_dir output/train_experiment4_20s_LOCV/checkpoint4
+--checkpoint_dir output/train_experiment4_20s_LOCV/checkpoints4
 
 python step5_eval.py \
 --stream_path output/data_prep_experiment3_20s/mseed \
