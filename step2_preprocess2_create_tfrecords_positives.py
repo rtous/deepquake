@@ -37,7 +37,7 @@ def preprocess_stream(stream):
 
 def main(_):
     print("[tfrecords positives] Converting .mseed files into tfrecords...")
-    print("[tfrecords positives] Input directory: "+os.path.join(dataset_dir, cfg.mseed_noise_dir))
+    print("[tfrecords positives] Input directory: "+os.path.join(dataset_dir, cfg.mseed_event_dir))
     print("[tfrecords positives] Output directory: "+os.path.join(output_dir, cfg.output_tfrecords_dir_positives))
     print("[tfrecords positives] File pattern: "+args.pattern)
 
@@ -45,6 +45,8 @@ def main(_):
                     fnmatch.fnmatch(file, args.pattern)]
     print("[tfrecords negatives] Matching files: "+str(len(stream_files)))
     # Create dir to store tfrecords
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
     if not os.path.exists(os.path.join(output_dir, cfg.output_tfrecords_dir_positives)):
         os.makedirs(os.path.join(output_dir, cfg.output_tfrecords_dir_positives))
 

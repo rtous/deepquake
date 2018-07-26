@@ -44,6 +44,8 @@ def main(_):
     print("[tfrecords negatives] Matching files: "+str(len(stream_files)))
 
     # Create dir to store tfrecords
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
     if not os.path.exists(os.path.join(output_dir, cfg.output_tfrecords_dir_negatives)):
         os.makedirs(os.path.join(output_dir, cfg.output_tfrecords_dir_negatives))
 
