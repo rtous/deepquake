@@ -50,8 +50,7 @@ NOTE: Ensure that the virtualenv activated within the script is the correct one 
 
 ## 9. Submit the script to tue queue
 
-	qsub -S /bin/bash -N deepquake_experiment1_test -l big ./arvei/experiments/experiment1_test_arvei.sh
-	qsub -S /bin/bash -N deepquake_experiment1_test -l big ./arvei/launch.sh experiment1_test_arvei.sh
+	qsub -S /bin/bash -N deepquake_experiment1_test -l big ./arvei/launch.sh experiments/experiment1_test.sh
 
 Once finished, it should have created an output directory within /scratch/nas/4/rtous/deepquake with the results and also a couple of files with the stdout and stderr.
 
