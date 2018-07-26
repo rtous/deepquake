@@ -28,6 +28,8 @@
 	git clone https://github.com/rtous/deepquake.git
 	cd deepquake
 
+Next time would be convenient to do a "git pull" to work with the latest changes. 
+
 ## 6. Install the dependencies (can take around 30 mins.)
 
 WARNING: Arvei required more complex installation steps. In addition, some of the dependencies stop working at different times during the project development (e.g. "pip install tensorflow==0.12.0" and "pip install lxml"). I fixed them, but it's an unstable environment (python packages within machines which you don't control). Cross your fingers.
@@ -50,7 +52,9 @@ NOTE: Ensure that the virtualenv activated within the script is the correct one 
 
 ## 9. Submit the script to tue queue
 
-	qsub -S /bin/bash -N deepquake_experiment1_test -l big ./arvei/launch.sh experiments/experiment1_test.sh
+Change the job name and the email address and execute this command:
+
+	qsub -S /bin/bash -N deepquake_experiment1_test -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment1_test.sh
 
 Once finished, it should have created an output directory within /scratch/nas/4/rtous/deepquake with the results and also a couple of files with the stdout and stderr.
 
