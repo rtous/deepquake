@@ -58,6 +58,8 @@ Change the job name and the email address and execute this command:
 
 Once finished, it should have created an output directory within /scratch/nas/4/rtous/deepquake with the results and also a couple of files with the stdout and stderr.
 
+You can abort a job with "qdel JOBID". Obtain the JOBID with a "qstat".
+
 ## 10. Debugging
 
 Till the end of the exeuction the stdout an stderr files will not be copied to the outpus dir. In order to check the stdout/stderr output before the script ends you can:
