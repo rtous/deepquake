@@ -47,7 +47,7 @@ python step4_train.py \
 --checkpoint_dir output/train_experiment5_50s_LOCV/checkpoints1
 
 python step5_eval.py \
---stream_path output/data_prep_experiment5_50s/mseed \
+--stream_path output/data_prep_default/mseed \
 --config_file_path experiments/config_50s.ini \
 --checkpoint_dir output/train_experiment5_50s_LOCV/checkpoints1 \
 --pattern 2015-01-10-0517-00S*.mseed \
@@ -102,7 +102,7 @@ python step4_train.py \
 --checkpoint_dir output/train_experiment5_50s_LOCV/checkpoints2
 
 python step5_eval.py \
---stream_path output/data_prep_experiment5_50s/mseed \
+--stream_path output/data_prep_default/mseed \
 --config_file_path experiments/config_50s.ini \
 --checkpoint_dir output/train_experiment5_50s_LOCV/checkpoints2 \
 --pattern 2015-02-05-0703-00S*.mseed \
@@ -157,7 +157,7 @@ python step4_train.py \
 --checkpoint_dir output/train_experiment5_50s_LOCV/checkpoints3
 
 python step5_eval.py \
---stream_path output/data_prep_experiment5_50s/mseed \
+--stream_path output/data_prep_default/mseed \
 --config_file_path experiments/config_50s.ini \
 --checkpoint_dir output/train_experiment5_50s_LOCV/checkpoints3 \
 --pattern 2015-02-05-0538-00S*.mseed \
