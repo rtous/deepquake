@@ -3,5 +3,6 @@ qsub -S /bin/bash -N deepquake_experiment2_defaults -M rtous@ac.upc.edu -l big .
 qsub -S /bin/bash -N deepquake_experiment3_20s -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment3_20s.sh
 qsub -S /bin/bash -N deepquake_experiment4_20s_LOCV -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment4_20s_LOCV.sh
 qsub -S /bin/bash -N deepquake_experiment5_50s_LOCV -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment5_50s_LOCV.sh
-
 qsub -S /bin/bash -N deepquake_experiment5_50s_LOCV -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment5_50s_LOCV_eval.sh
+(després de canviar el model)
+qsub -S /bin/bash -N experiment6_50s_LOCV_train_and_eval_new_model -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment6_50s_LOCV_train_and_eval_new_model.sh

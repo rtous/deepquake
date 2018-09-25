@@ -33,7 +33,9 @@ def get(model_name, inputs, config, checkpoint_dir, is_training=False):
 
   return globals()[model_name](inputs, config, checkpoint_dir, is_training)
 
-
+#######################################################################
+# ConvNetQuake (default)
+########################################################################
 class ConvNetQuake(tflib.model.BaseModel):
 
   def __init__(self, inputs, config, checkpoint_dir, is_training=False,
@@ -48,35 +50,18 @@ class ConvNetQuake(tflib.model.BaseModel):
   def _setup_prediction(self):
     self.batch_size = self.inputs['data'].get_shape().as_list()[0]
 
-    # LAYER 0: INPUT layer: 2D tensor. Three rows (channels) x window size 
     current_layer = self.inputs['data']
-
-    # LAYER 1-8: 8 CONVOLUTINAL layers, 32 1D kernels of size 3 each, stride 2, zero padding
     c = 32  # number of channels per conv layer
     ksize = 3  # size of the convolution kernel
-    depth = 4
+    depth = 8
     for i in range(depth):
         current_layer = layers.conv1(current_layer, c, ksize, stride=2, scope='conv{}'.format(i+1), padding='SAME')
         tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
         self.layers['conv{}'.format(i+1)] = current_layer
 
-        # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
-        #current_pooling_layer = layers.max_pooling2d(current_layer, 2, 2)
-
     bs, width, _ = current_layer.get_shape().as_list()
     current_layer = tf.reshape(current_layer, [bs, width*c], name="reshape")
 
-    # LAYER 9: FULLY CONNECTED
-    current_layer = layers.fc(current_layer, self.config.n_clusters, scope='fc1', activation_fn=None)
-    self.layers['fc1'] = current_layer
-    tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
-
-    # LAYER 10: FULLY CONNECTED
-    current_layer = layers.fc(current_layer, self.config.n_clusters, scope='fc2', activation_fn=None)
-    self.layers['fc2'] = current_layer
-    tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
-
-    # LAYER 11: FULLY CONNECTED
     current_layer = layers.fc(current_layer, self.config.n_clusters, scope='logits', activation_fn=None)
     self.layers['logits'] = current_layer
     tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
@@ -168,4 +153,55 @@ class ConvNetQuake(tflib.model.BaseModel):
         step, duration, avg_duration, 100*det_accuracy, 100*loc_accuracy)
 
     return toprint
+
+
+
+#######################################################################
+# ConvNetQuake2 (only 4 conv, two more fully-connected layers)
+########################################################################
+class ConvNetQuake2(ConvNetQuake):
+
+  def _setup_prediction(self):
+    self.batch_size = self.inputs['data'].get_shape().as_list()[0]
+
+    # LAYER 0: INPUT layer: 2D tensor. Three rows (channels) x window size 
+    current_layer = self.inputs['data']
+
+    # LAYER 1-8: 8 CONVOLUTINAL layers, 32 1D kernels of size 3 each, stride 2, zero padding
+    c = 32  # number of channels per conv layer
+    ksize = 3  # size of the convolution kernel
+    depth = 4
+    for i in range(depth):
+        current_layer = layers.conv1(current_layer, c, ksize, stride=2, scope='conv{}'.format(i+1), padding='SAME')
+        tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
+        self.layers['conv{}'.format(i+1)] = current_layer
+
+        # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
+        #current_pooling_layer = layers.max_pooling2d(current_layer, 2, 2)
+
+    bs, width, _ = current_layer.get_shape().as_list()
+    current_layer = tf.reshape(current_layer, [bs, width*c], name="reshape")
+
+    # LAYER 9: FULLY CONNECTED
+    current_layer = layers.fc(current_layer, self.config.n_clusters, scope='fc1', activation_fn=None)
+    self.layers['fc1'] = current_layer
+    tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
+
+    # LAYER 10: FULLY CONNECTED
+    current_layer = layers.fc(current_layer, self.config.n_clusters, scope='fc2', activation_fn=None)
+    self.layers['fc2'] = current_layer
+    tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
+
+    # LAYER 11: FULLY CONNECTED
+    current_layer = layers.fc(current_layer, self.config.n_clusters, scope='logits', activation_fn=None)
+    self.layers['logits'] = current_layer
+    tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
+
+    self.layers['class_prob'] = tf.nn.softmax(current_layer, name='class_prob')
+    self.layers['class_prediction'] = tf.argmax(self.layers['class_prob'], 1, name='class_pred')
+
+    tf.contrib.layers.apply_regularization(
+        tf.contrib.layers.l2_regularizer(self.config.regularization),
+        weights_list=tf.get_collection(tf.GraphKeys.WEIGHTS))
+
 
