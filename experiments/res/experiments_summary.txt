@@ -1,7 +1,8 @@
 1. experiment2_defaults:
 
+2.
 
-2. experiment3_20s:
+3. experiment3_20s:
 
 window_size = 20
 pwave_window = 4
@@ -20,3 +21,54 @@ max_checkpoint_step = 5000
 [classify] precission = 72.8260869565%
 [classify] recall = 91.156462585%
 [classify] accuracy = 99.3180342065%
+
+4. experiment4_20s: Leave one out cross validation (LOCV)
+
+[classify] Run time:  0.701636075974
+[classify] true positives = 24
+[classify] false positives = 243
+[classify] true negatives = 586
+[classify] false negatives = 7
+[classify] precission = 8.98876404494%
+[classify] recall = 77.4193548387%
+[classify] accuracy = 70.9302325581%
+
+5. experiment5_50s: Leave one out cross validation (LOCV)
+
+[classify] Run time:  0.688389062881
+[classify] true positives = 77
+[classify] false positives = 118
+[classify] true negatives = 591
+[classify] false negatives = 14
+[classify] precission = 39.4871794872%
+[classify] recall = 84.6153846154%
+[classify] accuracy = 83.5%
+
+[classify] Run time:  5.6252810955
+[classify] true positives = 57
+[classify] false positives = 8
+[classify] true negatives = 2088
+[classify] false negatives = 32
+[classify] precission = 87.6923076923%
+[classify] recall = 64.0449438202%
+[classify] accuracy = 98.1693363844%
+
+[classify] Run time:  5.51619791985
+[classify] true positives = 114
+[classify] false positives = 16
+[classify] true negatives = 2964
+[classify] false negatives = 11
+[classify] precission = 87.6923076923%
+[classify] recall = 91.2%
+[classify] accuracy = 99.1304347826%
+
+[classify] Run time:  4.36331796646
+[classify] true positives = 104
+[classify] false positives = 13
+[classify] true negatives = 2747
+[classify] false negatives = 11
+[classify] precission = 88.8888888889%
+[classify] recall = 90.4347826087%
+[classify] accuracy = 99.1652173913%
+
+

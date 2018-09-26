@@ -6,3 +6,4 @@ qsub -S /bin/bash -N deepquake_experiment5_50s_LOCV -M rtous@ac.upc.edu -l big .
 qsub -S /bin/bash -N deepquake_experiment5_50s_LOCV -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment5_50s_LOCV_eval.sh
 (després de canviar el model)
 qsub -S /bin/bash -N experiment6_50s_LOCV_train_and_eval_new_model -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment6_50s_LOCV_train_and_eval_new_model.sh
+qsub -S /bin/bash -N experiment6_50s_LOCV_train_and_eval_new_model -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment6_50s_LOCV_train_and_eval_new_model_eval.sh
