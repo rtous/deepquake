@@ -99,6 +99,11 @@ def main(args):
 
     stream_files = [file for file in os.listdir(stream_path) if
                     fnmatch.fnmatch(file, args.pattern)]
+
+    if len(stream_files)==0:
+        print ("[classify] \033[91m ERROR!!\033[0m No files match the file pattern "+args.pattern+".")
+        sys.exit(0)
+
     for stream_file in stream_files:
     	stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
         metadata_path = os.path.join(stream_path, stream_file_without_extension+".csv")

@@ -1,0 +1,41 @@
+[ DEBUG] INPUT LAYER shape = 256x5001x3
+[ DEBUG] LAYER conv1 shape = 256x2501x32
+[ DEBUG] LAYER conv2 shape = 256x1251x32
+[ DEBUG] LAYER conv3 shape = 256x626x32
+[ DEBUG] LAYER conv4 shape = 256x313x32
+[ DEBUG] LAYER conv5 shape = 256x157x32
+[ DEBUG] LAYER conv6 shape = 256x79x32
+[ DEBUG] LAYER conv7 shape = 256x40x32
+[ DEBUG] LAYER conv8 shape = 256x20x32
+[ DEBUG] LAST LAYER CONV RESHAPED shape = 256x640
+[ DEBUG] FC LAYER shape = 256x2
+
+output width=((W-F+2*P )/S)+1
+Convolution filter size (F): (F_width = 5, F_height = 5)
+
+(5001-3)/2 + 1 = 
+
+NOTE: The 1D conv means the convolution travels in one direction, but the kernels will be 2D. So the output shape does not change if you add more channels
+
+
+a layers.py es veu que són relu activations
+
+
+KERAS:
+-------------------------------------------------------
+model.summary()
+The model summary would be:
+
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_4 (InputLayer)         (None, 400, 16)           0         
+_________________________________________________________________
+conv1d_4 (Conv1D)            (None, 400, 32)           4128      
+_________________________________________________________________
+lstm_4 (LSTM)                (None, 400, 32)           8320      
+_________________________________________________________________
+dense_4 (Dense)              (None, 400, 1)            33        
+=================================================================
+Total params: 12,481
+Trainable params: 12,481
+Non-trainable params: 0

@@ -1,0 +1,6 @@
+ Año mes dia hr min seg Loc Lat  Long  prof  Agen  Nest RMS Mag TipMag
+ 2018  4  1 13 00 20.5 L  10.161 -67.740  2.9  FUN  3 0.5 2.0 WFUN
+ 2018  4  2 16 24  8.2 L  10.668 -67.575  5.0F FUN  5 0.7 2.1 WFUN
+ 2018  4  2 19 10 48.7 L  10.808 -67.518 13.1  FUN  5 0.6 2.3 WFUN
+ 2018  4 24 03 57 19.0 L  10.224 -67.228 10.8  FUN 13 0.7 3.2 WFUN
+ 2018  4 27 08 44 50.4 L  10.350 -68.067  9.0  FUN 22 0.8 4.7 WFUN

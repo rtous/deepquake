@@ -71,4 +71,42 @@ max_checkpoint_step = 5000
 [classify] recall = 90.4347826087%
 [classify] accuracy = 99.1652173913%
 
+6. experiment 50s model v2
+
+[classify] Run time:  0.765468835831
+[classify] true positives = 42
+[classify] false positives = 17
+[classify] true negatives = 692
+[classify] false negatives = 49
+[classify] precission = 71.186440678%
+[classify] recall = 46.1538461538%
+[classify] accuracy = 91.75%
+
+[classify] Run time:  5.25144195557
+[classify] true positives = 47
+[classify] false positives = 11
+[classify] true negatives = 2085
+[classify] false negatives = 42
+[classify] precission = 81.0344827586%
+[classify] recall = 52.808988764%
+[classify] accuracy = 97.5743707094%
+
+[classify] Run time:  11.2320971489
+[classify] true positives = 91
+[classify] false positives = 144
+[classify] true negatives = 2836
+[classify] false negatives = 34
+[classify] precission = 38.7234042553%
+[classify] recall = 72.8%
+[classify] accuracy = 94.267310789%
+
+[classify] Run time:  30.962843895
+[classify] true positives = 110
+[classify] false positives = 301
+[classify] true negatives = 2459
+[classify] false negatives = 5
+[classify] precission = 26.7639902676%
+[classify] recall = 95.652173913%
+[classify] accuracy = 89.3565217391%
+
 
