@@ -86,6 +86,9 @@ class DataReader(object):
         for root, dirs, files in os.walk(self._path):
             for f in files:
                 if f.endswith(".tfrecords"):
+                    if os.stat(os.path.join(root, f)).st_size==0:
+                        print ("[data_pipeline] \033[91m ERROR!!\033[0m Empty file "+f+".")
+                        sys.exit(0)
                     fnames.append(os.path.join(root, f))
         fname_q = tf.train.string_input_producer(fnames,
                                                  shuffle=self._shuffle,
@@ -128,7 +131,7 @@ class DataPipeline(object):
     def __init__(self, dataset_path, config, is_training):
 
         min_after_dequeue = 1000
-        capacity = 1000 + 3 * config.batch_size
+        capacity = 1000 + config.n_traces * config.batch_size
 
         if is_training:
 

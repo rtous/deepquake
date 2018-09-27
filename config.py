@@ -15,6 +15,23 @@ class Config(object):
     #self.input_stream_dir = config.get('main', 'input_stream_dir')
     #self.input_metadata_dir = config.get('main', 'input_metadata_dir')
     #self.dataset_base_dir = config.get('main', 'dataset_base_dir')
+    
+
+    self.n_traces = 0
+    self.component_Z = config.getboolean('main', 'component_Z')
+    if self.component_Z:
+        self.n_traces = self.n_traces + 1    
+    self.component_N = config.getboolean('main', 'component_N')
+    if self.component_N:
+        self.n_traces = self.n_traces + 1
+    self.component_E = config.getboolean('main', 'component_E')
+    if self.component_E:
+        self.n_traces = self.n_traces + 1
+    #self.n_traces = config.getint('main', 'n_traces')
+    if self.n_traces == 0:
+        print ("[config] \033[91m ERROR!!\033[0m 0 number of components selected. You need to specify at least component_Z = true, component_N = true or component_E = true")
+        sys.exit(0)
+
     self.mseed_dir = config.get('main', 'mseed_dir')
     self.mseed_event_dir = config.get('main', 'mseed_event_dir')
     self.mseed_noise_dir = config.get('main', 'mseed_noise_dir')
@@ -29,7 +46,7 @@ class Config(object):
     self.learning_rate = config.getfloat('main', 'learning_rate')
     self.batch_size = config.getint('main', 'batch_size')
     self.win_size = int((self.window_size * self.sampling_rate) + 1)
-    self.n_traces = config.getint('main', 'n_traces')
+    
     self.display_step = config.getint('main', 'display_step')
     self.n_threads = config.getint('main', 'n_threads')
     self.n_epochs = None

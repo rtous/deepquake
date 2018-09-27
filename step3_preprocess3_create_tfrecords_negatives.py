@@ -60,13 +60,17 @@ def main(_):
         #print '[tfrecords negatives] Preprocessing stream'
         st_event = preprocess_stream(st_event)
 
+        #Select only the specified channels
+        st_event_select = utils.select_components(st_event, cfg) 
+
+
         #cluster_id = filtered_catalog.cluster_id.values[event_n]
         cluster_id = -1 #We work with only one location for the moment (cluster id = 0)
-        n_traces = len(st_event)
-        if utils.check_stream(st_event, cfg):
+        n_traces = len(st_event_select)
+        if utils.check_stream(st_event_select, cfg):
             #print("[tfrecords negatives] Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
             # Write tfrecords
-            writer.write(st_event, cluster_id) 
+            writer.write(st_event_select, cluster_id) 
             
     # Cleanup writer
     print("[tfrecords negatives] Number of windows written={}".format(writer._written))

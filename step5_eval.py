@@ -83,7 +83,7 @@ def main(args):
     #Load model just once
     samples = {
             'data': tf.placeholder(tf.float32,
-                                   shape=(1, cfg.win_size, 3),
+                                   shape=(1, cfg.win_size, cfg.n_traces),
                                    name='input_data'),
             'cluster_id': tf.placeholder(tf.int64,
                                          shape=(1,),
@@ -168,6 +168,11 @@ def predict(path, stream_file, sess, model, samples, cat):
     stream = read(stream_path)
     print '[classify] Preprocessing stream'
     stream = utils.preprocess_stream(stream)
+
+
+    #Select only the specified channels
+    stream_select = utils.select_components(stream, cfg) 
+
     outputSubdir = os.path.join(output_dir, stream_file_without_extension)
     if os.path.exists(outputSubdir):
         shutil.rmtree(outputSubdir)
@@ -208,11 +213,11 @@ def predict(path, stream_file, sess, model, samples, cat):
                  "clusters_prob": []}
 
     # Windows generator
-    win_gen = stream.slide(window_length=cfg.window_size,
+    win_gen = stream_select.slide(window_length=cfg.window_size,
                            step=cfg.window_step_predict,
                            include_partial_windows=False)
 
-    total_time_in_sec = stream[0].stats.endtime - stream[0].stats.starttime
+    total_time_in_sec = stream_select[0].stats.endtime - stream_select[0].stats.starttime
     max_windows = (total_time_in_sec - cfg.window_size) / cfg.window_step_predict
 
     
@@ -321,7 +326,7 @@ def predict(path, stream_file, sess, model, samples, cat):
     customPlot(stream, output_dir+"/"+stream_file+"_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
     #Plot only 10min sections with events
     max_secs_to_show = 600
-    win_gen = stream.slide(window_length=max_secs_to_show,
+    win_gen = stream_select.slide(window_length=max_secs_to_show,
                            step=max_secs_to_show,
                            include_partial_windows=False)
     for idx, win in enumerate(win_gen):

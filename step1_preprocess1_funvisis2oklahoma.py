@@ -155,6 +155,10 @@ def processMseed(stream_path, obspyCatalogMeta, output_dir, station, plot_statio
         #print(stream[-1].stats.starttime)
         #print(stream[0].stats.endtime)
 
+        #DEBUG
+        #print ("[step2] \033[91m WARNING!!\033[0m Getting only one trace!!")
+        #stream = stream.select(component="Z")
+
 
         for pick in obspyCatalogMeta.events[0].picks:
             if pick.phase_hint == 'P':
@@ -199,7 +203,7 @@ def processMseed(stream_path, obspyCatalogMeta, output_dir, station, plot_statio
                 num_errors = 0
                 num_skipped = 0
                 for idx, win in enumerate(win_gen):
-                    if utils.check_stream(win, cfg):
+                    if utils.check_stream(win, cfg, False):
                         window_start = win[0].stats.starttime.timestamp
                         window_end = win[-1].stats.endtime.timestamp
 
