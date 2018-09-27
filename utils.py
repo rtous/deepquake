@@ -72,16 +72,16 @@ def select_components(stream, cfg):
     stream_select = None
     if cfg.component_Z:
         stream_select = stream.select(component="Z")
-        print ("[check select_components] component Z selected.")
+        #print ("[check select_components] component Z selected.")
     if cfg.component_N:
-        print ("[check select_components] component N selected.")
+        #print ("[check select_components] component N selected.")
         streamN = stream.select(component="N")
         if stream_select == None:
             stream_select = streamN
         else:
             stream_select += streamN
     if cfg.component_E:
-        print ("[check select_components] component E selected.")
+        #print ("[check select_components] component E selected.")
         streamE = stream.select(component="E")
         if stream_select == None:
             stream_select = streamE
