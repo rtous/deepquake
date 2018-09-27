@@ -1,0 +1,56 @@
+
+
+
+- Input data are a set of mseed files and also metadata about the events
+
+1) Preprocessing
+
+For each input mseed file:
+
+	- Read the metadata and determine the P-wave window: [timeP - cfg.pwave_window/2, timeP + cfg.pwave_window/2]. Currently pwave_window = 4 
+	- Write each small window into an mseed file
+	- Write the metadata of every original file into a .csv file
+
+
+	2015-01-10-0517-00S.MAN___161 + 10-0517-00L.S201501
+	2015-02-05-0420-00S.MAN___161 + 05-0420-00L.S201502
+	2015-02-05-0538-00S.MAN___161 + 05-0538-00L.S201502
+	2015-02-05-0703-00S.MAN___161 + 05-0703-00L.S201502
+
+
+	mseed
+		2015-02-05-0420-00S.MAN___161_CRUV.mseed
+		2015-02-05-0420-00S.MAN___161_CRUV.csv
+	mseed_event_windows
+		2015-02-05-0420-00S.MAN___161_CRUV_20.mseed
+    mseed_noise          
+    	2015-02-05-0420-00S.MAN___161_CRUV_noise0.mseed
+
+
+------------------------------------------------------------------------------------------------
+DATOS2
+
+
+1) Preprocess metadata: 
+
+python util_datos2_metadata2csv.py --input_metadata_file input/datos2/Eventos.txt --output_csv_metadata_file output/datos2/catalog.csv
+
+2) We already can evaluate against an existing model:
+
+python step5_eval.py \
+--stream_path input/datos2 \
+--config_file_path experiments/config_50s_Z.ini \
+--checkpoint_dir output/train_experiment5_50s_LOCV_componentZ/checkpoints4 \
+--output_dir output/datos2/eval
+--catalog_path output/datos2/catalog.csv
+
+3) But we can also generate training data:
+
+python step1_preprocess1_datos2.py \
+--config_file_path experiments/config_50s_Z.ini \
+--raw_data_dir input/datos2 \
+--prep_data_dir output/datos2/data_prep \
+--plot_positives True \
+--plot_negatives True \
+--catalog_path output/datos2/catalog.csv
+

@@ -106,14 +106,18 @@ def main(args):
 
     for stream_file in stream_files:
     	stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
-        metadata_path = os.path.join(stream_path, stream_file_without_extension+".csv")
-    	if os.path.isfile(metadata_path):
-            print("[classify] Found groundtruth metadata in "+metadata_path+".")  
-            cat = pd.read_csv(metadata_path)
-            evaluation = True
+        if args.catalog_path is None:
+            metadata_path = os.path.join(stream_path, stream_file_without_extension+".csv")
+            if os.path.isfile(metadata_path):
+                print("[classify] Found groundtruth metadata in "+metadata_path+".")  
+                cat = pd.read_csv(metadata_path)
+                evaluation = True
+            else:
+                print("[classify] Not found groundtruth metadata in "+metadata_path+".")
+                cat = None
         else:
-            print("[classify] Not found groundtruth metadata in "+metadata_path+".")
-            cat = None
+            cat = pd.read_csv(args.catalog_path)
+            evaluation = True
         predictions = predict(stream_path, stream_file, sess, model, samples, cat)
         #stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
         #metadata_path = os.path.join(args.stream_path, stream_file_without_extension+".csv")
@@ -348,6 +352,7 @@ if __name__ == "__main__":
     parser.add_argument("--pattern",type=str, default="*.mseed")
     parser.add_argument("--output_dir",type=str)
     parser.add_argument("--checkpoint_dir",type=str)
+    parser.add_argument("--catalog_path",type=str) #For datos2, which have just one global catalog
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
 
     args = parser.parse_args()

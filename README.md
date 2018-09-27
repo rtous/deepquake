@@ -187,6 +187,7 @@ You may specify a filename pattern:
 	* keep tensorflow 0.12.0 wheel somewhere (pip install tensorflow==0.12.0 stop working) 
 	* keep openquake.hazardlib==0.22.0 from https://github.com/gem/oq-hazardlib/releases 
 	* keep a full copy of the arvei virtualenv somewhere
+* window skipping gap. 
 
 DONE:
 
