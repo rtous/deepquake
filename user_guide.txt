@@ -53,4 +53,7 @@ python step1_preprocess1_datos2.py \
 --plot_positives True \
 --plot_negatives True \
 --catalog_path output/datos2/catalog.csv
+------------------------------------------
+EVAL 2
 
+python step5_eval2.py --stream_path output/data_prep_test/mseed --config_file_path experiments/config_test.ini --checkpoint_dir output/train_test/checkpoints --output_dir output/train_test/eval --tfrecords_dir output/data_prep_test/tfrecords/test

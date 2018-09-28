@@ -159,6 +159,10 @@ class DataPipeline(object):
                 start_time = samples["start_time"]
                 end_time = samples["end_time"]
 
+                print("Preparing data batch")
+                print(start_time)
+
+
                 self.samples, self.labels, self.start_time, self.end_time = tf.train.batch(
                     [sample_input, sample_target, start_time, end_time],
                     batch_size=config.batch_size,

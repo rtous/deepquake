@@ -109,4 +109,31 @@ max_checkpoint_step = 5000
 [classify] recall = 95.652173913%
 [classify] accuracy = 89.3565217391%
 
+7. experiment 7 (component Z only)
 
+[classify] Run time:  0.487166881561
+[classify] true positives = 67
+[classify] false positives = 7
+[classify] true negatives = 702
+[classify] false negatives = 24
+[classify] precission = 90.5405405405%
+[classify] recall = 73.6263736264%
+[classify] accuracy = 96.125%
+
+[classify] Run time:  3.2024371624
+[classify] true positives = 34
+[classify] false positives = 8
+[classify] true negatives = 2088
+[classify] false negatives = 55
+[classify] precission = 80.9523809524%
+[classify] recall = 38.202247191%
+[classify] accuracy = 97.1167048055%
+
+[classify] Run time:  3.03752017021
+[classify] true positives = 108
+[classify] false positives = 4
+[classify] true negatives = 2976
+[classify] false negatives = 17
+[classify] precission = 96.4285714286%
+[classify] recall = 86.4%
+[classify] accuracy = 99.3236714976%

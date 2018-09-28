@@ -28,6 +28,7 @@ import json
 import argparse
 import config as config
 import utils
+import random
 
 
 def preprocess_stream(stream):
@@ -43,17 +44,34 @@ def main(_):
 
     stream_files = [file for file in os.listdir(os.path.join(dataset_dir, cfg.mseed_event_dir)) if
                     fnmatch.fnmatch(file, args.pattern)]
+    total_positives = len(stream_files)
     print("[tfrecords negatives] Matching files: "+str(len(stream_files)))
+    
+    
+    # Divide training and validation datasets
+    random.shuffle(stream_files)
+    stream_files_train = stream_files[:int(0.8*total_positives)-1]
+    stream_files_validation = stream_files[int(0.8*total_positives):]
+
     # Create dir to store tfrecords
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    if not os.path.exists(os.path.join(output_dir, cfg.output_tfrecords_dir_positives)):
-        os.makedirs(os.path.join(output_dir, cfg.output_tfrecords_dir_positives))
+
+    write(stream_files_train, "train")
+    write(stream_files_validation, "test")
+
+def write(stream_files, subfolder):
+
+    if not os.path.exists(os.path.join(output_dir, subfolder)):
+        os.makedirs(os.path.join(output_dir, subfolder))
+
+    if not os.path.exists(os.path.join(os.path.join(output_dir, subfolder), cfg.output_tfrecords_dir_positives)):
+        os.makedirs(os.path.join(os.path.join(output_dir, subfolder), cfg.output_tfrecords_dir_positives))
 
     # Write event waveforms and cluster_id in .tfrecords
     #output_name = "positives.tfrecords"  
     output_name = args.file_name
-    output_path = os.path.join(os.path.join(output_dir, cfg.output_tfrecords_dir_positives), output_name)
+    output_path = os.path.join(os.path.join(os.path.join(output_dir, subfolder), cfg.output_tfrecords_dir_positives), output_name)
     writer = DataWriter(output_path)
     for stream_file in stream_files:
 
@@ -78,7 +96,7 @@ def main(_):
     # Cleanup writer
     print("[tfrecords positives] Number of windows written={}".format(writer._written))
     writer.close()
-    
+
 if __name__ == "__main__":
     print ("\033[92m******************** STEP 2/5. PREPROCESSING STEP 2/3. POSITIVE TRAINING WINDOWS -> TFRECORDS *******************\033[0m ")
     parser = argparse.ArgumentParser()

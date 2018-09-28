@@ -11,4 +11,7 @@ qsub -S /bin/bash -N experiment6_50s_LOCV_train_and_eval_new_model -M rtous@ac.u
 qsub -S /bin/bash -N experiment6_50s_LOCV_train_and_eval_new_model -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment6_50s_LOCV_train_and_eval_new_model_eval.sh
 
 #Same as deepquake_experiment5_50s_LOCV but only with componentZ. Asumes output/data_prep_default contains the preprocessed windows in .mseed format (by default 50s)
+
 qsub -S /bin/bash -N experiment7_50s_LOCV_componentZ -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment7_50s_LOCV_componentZ.sh
+
+qsub -S /bin/bash -N experiment7_50s_LOCV_componentZ -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment7_50s_LOCV_componentZ_eval.sh

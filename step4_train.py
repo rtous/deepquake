@@ -29,11 +29,11 @@ def main(args):
   tf.set_random_seed(1234)
 
   #pos_path = os.path.join(cfg.DATASET,"positive")
-  pos_path = os.path.join(dataset_dir, cfg.output_tfrecords_dir_positives)
+  pos_path = os.path.join(os.path.join(dataset_dir, "train"), cfg.output_tfrecords_dir_positives)
   if not os.path.exists(pos_path):
     print ("[train] \033[91m ERROR!!\033[0m Missing directory "+pos_path+". Run step 2 first.")
     sys.exit(0)
-  neg_path = os.path.join(dataset_dir, cfg.output_tfrecords_dir_negatives)
+  neg_path = os.path.join(os.path.join(dataset_dir, "train"), cfg.output_tfrecords_dir_negatives)
   if not os.path.exists(neg_path):
     print ("[train] \033[91m ERROR!!\033[0m Missing directory "+neg_path+". Run step 3 first.")
     sys.exit(0)

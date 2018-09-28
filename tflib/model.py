@@ -216,6 +216,11 @@ class BaseModel(object):
                 print ('Writing trace.')
                 fid.write(ctf)
 
+            #Validation accuracy
+            #summary, acc = sess.run([accuracy_summary, accuracy], feed_dict=...)
+            #print('Accuracy at step %s: %s' % (n, acc))
+            #test_summary_str = sess.run(test_acc_summary, feed_dict={x: mnist.test.images,y_: mnist.test.labels})
+
             print self._summary_step(step_data)
             sys.stdout.flush()
             self.summary_writer.add_summary(step_data['summaries'], global_step=step)
