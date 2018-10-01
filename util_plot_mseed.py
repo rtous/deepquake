@@ -35,7 +35,7 @@ from tqdm import tqdm
 import time
 import pandas as pd
 
-OUTPUT_DIR = "output"
+#OUTPUT_DIR = "output"
 
 def preprocess_stream(stream):
     stream = stream.detrend('constant')
@@ -43,11 +43,23 @@ def preprocess_stream(stream):
 
 def main(args):
     # Create dir to store the plot
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
+    if not os.path.exists(args.output_dir):
+        os.makedirs(args.output_dir)
 
+    if os.path.isdir(args.stream_path):
+        processDirectory(args)
+    else:
+        processSingleFile(args.stream_path, args) 
+
+def processDirectory(args):
+    files = [file for file in os.listdir(args.stream_path) if
+                    fnmatch.fnmatch(file, "*.mseed")]
+    for file in files:
+        processSingleFile(os.path.join(args.stream_path, file), args)
+
+def processSingleFile(file, args):
     # Load stream
-    stream_path = args.stream_path
+    stream_path = file
     stream_file = os.path.split(stream_path)[-1]
     print "+ Loading Stream {}".format(stream_file)
     stream = read(stream_path)
@@ -58,11 +70,12 @@ def main(args):
     print "total time {}s".format(total_time)
 
     #debug: plot all
-    stream.plot(outfile=OUTPUT_DIR+"/stream.png")
+    stream.plot(outfile=os.path.join(args.output_dir, os.path.basename(stream_path)+".png"))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--stream_path",type=str,default=None,
                         help="path to mseed to analyze")
+    parser.add_argument("--output_dir",type=str,default=None)
     args = parser.parse_args()
     main(args)

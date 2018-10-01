@@ -21,8 +21,10 @@ import quakenet.models as models
 import quakenet.data_pipeline as dp
 import config as config
 import sys
+import logging
 
 def main(args):
+  logging.getLogger("tensorflow").setLevel(logging.ERROR)
   print ("\033[92m******************** STEP 4/5. TRAINING *******************\033[0m ")
   setproctitle.setproctitle('quakenet')
 

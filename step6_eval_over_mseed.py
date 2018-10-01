@@ -38,6 +38,7 @@ import sys
 import utils
 import fnmatch
 from obspy.core.utcdatetime import UTCDateTime
+import logging
 
 
 evaluation = False
@@ -341,6 +342,7 @@ def predict(path, stream_file, sess, model, samples, cat):
     return events_dic
 
 if __name__ == "__main__":
+    logging.getLogger("tensorflow").setLevel(logging.ERROR)
 
     print ("\033[92m******************** STEP 5/5. EVALUATION *******************\033[0m ")
 
