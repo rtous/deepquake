@@ -44,11 +44,11 @@
 
 [validation] true positives = 77
 [validation] false positives = 7
-[validation] true negatives = 1651
-[validation] false negatives = 8
+[validation] true negatives = 1650
+[validation] false negatives = 9
 [validation] precission = 91.6666666667%
-[validation] recall = 90.5882352941%
-[validation] accuracy = 99.1394148021%
+[validation] recall = 89.5348837209%
+[validation] accuracy = 99.0820424555%
 
 50s_Z
 
@@ -67,6 +67,27 @@
 [validation] precission = 92.8571428571%
 [validation] recall = 95.1219512195%
 [validation] accuracy = 99.4262765347%
+
+50s_Z_datos2
+
+[validation] true positives = 9
+[validation] false positives = 12
+[validation] true negatives = 144
+[validation] false negatives = 20
+[validation] precission = 42.8571428571%
+[validation] recall = 31.0344827586%
+[validation] accuracy = 82.7027027027%
+
+50s_Z_datos2_datos1train
+
+
+[validation] true positives = 5
+[validation] false positives = 16
+[validation] true negatives = 161
+[validation] false negatives = 3
+[validation] precission = 23.8095238095%
+[validation] recall = 62.5%
+[validation] accuracy = 89.7297297297%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 1. experiment2_defaults:

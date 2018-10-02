@@ -1,23 +1,4 @@
 qsub -S /bin/bash -N deepquake_experiment1_test -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment1_test.sh
-qsub -S /bin/bash -N deepquake_experiment2_defaults -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment2_defaults.sh
-qsub -S /bin/bash -N deepquake_experiment3_20s -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment3_20s.sh
-qsub -S /bin/bash -N deepquake_experiment4_20s_LOCV -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment4_20s_LOCV.sh
-qsub -S /bin/bash -N deepquake_experiment5_50s_LOCV -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment5_50s_LOCV.sh
-qsub -S /bin/bash -N deepquake_experiment5_50s_LOCV -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment5_50s_LOCV_eval.sh
-(després de canviar el model)
-qsub -S /bin/bash -N experiment6_50s_LOCV_train_and_eval_new_model -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment6_50s_LOCV_train_and_eval_new_model.sh
-
-#Same as deepquake_experiment5_50s_LOCV but with a different model
-qsub -S /bin/bash -N experiment6_50s_LOCV_train_and_eval_new_model -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment6_50s_LOCV_train_and_eval_new_model_eval.sh
-
-#Same as deepquake_experiment5_50s_LOCV but only with componentZ. Asumes output/data_prep_default contains the preprocessed windows in .mseed format (by default 50s)
-
-qsub -S /bin/bash -N experiment7_50s_LOCV_componentZ -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment7_50s_LOCV_componentZ.sh
-
-qsub -S /bin/bash -N experiment7_50s_LOCV_componentZ -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment7_50s_LOCV_componentZ_eval.sh
-
-
-
 
 STEP 1 
 qsub -S /bin/bash -N experiment_10s -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_10s.sh
@@ -35,5 +16,5 @@ STEP 3 (DATOS2 WITH MODEL TRAINED WITH DATOS1)
 qsub -S /bin/bash -N experiment_50s_Z_datos2_datos1train -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_Z_datos2_datos1train.sh (TODO)
 
 STEP 3 (MODEL2)
-qsub -S /bin/bash -N experiment_50s -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_model2.sh (TODO)
+qsub -S /bin/bash -N experiment_50s_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_model2.sh (TODO)
 
