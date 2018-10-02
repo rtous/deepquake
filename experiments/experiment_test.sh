@@ -22,7 +22,6 @@ python step4_train.py \
 --checkpoint_dir output/train_test/checkpoints
 
 python step5_eval_over_tfrecords.py \
---stream_path output/data_prep_test/mseed \
 --config_file_path experiments/config_test.ini \
 --checkpoint_dir output/train_test/checkpoints \
 --output_dir output/train_test/eval \

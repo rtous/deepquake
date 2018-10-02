@@ -12,6 +12,9 @@ import config as config
 #python util_datos2_metadata2csv.py --input_metadata_file input/datos2/Eventos.txt --output_csv_metadata_file output/datos2/catalog.csv
 
 def main(args):
+
+    if not os.path.exists(os.path.dirname(args.output_csv_metadata_file)):
+        os.makedirs(os.path.dirname(args.output_csv_metadata_file))
     
     events_dic ={"start_time": [],
      "end_time": [],

@@ -191,8 +191,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")
-    parser.add_argument("--stream_path",type=str,
-                        help="path to mseed to analyze")
     parser.add_argument("--pattern",type=str, default="*.mseed")
     parser.add_argument("--output_dir",type=str)
     parser.add_argument("--checkpoint_dir",type=str)
@@ -205,7 +203,6 @@ if __name__ == "__main__":
 
     checkpoint_dir = args.checkpoint_dir
     output_dir = args.output_dir
-    stream_path = args.stream_path
 
     dataset_dir = args.tfrecords_dir
 

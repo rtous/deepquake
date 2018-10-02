@@ -20,7 +20,6 @@ python step4_train.py \
 --checkpoint_dir output/train_50s/checkpoints
 
 python step5_eval_over_tfrecords.py \
---stream_path output/data_prep_50s/mseed \
 --config_file_path experiments/config_50s.ini \
 --checkpoint_dir output/train_50s/checkpoints \
 --output_dir output/train_50s/eval \
