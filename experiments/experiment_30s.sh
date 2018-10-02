@@ -19,9 +19,10 @@ python step4_train.py \
 --tfrecords_dir output/data_prep_30s/tfrecords \
 --checkpoint_dir output/train_30s/checkpoints
 
-python step5_eval.py \
---stream_path output/data_prep_experiment3_30s/mseed \
+python step5_eval_over_tfrecords.py \
+--stream_path output/data_prep_30s/mseed \
 --config_file_path experiments/config_30s.ini \
 --checkpoint_dir output/train_30s/checkpoints \
---output_dir output/train_30s/eval
+--output_dir output/train_30s/eval \
+--tfrecords_dir output/data_prep_30s/tfrecords/test
 
