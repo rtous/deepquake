@@ -19,7 +19,10 @@ def main(args):
     events_dic ={"start_time": [],
      "end_time": [],
      "cluster_id": [],
-     "clusters_prob": []}
+     "clusters_prob": [],
+     "lat": [],
+     "long": [],
+     "prof": []}
 
     with open(args.input_metadata_file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=" ", skipinitialspace=True)
@@ -35,12 +38,18 @@ def main(args):
                 hour = int(row[3])
                 minute = int(row[4])
                 sec = int(float(row[5]))
-                print(str(year)+","+str(month)+","+str(day)+","+str(hour)+","+str(minute)+","+str(sec))
+                lat = float(row[7])
+                long = float(row[8])
+                prof = float(row[9])
+                print(str(year)+","+str(month)+","+str(day)+","+str(hour)+","+str(minute)+","+str(sec)+","+str(lat)+","+str(long)+","+str(prof))
                 timeP = UTCDateTime(year=year, month=month, day=day, hour=hour, minute=minute, second=sec)
                 events_dic["start_time"].append(timeP - cfg.pwave_window/2)
                 events_dic["end_time"].append(timeP + cfg.pwave_window/2)
                 events_dic["cluster_id"].append(0) #TODO
                 events_dic["clusters_prob"].append(1) #manually annotated event
+                events_dic["lat"].append(lat) #manually annotated event
+                events_dic["long"].append(long) #manually annotated event
+                events_dic["prof"].append(prof) #manually annotated event
 
     df = pd.DataFrame.from_dict(events_dic)
     df.to_csv(args.output_csv_metadata_file)

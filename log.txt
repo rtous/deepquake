@@ -1,0 +1,18 @@
+
+
+- STATION GEOLOCATION obtained from http://www.isc.ac.uk/registries/search/
+
+- http://www.isc.ac.uk/cgi-bin/stations?sta_list=TERV&stn_ctr_lat=&stn_ctr_lon=&stn_radius=&max_stn_dist_units=deg&stn_bot_lat=12&stn_top_lat=8&stn_left_lon=60&stn_right_lon=70&stnsearch=FE&stn_srn=&stn_grn=101
+
+code,latitude,longitude,elevation
+BAUV,8.94330,-68.04150,-0.106
+BENV,9.96230,-67.59880,-0.666
+JACV,11.08800,-68.83000,-0.349
+MAN,9.79919,-70.79619,0
+MAPV,9.83080,-68.45730,-0.355
+TACV,10.13810,-67.02670,-0.546
+TERV,9.9586,-69.2865,-1.235 
+TURV,10.45000,-67.84000,-0.058
+
+TERV,10.01300,-69.25,-0.355 inventada en base a mapa (MAPV y CURV)
+

@@ -52,12 +52,12 @@ def preprocess_stream(stream):
 def obspyDateTime2PythonDateTime(odt):
     return dt.datetime(odt.year, odt.month, odt.day, odt.hour, odt.minute, odt.second)
 
-def customPlot(st, timeP, outfile):
+def customPlot(st, timeP, eventTime, outfile):
     fig = plt.figure()
     st.plot(fig=fig)
-    plt.axvline(x=obspyDateTime2PythonDateTime(timeP), linewidth=2, color='g')
-    plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.window_size), linewidth=2, color='g')
-    plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.window_avoid_negatives), linewidth=2, color='g')
+    plt.axvline(x=obspyDateTime2PythonDateTime(timeP), linewidth=2, color='r')
+    plt.axvline(x=obspyDateTime2PythonDateTime(eventTime), linewidth=2, color='b')
+    #plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.window_avoid_negatives), linewidth=2, color='g')
 
     total_time = st[-1].stats.endtime - st[0].stats.starttime
     max_windows = int((total_time - cfg.window_size) / cfg.window_step_negatives)
@@ -93,13 +93,14 @@ def customPlotPureMatplotlib(st, timeP):
     plt.legend()
     plt.show()
 
-def main(input_stream, output_dir, pattern, plot_positives, plot_negatives, catalog_path):
+def main(input_stream, output_dir, pattern, plot_positives, plot_negatives, catalog_path, stations_path):
     cat = pd.read_csv(catalog_path)
+    stations = pd.read_csv(stations_path)
     createDirectories(output_dir, plot_positives, plot_negatives)
     if os.path.isdir(input_stream):
-        processDirectory(input_stream, output_dir, pattern, plot_positives, plot_negatives, cat) 
+        processDirectory(input_stream, output_dir, pattern, plot_positives, plot_negatives, cat, stations) 
     else:
-        processSingleFile(input_stream, output_dir, plot_positives, plot_negatives, cat)
+        processSingleFile(input_stream, output_dir, plot_positives, plot_negatives, cat, stations)
 
 def createDirectories(base_dir, plot_positives, plot_negatives):
     if not os.path.exists(os.path.join(base_dir, cfg.mseed_dir)):
@@ -114,17 +115,19 @@ def createDirectories(base_dir, plot_positives, plot_negatives):
     if plot_negatives:
         if not os.path.exists(os.path.join(base_dir, cfg.png_noise_dir)):
             os.makedirs(os.path.join(base_dir, cfg.png_noise_dir))
+    if not os.path.exists(os.path.join(base_dir, cfg.png_dir)):
+            os.makedirs(os.path.join(base_dir, cfg.png_dir))
 
-def processSingleFile(input_stream, output_dir, plot_positives, plot_negatives, cat):
-    processMseed(input_stream, output_dir, plot_positives, plot_negatives)
+def processSingleFile(input_stream, output_dir, plot_positives, plot_negatives, cat, stations):
+    processMseed(input_stream, output_dir, plot_positives, plot_negatives, cat, stations)
 
-def processDirectory(input_stream_dir, output_dir, pattern, plot_positives, plot_negatives, cat): 
+def processDirectory(input_stream_dir, output_dir, pattern, plot_positives, plot_negatives, cat, stations): 
     input_stream_files = [file for file in os.listdir(input_stream_dir) if
                     fnmatch.fnmatch(file, pattern)]
     for mseedFileName in input_stream_files:
-        processMseed(os.path.join(input_stream_dir, mseedFileName), output_dir, plot_positives, plot_negatives,cat )
+        processMseed(os.path.join(input_stream_dir, mseedFileName), output_dir, plot_positives, plot_negatives, cat, stations)
 
-def processMseed(stream_path, output_dir, plot_positives, plot_negatives, cat):
+def processMseed(stream_path, output_dir, plot_positives, plot_negatives, cat, stations):
         stream_file = os.path.basename(stream_path)
         #2. Process .mseed
         #print("Processing stream "+stream_file)
@@ -134,6 +137,19 @@ def processMseed(stream_path, output_dir, plot_positives, plot_negatives, cat):
         print '[obtain training windows] Preprocessing stream'
         stream = preprocess_stream(stream)
         total_time = stream[-1].stats.endtime - stream[0].stats.starttime
+
+        station = stream[-1].stats.station
+
+        print("Processing station "+station)
+
+        stationLAT, stationLONG, stationDEPTH = utils.station_coordinates(station, stations)
+        
+
+        timeP, eventTime = utils.getPtime(stream[0].stats.starttime, stream[-1].stats.endtime, cat, stationLAT, stationLONG, stationDEPTH, cfg.mean_velocity)
+        #if timeP != None:
+        
+        customPlot(stream, timeP, eventTime, os.path.join(output_dir, cfg.png_dir)+"/"+stream_file+".png") 
+
         #print "total time {}s".format(total_time)
         #print(stream[-1].stats.starttime)
         #print(stream[0].stats.endtime)
@@ -156,10 +172,11 @@ def processMseed(stream_path, output_dir, plot_positives, plot_negatives, cat):
 
                 #Event window: [timeP-cfg.pwave_window..timeP+cfg.pwave_window]
                 #Do not use negatives 
-                if (utils.isPositive(window_start, window_end, cat)): #positive
+
+                if (utils.isPositive(window_start, window_end, cat, stationLAT, stationLONG, stationDEPTH, cfg.mean_velocity)): #positive
                     win.write(os.path.join(output_dir, cfg.mseed_event_dir)+"/"+stream_file+"_"+str(idx)+".mseed", format="MSEED") 
                     if plot_positives:
-                        win.plot(outfile=os.path.join(output_dir, cfg.png_event_dir)+"/"+stream_file+".png")
+                        win.plot(outfile=os.path.join(output_dir, cfg.png_event_dir)+"/"+stream_file+"_"+str(idx)+".png")
                     sys.stdout.write("\033[92m.\033[0m")
                     num_positives = num_positives+1
                 else:# negative
@@ -195,6 +212,7 @@ if __name__ == "__main__":
     parser.add_argument("--plot_positives",type=bool, default=False)
     parser.add_argument("--plot_negatives",type=bool, default=False)
     parser.add_argument("--catalog_path",type=str) #For datos2, which have just one global catalog
+    parser.add_argument("--stations_path",type=str)
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
     args = parser.parse_args()
 
@@ -209,5 +227,5 @@ if __name__ == "__main__":
     else:
         pattern = args.pattern
 
-    main(input_stream, output_dir, pattern, args.plot_positives, args.plot_negatives, args.catalog_path)
+    main(input_stream, output_dir, pattern, args.plot_positives, args.plot_negatives, args.catalog_path, args.stations_path)
 

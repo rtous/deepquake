@@ -212,7 +212,7 @@ def processMseed(stream_path, obspyCatalogMeta, output_dir, station, plot_statio
                         if (window_start <= event_window_start) and (window_end >= event_window_end): #positive
                             win.write(os.path.join(output_dir, cfg.mseed_event_dir)+"/"+stream_file+"_"+station_code+"_"+str(idx)+".mseed", format="MSEED") 
                             if plot_positives:
-                                win.plot(outfile=os.path.join(output_dir, cfg.png_event_dir)+"/"+stream_file+"_"+station_code+".png")
+                                win.plot(outfile=os.path.join(output_dir, cfg.png_event_dir)+"/"+stream_file+"_"+station_code+"_"+str(idx)+".png")
                             sys.stdout.write("\033[92m.\033[0m")
                             num_positives = num_positives+1
                         elif (window_end < event_window_start-cfg.window_avoid_negatives) or (window_start > event_window_end+cfg.window_avoid_negatives):# negative

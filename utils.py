@@ -27,6 +27,7 @@ import config as config
 import matplotlib.pyplot as plt
 import obspy
 import datetime as dt
+from openquake.hazardlib.geo.geodetic import distance
 
 def preprocess_stream(stream):
     stream = stream.detrend('constant')
@@ -89,10 +90,12 @@ def select_components(stream, cfg):
             stream_select += streamE
     return stream_select
 
-def isPositive(window_start, window_end, cat):
+def isPositive(window_start, window_end, cat, stationLAT, stationLONG, stationDEPTH, mean_velocity):
     isPositive = False
     for i in range(0, len(cat.start_time)):
-        if (UTCDateTime(cat.start_time[i]) >= UTCDateTime(window_start)) and (UTCDateTime(cat.end_time[i]) <= UTCDateTime(window_end)):# and (cat.end_time[0] <= win[0].stats.endtime):
+        event_start_time = UTCDateTime(cat.start_time[i]) + travel_time(cat.lat[i], cat.long[i], cat.prof[i], stationLAT, stationLONG, stationDEPTH, mean_velocity)
+        event_end_time = UTCDateTime(cat.end_time[i]) + travel_time(cat.lat[i], cat.long[i], cat.prof[i], stationLAT, stationLONG, stationDEPTH, mean_velocity)
+        if (event_start_time >= UTCDateTime(window_start)) and (event_end_time <= UTCDateTime(window_end)):# and (cat.end_time[0] <= win[0].stats.endtime):
             isPositive = True
     return isPositive
 
@@ -100,5 +103,34 @@ def isPositive(window_start, window_end, cat):
 #    with open(path, 'w') as outfile:  
 #        json.dump(data, outfile)
 
+def travel_time(lat, long, depth, stationLAT, stationLONG, stationDEPTH, mean_velocity):
+    #print("long ="+str(long)+", lat ="+str(lat)+", depth ="+str(depth)+", stationLONG ="+str(stationLONG)+", stationLAT ="+str(stationLAT));
+    distance_to_station = distance(long, lat, depth, stationLONG, stationLAT, stationDEPTH)
+    #distance_to_station = distance(long, lat, 0, stationLONG, stationLAT, 0)
+    #distance in km
+    #print("distance_to_station = "+str(distance_to_station)+" km")
+    travel_time = (distance_to_station/mean_velocity)*3600
+    #print("travel_time = "+str(travel_time)+"s")
+    return travel_time
 
+def station_coordinates(station, stations):
+    stationLAT = None
+    stationLONG = None
+    stationDEPTH = None
+    for i in range(0, len(stations.code)):
+        if station == stations.code[i]:
+            stationLAT = stations.latitude[i]
+            stationLONG = stations.longitude[i]
+            stationDEPTH = stations.elevation[i]
+    return stationLAT, stationLONG, stationDEPTH
 
+def getPtime(window_start, window_end, cat, stationLAT, stationLONG, stationDEPTH, mean_velocity):
+    timeP = None
+    eventTime = None
+    for i in range(0, len(cat.start_time)):
+        event_start_time = UTCDateTime(cat.start_time[i]) + travel_time(cat.lat[i], cat.long[i], cat.prof[i], stationLAT, stationLONG, stationDEPTH, mean_velocity)
+        event_end_time = UTCDateTime(cat.end_time[i]) + travel_time(cat.lat[i], cat.long[i], cat.prof[i], stationLAT, stationLONG, stationDEPTH, mean_velocity)
+        if (event_start_time >= UTCDateTime(window_start)) and (event_end_time <= UTCDateTime(window_end)):# and (cat.end_time[0] <= win[0].stats.endtime):
+            timeP = event_start_time
+            eventTime = UTCDateTime(cat.start_time[i])
+    return timeP, eventTime
