@@ -90,6 +90,15 @@ def select_components(stream, cfg):
             stream_select += streamE
     return stream_select
 
+def isPositive(window_start, window_end, cat):
+    isPositive = False
+    for i in range(0, len(cat.start_time)):
+        event_start_time = UTCDateTime(cat.start_time[i])
+        event_end_time = UTCDateTime(cat.end_time[i])
+        if (event_start_time >= UTCDateTime(window_start)) and (event_end_time <= UTCDateTime(window_end)):# and (cat.end_time[0] <= win[0].stats.endtime):
+            isPositive = True
+    return isPositive
+
 def isPositive(window_start, window_end, cat, stationLAT, stationLONG, stationDEPTH, mean_velocity):
     isPositive = False
     for i in range(0, len(cat.start_time)):

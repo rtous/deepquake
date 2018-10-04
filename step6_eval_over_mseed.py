@@ -118,8 +118,9 @@ def main(args):
                 cat = None
         else:
             cat = pd.read_csv(args.catalog_path)
+            stations = pd.read_csv(args.stations_path)
             evaluation = True
-        predictions = predict(stream_path, stream_file, sess, model, samples, cat)
+        predictions = predict(stream_path, stream_file, sess, model, samples, cat, stations)
         #stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
         #metadata_path = os.path.join(args.stream_path, stream_file_without_extension+".csv")
         #if os.path.isfile(metadata_path):
@@ -159,7 +160,7 @@ def main(args):
 
 
     
-def predict(path, stream_file, sess, model, samples, cat):
+def predict(path, stream_file, sess, model, samples, cat, stations):
     global truePositives
     global falsePositives
     global trueNegatives
@@ -232,7 +233,9 @@ def predict(path, stream_file, sess, model, samples, cat):
 
     n_events = 0
     time_start = time.time()
-
+    if stations is not None:
+        station = stream_select[-1].stats.station
+        stationLAT, stationLONG, stationDEPTH = utils.station_coordinates(station, stations)
     try:
         for idx, win in enumerate(win_gen):
             #Check the groundtruth
@@ -242,12 +245,22 @@ def predict(path, stream_file, sess, model, samples, cat):
             	#print("win[0].stats.endtime ="+str(win[0].stats.endtime))
             	#print("cat.start_time[0] ="+str(cat.start_time[0]))
             	#print("cat.end_time[0] ="+str(cat.end_time[0]))
-            	for i in range(0, len(cat.start_time)):
-	            	if (UTCDateTime(cat.start_time[i]) >= UTCDateTime(win[0].stats.starttime)) and (UTCDateTime(cat.end_time[i]) <= UTCDateTime(win[0].stats.endtime)):# and (cat.end_time[0] <= win[0].stats.endtime):
-		            	isPositive = True
-		                #print("\033[92m isPositive = True\033[0m")
-	                else:
-	                    isPositive = False
+
+                window_start = win[0].stats.starttime.timestamp
+                window_end = win[-1].stats.endtime.timestamp
+                if stations is not None:
+                    isPositive = utils.isPositive(window_start, window_end, cat, stationLAT, stationLONG, stationDEPTH, cfg.mean_velocity)
+                else:
+                    isPositive = utils.isPositive(window_start, window_end, cat)
+                #Event window: [timeP-cfg.pwave_window..timeP+cfg.pwave_window]
+                #Do not use negatives 
+
+            	#for i in range(0, len(cat.start_time)):
+	            #	if (UTCDateTime(cat.start_time[i]) >= UTCDateTime(win[0].stats.starttime)) and (UTCDateTime(cat.end_time[i]) <= UTCDateTime(win[0].stats.endtime)):# and (cat.end_time[0] <= win[0].stats.endtime):
+		        #    	isPositive = True
+		        #        #print("\033[92m isPositive = True\033[0m")
+	            #    else:
+	            #        isPositive = False
                          
             # Fetch class_proba and label
             to_fetch = [samples['data'], model.layers['class_prob'], model.layers['class_prediction']]
@@ -282,6 +295,7 @@ def predict(path, stream_file, sess, model, samples, cat):
                     sys.stdout.write("\033[92mP\033[0m")
                     sys.stdout.flush()
                     truePositives = truePositives+1
+                    #break
                 elif evaluation:
 	                #sys.stdout.write("\033[91m MISS\033[0m (false positive)\n")
                     sys.stdout.write("\033[91mP\033[0m")
@@ -354,7 +368,8 @@ if __name__ == "__main__":
     parser.add_argument("--pattern",type=str, default="*.mseed")
     parser.add_argument("--output_dir",type=str)
     parser.add_argument("--checkpoint_dir",type=str)
-    parser.add_argument("--catalog_path",type=str) #For datos2, which have just one global catalog
+    parser.add_argument("--catalog_path",type=str,default=None) #For datos2, which have just one global catalog
+    parser.add_argument("--stations_path",type=str,default=None) #For datos2, which have just one global catalog
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
 
     args = parser.parse_args()

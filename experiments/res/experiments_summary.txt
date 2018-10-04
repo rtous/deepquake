@@ -76,6 +76,15 @@
 [validation] recall = 95.1219512195%
 [validation] accuracy = 99.4262765347%
 
+(pwave = 0)
+[validation] true positives = 78
+[validation] false positives = 13
+[validation] true negatives = 1657
+[validation] false negatives = 9
+[validation] precission = 85.7142857143%
+[validation] recall = 89.6551724138%
+[validation] accuracy = 98.7478656801%
+
 50s_Z_datos2
 
 [validation] true positives = 9
@@ -85,6 +94,19 @@
 [validation] precission = 42.8571428571%
 [validation] recall = 31.0344827586%
 [validation] accuracy = 82.7027027027%
+
+With corrected and purged data:
+
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+172 windows seen
+[validation] true positives = 5
+[validation] false positives = 26
+[validation] true negatives = 145
+[validation] false negatives = 27
+[validation] precission = 16.1290322581%
+[validation] recall = 15.625%
+[validation] accuracy = 73.8916256158%
 
 50s_Z_datos2_datos1train
 
@@ -106,9 +128,9 @@ experiment_50s_model2
 [validation] recall = 89.010989011%
 [validation] accuracy = 99.2541594951%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 1. experiment2_defaults:
 
 2.

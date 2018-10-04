@@ -174,6 +174,7 @@ class ConvNetQuake(tflib.model.BaseModel):
 # ConvNetQuake2 (only 4 conv, two more fully-connected layers)
 ########################################################################
 class ConvNetQuake2(ConvNetQuake):
+  #https://github.com/tensorflow/tensorflow/blob/r0.12/tensorflow/models/image/mnist/convolutional.py
 
   def _setup_prediction(self):
     self.batch_size = self.inputs['data'].get_shape().as_list()[0]
@@ -191,7 +192,10 @@ class ConvNetQuake2(ConvNetQuake):
         self.layers['conv{}'.format(i+1)] = current_layer
 
         # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
-        #current_pooling_layer = layers.max_pooling2d(current_layer, 2, 2)
+        #https://www.tensorflow.org/api_docs/python/tf/nn/pool
+        current_layer = tf.nn.pool(current_layer, window_shape=[5], pooling_type='MAX', padding='SAME', strides=[5])
+
+
 
     bs, width, _ = current_layer.get_shape().as_list()
     current_layer = tf.reshape(current_layer, [bs, width*c], name="reshape")
