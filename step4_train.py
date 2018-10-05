@@ -25,7 +25,6 @@ import logging
 
 def main(args):
   logging.getLogger("tensorflow").setLevel(logging.ERROR)
-  print ("\033[92m******************** STEP 4/5. TRAINING *******************\033[0m ")
   setproctitle.setproctitle('quakenet')
 
   tf.set_random_seed(1234)
@@ -72,6 +71,7 @@ def main(args):
     )
 
 if __name__ == '__main__':
+  print ("\033[92m******************** STEP 4/5. TRAINING *******************\033[0m ")
   parser = argparse.ArgumentParser()
   parser.add_argument("--config_file_path",type=str,default="config_default.ini",
                         help="path to .ini file with all the parameters")

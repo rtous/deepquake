@@ -92,6 +92,7 @@ def write(stream_files, subfolder):
     # Cleanup writer
     print("[tfrecords negatives] Number of windows written={}".format(writer._written))
     writer.close()
+
 if __name__ == "__main__":
     print ("\033[92m******************** STEP 3/5. PREPROCESSING STEP 3/3. NEGATIVE TRAINING WINDOWS -> TFRECORDS *******************\033[0m ")
     parser = argparse.ArgumentParser()

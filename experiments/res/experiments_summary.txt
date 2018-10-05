@@ -58,6 +58,8 @@
 [validation] recall = 91.8604651163%
 [validation] accuracy = 99.3115318417%
 
+
+
 50s_Z
 
 [validation] true positives = 80
@@ -126,6 +128,21 @@ experiment_50s_model2
 [validation] false negatives = 10
 [validation] precission = 96.4285714286%
 [validation] recall = 89.010989011%
+[validation] accuracy = 99.2541594951%
+
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+84 windows seen
+[train] Loaded model at step 5000 from snapshot output/train_50s/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+1659 windows seen
+[validation] true positives = 79
+[validation] false positives = 5
+[validation] true negatives = 1651
+[validation] false negatives = 8
+[validation] precission = 94.0476190476%
+[validation] recall = 90.8045977011%
 [validation] accuracy = 99.2541594951%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

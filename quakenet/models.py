@@ -52,31 +52,31 @@ class ConvNetQuake(tflib.model.BaseModel):
 
     current_layer = self.inputs['data']
     d1, d2, d3 = current_layer.get_shape().as_list()
-    print ("[\033[94m INFO\033[0m] INPUT LAYER shape = "+str(d1)+"x"+str(d2)+"x"+str(d3))
+    print ("[\033[94mINFO\033[0m] INPUT LAYER shape = "+str(d1)+"x"+str(d2)+"x"+str(d3))
     c = 32  # number of channels per conv layer
     ksize = 3  # size of the convolution kernel
     depth = 8
     for i in range(depth):
         current_layer = layers.conv1(current_layer, c, ksize, stride=2, scope='conv{}'.format(i+1), padding='SAME')
         d1, d2, d3 = current_layer.get_shape().as_list()
-        print ("[\033[94m INFO\033[0m] LAYER "+'conv{}'.format(i+1)+" shape = "+str(d1)+"x"+str(d2)+"x"+str(d3))
+        print ("[\033[94mINFO\033[0m] LAYER "+'conv{}'.format(i+1)+" shape = "+str(d1)+"x"+str(d2)+"x"+str(d3))
 
         tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
         self.layers['conv{}'.format(i+1)] = current_layer
 
     bs, width, _ = current_layer.get_shape().as_list()
 
-    print ("[\033[94m INFO\033[0m] LAST LAYER CONV shape = "+str(bs)+"x"+str(width)+"x"+str(_))
+    #print ("[\033[94mINFO\033[0m] LAST LAYER CONV shape = "+str(bs)+"x"+str(width)+"x"+str(_))
 
     current_layer = tf.reshape(current_layer, [bs, width*c], name="reshape")
 
     d1, d2 = current_layer.get_shape().as_list()
-    print ("[\033[94m INFO\033[0m] LAST LAYER CONV RESHAPED shape = "+str(d1)+"x"+str(d2))
+    print ("[\033[94mINFO\033[0m] LAST LAYER CONV RESHAPED shape = "+str(d1)+"x"+str(d2))
 
     current_layer = layers.fc(current_layer, self.config.n_clusters, scope='logits', activation_fn=None)
     
     d1, d2 = current_layer.get_shape().as_list()
-    print ("[\033[94m INFO\033[0m] FC LAYER shape = "+str(d1)+"x"+str(d2))
+    print ("[\033[94mINFO\033[0m] FC LAYER shape = "+str(d1)+"x"+str(d2))
     self.layers['logits'] = current_layer
     tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
 
@@ -185,36 +185,41 @@ class ConvNetQuake2(ConvNetQuake):
     # LAYER 1-8: 8 CONVOLUTINAL layers, 32 1D kernels of size 3 each, stride 2, zero padding
     c = 32  # number of channels per conv layer
     ksize = 3  # size of the convolution kernel
-    depth = 8
+    depth = self.config.num_conv_layers
     for i in range(depth):
         current_layer = layers.conv1(current_layer, c, ksize, stride=2, scope='conv{}'.format(i+1), padding='SAME')
+        d1, d2, d3 = current_layer.get_shape().as_list()
+        print ("[\033[94mINFO\033[0m] LAYER "+'conv{}'.format(i+1)+" shape = "+str(d1)+"x"+str(d2)+"x"+str(d3))
         tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
         self.layers['conv{}'.format(i+1)] = current_layer
-
-        # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
-        #https://www.tensorflow.org/api_docs/python/tf/nn/pool
-        current_layer = tf.nn.pool(current_layer, window_shape=[5], pooling_type='MAX', padding='SAME', strides=[5])
-
-
+        if self.config.pooling:
+          # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
+          #https://www.tensorflow.org/api_docs/python/tf/nn/pool
+          current_layer = tf.nn.pool(current_layer, window_shape=[self.config.pooling_window], pooling_type='MAX', padding='SAME', strides=[5])
+          d1, d2, d3 = current_layer.get_shape().as_list()
+          print ("[\033[94mINFO\033[0m] LAYER "+'max_pool{}'.format(i+1)+" shape = "+str(d1)+"x"+str(d2)+"x"+str(d3))
+          tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
+          self.layers['pool{}'.format(i+1)] = current_layer
 
     bs, width, _ = current_layer.get_shape().as_list()
     current_layer = tf.reshape(current_layer, [bs, width*c], name="reshape")
 
-    # LAYER 9: FULLY CONNECTED
-    current_layer = layers.fc(current_layer, self.config.n_clusters, scope='fc1', activation_fn=None)
-    self.layers['fc1'] = current_layer
-    tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
+    # FULLY CONNECTED LAYERS
+    for i in range(0, self.config.num_fc_layers-1):
+      # LAYER 10: FULLY CONNECTED
+      current_layer = layers.fc(current_layer, self.config.fc_size, scope='fc{}'.format(i+1), activation_fn=None)
+      d1, d2 = current_layer.get_shape().as_list()
+      print ("[\033[94mINFO\033[0m] FC LAYER "+'{}'.format(i+1)+" shape = "+str(d1)+"x"+str(d2))
+      self.layers['fc{}'.format(i+1)] = current_layer
+      tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
 
-    # LAYER 10: FULLY CONNECTED
-    current_layer = layers.fc(current_layer, self.config.n_clusters, scope='fc2', activation_fn=None)
-    self.layers['fc2'] = current_layer
-    tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
-
-    # LAYER 11: FULLY CONNECTED
+    # LAYER: LAST FULLY CONNECTED (LOGITS)
     current_layer = layers.fc(current_layer, self.config.n_clusters, scope='logits', activation_fn=None)
+    d1, d2 = current_layer.get_shape().as_list()
+    print ("[\033[94mINFO\033[0m] FC LAYER LOGITS shape = "+str(d1)+"x"+str(d2))
     self.layers['logits'] = current_layer
     tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
-
+    
     self.layers['class_prob'] = tf.nn.softmax(current_layer, name='class_prob')
     self.layers['class_prediction'] = tf.argmax(self.layers['class_prob'], 1, name='class_pred')
 
