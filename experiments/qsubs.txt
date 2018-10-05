@@ -16,5 +16,7 @@ STEP 3 (DATOS2 WITH MODEL TRAINED WITH DATOS1)
 qsub -S /bin/bash -N experiment_50s_Z_datos2_datos1train -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_Z_datos2_datos1train.sh
 
 STEP 3 (MODEL2)
-qsub -S /bin/bash -N experiment_50s_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_model2.sh 
+qsub -S /bin/bash -N experiment_50s_model2a -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_model2a.sh
+
+qsub -S /bin/bash -N experiment_50s_model2b -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_model2b.sh 
 

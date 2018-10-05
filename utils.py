@@ -90,7 +90,7 @@ def select_components(stream, cfg):
             stream_select += streamE
     return stream_select
 
-def isPositive(window_start, window_end, cat):
+def isPositiveKnownP(window_start, window_end, cat):
     isPositive = False
     for i in range(0, len(cat.start_time)):
         event_start_time = UTCDateTime(cat.start_time[i])
@@ -99,7 +99,7 @@ def isPositive(window_start, window_end, cat):
             isPositive = True
     return isPositive
 
-def isPositive(window_start, window_end, cat, stationLAT, stationLONG, stationDEPTH, mean_velocity):
+def isPositiveEstimatedP(window_start, window_end, cat, stationLAT, stationLONG, stationDEPTH, mean_velocity):
     isPositive = False
     for i in range(0, len(cat.start_time)):
         event_start_time = UTCDateTime(cat.start_time[i]) + travel_time(cat.lat[i], cat.long[i], cat.prof[i], stationLAT, stationLONG, stationDEPTH, mean_velocity)
@@ -143,3 +143,16 @@ def getPtime(window_start, window_end, cat, stationLAT, stationLONG, stationDEPT
             timeP = event_start_time
             eventTime = UTCDateTime(cat.start_time[i])
     return timeP, eventTime
+
+def getPtimeFromObsPyCat(obspyCatalogMeta, station):
+    print("getPtimeFromObsPyCat for station "+station)
+    timeP = None
+    for pick in obspyCatalogMeta.events[0].picks:
+        print("Found pick")
+        if pick.phase_hint == 'P':
+            station_code = pick.waveform_id.station_code
+            print("Found P for station "+station_code)
+            if station == station_code:
+                timeP = pick.time
+                break
+    return timeP

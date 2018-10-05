@@ -145,6 +145,61 @@ Evaluation completed (1 epochs).
 [validation] recall = 90.8045977011%
 [validation] accuracy = 99.2541594951%
 
+
+50s_model2a
+(train step  1299s (260ms))
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER max_pool1 shape = 1x501x32
+[INFO] LAYER conv2 shape = 1x251x32
+[INFO] LAYER max_pool2 shape = 1x51x32
+[INFO] LAYER conv3 shape = 1x26x32
+[INFO] LAYER max_pool3 shape = 1x6x32
+[INFO] LAYER conv4 shape = 1x3x32
+[INFO] LAYER max_pool4 shape = 1x1x32
+[INFO] LAYER conv5 shape = 1x1x32
+[INFO] LAYER max_pool5 shape = 1x1x32
+[INFO] LAYER conv6 shape = 1x1x32
+[INFO] LAYER max_pool6 shape = 1x1x32
+[INFO] FC LAYER 1 shape = 1x10
+[INFO] FC LAYER 2 shape = 1x10
+[INFO] FC LAYER LOGITS shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+1659 windows seen
+[validation] true positives = 80
+[validation] false positives = 4
+[validation] true negatives = 1647
+[validation] false negatives = 12
+[validation] precission = 95.2380952381%
+[validation] recall = 86.9565217391%
+[validation] accuracy = 99.0820424555%
+
+50s_model2a
+
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER max_pool1 shape = 1x501x32
+[INFO] LAYER conv2 shape = 1x251x32
+[INFO] LAYER max_pool2 shape = 1x51x32
+[INFO] LAYER conv3 shape = 1x26x32
+[INFO] LAYER max_pool3 shape = 1x6x32
+[INFO] LAYER conv4 shape = 1x3x32
+[INFO] LAYER max_pool4 shape = 1x1x32
+[INFO] FC LAYER 1 shape = 1x10
+[INFO] FC LAYER LOGITS shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+1659 windows seen
+[validation] true positives = 79
+[validation] false positives = 5
+[validation] true negatives = 1652
+[validation] false negatives = 7
+[validation] precission = 94.0476190476%
+[validation] recall = 91.8604651163%
+[validation] accuracy = 99.3115318417%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

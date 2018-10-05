@@ -1,10 +1,8 @@
-python util_datos2_metadata2csv.py \
---input_metadata_file input/datos2/Eventos.txt \
---output_csv_metadata_file output/data_prep_datos2/catalog.csv
-
 python step1_preprocess1_datos2.py \
 --config_file_path experiments/config_50s_Z.ini \
 --raw_data_dir input/datos2 \
+--raw_metadata_dir input/datos2/sfiles_nordicformat \
+--raw_metadata_dir input/datos2/sfiles_nordicformat \
 --prep_data_dir output/data_prep_datos2 \
 --catalog_path output/data_prep_datos2/catalog.csv \
 --stations_path input/stations.csv
