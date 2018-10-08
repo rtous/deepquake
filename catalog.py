@@ -18,8 +18,14 @@ class Catalog():
         print "[obtain training windows] List of metadata files to anlayze: ", metadata_files
         for metadata_file in metadata_files:
             #1. Process metadata
-            print("[obtain training windows] Reading metadata file "+os.path.join(input_metadata_dir, metadata_file))
+            print("[preprocessing metadata] Reading metadata file "+os.path.join(input_metadata_dir, metadata_file))
             obspyCatalogMeta = seisobs.seis2cat(os.path.join(input_metadata_dir, metadata_file)) 
+            
+            if len(obspyCatalogMeta.events) == 0 :
+                print ("[preprocessing metadata] \033[91m ERROR!!\033[0m Cannot process metadata sfile "+os.path.join(input_metadata_dir, metadata_file))
+                sys.exit(0)
+
+            print("[preprocessing metadata] Imported sfile "+str(obspyCatalogMeta.events[0]))
             eventOriginTime = obspyCatalogMeta.events[0].origins[0].time
             lat = obspyCatalogMeta.events[0].origins[0].latitude
             lon = obspyCatalogMeta.events[0].origins[0].longitude
@@ -61,13 +67,13 @@ class Catalog():
                     d = Detection(jdetection['station'], UTCDateTime(jdetection['ptime']))
                     e.detections.append(d)
 
-    def getPtime(window_start, window_end, station):
-    ptime = None
-    for e in self.events:
-        for d in e.detections:
-        if ((d.station == station) and (ptime >= window_start) and (ptime <= window_end)):
-            ptime = d.ptime
-    return ptime
+    def getPtime(self, window_start, window_end, station):
+        ptime = None
+        for e in self.events:
+            for d in e.detections:
+                if ((d.station == station) and (d.ptime >= window_start) and (d.ptime <= window_end)):
+                    ptime = d.ptime
+        return ptime
 
 class Event():
     def __init__(self, eventOriginTime, lat, lon, depth):
@@ -88,6 +94,8 @@ if __name__ == "__main__":
     parser.add_argument("--input_path", type=str)
     parser.add_argument("--output_path", type=str)
     args = parser.parse_args()
+    if not os.path.exists(os.path.dirname(args.output_path)):
+        os.makedirs(os.path.dirname(args.output_path))
     c = Catalog()
     c.import_sfiles(args.input_path)
     c.export_json(args.output_path)

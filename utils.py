@@ -156,3 +156,6 @@ def getPtimeFromObsPyCat(obspyCatalogMeta, station):
                 timeP = pick.time
                 break
     return timeP
+
+def fileNameWithoutExtension(fileName):
+    return os.path.splitext(fileName)[0]
