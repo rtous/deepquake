@@ -1,27 +1,39 @@
-python step1_preprocess1_funvisis2oklahoma.py \
---config_file_path experiments/config_10s.ini \
---raw_data_dir input/data_raw_default/mseed \
---raw_metadata_dir input/data_raw_default/sfiles_nordicformat \
---prep_data_dir output/data_prep_10s \
+#!/bin/bash
+
+EXPERIMENT_NAME=10s
+INPUT_DATA_DIR=datos1
+
+CONFIG_FILE=experiments/config_$EXPERIMENT_NAME.ini
+DATA_PREP_DIR=data_prep_$EXPERIMENT_NAME
+DATA_TRAIN_DIR=train_$EXPERIMENT_NAME
+
+python step0_preprocess0_metadata.py \
+--input_path input/$INPUT_DATA_DIR/sfiles_nordicformat \
+--output_path output/$DATA_PREP_DIR/catalog.json
+
+python step1_preprocess1_get_windows.py \
+--config_file_path $CONFIG_FILE \
+--raw_data_dir input/$INPUT_DATA_DIR/mseed \
+--catalog_path output/$DATA_PREP_DIR/catalog.json \
+--prep_data_dir output/$DATA_PREP_DIR
 
 python step2_preprocess2_create_tfrecords_positives.py \
---config_file_path experiments/config_10s.ini \
---prep_data_dir output/data_prep_10s \
---tfrecords_dir output/data_prep_10s/tfrecords
+--config_file_path $CONFIG_FILE \
+--prep_data_dir output/$DATA_PREP_DIR \
+--tfrecords_dir output/$DATA_PREP_DIR/tfrecords
 
 python step3_preprocess3_create_tfrecords_negatives.py \
---config_file_path experiments/config_10s.ini \
---prep_data_dir output/data_prep_10s \
---tfrecords_dir output/data_prep_10s/tfrecords
+--config_file_path $CONFIG_FILE \
+--prep_data_dir output/$DATA_PREP_DIR \
+--tfrecords_dir output/$DATA_PREP_DIR/tfrecords
 
 python step4_train.py \
---config_file_path experiments/config_10s.ini \
---tfrecords_dir output/data_prep_10s/tfrecords \
---checkpoint_dir output/train_10s/checkpoints
+--config_file_path $CONFIG_FILE \
+--tfrecords_dir output/$DATA_PREP_DIR/tfrecords \
+--checkpoint_dir output/$DATA_TRAIN_DIR/checkpoints
 
 python step5_eval_over_tfrecords.py \
---config_file_path experiments/config_10s.ini \
---checkpoint_dir output/train_10s/checkpoints \
---output_dir output/train_10s/eval \
---tfrecords_dir output/data_prep_10s/tfrecords/test
-
+--config_file_path $CONFIG_FILE \
+--checkpoint_dir output/$DATA_TRAIN_DIR/checkpoints \
+--output_dir output/$DATA_TRAIN_DIR/eval \
+--tfrecords_dir output/$DATA_PREP_DIR/tfrecords/test
