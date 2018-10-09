@@ -184,7 +184,7 @@ class ConvNetQuake2(ConvNetQuake):
 
     # LAYER 1-8: 8 CONVOLUTINAL layers, 32 1D kernels of size 3 each, stride 2, zero padding
     c = 32  # number of channels per conv layer
-    ksize = 3  # size of the convolution kernel
+    ksize = self.config.ksize  # size of the convolution kernel
     depth = self.config.num_conv_layers
     for i in range(depth):
         current_layer = layers.conv1(current_layer, c, ksize, stride=2, scope='conv{}'.format(i+1), padding='SAME')

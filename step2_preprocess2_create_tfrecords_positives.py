@@ -45,13 +45,15 @@ def main(_):
     stream_files = [file for file in os.listdir(os.path.join(dataset_dir, cfg.mseed_event_dir)) if
                     fnmatch.fnmatch(file, args.pattern)]
     total_positives = len(stream_files)
-    print("[tfrecords negatives] Matching files: "+str(len(stream_files)))
+    print("[tfrecords positives] Matching files: "+str(len(stream_files)))
     
     
     # Divide training and validation datasets
     random.shuffle(stream_files)
     stream_files_train = stream_files[:int(0.8*total_positives)-1]
+    print("[tfrecords positives] Number of windows for train: "+str(len(stream_files_train)))
     stream_files_validation = stream_files[int(0.8*total_positives):]
+    print("[tfrecords positives] Number of windows for test: "+str(len(stream_files_validation)))
 
     # Create dir to store tfrecords
     if not os.path.exists(output_dir):

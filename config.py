@@ -1,6 +1,7 @@
 import configparser
 import argparse
 import sys
+import os
 
 STRING = 0
 INT = 1
@@ -10,6 +11,9 @@ BOOLEAN = 3
 class Config(object):
 
     def __init__(self, config_file_path):
+        if not os.path.isfile(config_file_path):
+            print ("[config] \033[91m ERROR!!\033[0m Config file not found: "+config_file_path)
+            sys.exit(0)
         config = configparser.ConfigParser()
         config.read(config_file_path)  
         default_config = configparser.ConfigParser()
@@ -51,6 +55,7 @@ class Config(object):
         self.read_attribute('pooling', BOOLEAN, default_config, config)
         self.read_attribute('n_clusters', INT, default_config, config)
         self.read_attribute('pooling_window', INT, default_config, config)
+        self.read_attribute('ksize', INT, default_config, config)
 
         #training
         self.read_attribute('learning_rate', FLOAT, default_config, config)

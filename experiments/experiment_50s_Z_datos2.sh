@@ -3,7 +3,7 @@
 EXPERIMENT_NAME=50s_Z_datos2
 INPUT_DATA_DIR=datos2
 
-CONFIG_FILE=experiments/config_$EXPERIMENT_NAME.ini
+CONFIG_FILE=experiments/config_50s_Z.ini
 DATA_PREP_DIR=data_prep_$EXPERIMENT_NAME
 DATA_TRAIN_DIR=train_$EXPERIMENT_NAME
 

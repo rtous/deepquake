@@ -8,6 +8,7 @@ from tqdm import tqdm
 import csv
 import json
 from obspy.core.utcdatetime import UTCDateTime
+import sys
 
 POSITIVE_EXAMPLES_PATH = 'positive'
 NEGATIVE_EXAMPLES_PATH = 'negative'
