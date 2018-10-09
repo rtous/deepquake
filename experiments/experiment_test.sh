@@ -1,9 +1,13 @@
-python step1_preprocess1_funvisis2oklahoma.py \
+python step0_preprocess0_metadata.py \
+--input_path input/datos1/sfiles_nordicformat \
+--output_path output/data_prep_test/catalog.json
+
+python step1_preprocess1_get_windows.py \
 --config_file_path experiments/config_test.ini \
---raw_data_dir input/data_raw_default/mseed \
---raw_metadata_dir input/data_raw_default/sfiles_nordicformat \
+--raw_data_dir input/datos1/mseed \
+--catalog_path output/data_prep_test/catalog.json \
 --prep_data_dir output/data_prep_test \
---pattern 05-0420-00L* \
+--pattern 2015-02-05-0420* \
 --station CRUV
 
 python step2_preprocess2_create_tfrecords_positives.py \

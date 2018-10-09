@@ -94,12 +94,12 @@ def customPlotPureMatplotlib(st, timeP):
     plt.legend()
     plt.show()
 
-def main(input_stream, input_metadata, output_dir, plot):
+def main(input_stream, input_metadata, output_dir, plot, onlyPattern, onlyStation):
     createDirectories(output_dir, plot)
     if os.path.isdir(input_stream):
-        processDirectory(input_stream, input_metadata, output_dir, plot) 
+        processDirectory(input_stream, input_metadata, output_dir, plot, pattern, onlyStation) 
     else:
-        processSingleFile(input_stream, input_metadata, output_dir, plot)
+        processSingleFile(input_stream, input_metadata, output_dir, plot, onlyStation)
 
 def createDirectories(base_dir, plot):
     if not os.path.exists(os.path.join(base_dir, cfg.mseed_dir)):
@@ -116,19 +116,19 @@ def createDirectories(base_dir, plot):
         if not os.path.exists(os.path.join(base_dir, cfg.png_noise_dir)):
             os.makedirs(os.path.join(base_dir, cfg.png_noise_dir))
 
-def processSingleFile(input_stream, cat, output_dir, plot):    
-    processMseed(input_stream, cat, output_dir, station, plot)
+def processSingleFile(input_stream, cat, output_dir, plot, onlyStation):    
+    processMseed(input_stream, cat, output_dir, station, plot, onlyStation)
 
-def processDirectory(input_stream_dir, cat, output_dir, plot):
+def processDirectory(input_stream_dir, cat, output_dir, plot, onlyPattern, onlyStation):
     stream_files = [file for file in os.listdir(input_stream_dir) if
-                   fnmatch.fnmatch(file, '*.mseed')]
+                   fnmatch.fnmatch(file, onlyPattern)]
     if len(stream_files) == 0:
-        print ("[train] \033[91m ERROR!!\033[0m No files with .mseed extension within "+input_stream+".")
+        print ("[obtain training windows] \033[91m ERROR!!\033[0m No files with .mseed extension with pattern "+onlyPattern+".")
         sys.exit(0)
     for mseedFileName in stream_files:
-        processMseed(os.path.join(input_stream_dir, mseedFileName), cat, output_dir, plot)
+        processMseed(os.path.join(input_stream_dir, mseedFileName), cat, output_dir, plot, onlyStation)
 
-def processMseed(stream_path, cat, output_dir, plot):
+def processMseed(stream_path, cat, output_dir, plot, onlyStation):
         stream_file = os.path.basename(stream_path)
         #2. Process .mseed
         #print("Processing stream "+stream_file)
@@ -146,6 +146,9 @@ def processMseed(stream_path, cat, output_dir, plot):
         for z_stream in z_streams:
             #Slice the input stream horizontally, for one station
             station = z_stream.stats.station
+
+            if onlyStation is not None and onlyStation != station: 
+                    continue
 
             print ("[obtain training windows] ---------- Station "+station+" ---------")
 
@@ -224,6 +227,8 @@ if __name__ == "__main__":
     parser.add_argument("--catalog_path",type=str)
     parser.add_argument("--prep_data_dir",type=str)
     parser.add_argument("--plot",type=bool, default=False)
+    parser.add_argument("--station",type=str, default=None)
+    parser.add_argument("--pattern",type=str, default=None)
     args = parser.parse_args()
 
     cfg = config.Config(args.config_file_path)
@@ -232,7 +237,12 @@ if __name__ == "__main__":
     cat = catalog.Catalog()
     cat.import_json(args.catalog_path)
 
-    main(args.raw_data_dir, cat, args.prep_data_dir, args.plot)
+    if args.pattern is None:
+        pattern = '*.mseed'
+    else:
+        pattern = args.pattern
+
+    main(args.raw_data_dir, cat, args.prep_data_dir, args.plot, args.pattern, args.station)
 
 
    

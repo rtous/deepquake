@@ -1,7 +1,11 @@
-python step1_preprocess1_funvisis2oklahoma.py \
+python step0_preprocess0_metadata.py \
+--input_path input/datos1/sfiles_nordicformat \
+--output_path output/data_prep_50s/catalog.json
+
+python step1_preprocess1_get_windows.py \
 --config_file_path experiments/config_50s.ini \
---raw_data_dir input/data_raw_default/mseed \
---raw_metadata_dir input/data_raw_default/sfiles_nordicformat \
+--raw_data_dir input/datos1/mseed \
+--catalog_path output/data_prep_50s/catalog.json \
 --prep_data_dir output/data_prep_50s
 
 python step2_preprocess2_create_tfrecords_positives.py \

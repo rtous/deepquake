@@ -25,7 +25,7 @@ class Catalog():
                 print ("[preprocessing metadata] \033[91m ERROR!!\033[0m Cannot process metadata sfile "+os.path.join(input_metadata_dir, metadata_file))
                 sys.exit(0)
 
-            print("[preprocessing metadata] Imported sfile "+str(obspyCatalogMeta.events[0]))
+            #print("[preprocessing metadata] Imported sfile "+str(obspyCatalogMeta.events[0]))
             eventOriginTime = obspyCatalogMeta.events[0].origins[0].time
             lat = obspyCatalogMeta.events[0].origins[0].latitude
             lon = obspyCatalogMeta.events[0].origins[0].longitude
@@ -88,19 +88,19 @@ class Detection():
         self.station = station
         self.ptime = ptime
 
-if __name__ == "__main__":
-    print ("\033[92m******************** STEP 1/5. PREPROCESSING STEP 1/4. IMPORT METADATA *******************\033[0m ")
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--input_path", type=str)
-    parser.add_argument("--output_path", type=str)
-    args = parser.parse_args()
-    if not os.path.exists(os.path.dirname(args.output_path)):
-        os.makedirs(os.path.dirname(args.output_path))
-    c = Catalog()
-    c.import_sfiles(args.input_path)
-    c.export_json(args.output_path)
-    c.import_json(args.output_path)
-    c.export_json("out2.json")
+#if __name__ == "__main__":
+#    print ("\033[92m******************** STEP 1/5. PREPROCESSING STEP 1/4. IMPORT METADATA *******************\033[0m ")
+#    parser = argparse.ArgumentParser()
+#    parser.add_argument("--input_path", type=str)
+#    parser.add_argument("--output_path", type=str)
+#    args = parser.parse_args()
+#    if not os.path.exists(os.path.dirname(args.output_path)):
+#        os.makedirs(os.path.dirname(args.output_path))
+#    c = Catalog()
+#    c.import_sfiles(args.input_path)
+#    c.export_json(args.output_path)
+#    c.import_json(args.output_path)
+#    c.export_json("out2.json")
 
 
     
