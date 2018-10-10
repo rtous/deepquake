@@ -171,6 +171,20 @@ Evaluation completed (1 epochs).
 [validation] recall = 24.5283018868%
 [validation] accuracy = 70.0%
 
+- datos 1 model 1 pero ksize = 5 (millor!)
+
+[train] Loaded model at step 5000 from snapshot output/train_50s_ksize5_pwindow4/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+1666 windows seen
+[validation] true positives = 78
+[validation] false positives = 13
+[validation] true negatives = 1651
+[validation] false negatives = 15
+[validation] precission = 85.7142857143%
+[validation] recall = 83.8709677419%
+[validation] accuracy = 98.406374502%
+
 - datos 1 model 2c
 
 [train] Loaded model at step 5000 from snapshot output/train_50s_Z_model2c/checkpoints/model-5000.
