@@ -1,4 +1,5 @@
 
+- pwave = 4 millora respecte a pwave = 0
 
 - STATION GEOLOCATION obtained from http://www.isc.ac.uk/registries/search/
 

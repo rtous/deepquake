@@ -1,0 +1,140 @@
+
+1. experiment2_defaults:
+
+2.
+
+3. experiment3_20s:
+
+window_size = 20
+pwave_window = 4
+window_step_negatives = 10
+window_avoid_negatives = 10
+learning_rate = 0.001
+batch_size = 128
+n_clusters = 2
+max_checkpoint_step = 5000
+
+[classify] Run time:  5.02463793755
+[classify] true positives = 134
+[classify] false positives = 50
+[classify] true negatives = 9041
+[classify] false negatives = 13
+[classify] precission = 72.8260869565%
+[classify] recall = 91.156462585%
+[classify] accuracy = 99.3180342065%
+
+4. experiment4_20s: Leave one out cross validation (LOCV)
+
+[classify] Run time:  0.701636075974
+[classify] true positives = 24
+[classify] false positives = 243
+[classify] true negatives = 586
+[classify] false negatives = 7
+[classify] precission = 8.98876404494%
+[classify] recall = 77.4193548387%
+[classify] accuracy = 70.9302325581%
+
+5. experiment5_50s: Leave one out cross validation (LOCV)
+
+[classify] Run time:  0.688389062881
+[classify] true positives = 77
+[classify] false positives = 118
+[classify] true negatives = 591
+[classify] false negatives = 14
+[classify] precission = 39.4871794872%
+[classify] recall = 84.6153846154%
+[classify] accuracy = 83.5%
+
+[classify] Run time:  5.6252810955
+[classify] true positives = 57
+[classify] false positives = 8
+[classify] true negatives = 2088
+[classify] false negatives = 32
+[classify] precission = 87.6923076923%
+[classify] recall = 64.0449438202%
+[classify] accuracy = 98.1693363844%
+
+[classify] Run time:  5.51619791985
+[classify] true positives = 114
+[classify] false positives = 16
+[classify] true negatives = 2964
+[classify] false negatives = 11
+[classify] precission = 87.6923076923%
+[classify] recall = 91.2%
+[classify] accuracy = 99.1304347826%
+
+[classify] Run time:  4.36331796646
+[classify] true positives = 104
+[classify] false positives = 13
+[classify] true negatives = 2747
+[classify] false negatives = 11
+[classify] precission = 88.8888888889%
+[classify] recall = 90.4347826087%
+[classify] accuracy = 99.1652173913%
+
+6. experiment 50s model v2
+
+[classify] Run time:  0.765468835831
+[classify] true positives = 42
+[classify] false positives = 17
+[classify] true negatives = 692
+[classify] false negatives = 49
+[classify] precission = 71.186440678%
+[classify] recall = 46.1538461538%
+[classify] accuracy = 91.75%
+
+[classify] Run time:  5.25144195557
+[classify] true positives = 47
+[classify] false positives = 11
+[classify] true negatives = 2085
+[classify] false negatives = 42
+[classify] precission = 81.0344827586%
+[classify] recall = 52.808988764%
+[classify] accuracy = 97.5743707094%
+
+[classify] Run time:  11.2320971489
+[classify] true positives = 91
+[classify] false positives = 144
+[classify] true negatives = 2836
+[classify] false negatives = 34
+[classify] precission = 38.7234042553%
+[classify] recall = 72.8%
+[classify] accuracy = 94.267310789%
+
+[classify] Run time:  30.962843895
+[classify] true positives = 110
+[classify] false positives = 301
+[classify] true negatives = 2459
+[classify] false negatives = 5
+[classify] precission = 26.7639902676%
+[classify] recall = 95.652173913%
+[classify] accuracy = 89.3565217391%
+
+7. experiment 7 (component Z only)
+
+[classify] Run time:  0.487166881561
+[classify] true positives = 67
+[classify] false positives = 7
+[classify] true negatives = 702
+[classify] false negatives = 24
+[classify] precission = 90.5405405405%
+[classify] recall = 73.6263736264%
+[classify] accuracy = 96.125%
+
+[classify] Run time:  3.2024371624
+[classify] true positives = 34
+[classify] false positives = 8
+[classify] true negatives = 2088
+[classify] false negatives = 55
+[classify] precission = 80.9523809524%
+[classify] recall = 38.202247191%
+[classify] accuracy = 97.1167048055%
+
+[classify] Run time:  3.03752017021
+[classify] true positives = 108
+[classify] false positives = 4
+[classify] true negatives = 2976
+[classify] false negatives = 17
+[classify] precission = 96.4285714286%
+[classify] recall = 86.4%
+[classify] accuracy = 99.3236714976%

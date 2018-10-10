@@ -7,7 +7,15 @@ qsub -S /bin/bash -N experiment_10s_Z -M rtous@ac.upc.edu -l big ./arvei/launch.
 qsub -S /bin/bash -N experiment_20s -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_20s.sh
 qsub -S /bin/bash -N experiment_30s -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_30s.sh
 qsub -S /bin/bash -N experiment_40s -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_40s.sh
+
+50s
+---
+
 qsub -S /bin/bash -N experiment_50s -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s.sh
+
+(only reshuffle and retrain)
+
+
 qsub -S /bin/bash -N experiment_50s_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_Z.sh
 
 STEP 2 (DATOS2)
