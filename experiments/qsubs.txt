@@ -35,6 +35,8 @@ STEP 4 (NEW MODEL FOR DATOS2)
 ------------------------
 qsub -S /bin/bash -N experiment_50s_Z_datos2_model2c -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_Z_datos2_model2c.sh
 
+qsub -S /bin/bash -N experiment_50s_Z_datos2_model2d -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_Z_datos2_model2d.sh
+
 
 (test with datos1)
 

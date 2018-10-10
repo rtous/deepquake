@@ -1,0 +1,177 @@
+
+
+#######################################################
+#######################################################
+#######################################################
+
+EXPERIMENT REFACTORED PREPROCESSING
+
+- 50s (but pwindow = 0)
+
+[INFO] INPUT LAYER shape = 1x5001x3
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER conv2 shape = 1x1251x32
+[INFO] LAYER conv3 shape = 1x626x32
+[INFO] LAYER conv4 shape = 1x313x32
+[INFO] LAYER conv5 shape = 1x157x32
+[INFO] LAYER conv6 shape = 1x79x32
+[INFO] LAYER conv7 shape = 1x40x32
+[INFO] LAYER conv8 shape = 1x20x32
+[INFO] LAST LAYER CONV RESHAPED shape = 1x640
+[INFO] FC LAYER shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+1666 windows seen
+[validation] true positives = 78
+[validation] false positives = 13
+[validation] true negatives = 1651
+[validation] false negatives = 15
+[validation] precission = 85.7142857143%
+[validation] recall = 83.8709677419%
+[validation] accuracy = 98.406374502%
+
+- 50s_Z ( pwave_window = 4 )
+
+[train] Loaded model at step 5000 from snapshot output/train_50s_Z/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+84 windows seen
+[INFO] INPUT LAYER shape = 1x5001x1
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER conv2 shape = 1x1251x32
+[INFO] LAYER conv3 shape = 1x626x32
+[INFO] LAYER conv4 shape = 1x313x32
+[INFO] LAYER conv5 shape = 1x157x32
+[INFO] LAYER conv6 shape = 1x79x32
+[INFO] LAYER conv7 shape = 1x40x32
+[INFO] LAYER conv8 shape = 1x20x32
+[INFO] LAST LAYER CONV RESHAPED shape = 1x640
+[INFO] FC LAYER shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s_Z/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+1659 windows seen
+[validation] true positives = 75
+[validation] false positives = 9
+[validation] true negatives = 1649
+[validation] false negatives = 10
+[validation] precission = 89.2857142857%
+[validation] recall = 88.2352941176%
+[validation] accuracy = 98.9099254159%
+
+- datos2
+
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+21 windows seen
+[INFO] INPUT LAYER shape = 1x5001x1
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER conv2 shape = 1x1251x32
+[INFO] LAYER conv3 shape = 1x626x32
+[INFO] LAYER conv4 shape = 1x313x32
+[INFO] LAYER conv5 shape = 1x157x32
+[INFO] LAYER conv6 shape = 1x79x32
+[INFO] LAYER conv7 shape = 1x40x32
+[INFO] LAYER conv8 shape = 1x20x32
+[INFO] LAST LAYER CONV RESHAPED shape = 1x640
+[INFO] FC LAYER shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s_Z_datos2/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+139 windows seen
+[validation] true positives = 10
+[validation] false positives = 11
+[validation] true negatives = 116
+[validation] false negatives = 23
+[validation] precission = 47.619047619%
+[validation] recall = 30.303030303%
+[validation] accuracy = 78.75%
+
+- datos 2 model 2c
+
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER max_pool1 shape = 1x501x32
+[INFO] LAYER conv2 shape = 1x251x32
+[INFO] LAYER max_pool2 shape = 1x51x32
+[INFO] LAYER conv3 shape = 1x26x32
+[INFO] LAYER max_pool3 shape = 1x6x32
+[INFO] LAYER conv4 shape = 1x3x32
+[INFO] LAYER max_pool4 shape = 1x1x32
+[INFO] LAYER conv5 shape = 1x1x32
+[INFO] LAYER max_pool5 shape = 1x1x32
+[INFO] LAYER conv6 shape = 1x1x32
+[INFO] LAYER max_pool6 shape = 1x1x32
+[INFO] FC LAYER 1 shape = 1x10
+[INFO] FC LAYER 2 shape = 1x10
+[INFO] FC LAYER LOGITS shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s_Z_datos2_model2c/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+139 windows seen
+[validation] true positives = 17
+[validation] false positives = 4
+[validation] true negatives = 133
+[validation] false negatives = 6
+[validation] precission = 80.9523809524%
+[validation] recall = 73.9130434783%
+[validation] accuracy = 93.75%
+
+- datos 2 model 2d (ksize = 10) 
+
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+21 windows seen
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER conv2 shape = 1x1251x32
+[INFO] LAYER conv3 shape = 1x626x32
+[INFO] LAYER conv4 shape = 1x313x32
+[INFO] LAYER conv5 shape = 1x157x32
+[INFO] LAYER conv6 shape = 1x79x32
+[INFO] LAYER conv7 shape = 1x40x32
+[INFO] LAYER conv8 shape = 1x20x32
+[INFO] FC LAYER LOGITS shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s_Z_datos2_model2d/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+139 windows seen
+[validation] true positives = 13
+[validation] false positives = 8
+[validation] true negatives = 99
+[validation] false negatives = 40
+[validation] precission = 61.9047619048%
+[validation] recall = 24.5283018868%
+[validation] accuracy = 70.0%
+
+- datos 1 model 2c
+
+[train] Loaded model at step 5000 from snapshot output/train_50s_Z_model2c/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+84 windows seen
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER max_pool1 shape = 1x501x32
+[INFO] LAYER conv2 shape = 1x251x32
+[INFO] LAYER max_pool2 shape = 1x51x32
+[INFO] LAYER conv3 shape = 1x26x32
+[INFO] LAYER max_pool3 shape = 1x6x32
+[INFO] LAYER conv4 shape = 1x3x32
+[INFO] LAYER max_pool4 shape = 1x1x32
+[INFO] LAYER conv5 shape = 1x1x32
+[INFO] LAYER max_pool5 shape = 1x1x32
+[INFO] LAYER conv6 shape = 1x1x32
+[INFO] LAYER max_pool6 shape = 1x1x32
+[INFO] FC LAYER 1 shape = 1x10
+[INFO] FC LAYER 2 shape = 1x10
+[INFO] FC LAYER LOGITS shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s_Z_model2c/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+1659 windows seen
+[validation] true positives = 78
+[validation] false positives = 6
+[validation] true negatives = 1657
+[validation] false negatives = 2
+[validation] precission = 92.8571428571%
+[validation] recall = 97.5%
+[validation] accuracy = 99.5410212278%
