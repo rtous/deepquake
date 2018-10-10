@@ -31,6 +31,34 @@ Evaluation completed (1 epochs).
 [validation] recall = 83.8709677419%
 [validation] accuracy = 98.406374502%
 
+- 50s (pwindow = 4)
+[train] Loaded model at step 5000 from snapshot output/train_50s/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+91 windows seen
+[INFO] INPUT LAYER shape = 1x5001x3
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER conv2 shape = 1x1251x32
+[INFO] LAYER conv3 shape = 1x626x32
+[INFO] LAYER conv4 shape = 1x313x32
+[INFO] LAYER conv5 shape = 1x157x32
+[INFO] LAYER conv6 shape = 1x79x32
+[INFO] LAYER conv7 shape = 1x40x32
+[INFO] LAYER conv8 shape = 1x20x32
+[INFO] LAST LAYER CONV RESHAPED shape = 1x640
+[INFO] FC LAYER shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+1666 windows seen
+[validation] true positives = 79
+[validation] false positives = 12
+[validation] true negatives = 1655
+[validation] false negatives = 11
+[validation] precission = 86.8131868132%
+[validation] recall = 87.7777777778%
+[validation] accuracy = 98.6909504838%
+
 - 50s_Z ( pwave_window = 4 )
 
 [train] Loaded model at step 5000 from snapshot output/train_50s_Z/checkpoints/model-5000.
