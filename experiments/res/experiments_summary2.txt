@@ -58,8 +58,6 @@
 [validation] recall = 91.8604651163%
 [validation] accuracy = 99.3115318417%
 
-
-
 50s_Z
 
 [validation] true positives = 80

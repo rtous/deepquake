@@ -13,6 +13,8 @@ qsub -S /bin/bash -N experiment_40s -M rtous@ac.upc.edu -l big ./arvei/launch.sh
 
 qsub -S /bin/bash -N experiment_50s -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s.sh
 
+qsub -S /bin/bash -N experiment_50s_olddata -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_olddata.sh
+
 (only reshuffle and retrain)
 
 
