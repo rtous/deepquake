@@ -58,3 +58,4 @@ DEBUG
 
 
 qsub -S /bin/bash -N experiment_50s_olddata_oldmodel -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_olddata_oldmodel.sh
+qsub -S /bin/bash -N experiment_50s_oldmodel -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_oldmodel.sh
