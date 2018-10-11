@@ -202,9 +202,16 @@ if __name__ == "__main__":
     cfg = config.Config(args.config_file_path)
 
     checkpoint_dir = args.checkpoint_dir
+
+    if not os.path.exists(checkpoint_dir):
+        print ("[train] \033[91m ERROR!!\033[0m Missing directory "+checkpoint_dir+". Run step 3 (train) first.")
+        sys.exit(0)
+
     output_dir = args.output_dir
 
     dataset_dir = args.tfrecords_dir
+
+
 
     #if args.redirect_stdout_stderr:
     #    stdout_stderr_file = open(os.path.join(output_dir, 'stdout_stderr_file.txt'), 'w')
