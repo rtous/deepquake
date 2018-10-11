@@ -50,7 +50,7 @@ qsub -S /bin/bash -N experiment_50s_ksize5_pwindow4 -M rtous@ac.upc.edu -l big .
 
 (now datos 2 with only ksize=5)
 
-qsub -S /bin/bash -N experiment_50s_Z_datos2_ksize5_pwindow4 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_Z_datos2_ksize5_pwindow4.sh
+qsub -S /bin/bash -N experiment_50s_Z_datos2_ksize5_pwindow4_pooling -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_Z_datos2_ksize5_pwindow4.sh
 
 
 
@@ -63,3 +63,4 @@ DEBUG
 qsub -S /bin/bash -N experiment_50s_olddata -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_olddata.sh
 qsub -S /bin/bash -N experiment_50s_olddata_oldmodel -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_olddata_oldmodel.sh
 qsub -S /bin/bash -N experiment_50s_oldmodel -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_oldmodel.sh
+qsub -S /bin/bash -N experiment_50s_olddata_oldmodel_eval_newdata -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_olddata_oldmodel_eval_newdata.sh
