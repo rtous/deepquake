@@ -173,6 +173,33 @@ Evaluation completed (1 epochs).
 [validation] recall = 73.9130434783%
 [validation] accuracy = 93.75%
 
+- datos 2 experiment_50s_Z_datos2_ksize5_pwindow4
+
+[train] Loaded model at step 5000 from snapshot output/train_50s_Z_datos2_ksize5_pwindow4/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+21 windows seen
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER conv2 shape = 1x1251x32
+[INFO] LAYER conv3 shape = 1x626x32
+[INFO] LAYER conv4 shape = 1x313x32
+[INFO] LAYER conv5 shape = 1x157x32
+[INFO] LAYER conv6 shape = 1x79x32
+[INFO] LAYER conv7 shape = 1x40x32
+[INFO] LAYER conv8 shape = 1x20x32
+[INFO] FC LAYER LOGITS shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s_Z_datos2_ksize5_pwindow4/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+139 windows seen
+[validation] true positives = 13
+[validation] false positives = 8
+[validation] true negatives = 127
+[validation] false negatives = 12
+[validation] precission = 61.9047619048%
+[validation] recall = 52.0%
+[validation] accuracy = 87.5%
+
 - datos 2 model 2d (ksize = 10) 
 
 Evaluating at step 5000
