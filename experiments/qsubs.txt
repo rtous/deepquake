@@ -47,3 +47,14 @@ qsub -S /bin/bash -N experiment_50s_Z_model2c -M rtous@ac.upc.edu -l big ./arvei
 (now datos 1 with only ksize=5)
 
 qsub -S /bin/bash -N experiment_50s_ksize5_pwindow4 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_ksize5_pwindow4.sh
+
+
+
+----------
+
+
+DEBUG
+
+
+
+qsub -S /bin/bash -N experiment_50s_olddata_oldmodel -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_50s_olddata_oldmodel.sh
