@@ -189,17 +189,18 @@ if __name__ == "__main__":
     print ("\033[92m******************** STEP 5/5. EVALUATION *******************\033[0m ")
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_file_path",type=str,default="config_default.ini",
+    parser.add_argument("--config_file_path",type=str,default=None,
                         help="path to .ini file with all the parameters")
     parser.add_argument("--pattern",type=str, default="*.mseed")
-    parser.add_argument("--output_dir",type=str)
-    parser.add_argument("--checkpoint_dir",type=str)
-    parser.add_argument("--catalog_path",type=str) #For datos2, which have just one global catalog
+    parser.add_argument("--output_dir",type=str, required=True)
+    parser.add_argument("--checkpoint_dir",type=str, required=True)
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
-    parser.add_argument("--tfrecords_dir",type=str)
+    parser.add_argument("--tfrecords_dir",type=str, required=True)
+    parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
+    parser.add_argument("--window_size", type=int, required=True) #Optional, we will use the value from the config file
     args = parser.parse_args()
 
-    cfg = config.Config(args.config_file_path)
+    cfg = config.Config(args)
 
     checkpoint_dir = args.checkpoint_dir
 

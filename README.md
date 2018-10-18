@@ -80,6 +80,14 @@ python util_join_components.py \
 --streamHHZ_path input/funvisis/other/CAPV/CAPV.VE..HHZ.2017.323 \
 --output_stream_path input/funvisis/other/CAPV.VE.2017.323
 
+## Note about the tools usage
+
+* By default tools read parameters from the config_default.ini file.
+* Some parameters can be (some times need to be) overriden with command line arguments. This is the recommended way of overriding the defaults.
+* You can also override a subset of parameters specifying your own config file with the --config_file_path argument. 
+
+WARNING: When passing boolean arguments we will use 0 or 1 (not in the config files, where we will use false and true).
+
 ## 2.3 Step 1. Preprocessing 1. Converting FUNVISIS to ConvNetQuake format
 
 The following utility will:

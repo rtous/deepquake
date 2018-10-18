@@ -1,0 +1,1 @@
+qsub -S /bin/bash -N experiment_1_data_preprocessing -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_1_data_preprocessing.sh

@@ -96,16 +96,21 @@ def write(stream_files, subfolder):
 if __name__ == "__main__":
     print ("\033[92m******************** STEP 3/5. PREPROCESSING STEP 3/3. NEGATIVE TRAINING WINDOWS -> TFRECORDS *******************\033[0m ")
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_file_path",type=str,default="config_default.ini",
+    parser.add_argument("--config_file_path",type=str,default=None,
                         help="path to .ini file with all the parameters")
-    parser.add_argument("--prep_data_dir",type=str)
+    parser.add_argument("--prep_data_dir",type=str, required=True)
     parser.add_argument("--pattern",type=str, default="*.mseed")
-    parser.add_argument("--tfrecords_dir",type=str)
+    parser.add_argument("--tfrecords_dir",type=str, required=True)
+    parser.add_argument("--component_N",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
+    parser.add_argument("--component_E",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file    parser.add_argument("--file_name",type=str, default="negatives.tfrecords")
     parser.add_argument("--file_name",type=str, default="negatives.tfrecords")
+    parser.add_argument("--window_size", type=int, required=True)
+    parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
+
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
 
     args = parser.parse_args()
-    cfg = config.Config(args.config_file_path)
+    cfg = config.Config(args)
     
     dataset_dir = args.prep_data_dir
     output_dir = args.tfrecords_dir

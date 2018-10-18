@@ -235,17 +235,19 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
 if __name__ == "__main__":
     print ("\033[92m******************** STEP 1/5. PREPROCESSING STEP 1/3. OBTAIN TRAINING WINDOWS *******************\033[0m ")
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_file_path",type=str,default="config_default.ini",
+    parser.add_argument("--config_file_path",type=str, default=None,
                         help="path to .ini file with all the parameters")
-    parser.add_argument("--raw_data_dir",type=str)
-    parser.add_argument("--catalog_path",type=str)
-    parser.add_argument("--prep_data_dir",type=str)
+    parser.add_argument("--raw_data_dir", type=str, required=True)
+    parser.add_argument("--catalog_path", type=str, required=True)
+    parser.add_argument("--prep_data_dir", type=str, required=True)
     parser.add_argument("--plot",type=bool, default=False)
     parser.add_argument("--station",type=str, default=None)
     parser.add_argument("--pattern",type=str, default=None)
+    parser.add_argument("--window_size", type=int, required=True)
+    parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
     args = parser.parse_args()
 
-    cfg = config.Config(args.config_file_path)
+    cfg = config.Config(args)
 
     #Load metadata
     cat = catalog.Catalog()
