@@ -39,6 +39,9 @@ def main(args):
     print ("[train] \033[91m ERROR!!\033[0m Missing directory "+neg_path+". Run step 3 first.")
     sys.exit(0)
 
+  print ("[train] path to positives = "+pos_path)
+  print ("[train] path to negaties = "+neg_path)
+
   # data pipeline for positive and negative examples
   pos_pipeline = dp.DataPipeline(pos_path, cfg, True)
   neg_pipeline = dp.DataPipeline(neg_path, cfg, True)
