@@ -202,6 +202,32 @@ Evaluation completed (1 epochs).
 [validation] recall = 91.8604651163%
 [validation] accuracy = 99.3115318417%
 
+[train] Loaded model at step 5000 from snapshot output/train_50s/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+84 windows seen
+[INFO] INPUT LAYER shape = 1x5001x3
+[INFO] LAYER conv1 shape = 1x2501x32
+[INFO] LAYER conv2 shape = 1x1251x32
+[INFO] LAYER conv3 shape = 1x626x32
+[INFO] LAYER conv4 shape = 1x313x32
+[INFO] LAYER conv5 shape = 1x157x32
+[INFO] LAYER conv6 shape = 1x79x32
+[INFO] LAYER conv7 shape = 1x40x32
+[INFO] LAYER conv8 shape = 1x20x32
+[INFO] LAST LAYER CONV RESHAPED shape = 1x640
+[INFO] FC LAYER shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/train_50s/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+1659 windows seen
+[validation] true positives = 76
+[validation] false positives = 8
+[validation] true negatives = 1653
+[validation] false negatives = 6
+[validation] precission = 90.4761904762%
+[validation] recall = 92.6829268293%
+[validation] accuracy = 99.1967871486%
 
 #######################################################
 ############  datos 1 new models ######################

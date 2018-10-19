@@ -46,6 +46,7 @@ def main(_):
     print("[tfrecords negatives] Matching files: "+str(len(stream_files)))
 
     # Divide training and validation datasets
+    random.seed()
     random.shuffle(stream_files)
     stream_files_train = stream_files[:int(0.8*total_negatives)-1]
     stream_files_validation = stream_files[int(0.8*total_negatives):]
