@@ -371,6 +371,8 @@ if __name__ == "__main__":
     parser.add_argument("--stations_path",type=str, default=None) #For datos2, which have just one global catalog
     parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
     parser.add_argument("--window_size", type=int, required=True) #Optional, we will use the value from the config file
+    parser.add_argument("--component_N",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
+    parser.add_argument("--component_E",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file    
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
 
     args = parser.parse_args()
