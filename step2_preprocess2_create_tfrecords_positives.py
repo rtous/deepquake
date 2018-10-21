@@ -49,7 +49,7 @@ def main(_):
     
     
     # Divide training and validation datasets
-    random.seed()
+    random.seed(cfg.random_seed)
     random.shuffle(stream_files)
     stream_files_train = stream_files[:int(0.8*total_positives)-1]
     print("[tfrecords positives] Number of windows for train: "+str(len(stream_files_train)))

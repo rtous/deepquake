@@ -1,73 +1,6 @@
 ########################################
 experiment_2_train_model1_datos1_10.sh
 
-[CONFIG] debug = False
-[CONFIG] sampling_rate = 100
-[CONFIG] window_size = 10 (OVERWRITTEN)
-[CONFIG] pwave_window = 0
-[CONFIG] window_step_negatives = 10
-[CONFIG] window_avoid_negatives = 10
-[CONFIG] component_Z = True
-[CONFIG] component_N = True
-[CONFIG] component_E = True
-[CONFIG] mean_velocity = 18000.0
-[CONFIG] mseed_dir = mseed
-[CONFIG] mseed_event_dir = mseed_event_windows
-[CONFIG] mseed_noise_dir = mseed_noise
-[CONFIG] png_dir = png
-[CONFIG] png_event_dir = png_event_windows
-[CONFIG] png_noise_dir = png_noise
-[CONFIG] output_tfrecords_dir_positives = positive
-[CONFIG] output_tfrecords_dir_negatives = negative
-[CONFIG] model = ConvNetQuake
-[CONFIG] num_conv_layers = 8
-[CONFIG] num_fc_layers = 1
-[CONFIG] fc_size = 10
-[CONFIG] pooling = False
-[CONFIG] n_clusters = 2
-[CONFIG] pooling_window = 5
-[CONFIG] ksize = 3
-[CONFIG] learning_rate = 0.001
-[CONFIG] batch_size = 128
-[CONFIG] display_step = 50
-[CONFIG] n_threads = 2
-[CONFIG] resume = False
-[CONFIG] profiling = False
-[CONFIG] add = 1
-[CONFIG] checkpoint_step = 1000
-[CONFIG] max_checkpoint_step = 5000
-[CONFIG] window_step_predict = 10
-[CONFIG] save_sac = False
-[INFO] INPUT LAYER shape = 1x1001x3
-[INFO] LAYER conv1 shape = 1x501x32
-[INFO] LAYER conv2 shape = 1x251x32
-[INFO] LAYER conv3 shape = 1x126x32
-[INFO] LAYER conv4 shape = 1x63x32
-[INFO] LAYER conv5 shape = 1x32x32
-[INFO] LAYER conv6 shape = 1x16x32
-[INFO] LAYER conv7 shape = 1x8x32
-[INFO] LAYER conv8 shape = 1x4x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x128
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/10/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-19 windows seen
-[INFO] INPUT LAYER shape = 1x1001x3
-[INFO] LAYER conv1 shape = 1x501x32
-[INFO] LAYER conv2 shape = 1x251x32
-[INFO] LAYER conv3 shape = 1x126x32
-[INFO] LAYER conv4 shape = 1x63x32
-[INFO] LAYER conv5 shape = 1x32x32
-[INFO] LAYER conv6 shape = 1x16x32
-[INFO] LAYER conv7 shape = 1x8x32
-[INFO] LAYER conv8 shape = 1x4x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x128
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/10/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-1812 windows seen
 [validation] true positives = 8
 [validation] false positives = 11
 [validation] true negatives = 1802
@@ -76,76 +9,19 @@ Evaluation completed (1 epochs).
 [validation] recall = 44.4444444444%
 [validation] accuracy = 98.8530857455%
 
+Z:
+
+[validation] true positives = 10
+[validation] false positives = 9
+[validation] true negatives = 1808
+[validation] false negatives = 4
+[validation] precission = 52.6315789474%
+[validation] recall = 71.4285714286%
+[validation] accuracy = 99.2900054615%
+
 ########################################
 experiment_2_train_model1_datos1_20.sh
 
-[CONFIG] debug = False
-[CONFIG] sampling_rate = 100
-[CONFIG] window_size = 20 (OVERWRITTEN)
-[CONFIG] pwave_window = 0
-[CONFIG] window_step_negatives = 10
-[CONFIG] window_avoid_negatives = 10
-[CONFIG] component_Z = True
-[CONFIG] component_N = True
-[CONFIG] component_E = True
-[CONFIG] mean_velocity = 18000.0
-[CONFIG] mseed_dir = mseed
-[CONFIG] mseed_event_dir = mseed_event_windows
-[CONFIG] mseed_noise_dir = mseed_noise
-[CONFIG] png_dir = png
-[CONFIG] png_event_dir = png_event_windows
-[CONFIG] png_noise_dir = png_noise
-[CONFIG] output_tfrecords_dir_positives = positive
-[CONFIG] output_tfrecords_dir_negatives = negative
-[CONFIG] model = ConvNetQuake
-[CONFIG] num_conv_layers = 8
-[CONFIG] num_fc_layers = 1
-[CONFIG] fc_size = 10
-[CONFIG] pooling = False
-[CONFIG] n_clusters = 2
-[CONFIG] pooling_window = 5
-[CONFIG] ksize = 3
-[CONFIG] learning_rate = 0.001
-[CONFIG] batch_size = 128
-[CONFIG] display_step = 50
-[CONFIG] n_threads = 2
-[CONFIG] resume = False
-[CONFIG] profiling = False
-[CONFIG] add = 1
-[CONFIG] checkpoint_step = 1000
-[CONFIG] max_checkpoint_step = 5000
-[CONFIG] window_step_predict = 10
-[CONFIG] save_sac = False
-[INFO] INPUT LAYER shape = 1x2001x3
-[INFO] LAYER conv1 shape = 1x1001x32
-[INFO] LAYER conv2 shape = 1x501x32
-[INFO] LAYER conv3 shape = 1x251x32
-[INFO] LAYER conv4 shape = 1x126x32
-[INFO] LAYER conv5 shape = 1x63x32
-[INFO] LAYER conv6 shape = 1x32x32
-[INFO] LAYER conv7 shape = 1x16x32
-[INFO] LAYER conv8 shape = 1x8x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x256
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/20/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-37 windows seen
-[INFO] INPUT LAYER shape = 1x2001x3
-[INFO] LAYER conv1 shape = 1x1001x32
-[INFO] LAYER conv2 shape = 1x501x32
-[INFO] LAYER conv3 shape = 1x251x32
-[INFO] LAYER conv4 shape = 1x126x32
-[INFO] LAYER conv5 shape = 1x63x32
-[INFO] LAYER conv6 shape = 1x32x32
-[INFO] LAYER conv7 shape = 1x16x32
-[INFO] LAYER conv8 shape = 1x8x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x256
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/20/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-1775 windows seen
 [validation] true positives = 21
 [validation] false positives = 16
 [validation] true negatives = 1766
@@ -153,85 +29,41 @@ Evaluation completed (1 epochs).
 [validation] precission = 56.7567567568%
 [validation] recall = 70.0%
 [validation] accuracy = 98.6203090508%
+
+Z:
+
+[validation] true positives = 28
+[validation] false positives = 9
+[validation] true negatives = 1765
+[validation] false negatives = 10
+[validation] precission = 75.6756756757%
+[validation] recall = 73.6842105263%
+[validation] accuracy = 98.9514348786%
+
 ########################################
 experiment_2_train_model1_datos1_30.sh
 
+[validation] true positives = 43
+[validation] false positives = 12
+[validation] true negatives = 1716
+[validation] false negatives = 23
+[validation] precission = 78.1818181818%
+[validation] recall = 65.1515151515%
+[validation] accuracy = 98.0490523969%
 
+Z:
 
-
-
-
+[validation] true positives = 46
+[validation] false positives = 9
+[validation] true negatives = 1730
+[validation] false negatives = 9
+[validation] precission = 83.6363636364%
+[validation] recall = 83.6363636364%
+[validation] accuracy = 98.9966555184%
 
 ########################################
 experiment_2_train_model1_datos1_40.sh
 
-[CONFIG] debug = False
-[CONFIG] sampling_rate = 100
-[CONFIG] window_size = 40 (OVERWRITTEN)
-[CONFIG] pwave_window = 0
-[CONFIG] window_step_negatives = 10
-[CONFIG] window_avoid_negatives = 10
-[CONFIG] component_Z = True
-[CONFIG] component_N = True
-[CONFIG] component_E = True
-[CONFIG] mean_velocity = 18000.0
-[CONFIG] mseed_dir = mseed
-[CONFIG] mseed_event_dir = mseed_event_windows
-[CONFIG] mseed_noise_dir = mseed_noise
-[CONFIG] png_dir = png
-[CONFIG] png_event_dir = png_event_windows
-[CONFIG] png_noise_dir = png_noise
-[CONFIG] output_tfrecords_dir_positives = positive
-[CONFIG] output_tfrecords_dir_negatives = negative
-[CONFIG] model = ConvNetQuake
-[CONFIG] num_conv_layers = 8
-[CONFIG] num_fc_layers = 1
-[CONFIG] fc_size = 10
-[CONFIG] pooling = False
-[CONFIG] n_clusters = 2
-[CONFIG] pooling_window = 5
-[CONFIG] ksize = 3
-[CONFIG] learning_rate = 0.001
-[CONFIG] batch_size = 128
-[CONFIG] display_step = 50
-[CONFIG] n_threads = 2
-[CONFIG] resume = False
-[CONFIG] profiling = False
-[CONFIG] add = 1
-[CONFIG] checkpoint_step = 1000
-[CONFIG] max_checkpoint_step = 5000
-[CONFIG] window_step_predict = 10
-[CONFIG] save_sac = False
-[INFO] INPUT LAYER shape = 1x4001x3
-[INFO] LAYER conv1 shape = 1x2001x32
-[INFO] LAYER conv2 shape = 1x1001x32
-[INFO] LAYER conv3 shape = 1x501x32
-[INFO] LAYER conv4 shape = 1x251x32
-[INFO] LAYER conv5 shape = 1x126x32
-[INFO] LAYER conv6 shape = 1x63x32
-[INFO] LAYER conv7 shape = 1x32x32
-[INFO] LAYER conv8 shape = 1x16x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x512
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/40/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-73 windows seen
-[INFO] INPUT LAYER shape = 1x4001x3
-[INFO] LAYER conv1 shape = 1x2001x32
-[INFO] LAYER conv2 shape = 1x1001x32
-[INFO] LAYER conv3 shape = 1x501x32
-[INFO] LAYER conv4 shape = 1x251x32
-[INFO] LAYER conv5 shape = 1x126x32
-[INFO] LAYER conv6 shape = 1x63x32
-[INFO] LAYER conv7 shape = 1x32x32
-[INFO] LAYER conv8 shape = 1x16x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x512
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/40/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-1702 windows seen
 [validation] true positives = 65
 [validation] false positives = 8
 [validation] true negatives = 1688
@@ -240,76 +72,19 @@ Evaluation completed (1 epochs).
 [validation] recall = 82.2784810127%
 [validation] accuracy = 98.7605633803%
 
+Z:
+
+[validation] true positives = 66
+[validation] false positives = 7
+[validation] true negatives = 1684
+[validation] false negatives = 18
+[validation] precission = 90.4109589041%
+[validation] recall = 78.5714285714%
+[validation] accuracy = 98.5915492958%
+
 ########################################
 experiment_2_train_model1_datos1_50.sh
 
-[CONFIG] debug = False
-[CONFIG] sampling_rate = 100
-[CONFIG] window_size = 50 (OVERWRITTEN)
-[CONFIG] pwave_window = 0
-[CONFIG] window_step_negatives = 10
-[CONFIG] window_avoid_negatives = 10
-[CONFIG] component_Z = True
-[CONFIG] component_N = True
-[CONFIG] component_E = True
-[CONFIG] mean_velocity = 18000.0
-[CONFIG] mseed_dir = mseed
-[CONFIG] mseed_event_dir = mseed_event_windows
-[CONFIG] mseed_noise_dir = mseed_noise
-[CONFIG] png_dir = png
-[CONFIG] png_event_dir = png_event_windows
-[CONFIG] png_noise_dir = png_noise
-[CONFIG] output_tfrecords_dir_positives = positive
-[CONFIG] output_tfrecords_dir_negatives = negative
-[CONFIG] model = ConvNetQuake
-[CONFIG] num_conv_layers = 8
-[CONFIG] num_fc_layers = 1
-[CONFIG] fc_size = 10
-[CONFIG] pooling = False
-[CONFIG] n_clusters = 2
-[CONFIG] pooling_window = 5
-[CONFIG] ksize = 3
-[CONFIG] learning_rate = 0.001
-[CONFIG] batch_size = 128
-[CONFIG] display_step = 50
-[CONFIG] n_threads = 2
-[CONFIG] resume = False
-[CONFIG] profiling = False
-[CONFIG] add = 1
-[CONFIG] checkpoint_step = 1000
-[CONFIG] max_checkpoint_step = 5000
-[CONFIG] window_step_predict = 10
-[CONFIG] save_sac = False
-[INFO] INPUT LAYER shape = 1x5001x3
-[INFO] LAYER conv1 shape = 1x2501x32
-[INFO] LAYER conv2 shape = 1x1251x32
-[INFO] LAYER conv3 shape = 1x626x32
-[INFO] LAYER conv4 shape = 1x313x32
-[INFO] LAYER conv5 shape = 1x157x32
-[INFO] LAYER conv6 shape = 1x79x32
-[INFO] LAYER conv7 shape = 1x40x32
-[INFO] LAYER conv8 shape = 1x20x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x640
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/50/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-91 windows seen
-[INFO] INPUT LAYER shape = 1x5001x3
-[INFO] LAYER conv1 shape = 1x2501x32
-[INFO] LAYER conv2 shape = 1x1251x32
-[INFO] LAYER conv3 shape = 1x626x32
-[INFO] LAYER conv4 shape = 1x313x32
-[INFO] LAYER conv5 shape = 1x157x32
-[INFO] LAYER conv6 shape = 1x79x32
-[INFO] LAYER conv7 shape = 1x40x32
-[INFO] LAYER conv8 shape = 1x20x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x640
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/50/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-1666 windows seen
 [validation] true positives = 78
 [validation] false positives = 13
 [validation] true negatives = 1651
@@ -318,76 +93,19 @@ Evaluation completed (1 epochs).
 [validation] recall = 83.8709677419%
 [validation] accuracy = 98.406374502%
 
+Z:
+
+[validation] true positives = 83
+[validation] false positives = 8
+[validation] true negatives = 1654
+[validation] false negatives = 12
+[validation] precission = 91.2087912088%
+[validation] recall = 87.3684210526%
+[validation] accuracy = 98.8616960729%
+
 ########################################
 experiment_2_train_model1_datos1_60.sh
 
-[CONFIG] debug = False
-[CONFIG] sampling_rate = 100
-[CONFIG] window_size = 60 (OVERWRITTEN)
-[CONFIG] pwave_window = 0
-[CONFIG] window_step_negatives = 10
-[CONFIG] window_avoid_negatives = 10
-[CONFIG] component_Z = True
-[CONFIG] component_N = True
-[CONFIG] component_E = True
-[CONFIG] mean_velocity = 18000.0
-[CONFIG] mseed_dir = mseed
-[CONFIG] mseed_event_dir = mseed_event_windows
-[CONFIG] mseed_noise_dir = mseed_noise
-[CONFIG] png_dir = png
-[CONFIG] png_event_dir = png_event_windows
-[CONFIG] png_noise_dir = png_noise
-[CONFIG] output_tfrecords_dir_positives = positive
-[CONFIG] output_tfrecords_dir_negatives = negative
-[CONFIG] model = ConvNetQuake
-[CONFIG] num_conv_layers = 8
-[CONFIG] num_fc_layers = 1
-[CONFIG] fc_size = 10
-[CONFIG] pooling = False
-[CONFIG] n_clusters = 2
-[CONFIG] pooling_window = 5
-[CONFIG] ksize = 3
-[CONFIG] learning_rate = 0.001
-[CONFIG] batch_size = 128
-[CONFIG] display_step = 50
-[CONFIG] n_threads = 2
-[CONFIG] resume = False
-[CONFIG] profiling = False
-[CONFIG] add = 1
-[CONFIG] checkpoint_step = 1000
-[CONFIG] max_checkpoint_step = 5000
-[CONFIG] window_step_predict = 10
-[CONFIG] save_sac = False
-[INFO] INPUT LAYER shape = 1x6001x3
-[INFO] LAYER conv1 shape = 1x3001x32
-[INFO] LAYER conv2 shape = 1x1501x32
-[INFO] LAYER conv3 shape = 1x751x32
-[INFO] LAYER conv4 shape = 1x376x32
-[INFO] LAYER conv5 shape = 1x188x32
-[INFO] LAYER conv6 shape = 1x94x32
-[INFO] LAYER conv7 shape = 1x47x32
-[INFO] LAYER conv8 shape = 1x24x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x768
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/60/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-109 windows seen
-[INFO] INPUT LAYER shape = 1x6001x3
-[INFO] LAYER conv1 shape = 1x3001x32
-[INFO] LAYER conv2 shape = 1x1501x32
-[INFO] LAYER conv3 shape = 1x751x32
-[INFO] LAYER conv4 shape = 1x376x32
-[INFO] LAYER conv5 shape = 1x188x32
-[INFO] LAYER conv6 shape = 1x94x32
-[INFO] LAYER conv7 shape = 1x47x32
-[INFO] LAYER conv8 shape = 1x24x32
-[INFO] LAST LAYER CONV RESHAPED shape = 1x768
-[INFO] FC LAYER shape = 1x2
-[train] Loaded model at step 5000 from snapshot output/data_prep_datos1/60/train_default/checkpoints/model-5000.
-Evaluating at step 5000
-Evaluation completed (1 epochs).
-1631 windows seen
 [validation] true positives = 95
 [validation] false positives = 14
 [validation] true negatives = 1616
@@ -395,3 +113,13 @@ Evaluation completed (1 epochs).
 [validation] precission = 87.1559633028%
 [validation] recall = 86.3636363636%
 [validation] accuracy = 98.3333333333%
+
+Z:
+
+[validation] true positives = 95
+[validation] false positives = 14
+[validation] true negatives = 1619
+[validation] false negatives = 12
+[validation] precission = 87.1559633028%
+[validation] recall = 88.785046729%
+[validation] accuracy = 98.5057471264%

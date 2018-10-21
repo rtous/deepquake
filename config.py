@@ -50,6 +50,9 @@ class Config(object):
         self.read_attribute('output_tfrecords_dir_positives', STRING, default_config, config, args)
         self.read_attribute('output_tfrecords_dir_negatives', STRING, default_config, config, args)
         
+        #tfrecords
+        self.read_attribute('random_seed', INT, default_config, config, args)
+
         #model
         self.read_attribute('model', STRING, default_config, config, args)
         self.read_attribute('num_conv_layers', INT, default_config, config, args)
