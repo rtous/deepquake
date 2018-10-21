@@ -15,7 +15,7 @@ qsub -S /bin/bash -N experiment_2_train_model1_datos1_30_Z -M rtous@ac.upc.edu -
 
 qsub -S /bin/bash -N experiment_2_train_model1_datos1_40 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_2_train_model1_datos1_40.sh
 qsub -S /bin/bash -N experiment_2_train_model1_datos1_40_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_2_train_model1_datos1_40_Z.sh
--->
+
 qsub -S /bin/bash -N experiment_2_train_model1_datos1_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_2_train_model1_datos1_50.sh
 qsub -S /bin/bash -N experiment_2_train_model1_datos1_50_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_2_train_model1_datos1_50_Z.sh
 

@@ -19,9 +19,11 @@ DATA=data.$JOB_ID
 #rsync $CSCRATCH/exSimul/data $DATA
 # La otra opción es que la aplicación lea de $CSCRATCH
 
-### Run
+### Prepare Python virtualenv
 CURRENT_ENVIRONMENT=`ls -d $CSCRATCH`/deepquake_virtualenv
 source $CURRENT_ENVIRONMENT/bin/activate
+
+### Run
 cd $CSCRATCH/deepquake/
 "$1"
 
