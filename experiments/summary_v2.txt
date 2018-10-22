@@ -284,3 +284,20 @@ experiment_3_train_model2a_datos2_50
 [validation] precission = 52.380952381%
 [validation] recall = 57.8947368421%
 [validation] accuracy = 88.75%
+
+############################################
+############ MODEL 2 DATOS 1+2 #############
+############################################
+
+[validation] true positives = 100
+[validation] false positives = 12
+[validation] true negatives = 1795
+[validation] false negatives = 10
+[validation] precission = 89.2857142857%
+[validation] recall = 90.9090909091%
+[validation] accuracy = 98.8523735003%
+
+(eval over datos 1)
+
+
+(eval over datos 2)
