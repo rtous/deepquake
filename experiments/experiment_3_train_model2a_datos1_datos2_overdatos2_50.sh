@@ -21,5 +21,5 @@ python step5_eval_over_tfrecords.py \
 --window_size $WINDOW_SIZE \
 --checkpoint_dir output/$DATA_TRAIN_DIR/checkpoints \
 --output_dir output/$DATA_TRAIN_DIR/eval_overdatos2 \
---tfrecords_dir output/$data_prep_datos2/Z/tfrecords/test
+--tfrecords_dir output/data_prep_datos2/Z/tfrecords/test
 
