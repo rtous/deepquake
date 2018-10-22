@@ -110,6 +110,13 @@ Z:
 ########################################
 experiment_2_train_model1_datos1_60.sh
 
+[validation] true positives = 92
+[validation] false positives = 17
+[validation] true negatives = 1619
+[validation] false negatives = 12
+[validation] precission = 84.4036697248%
+[validation] recall = 88.4615384615%
+[validation] accuracy = 98.3333333333%
 
 Z:
 
@@ -197,6 +204,13 @@ experiment_2_train_model1_datos2_60.sh
 ############ DATOS 1 y 2 ##############
 #######################################
 
+[validation] true positives = 95
+[validation] false positives = 17
+[validation] true negatives = 1766
+[validation] false negatives = 39
+[validation] precission = 84.8214285714%
+[validation] recall = 70.8955223881%
+[validation] accuracy = 97.0787689098%
 
 
 ############################################
