@@ -212,6 +212,26 @@ experiment_2_train_model1_datos2_60.sh
 [validation] recall = 70.8955223881%
 [validation] accuracy = 97.0787689098%
 
+(eval over datos 1)
+
+[validation] true positives = 88
+[validation] false positives = 3
+[validation] true negatives = 1653
+[validation] false negatives = 13
+[validation] precission = 96.7032967033%
+[validation] recall = 87.1287128713%
+[validation] accuracy = 99.0893568583%
+
+(eval over datos 2)
+
+[validation] true positives = 19
+[validation] false positives = 2
+[validation] true negatives = 138
+[validation] false negatives = 1
+[validation] precission = 90.4761904762%
+[validation] recall = 95.0%
+[validation] accuracy = 98.125%
+
 
 ############################################
 ############ MODEL 2 DATOS 1 ###############
