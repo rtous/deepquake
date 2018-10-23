@@ -1,125 +1,319 @@
+#######################################
+############ DATOS 1 ##################
+#######################################
+
 ########################################
 experiment_2_train_model1_datos1_10.sh
 
-[validation] true positives = 8
-[validation] false positives = 11
-[validation] true negatives = 1802
-[validation] false negatives = 10
-[validation] precission = 42.1052631579%
-[validation] recall = 44.4444444444%
-[validation] accuracy = 98.8530857455%
+[validation] true positives = 10
+[validation] false positives = 9
+[validation] true negatives = 1793
+[validation] false negatives = 19
+[validation] precission = 52.6315789474%
+[validation] recall = 34.4827586207%
+[validation] accuracy = 98.470780994%
 
 Z:
 
 [validation] true positives = 10
 [validation] false positives = 9
-[validation] true negatives = 1808
-[validation] false negatives = 4
+[validation] true negatives = 1811
+[validation] false negatives = 1
 [validation] precission = 52.6315789474%
-[validation] recall = 71.4285714286%
-[validation] accuracy = 99.2900054615%
+[validation] recall = 90.9090909091%
+[validation] accuracy = 99.453850355%
 
 ########################################
 experiment_2_train_model1_datos1_20.sh
 
-[validation] true positives = 21
-[validation] false positives = 16
-[validation] true negatives = 1766
-[validation] false negatives = 9
-[validation] precission = 56.7567567568%
-[validation] recall = 70.0%
-[validation] accuracy = 98.6203090508%
+[validation] true positives = 27
+[validation] false positives = 10
+[validation] true negatives = 1761
+[validation] false negatives = 14
+[validation] precission = 72.972972973%
+[validation] recall = 65.8536585366%
+[validation] accuracy = 98.6754966887%
 
 Z:
 
-[validation] true positives = 28
-[validation] false positives = 9
-[validation] true negatives = 1765
-[validation] false negatives = 10
-[validation] precission = 75.6756756757%
-[validation] recall = 73.6842105263%
-[validation] accuracy = 98.9514348786%
+[validation] true positives = 31
+[validation] false positives = 6
+[validation] true negatives = 1766
+[validation] false negatives = 9
+[validation] precission = 83.7837837838%
+[validation] recall = 77.5%
+[validation] accuracy = 99.1721854305%
 
 ########################################
 experiment_2_train_model1_datos1_30.sh
 
-[validation] true positives = 43
-[validation] false positives = 12
-[validation] true negatives = 1716
-[validation] false negatives = 23
-[validation] precission = 78.1818181818%
-[validation] recall = 65.1515151515%
-[validation] accuracy = 98.0490523969%
+[validation] true positives = 45
+[validation] false positives = 10
+[validation] true negatives = 1729
+[validation] false negatives = 10
+[validation] precission = 81.8181818182%
+[validation] recall = 81.8181818182%
+[validation] accuracy = 98.8851727982%
 
 Z:
 
 [validation] true positives = 46
 [validation] false positives = 9
-[validation] true negatives = 1730
-[validation] false negatives = 9
+[validation] true negatives = 1731
+[validation] false negatives = 8
 [validation] precission = 83.6363636364%
-[validation] recall = 83.6363636364%
-[validation] accuracy = 98.9966555184%
+[validation] recall = 85.1851851852%
+[validation] accuracy = 99.0523968785%
 
 ########################################
 experiment_2_train_model1_datos1_40.sh
 
-[validation] true positives = 65
-[validation] false positives = 8
+[validation] true positives = 64
+[validation] false positives = 9
 [validation] true negatives = 1688
 [validation] false negatives = 14
-[validation] precission = 89.0410958904%
-[validation] recall = 82.2784810127%
-[validation] accuracy = 98.7605633803%
+[validation] precission = 87.6712328767%
+[validation] recall = 82.0512820513%
+[validation] accuracy = 98.7042253521%
 
 Z:
 
-[validation] true positives = 66
-[validation] false positives = 7
-[validation] true negatives = 1684
-[validation] false negatives = 18
-[validation] precission = 90.4109589041%
-[validation] recall = 78.5714285714%
-[validation] accuracy = 98.5915492958%
+[validation] true positives = 63
+[validation] false positives = 10
+[validation] true negatives = 1694
+[validation] false negatives = 8
+[validation] precission = 86.301369863%
+[validation] recall = 88.7323943662%
+[validation] accuracy = 98.985915493%
 
 ########################################
 experiment_2_train_model1_datos1_50.sh
 
-[validation] true positives = 78
-[validation] false positives = 13
-[validation] true negatives = 1651
-[validation] false negatives = 15
-[validation] precission = 85.7142857143%
-[validation] recall = 83.8709677419%
-[validation] accuracy = 98.406374502%
+[validation] true positives = 79
+[validation] false positives = 12
+[validation] true negatives = 1653
+[validation] false negatives = 13
+[validation] precission = 86.8131868132%
+[validation] recall = 85.8695652174%
+[validation] accuracy = 98.5771200911%
 
 Z:
 
-[validation] true positives = 83
-[validation] false positives = 8
-[validation] true negatives = 1654
-[validation] false negatives = 12
-[validation] precission = 91.2087912088%
-[validation] recall = 87.3684210526%
-[validation] accuracy = 98.8616960729%
+[validation] true positives = 82
+[validation] false positives = 9
+[validation] true negatives = 1658
+[validation] false negatives = 8
+[validation] precission = 90.1098901099%
+[validation] recall = 91.1111111111%
+[validation] accuracy = 99.0324416619%
 
 ########################################
 experiment_2_train_model1_datos1_60.sh
 
-[validation] true positives = 95
-[validation] false positives = 14
-[validation] true negatives = 1616
-[validation] false negatives = 15
-[validation] precission = 87.1559633028%
-[validation] recall = 86.3636363636%
+[validation] true positives = 92
+[validation] false positives = 17
+[validation] true negatives = 1619
+[validation] false negatives = 12
+[validation] precission = 84.4036697248%
+[validation] recall = 88.4615384615%
 [validation] accuracy = 98.3333333333%
 
 Z:
 
+[validation] true positives = 88
+[validation] false positives = 21
+[validation] true negatives = 1616
+[validation] false negatives = 15
+[validation] precission = 80.7339449541%
+[validation] recall = 85.4368932039%
+[validation] accuracy = 97.9310344828%
+
+#######################################
+############ DATOS 2 ##################
+#######################################
+
+########################################
+experiment_2_train_model1_datos2_10.sh
+
+[validation] true positives = 3
+[validation] false positives = 2
+[validation] true negatives = 165
+[validation] false negatives = 8
+[validation] precission = 60.0%
+[validation] recall = 27.2727272727%
+[validation] accuracy = 94.3820224719%
+
+########################################
+experiment_2_train_model1_datos2_20.sh
+
+[validation] true positives = 3
+[validation] false positives = 6
+[validation] true negatives = 158
+[validation] false negatives = 6
+[validation] precission = 33.3333333333%
+[validation] recall = 33.3333333333%
+[validation] accuracy = 93.063583815%
+
+########################################
+experiment_2_train_model1_datos2_30.sh
+
+[validation] true positives = 3
+[validation] false positives = 10
+[validation] true negatives = 150
+[validation] false negatives = 6
+[validation] precission = 23.0769230769%
+[validation] recall = 33.3333333333%
+[validation] accuracy = 90.5325443787%
+
+########################################
+experiment_2_train_model1_datos2_40.sh
+
+[validation] true positives = 9
+[validation] false positives = 8
+[validation] true negatives = 134
+[validation] false negatives = 13
+[validation] precission = 52.9411764706%
+[validation] recall = 40.9090909091%
+[validation] accuracy = 87.1951219512%
+
+
+########################################
+experiment_2_train_model1_datos2_50.sh
+
+[validation] true positives = 10
+[validation] false positives = 11
+[validation] true negatives = 121
+[validation] false negatives = 18
+[validation] precission = 47.619047619%
+[validation] recall = 35.7142857143%
+[validation] accuracy = 81.875%
+
+
+########################################
+experiment_2_train_model1_datos2_60.sh
+
+[validation] true positives = 10
+[validation] false positives = 16
+[validation] true negatives = 124
+[validation] false negatives = 7
+[validation] precission = 38.4615384615%
+[validation] recall = 58.8235294118%
+[validation] accuracy = 85.3503184713%
+
+#######################################
+############ DATOS 1 y 2 ##############
+#######################################
+
 [validation] true positives = 95
-[validation] false positives = 14
-[validation] true negatives = 1619
-[validation] false negatives = 12
-[validation] precission = 87.1559633028%
-[validation] recall = 88.785046729%
-[validation] accuracy = 98.5057471264%
+[validation] false positives = 17
+[validation] true negatives = 1766
+[validation] false negatives = 39
+[validation] precission = 84.8214285714%
+[validation] recall = 70.8955223881%
+[validation] accuracy = 97.0787689098%
+
+(eval over datos 1)
+
+[validation] true positives = 88
+[validation] false positives = 3
+[validation] true negatives = 1653
+[validation] false negatives = 13
+[validation] precission = 96.7032967033%
+[validation] recall = 87.1287128713%
+[validation] accuracy = 99.0893568583%
+
+(eval over datos 2)
+
+[validation] true positives = 19
+[validation] false positives = 2
+[validation] true negatives = 138
+[validation] false negatives = 1
+[validation] precission = 90.4761904762%
+[validation] recall = 95.0%
+[validation] accuracy = 98.125%
+
+
+############################################
+############ MODEL 2 DATOS 1 ###############
+############################################
+
+experiment_3_train_model2a_datos1_10
+####################################
+[validation] true positives = 10
+[validation] false positives = 9
+[validation] true negatives = 1805
+[validation] false negatives = 7
+[validation] precission = 52.6315789474%
+[validation] recall = 58.8235294118%
+[validation] accuracy = 99.126160568%
+
+experiment_3_train_model2a_datos1_50
+####################################
+
+[validation] true positives = 84
+[validation] false positives = 7
+[validation] true negatives = 1658
+[validation] false negatives = 8
+[validation] precission = 92.3076923077%
+[validation] recall = 91.3043478261%
+[validation] accuracy = 99.1462720546%
+
+
+############################################
+############ MODEL 2 DATOS 2 ###############
+############################################
+
+experiment_3_train_model2a_datos2_10
+####################################
+
+[validation] true positives = 2
+[validation] false positives = 3
+[validation] true negatives = 173
+[validation] false negatives = 0
+[validation] precission = 40.0%
+[validation] recall = 100.0%
+[validation] accuracy = 98.3146067416%
+
+experiment_3_train_model2a_datos2_50
+####################################
+
+[validation] true positives = 11
+[validation] false positives = 10
+[validation] true negatives = 131
+[validation] false negatives = 8
+[validation] precission = 52.380952381%
+[validation] recall = 57.8947368421%
+[validation] accuracy = 88.75%
+
+############################################
+############ MODEL 2 DATOS 1+2 #############
+############################################
+
+[validation] true positives = 100
+[validation] false positives = 12
+[validation] true negatives = 1795
+[validation] false negatives = 10
+[validation] precission = 89.2857142857%
+[validation] recall = 90.9090909091%
+[validation] accuracy = 98.8523735003%
+
+(eval over datos 1)
+
+[validation] true positives = 88
+[validation] false positives = 3
+[validation] true negatives = 1663
+[validation] false negatives = 3
+[validation] precission = 96.7032967033%
+[validation] recall = 96.7032967033%
+[validation] accuracy = 99.6585088219%
+
+(eval over datos 2)
+
+[validation] true positives = 20
+[validation] false positives = 1
+[validation] true negatives = 139
+[validation] false negatives = 0
+[validation] precission = 95.2380952381%
+[validation] recall = 100.0%
+[validation] accuracy = 99.375%
+
