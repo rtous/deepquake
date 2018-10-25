@@ -185,9 +185,9 @@ You may specify a filename pattern:
 
 ## 2.10 TODO
 
-* tensorboard traces
-* leave one out cross validation
-* Intensive testing of different parameters
+* WARNING: the arrival times of some stations are missing, are we wrongly considering them as noise??
+
+
 * Intensive testing of different parameters
 * Overlapping detections fussion 
 * (arvei) use local scratch in arvei instead of nas (LOW PRIORITY)
@@ -196,9 +196,11 @@ You may specify a filename pattern:
 	* keep openquake.hazardlib==0.22.0 from https://github.com/gem/oq-hazardlib/releases 
 	* keep a full copy of the arvei virtualenv somewhere
 * window skipping gap. 
+* tensorboard traces
 
 DONE:
 
+* leave one out cross validation (tested but discarded, too much training time)
 * (arvei) move .out and .err instead of redirecting stderr and stdout 
 * Change step1_preprocess1_funvisis2oklahoma.py to generate training samples trough a pure sliding window
 * making plotting optional

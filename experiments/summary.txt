@@ -232,6 +232,9 @@ experiment_2_train_model1_datos2_60.sh
 [validation] recall = 95.0%
 [validation] accuracy = 98.125%
 
+############################################
+############ EXPERIMENT 3 ##################
+############################################
 
 ############################################
 ############ MODEL 2 DATOS 1 ###############
@@ -327,4 +330,43 @@ experiment_3_train_model2a_datos2_50
 [validation] precission = 95.2380952381%
 [validation] recall = 100.0%
 [validation] accuracy = 99.375%
+
+
+
+####################################################
+############ EXPERIMENT 4. MODEL 2b ###############
+####################################################
+
+3 conv layers, pooling
+
+experiment_4_train_model2b_datos1_50 
+
+[validation] true positives = 83
+[validation] false positives = 8
+[validation] true negatives = 1659
+[validation] false negatives = 7
+[validation] precission = 91.2087912088%
+[validation] recall = 92.2222222222%
+[validation] accuracy = 99.1462720546%
+
+experiment_4_train_model2b_datos2_10
+
+[validation] true positives = 3
+[validation] false positives = 2
+[validation] true negatives = 172
+[validation] false negatives = 1
+[validation] precission = 60.0%
+[validation] recall = 75.0%
+[validation] accuracy = 98.3146067416%
+
+experiment_4_train_model2b_datos2_50
+
+[validation] true positives = 9
+[validation] false positives = 12
+[validation] true negatives = 129
+[validation] false negatives = 10
+[validation] precission = 42.8571428571%
+[validation] recall = 47.3684210526%
+[validation] accuracy = 86.25%
+
 
