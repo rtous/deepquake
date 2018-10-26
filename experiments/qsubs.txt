@@ -50,6 +50,8 @@ qsub -S /bin/bash -N experiment_2_train_model1_datos1_datos2_overdatos1_10 -M rt
 
 # DATOS 1 y 2 sobre DATOS 2
 
+qsub -S /bin/bash -N experiment_2_train_model1_datos1_datos2_overdatos2_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_2_train_model1_datos1_datos2_overdatos2_50.sh
+
 qsub -S /bin/bash -N experiment_2_train_model1_datos1_datos2_overdatos2_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_2_train_model1_datos1_datos2_overdatos2_10.sh
 
 # MODEL2a 
@@ -80,14 +82,25 @@ qsub -S /bin/bash -N experiment_3_train_model2a_datos1_datos2_overdatos1_50 -M r
 
 qsub -S /bin/bash -N experiment_3_train_model2a_datos1_datos2_overdatos2_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_3_train_model2a_datos1_datos2_overdatos2_50.sh
 
-------
-------
+------------------------------------------
+------------------------------------------
+------------------------------------------
 
 # MODEL2b 
 
 qsub -S /bin/bash -N experiment_4_train_model2b_datos1_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_4_train_model2b_datos1_10.sh
 
+qsub -S /bin/bash -N experiment_4_train_model2b_datos1_20 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_4_train_model2b_datos1_20.sh
+
+qsub -S /bin/bash -N experiment_4_train_model2b_datos1_30 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_4_train_model2b_datos1_30.sh
+
+qsub -S /bin/bash -N experiment_4_train_model2b_datos1_40 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_4_train_model2b_datos1_40.sh
+
 qsub -S /bin/bash -N experiment_4_train_model2b_datos1_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_4_train_model2b_datos1_50.sh
+
+qsub -S /bin/bash -N experiment_4_train_model2b_datos1_60 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_4_train_model2b_datos1_60.sh
+
+
 
 qsub -S /bin/bash -N experiment_4_train_model2b_datos2_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_4_train_model2b_datos2_10.sh
 
