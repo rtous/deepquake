@@ -369,4 +369,36 @@ experiment_4_train_model2b_datos2_50
 [validation] recall = 47.3684210526%
 [validation] accuracy = 86.25%
 
+####################################################
+############ EXPERIMENT 4. MODEL 2b second round ###############
+####################################################
 
+4 convnet without pooling
+
+datos1 50
+[validation] true positives = 71
+[validation] false positives = 20
+[validation] true negatives = 1649
+[validation] false negatives = 17
+[validation] precission = 78.021978022%
+[validation] recall = 80.6818181818%
+[validation] accuracy = 97.8941377348%
+
+datos2 10
+[validation] true positives = 0
+[validation] false positives = 5
+[validation] true negatives = 169
+[validation] false negatives = 4
+[validation] precission = 0.0%
+[validation] recall = 0.0%
+[validation] accuracy = 94.9438202247%
+
+datos 2 50
+
+[validation] true positives = 9
+[validation] false positives = 12
+[validation] true negatives = 128
+[validation] false negatives = 11
+[validation] precission = 42.8571428571%
+[validation] recall = 45.0%
+[validation] accuracy = 85.625%
