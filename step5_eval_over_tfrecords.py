@@ -229,13 +229,18 @@ if __name__ == "__main__":
     print("[validation] true negatives = "+str(trueNegatives))
     print("[validation] false negatives = "+str(falseNegatives))
 
+    precision = 0
+    recall = 0
+
     if truePositives+falsePositives>0:
-        print("[validation] precission = "+str(100*float(truePositives)/(truePositives+falsePositives))+"%")
+        precision = 100*float(truePositives)/(truePositives+falsePositives)
+        print("[validation] precision = "+str(precision)+"%")
     else:
-        print("[validation] cannot compute precission as truePositives+falsePositives == 0")
+        print("[validation] cannot compute precision as truePositives+falsePositives == 0")
 
     if truePositives+falseNegatives>0:
-        print("[validation] recall = "+str(100*float(truePositives)/(truePositives+falseNegatives))+"%")
+        recall = 100*float(truePositives)/(truePositives+falseNegatives)
+        print("[validation] recall = "+str(recall)+"%")
     else:
         print("[validation] cannot compute recall as truePositives+falseNegatives == 0")
 
@@ -243,6 +248,12 @@ if __name__ == "__main__":
         print("[validation] accuracy = "+str(100*float(truePositives+trueNegatives)/(truePositives+falsePositives+trueNegatives+falseNegatives))+"%")
     else:
         print("[validation] cannot compute accuracy as truePositives+falsePositives+trueNegatives+falseNegatives == 0")
+
+    if precision+recall>0:
+        f1 = 2*precision*recall/(float)(precision+recall)
+        print("[validation] f1 = "+str(f1)+"%")
+    else:
+        print("[validation] cannot compute f1 as precision+recall == 0")
 
 
     #if args.redirect_stdout_stderr:  
