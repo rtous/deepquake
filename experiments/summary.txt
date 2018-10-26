@@ -373,32 +373,39 @@ experiment_4_train_model2b_datos2_50
 ############ EXPERIMENT 4. MODEL 2b second round ###############
 ####################################################
 
-4 convnet without pooling
+datos1 10
+[validation] true positives = 13
+[validation] false positives = 6
+[validation] true negatives = 1809
+[validation] false negatives = 3
+[validation] precision = 68.4210526316%
+[validation] recall = 81.25%
+[validation] accuracy = 99.5084653195%
+[validation] f1 = 74.2857142857%
 
 datos1 50
-[validation] true positives = 71
-[validation] false positives = 20
-[validation] true negatives = 1649
-[validation] false negatives = 17
-[validation] precission = 78.021978022%
-[validation] recall = 80.6818181818%
-[validation] accuracy = 97.8941377348%
+[validation] true positives = 84
+[validation] false positives = 7
+[validation] true negatives = 1660
+[validation] false negatives = 6
+[validation] precision = 92.3076923077%
+[validation] recall = 93.3333333333%
+[validation] accuracy = 99.2601024474%
+[validation] f1 = 92.817679558%
 
 datos2 10
-[validation] true positives = 0
-[validation] false positives = 5
-[validation] true negatives = 169
-[validation] false negatives = 4
-[validation] precission = 0.0%
-[validation] recall = 0.0%
-[validation] accuracy = 94.9438202247%
+[validation] true positives = 3
+[validation] false positives = 2
+[validation] true negatives = 172
+[validation] false negatives = 1
+[validation] precision = 60.0%
+[validation] recall = 75.0%
+[validation] accuracy = 98.3146067416%
+[validation] f1 = 66.6666666667%
 
 datos 2 50
 
-[validation] true positives = 9
-[validation] false positives = 12
-[validation] true negatives = 128
-[validation] false negatives = 11
+NO
 [validation] precission = 42.8571428571%
 [validation] recall = 45.0%
 [validation] accuracy = 85.625%
