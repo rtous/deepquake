@@ -56,11 +56,13 @@ class Config(object):
         #model
         self.read_attribute('model', STRING, default_config, config, args)
         self.read_attribute('num_conv_layers', INT, default_config, config, args)
+        self.read_attribute('conv_stride', INT, default_config, config, args)
         self.read_attribute('num_fc_layers', INT, default_config, config, args)
         self.read_attribute('fc_size', INT, default_config, config, args)
         self.read_attribute('pooling', BOOLEAN, default_config, config, args)
         self.read_attribute('n_clusters', INT, default_config, config, args)
         self.read_attribute('pooling_window', INT, default_config, config, args)
+        self.read_attribute('pooling_stride', INT, default_config, config, args)
         self.read_attribute('ksize', INT, default_config, config, args)
 
         #training

@@ -181,6 +181,8 @@ class ConvNetQuake2(ConvNetQuake):
 
     # LAYER 0: INPUT layer: 2D tensor. Three rows (channels) x window size 
     current_layer = self.inputs['data']
+    d1, d2, d3 = current_layer.get_shape().as_list()
+    print ("[\033[94mINFO\033[0m] LAYER input shape = "+str(d1)+"x"+str(d2)+"x"+str(d3))
 
     # LAYER 1-8: 8 CONVOLUTINAL layers, 32 1D kernels of size 3 each, stride 2, zero padding
     c = 32  # number of channels per conv layer
@@ -195,7 +197,7 @@ class ConvNetQuake2(ConvNetQuake):
         if self.config.pooling:
           # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
           #https://www.tensorflow.org/api_docs/python/tf/nn/pool
-          current_layer = tf.nn.pool(current_layer, window_shape=[self.config.pooling_window], pooling_type='MAX', padding='SAME', strides=[5])
+          current_layer = tf.nn.pool(current_layer, window_shape=[self.config.pooling_window], pooling_type='MAX', padding='SAME', strides=[self.config.pooling_stride])
           d1, d2, d3 = current_layer.get_shape().as_list()
           print ("[\033[94mINFO\033[0m] LAYER "+'max_pool{}'.format(i+1)+" shape = "+str(d1)+"x"+str(d2)+"x"+str(d3))
           tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)

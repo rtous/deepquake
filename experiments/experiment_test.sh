@@ -3,7 +3,9 @@
 EXPERIMENT_NAME=test
 INPUT_DATA_DIR=datos1
 
+
 CONFIG_FILE=experiments/config_$EXPERIMENT_NAME.ini
+#CONFIG_FILE=experiments/config_model2b.ini
 DATA_PREP_DIR=data_prep_$EXPERIMENT_NAME
 DATA_TRAIN_DIR=train_$EXPERIMENT_NAME
 WINDOW_SIZE=50
