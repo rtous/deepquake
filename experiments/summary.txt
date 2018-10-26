@@ -405,7 +405,82 @@ datos2 10
 
 datos 2 50
 
-NO
-[validation] precission = 42.8571428571%
-[validation] recall = 45.0%
-[validation] accuracy = 85.625%
+[validation] true positives = 13
+[validation] false positives = 8
+[validation] true negatives = 126
+[validation] false negatives = 13
+[validation] precision = 61.9047619048%
+[validation] recall = 50.0%
+[validation] accuracy = 86.875%
+[validation] f1 = 55.3191489362%
+
+datos1_datos2_10
+
+[validation] true positives = 14
+[validation] false positives = 9
+[validation] true negatives = 1950
+[validation] false negatives = 34
+[validation] precision = 60.8695652174%
+[validation] recall = 29.1666666667%
+[validation] accuracy = 97.8574987544%
+[validation] f1 = 39.4366197183%
+
+
+datos1_datos2_50
+
+[validation] true positives = 102
+[validation] false positives = 10
+[validation] true negatives = 1779
+[validation] false negatives = 26
+[validation] precision = 91.0714285714%
+[validation] recall = 79.6875%
+[validation] accuracy = 98.1220657277%
+[validation] f1 = 85.0%
+
+datos1_datos2_10_overdatos1
+
+[validation] true positives = 17
+[validation] false positives = 2
+[validation] true negatives = 1797
+[validation] false negatives = 15
+[validation] precision = 89.4736842105%
+[validation] recall = 53.125%
+[validation] accuracy = 99.0715456035%
+[validation] f1 = 66.6666666667%
+
+
+datos1_datos2_10_overdatos2
+
+[validation] true positives = 4
+[validation] false positives = 1
+[validation] true negatives = 171
+[validation] false negatives = 2
+[validation] precision = 80.0%
+[validation] recall = 66.6666666667%
+[validation] accuracy = 98.3146067416%
+[validation] f1 = 72.7272727273%
+
+datos1_datos2_50_overdatos1
+
+[validation] true positives = 89
+[validation] false positives = 2
+[validation] true negatives = 1661
+[validation] false negatives = 5
+[validation] precision = 97.8021978022%
+[validation] recall = 94.6808510638%
+[validation] accuracy = 99.6015936255%
+[validation] f1 = 96.2162162162%
+
+datos1_datos2_50_overdatos2
+
+[validation] true positives = 19
+[validation] false positives = 2
+[validation] true negatives = 137
+[validation] false negatives = 2
+[validation] precision = 90.4761904762%
+[validation] recall = 90.4761904762%
+[validation] accuracy = 97.5%
+[validation] f1 = 90.4761904762%
+
+
+
