@@ -204,6 +204,17 @@ experiment_2_train_model1_datos2_60.sh
 ############ DATOS 1 y 2 ##############
 #######################################
 
+10
+[validation] true positives = 13
+[validation] false positives = 10
+[validation] true negatives = 1978
+[validation] false negatives = 6
+[validation] precision = 56.5217391304%
+[validation] recall = 68.4210526316%
+[validation] accuracy = 99.2027902342%
+[validation] f1 = 61.9047619048%
+
+50
 [validation] true positives = 95
 [validation] false positives = 17
 [validation] true negatives = 1766
@@ -214,6 +225,17 @@ experiment_2_train_model1_datos2_60.sh
 
 (eval over datos 1)
 
+10
+[validation] true positives = 17
+[validation] false positives = 2
+[validation] true negatives = 1811
+[validation] false negatives = 1
+[validation] precision = 89.4736842105%
+[validation] recall = 94.4444444444%
+[validation] accuracy = 99.8361551065%
+[validation] f1 = 91.8918918919%
+
+50
 [validation] true positives = 88
 [validation] false positives = 3
 [validation] true negatives = 1653
@@ -223,7 +245,16 @@ experiment_2_train_model1_datos2_60.sh
 [validation] accuracy = 99.0893568583%
 
 (eval over datos 2)
-
+10
+[validation] true positives = 3
+[validation] false positives = 2
+[validation] true negatives = 173
+[validation] false negatives = 0
+[validation] precision = 60.0%
+[validation] recall = 100.0%
+[validation] accuracy = 98.8764044944%
+[validation] f1 = 75.0%
+50
 [validation] true positives = 19
 [validation] false positives = 2
 [validation] true negatives = 138
@@ -336,6 +367,7 @@ experiment_3_train_model2a_datos2_50
 ####################################################
 ############ EXPERIMENT 4. MODEL 2b ###############
 ####################################################
+NOT USED ()
 
 3 conv layers, pooling
 
@@ -383,6 +415,46 @@ datos1 10
 [validation] accuracy = 99.5084653195%
 [validation] f1 = 74.2857142857%
 
+datos1 10Z
+[validation] true positives = 13
+[validation] false positives = 6
+[validation] true negatives = 1802
+[validation] false negatives = 10
+[validation] precision = 68.4210526316%
+[validation] recall = 56.5217391304%
+[validation] accuracy = 99.126160568%
+[validation] f1 = 61.9047619048%
+
+datos1 20
+[validation] true positives = 33
+[validation] false positives = 4
+[validation] true negatives = 1753
+[validation] false negatives = 22
+[validation] precision = 89.1891891892%
+[validation] recall = 60.0%
+[validation] accuracy = 98.5651214128%
+[validation] f1 = 71.7391304348%
+
+datos1 30
+[validation] true positives = 49
+[validation] false positives = 6
+[validation] true negatives = 1736
+[validation] false negatives = 3
+[validation] precision = 89.0909090909%
+[validation] recall = 94.2307692308%
+[validation] accuracy = 99.4983277592%
+[validation] f1 = 91.5887850467%
+
+datos1 40
+[validation] true positives = 62
+[validation] false positives = 11
+[validation] true negatives = 1690
+[validation] false negatives = 12
+[validation] precision = 84.9315068493%
+[validation] recall = 83.7837837838%
+[validation] accuracy = 98.7042253521%
+[validation] f1 = 84.3537414966%
+
 datos1 50
 [validation] true positives = 84
 [validation] false positives = 7
@@ -392,6 +464,16 @@ datos1 50
 [validation] recall = 93.3333333333%
 [validation] accuracy = 99.2601024474%
 [validation] f1 = 92.817679558%
+
+datos 60
+[validation] true positives = 61
+[validation] false positives = 12
+[validation] true negatives = 1694
+[validation] false negatives = 8
+[validation] precision = 83.5616438356%
+[validation] recall = 88.4057971014%
+[validation] accuracy = 98.8732394366%
+[validation] f1 = 85.9154929577%
 
 datos2 10
 [validation] true positives = 3
