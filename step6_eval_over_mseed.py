@@ -39,7 +39,7 @@ import utils
 import fnmatch
 from obspy.core.utcdatetime import UTCDateTime
 import logging
-
+import catalog
 
 evaluation = False
 truePositives = 0
@@ -47,8 +47,11 @@ falsePositives = 0
 trueNegatives = 0
 falseNegatives = 0
 
-def customPlot(st, outfile, predictions, windowsMissed):
+def customPlot(st, outfile, predictions, windowsMissed, true_positive_dic, false_positive_dic, false_negative_dic, showMissed=False, ):
     fig = plt.figure()
+
+    st = st.select(component="Z")
+
     st.plot(fig=fig)
     #plt.axvline(x=obspyDateTime2PythonDateTime(timeP), linewidth=2, color='g')
     #plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.window_size), linewidth=2, color='g')
@@ -57,14 +60,26 @@ def customPlot(st, outfile, predictions, windowsMissed):
     total_time = st[-1].stats.endtime - st[0].stats.starttime
     max_windows = int((total_time - cfg.window_size) / cfg.window_step_predict)
     #print(max_windows)
-    for i in range(0, max_windows):
-        plt.axvline(x=utils.obspyDateTime2PythonDateTime(st[0].stats.starttime+i*cfg.window_step_predict), linewidth=1, color='b', linestyle='dashed')
+    #for i in range(0, max_windows):
+    #    plt.axvline(x=utils.obspyDateTime2PythonDateTime(st[0].stats.starttime+i*cfg.window_step_predict), linewidth=1, color='b', linestyle='dashed')
 
-    for prediction in predictions:
+
+
+    #for prediction in predictions:
+    #    plt.axvline(x=utils.obspyDateTime2PythonDateTime(prediction), linewidth=cfg.window_size, color='r', alpha=0.5)
+
+    for prediction in true_positive_dic:
+        plt.axvline(x=utils.obspyDateTime2PythonDateTime(prediction), linewidth=cfg.window_size, color='g', alpha=0.5)
+
+    for prediction in false_positive_dic:
         plt.axvline(x=utils.obspyDateTime2PythonDateTime(prediction), linewidth=cfg.window_size, color='r', alpha=0.5)
 
-    for windowMissed in windowsMissed:
-        plt.axvline(x=utils.obspyDateTime2PythonDateTime(windowMissed), linewidth=cfg.window_size, color='y', alpha=0.5)
+    for prediction in false_negative_dic:
+        plt.axvline(x=utils.obspyDateTime2PythonDateTime(prediction), linewidth=cfg.window_size, color='c', alpha=0.5)
+
+    if showMissed:
+        for windowMissed in windowsMissed:
+            plt.axvline(x=utils.obspyDateTime2PythonDateTime(windowMissed), linewidth=cfg.window_size, color='y', alpha=0.5)
 
     #plt.show()
     fig.savefig(outfile)   # save the figure to file
@@ -117,10 +132,13 @@ def main(args):
                 print("[classify] Not found groundtruth metadata in "+metadata_path+".")
                 cat = None
         else:
-            cat = pd.read_csv(args.catalog_path)
-            stations = pd.read_csv(args.stations_path)
+            #cat = pd.read_csv(args.catalog_path)
+            #stations = pd.read_csv(args.stations_path)
+            #Load metadata
+            cat = catalog.Catalog()
+            cat.import_json(args.catalog_path)
             evaluation = True
-        predictions = predict(stream_path, stream_file, sess, model, samples, cat, stations)
+        predictions = predict(stream_path, stream_file, sess, model, samples, cat)
         #stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
         #metadata_path = os.path.join(args.stream_path, stream_file_without_extension+".csv")
         #if os.path.isfile(metadata_path):
@@ -160,7 +178,7 @@ def main(args):
 
 
     
-def predict(path, stream_file, sess, model, samples, cat, stations):
+def predict(path, stream_file, sess, model, samples, cat):
     global truePositives
     global falsePositives
     global trueNegatives
@@ -213,6 +231,20 @@ def predict(path, stream_file, sess, model, samples, cat, stations):
                  "cluster_id": [],
                  "clusters_prob": []}
 
+    true_positive_dic ={"start_time": [],
+                 "end_time": [],
+                 "cluster_id": [],
+                 "clusters_prob": []}
+
+    false_positive_dic ={"start_time": [],
+                 "end_time": [],
+                 "cluster_id": [],
+                 "clusters_prob": []}
+    false_negative_dic ={"start_time": [],
+                 "end_time": [],
+                 "cluster_id": [],
+                 "clusters_prob": []}
+
     missed_dic ={"start_time": [],
                  "end_time": [],
                  "cluster_id": [],
@@ -233,9 +265,18 @@ def predict(path, stream_file, sess, model, samples, cat, stations):
 
     n_events = 0
     time_start = time.time()
-    if stations is not None:
-        station = stream_select[-1].stats.station
-        stationLAT, stationLONG, stationDEPTH = utils.station_coordinates(station, stations)
+
+    #if stations is not None:
+    #    station = stream_select[-1].stats.station
+    #    stationLAT, stationLONG, stationDEPTH = utils.station_coordinates(station, stations)
+
+    station = stream[0].stats.station
+    stream_start_time = stream[0].stats.starttime
+    stream_end_time = stream[-1].stats.endtime
+    ptime = cat.getPtime(stream_start_time, stream_end_time, station)
+    event_window_start = ptime - cfg.pwave_window/2
+    event_window_end = ptime + cfg.pwave_window/2
+
     try:
         for idx, win in enumerate(win_gen):
             #Check the groundtruth
@@ -248,10 +289,17 @@ def predict(path, stream_file, sess, model, samples, cat, stations):
 
                 window_start = win[0].stats.starttime.timestamp
                 window_end = win[-1].stats.endtime.timestamp
-                if stations is not None:
-                    isPositive = utils.isPositive(window_start, window_end, cat, stationLAT, stationLONG, stationDEPTH, cfg.mean_velocity)
-                else:
-                    isPositive = utils.isPositive(window_start, window_end, cat)
+
+                if (window_start <= event_window_start) and (window_end >= event_window_end): #positive
+                    isPositive = True
+                else:# negative
+                    isPositive = False      
+
+                #if stations is not None:
+                #    isPositive = utils.isPositive(window_start, window_end, cat, stationLAT, stationLONG, stationDEPTH, cfg.mean_velocity)
+                #else:
+                #    isPositive = utils.isPositive(window_start, window_end, cat)
+
                 #Event window: [timeP-cfg.pwave_window..timeP+cfg.pwave_window]
                 #Do not use negatives 
 
@@ -295,18 +343,30 @@ def predict(path, stream_file, sess, model, samples, cat, stations):
                     sys.stdout.write("\033[92mP\033[0m")
                     sys.stdout.flush()
                     truePositives = truePositives+1
+                    true_positive_dic["start_time"].append(win[0].stats.starttime)
+                    true_positive_dic["end_time"].append(win[0].stats.endtime)
+                    true_positive_dic["cluster_id"].append(cluster_id[0])
+                    true_positive_dic["clusters_prob"].append(list(clusters_prob))
                     #break
                 elif evaluation:
 	                #sys.stdout.write("\033[91m MISS\033[0m (false positive)\n")
                     sys.stdout.write("\033[91mP\033[0m")
                     sys.stdout.flush()
                     falsePositives = falsePositives+1
+                    false_positive_dic["start_time"].append(win[0].stats.starttime)
+                    false_positive_dic["end_time"].append(win[0].stats.endtime)
+                    false_positive_dic["cluster_id"].append(cluster_id[0])
+                    false_positive_dic["clusters_prob"].append(list(clusters_prob))
             else:
                 if evaluation and isPositive:
                     #sys.stdout.write("\033[91m MISS\033[0m (false negative)\n")
                     sys.stdout.write("\033[91mN\033[0m")
                     sys.stdout.flush()
                     falseNegatives = falseNegatives+1
+                    false_negative_dic["start_time"].append(win[0].stats.starttime)
+                    false_negative_dic["end_time"].append(win[0].stats.endtime)
+                    false_negative_dic["cluster_id"].append(cluster_id[0])
+                    false_negative_dic["clusters_prob"].append(list(clusters_prob))
                 elif evaluation:
 	                #sys.stdout.write("\033[92m HIT\033[0m (negative)\n")
                     sys.stdout.write("\033[92mN\033[0m")
@@ -318,9 +378,8 @@ def predict(path, stream_file, sess, model, samples, cat, stations):
 
             if is_event:
                 win_filtered = win.copy()
-                # win_filtered.filter("bandpass",freqmin=4.0, freqmax=16.0)
-                win_filtered.plot(outfile=os.path.join(output_dir+"/"+stream_file_without_extension,"viz",
-                                "event_{}_cluster_{}.png".format(idx,cluster_id)))
+                #win_filtered.plot(outfile=os.path.join(output_dir+"/"+stream_file_without_extension,"viz",
+                #                "event_{}_cluster_{}.png".format(idx,cluster_id)))
 
             if cfg.save_sac and is_event:
                 win_filtered = win.copy()
@@ -342,14 +401,15 @@ def predict(path, stream_file, sess, model, samples, cat, stations):
     df.to_csv(output_catalog)
 
     #Plot everything
-    customPlot(stream, output_dir+"/"+stream_file+"_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
+    customPlot(stream, output_dir+"/"+stream_file+"_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"], true_positive_dic["start_time"], false_positive_dic["start_time"], false_negative_dic["start_time"])
+    
     #Plot only 10min sections with events
-    max_secs_to_show = 600
-    win_gen = stream_select.slide(window_length=max_secs_to_show,
-                           step=max_secs_to_show,
-                           include_partial_windows=False)
-    for idx, win in enumerate(win_gen):
-        customPlot(win, outputSubdirSubplots+"/win_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
+    #max_secs_to_show = 600
+    #win_gen = stream_select.slide(window_length=max_secs_to_show,
+    #                      step=max_secs_to_show,
+    #                       include_partial_windows=False)
+    #for idx, win in enumerate(win_gen):
+    #    customPlot(win, outputSubdirSubplots+"/win_"+str(idx)+".png", events_dic["start_time"], missed_dic["start_time"])
     #win = substream.slice(UTCDateTime(timeP), UTCDateTime(timeP) + cfg.window_size).copy()    
     print "\n[classify] Run time: ", time.time() - time_start
 
@@ -378,6 +438,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     cfg = config.Config(args)
+
 
     checkpoint_dir = args.checkpoint_dir
     output_dir = args.output_dir
