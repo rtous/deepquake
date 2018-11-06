@@ -6,6 +6,7 @@ import argparse
 import os
 import fnmatch
 import seisobs #https://github.com/d-chambers/seisobs
+import sys 
 
 class Catalog():
 
@@ -74,6 +75,13 @@ class Catalog():
                 if ((d.station == station) and (d.ptime >= window_start) and (d.ptime <= window_end)):
                     ptime = d.ptime
         return ptime
+
+    def getLocations(self):
+        locations = []
+        for e in self.events:
+            locations.append([e.lat, e.lon, e.depth])
+            print(str(e.lat)+","+str(e.lon)+","+str(e.depth))
+        return locations
 
 class Event():
     def __init__(self, eventOriginTime, lat, lon, depth):
