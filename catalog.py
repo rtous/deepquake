@@ -7,6 +7,7 @@ import os
 import fnmatch
 import seisobs #https://github.com/d-chambers/seisobs
 import sys 
+import csv
 
 class Catalog():
 
@@ -14,9 +15,11 @@ class Catalog():
         self.events = []
    
     def import_sfiles(self, input_metadata_dir):
+        #This imports a nordic format sfile into our own catalog object
+        print ("[preprocessing metadata] \033[91m WARNING:\033[0m sfiles need to have names such as 01-1259-00M.S201804")
         metadata_files = [file for file in os.listdir(input_metadata_dir) if
             fnmatch.fnmatch(file, "*")]
-        print "[obtain training windows] List of metadata files to anlayze: ", metadata_files
+        print "[preprocessing metadata] List of metadata files to anlayze: ", metadata_files
         for metadata_file in metadata_files:
             #1. Process metadata
             print("[preprocessing metadata] Reading metadata file "+os.path.join(input_metadata_dir, metadata_file))
@@ -38,6 +41,32 @@ class Catalog():
                     station_code = pick.waveform_id.station_code
                     d = Detection(station_code, pick.time)
                     e.detections.append(d)
+
+    def import_txt(self, input_txtfile_path):
+        #This imports a summary containing only locations and origin times for events in txt with tab delimiters
+        print("[preprocessing metadata] Reading metadata file "+input_txtfile_path)
+        with open(input_txtfile_path) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter="\t", skipinitialspace=True)
+            line_count = 0
+            for row in csv_reader:
+                if line_count == 0:
+                    line_count += 1
+                else:
+                    line_count += 1
+                    year = int(row[0].strip())
+                    month = int(row[1])
+                    day = int(row[2])
+                    hour = int(row[3])
+                    minute = int(row[4])
+                    sec = int(float(row[5]))
+                    lat = float(row[6])
+                    lon = float(row[7])
+                    depth = float(row[8])
+                    print(str(year)+","+str(month)+","+str(day)+","+str(hour)+","+str(minute)+","+str(sec)+","+str(lat)+","+str(lon)+","+str(depth))
+                    eventOriginTime = UTCDateTime(year=year, month=month, day=day, hour=hour, minute=minute, second=sec)
+                    e = Event(eventOriginTime, lat, lon, depth)
+                    self.events.append(e)
+                    
 
     #def export_json(self, path):
     #    with open(path, 'w') as f:
@@ -76,11 +105,14 @@ class Catalog():
                     ptime = d.ptime
         return ptime
 
-    def getLocations(self):
+    def getLocations(self, depth=True):
         locations = []
         for e in self.events:
             locations.append([e.lat, e.lon, e.depth])
-            print(str(e.lat)+","+str(e.lon)+","+str(e.depth))
+            if depth:
+                print(str(e.lat)+","+str(e.lon)+","+str(e.depth))
+            else:
+                print(str(e.lat)+","+str(e.lon))
         return locations
 
 class Event():
