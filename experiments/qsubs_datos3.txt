@@ -1,0 +1,47 @@
+# DATA PREPROCESSING
+
+qsub -S /bin/bash -N experiment_5_data_preprocessing_datos3 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_data_preprocessing_datos3.sh
+
+# DATOS 3 (MODEL 1)
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos3_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos3_10.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos3_20 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos3_20.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos3_30 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos3_30.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos3_40 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos3_40.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos3_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos3_50.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos3_60 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos3_60.sh
+
+# DATOS (1 y 2) y 3 (MODEL 1)
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos1_datos2_datos3_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos1_datos2_10.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos1_datos2_datos3_20 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos1_datos2_20.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos1_datos2_datos3_30 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos1_datos2_30.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos1_datos2_datos3_40 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos1_datos2_40.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos1_datos2_datos3_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos1_datos2_50.sh
+
+qsub -S /bin/bash -N experiment_5_train_model1_datos1_datos2_datos3_60 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model1_datos1_datos2_60.sh
+
+# DATOS (1 y 2) y 3 (MODEL 2b)
+
+qsub -S /bin/bash -N experiment_5_train_model2b_datos1_datos2_datos3_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model2b_datos1_datos2_10.sh
+
+qsub -S /bin/bash -N experiment_5_train_model2b_datos1_datos2_datos3_20 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model2b_datos1_datos2_20.sh
+
+qsub -S /bin/bash -N experiment_5_train_model2b_datos1_datos2_datos3_30 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model2b_datos1_datos2_30.sh
+
+qsub -S /bin/bash -N experiment_5_train_model2b_datos1_datos2_datos3_40 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model2b_datos1_datos2_40.sh
+
+qsub -S /bin/bash -N experiment_5_train_model2b_datos1_datos2_datos3_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model2b_datos1_datos2_50.sh
+
+qsub -S /bin/bash -N experiment_5_train_model2b_datos1_datos2_datos3_60 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_5_train_model2b_datos1_datos2_60.sh
+
+
