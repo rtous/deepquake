@@ -34,7 +34,8 @@ class Catalog():
             lat = obspyCatalogMeta.events[0].origins[0].latitude
             lon = obspyCatalogMeta.events[0].origins[0].longitude
             depth = obspyCatalogMeta.events[0].origins[0].depth
-            e = Event(eventOriginTime, lat, lon, depth)
+            mag = obspyCatalogMeta.events[0].magnitudes[0].mag
+            e = Event(eventOriginTime, lat, lon, depth, mag)
             self.events.append(e)
             for pick in obspyCatalogMeta.events[0].picks:
                 if pick.phase_hint == 'P':
@@ -82,6 +83,7 @@ class Catalog():
                 jevent["lat"] = e.lat
                 jevent["lon"] = e.lon
                 jevent["depth"] = e.depth
+                jevent["mag"] = e.mag
                 for d in e.detections:
                     jevent["detections"].append({"station":d.station, "ptime":str(d.ptime)})
                 jevents["events"].append(jevent)
@@ -91,7 +93,7 @@ class Catalog():
         with open(path) as f:  
             jdata = json.load(f)
             for jevent in jdata['events']:
-                e = Event(UTCDateTime(jevent['eventOriginTime']), jevent['lat'], jevent['lon'], jevent['depth'])
+                e = Event(UTCDateTime(jevent['eventOriginTime']), jevent['lat'], jevent['lon'], jevent['depth'], jevent['mag'])
                 self.events.append(e)
                 for jdetection in jevent['detections']:
                     d = Detection(jdetection['station'], UTCDateTime(jdetection['ptime']))
@@ -116,12 +118,13 @@ class Catalog():
         return locations
 
 class Event():
-    def __init__(self, eventOriginTime, lat, lon, depth):
+    def __init__(self, eventOriginTime, lat, lon, depth, mag):
         self.eventOriginTime = eventOriginTime
         self.lat = lat
         self.lon = lon
         self.depth = depth
         self.detections = [] 
+        self.mag = mag
 
 class Detection():
     def __init__(self, station, ptime):
