@@ -8,6 +8,7 @@ import fnmatch
 import seisobs #https://github.com/d-chambers/seisobs
 import sys 
 import csv
+from sklearn.neighbors.nearest_centroid import NearestCentroid
 
 class Catalog():
 
@@ -20,6 +21,12 @@ class Catalog():
         metadata_files = [file for file in os.listdir(input_metadata_dir) if
             fnmatch.fnmatch(file, "*")]
         print "[preprocessing metadata] List of metadata files to anlayze: ", metadata_files
+
+        centroids = np.array([[10.33908571, -68.01505714], [8.246, -72.21366667], [10.352, -62.472]]) #centroids
+        centroid_numbers = np.array([0, 1, 2])
+        nearest_centroid_model = NearestCentroid()
+        nearest_centroid_model.fit(centroids, centroid_numbers)
+
         for metadata_file in metadata_files:
             #1. Process metadata
             print("[preprocessing metadata] Reading metadata file "+os.path.join(input_metadata_dir, metadata_file))
@@ -35,7 +42,8 @@ class Catalog():
             lon = obspyCatalogMeta.events[0].origins[0].longitude
             depth = obspyCatalogMeta.events[0].origins[0].depth
             mag = obspyCatalogMeta.events[0].magnitudes[0].mag
-            e = Event(eventOriginTime, lat, lon, depth, mag)
+            cluster = nearest_centroid_model.predict([[lat, lon]])[0]
+            e = Event(eventOriginTime, lat, lon, depth, mag, cluster)
             self.events.append(e)
             for pick in obspyCatalogMeta.events[0].picks:
                 if pick.phase_hint == 'P':
@@ -84,6 +92,7 @@ class Catalog():
                 jevent["lon"] = e.lon
                 jevent["depth"] = e.depth
                 jevent["mag"] = e.mag
+                jevent["cluster"] = e.cluster
                 for d in e.detections:
                     jevent["detections"].append({"station":d.station, "ptime":str(d.ptime)})
                 jevents["events"].append(jevent)
@@ -93,7 +102,7 @@ class Catalog():
         with open(path) as f:  
             jdata = json.load(f)
             for jevent in jdata['events']:
-                e = Event(UTCDateTime(jevent['eventOriginTime']), jevent['lat'], jevent['lon'], jevent['depth'], jevent['mag'])
+                e = Event(UTCDateTime(jevent['eventOriginTime']), jevent['lat'], jevent['lon'], jevent['depth'], jevent['mag'], jevent['cluster'])
                 self.events.append(e)
                 for jdetection in jevent['detections']:
                     d = Detection(jdetection['station'], UTCDateTime(jdetection['ptime']))
@@ -118,13 +127,14 @@ class Catalog():
         return locations
 
 class Event():
-    def __init__(self, eventOriginTime, lat, lon, depth, mag):
+    def __init__(self, eventOriginTime, lat, lon, depth, mag, cluster):
         self.eventOriginTime = eventOriginTime
         self.lat = lat
         self.lon = lon
         self.depth = depth
         self.detections = [] 
         self.mag = mag
+        self.cluster = cluster
 
 class Detection():
     def __init__(self, station, ptime):
