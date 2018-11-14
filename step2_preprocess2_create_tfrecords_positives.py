@@ -29,6 +29,8 @@ import argparse
 import config as config
 import utils
 import random
+import catalog
+import clusters
 
 
 def preprocess_stream(stream):
@@ -87,8 +89,15 @@ def write(stream_files, subfolder):
         #Select only the specified channels
         st_event_select = utils.select_components(st_event, cfg) 
 
-        #cluster_id = filtered_catalog.cluster_id.values[event_n]
+        #LOCATION CLUSTERS
         cluster_id = 0 #We work with only one location for the moment (cluster id = 0)
+        if cat is not None:
+            stream_start_time = st_event[0].stats.starttime
+            stream_end_time = st_event[-1].stats.endtime
+            station = stream_end_time.stats.station
+            lat, lon, depth = cat.getLatLongDepth(stream_start_time, stream_end_time, station)
+            cluster_id = clusters.nearest_cluster(lat, lon, depth)
+        #cluster_id = filtered_catalog.cluster_id.values[event_n]
 
         n_traces = len(st_event_select)
         if utils.check_stream(st_event_select, cfg):
@@ -113,11 +122,20 @@ if __name__ == "__main__":
     parser.add_argument("--file_name",type=str, default="positives.tfrecords")
     parser.add_argument("--window_size", type=int, required=True)
     parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
+    parser.add_argument("--catalog_path", type=str, default=None) #necessary if clustering
+    parser.add_argument("--clusters_file_path", type=str, default=None) #necessary if clustering
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
 
     args = parser.parse_args()
 
     cfg = config.Config(args)
+
+    #Load metadata (ONLY WHEN LOCATION DETECTION)
+    if args.catalog_path is not None:
+        cat = catalog.Catalog()
+        cat.import_json(args.catalog_path)
+        clusters = Clusters()
+        clusters.import_json(clusters_file_path)
     
     dataset_dir = args.prep_data_dir
     output_dir = args.tfrecords_dir

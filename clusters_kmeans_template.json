@@ -1,0 +1,19 @@
+{
+    "clusters_type" : "kmeans", 
+    "clusters": [
+        {
+            "lat": 41.62434239,
+            "lon": 1.95533221, 
+            "depth": 0, 
+            "id": 0,
+            "label": "barcelona area"
+        }, 
+        {
+            "lat": 41.97717859, 
+            "lon": 2.71244211, 
+            "depth": 0, 
+            "id": 1,
+            "label": "girona area"
+        }
+    ]
+}
