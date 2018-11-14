@@ -94,9 +94,11 @@ def write(stream_files, subfolder):
         if cat is not None:
             stream_start_time = st_event[0].stats.starttime
             stream_end_time = st_event[-1].stats.endtime
-            station = stream_end_time.stats.station
+            station = st_event[0].stats.station
             lat, lon, depth = cat.getLatLongDepth(stream_start_time, stream_end_time, station)
-            cluster_id = clusters.nearest_cluster(lat, lon, depth)
+            c = clusters.nearest_cluster(lat, lon, depth)
+            cluster_id = c.id
+            print("[tfrecords positives] Assigning cluster "+str(cluster_id)+" to event.")
         #cluster_id = filtered_catalog.cluster_id.values[event_n]
 
         n_traces = len(st_event_select)
@@ -134,8 +136,8 @@ if __name__ == "__main__":
     if args.catalog_path is not None:
         cat = catalog.Catalog()
         cat.import_json(args.catalog_path)
-        clusters = Clusters()
-        clusters.import_json(clusters_file_path)
+        clusters = clusters.Clusters()
+        clusters.import_json(args.clusters_file_path)
     
     dataset_dir = args.prep_data_dir
     output_dir = args.tfrecords_dir

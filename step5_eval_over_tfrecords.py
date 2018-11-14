@@ -200,6 +200,7 @@ if __name__ == "__main__":
     parser.add_argument("--window_size", type=int, required=True) #Optional, we will use the value from the config file
     parser.add_argument("--component_N",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
     parser.add_argument("--component_E",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file    
+    parser.add_argument("--n_clusters",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file 
     args = parser.parse_args()
 
     cfg = config.Config(args)

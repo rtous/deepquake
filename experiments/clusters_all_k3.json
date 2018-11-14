@@ -1,6 +1,6 @@
 {
     "clusters_type" : "kmeans",
-    "list": [
+    "clusters": [
         {
             "lat": 10.33908571,
             "lon":  -68.01505714, 
@@ -19,7 +19,7 @@
             "lat": 10.352, 
             "lon": -62.472, 
             "depth": 0, 
-            "id": 3,
+            "id": 2,
             "label": "third cluster"
         }
     ]

@@ -111,11 +111,14 @@ class Catalog():
                     e.detections.append(d)
 
     def getPtime(self, window_start, window_end, station):
-        event, detection = self.getDetection(window_start, window_end)
-        return detection.ptime
+        event, detection = self.getDetection(window_start, window_end, station)
+        if detection is not None:
+            return detection.ptime
+        else:
+            return None
 
     def getLatLongDepth(self, window_start, window_end, station):
-        event, detection = self.getDetection(window_start, window_end)
+        event, detection = self.getDetection(window_start, window_end, station)
         return event.lat, event.lon, event.depth
 
     def getDetection(self, window_start, window_end, station):
@@ -124,6 +127,7 @@ class Catalog():
             for d in e.detections:
                 if ((d.station == station) and (d.ptime >= window_start) and (d.ptime <= window_end)):
                     return e, d
+        return None, None
 
     def getLocations(self, depth=True):
         locations = []
@@ -136,7 +140,8 @@ class Catalog():
         return locations
 
 class Event():
-    def __init__(self, eventOriginTime, lat, lon, depth, mag, cluster):
+    #def __init__(self, eventOriginTime, lat, lon, depth, mag, cluster):
+    def __init__(self, eventOriginTime, lat, lon, depth, mag):
         self.eventOriginTime = eventOriginTime
         self.lat = lat
         self.lon = lon
