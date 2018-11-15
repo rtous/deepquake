@@ -11,7 +11,7 @@ INPUT_DATA_DIR=datos1
 
 # 1.1 10s
 WINDOW_SIZE=10
-DATA_PREP_MAIN_DIR_NAME=data_prep_$INPUT_DATA_DIR_clusters
+DATA_PREP_MAIN_DIR_NAME=data_prep_k3_$INPUT_DATA_DIR
 DATA_PREP_DIR=$DATA_PREP_MAIN_DIR_NAME/$WINDOW_SIZE
 
 python step1_preprocess1_get_windows.py \
