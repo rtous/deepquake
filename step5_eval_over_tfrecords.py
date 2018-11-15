@@ -46,12 +46,16 @@ truePositives = 0
 falsePositives = 0
 trueNegatives = 0
 falseNegatives = 0
+locationHit = 0
+locationMiss = 0
 
 def eval(args, positivesOrNegatives):
     global truePositives
     global falsePositives
     global trueNegatives
     global falseNegatives
+    global locationHit
+    global locationMiss
     #summary_dir = os.path.join(output_dir, "eval_summary_events")   
 
     datasetDir = None
@@ -114,13 +118,21 @@ def eval(args, positivesOrNegatives):
                     metrics_, batch_pred_label, batch_true_label, starttime, endtime = sess.run(to_fetch)
 
                     if positivesOrNegatives: 
-                        if batch_true_label[0]==0 and batch_pred_label[0]==1:
+                        #Positive windows
+                        #NOTE: pred label will be 0 for noise (-1) and 1 for cluster 0
+                        if batch_true_label[0]>=0 and batch_pred_label[0]>=1:
                             truePositives = truePositives+1
+                            print("TRUE POSITIVE: batch_true_label = "+str(batch_true_label[0])+"; batch_pred_label[0] = "+str(batch_pred_label[0]))
+                            if batch_true_label[0] == batch_pred_label[0]-1:
+                                locationHit = locationHit + 1
+                            else:
+                                locationMiss = locationMiss + 1    
                             #sys.stdout.write("\033[92mP\033[0m")
                         else:
                             falsePositives = falsePositives+1
                             #sys.stdout.write("\033[91mP\033[0m")
                     else:
+                        #Negative windows
                         if batch_true_label[0]==-1 and batch_pred_label[0]==0:
                             trueNegatives = trueNegatives+1
                             #sys.stdout.write("\033[92mN\033[0m")
@@ -221,8 +233,11 @@ if __name__ == "__main__":
     #    stdout_stderr_file = open(os.path.join(output_dir, 'stdout_stderr_file.txt'), 'w')
     #    sys.stdout = stderr = stdout_stderr_file
     
+    #Positive windows
     eval(args, True)
     tf.reset_default_graph()
+
+    #Negative windows
     eval(args, False)
 
     print("[validation] true positives = "+str(truePositives))
@@ -255,6 +270,12 @@ if __name__ == "__main__":
         print("[validation] f1 = "+str(f1)+"%")
     else:
         print("[validation] cannot compute f1 as precision+recall == 0")
+
+    if (locationHit+locationMiss)>0:
+        locationAccuracy = 100*float(locationHit)/(locationHit+locationMiss)
+        print("[validation] location accuracy = "+str(locationAccuracy)+"%")
+    else:
+        print("[validation] cannot compute location accuracy as locationHit+locationMiss == 0")
 
 
     #if args.redirect_stdout_stderr:  

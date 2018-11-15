@@ -2,20 +2,7 @@
 
 #set -x #echo on
 
-EXPERIMENT_NAME=data_preprocessing
-
-# 0. METADATA
-python step0_preprocess0_metadata.py \
---input_path input/datos1/sfiles_nordicformat \
---output_path output/data_prep_datos1/catalog.json
-
-python step0_preprocess0_metadata.py \
---input_path input/datos2/sfiles_nordicformat \
---output_path output/data_prep_datos2/catalog.json
-
-python step0_preprocess0_metadata.py \
---input_path input/datos3/sfiles_nordicformat \
---output_path output/data_prep_datos3/catalog.json
+EXPERIMENT_NAME=data_preprocessing_clusters
 
 ###################################
 # 1. DATOS 1 
@@ -24,7 +11,7 @@ INPUT_DATA_DIR=datos1
 
 # 1.1 10s
 WINDOW_SIZE=10
-DATA_PREP_MAIN_DIR_NAME=data_prep_$INPUT_DATA_DIR
+DATA_PREP_MAIN_DIR_NAME=data_prep_$INPUT_DATA_DIR_clusters
 DATA_PREP_DIR=$DATA_PREP_MAIN_DIR_NAME/$WINDOW_SIZE
 
 python step1_preprocess1_get_windows.py \
