@@ -7,18 +7,20 @@ TRAIN_CONFIG=train_default
 ################################### 
 INPUT_DATA_DIR=datos1
 
-# 1.1 10s
-WINDOW_SIZE=10
-DATA_PREP_MAIN_DIR_NAME=data_prep_k3_$INPUT_DATA_DIR
-DATA_PREP_DIR=$DATA_PREP_MAIN_DIR_NAME/$WINDOW_SIZE
+# 50s
+WINDOW_SIZE=50
+DATA_PREP_MAIN_DIR_NAME=data_prep_$INPUT_DATA_DIR
+DATA_PREP_DIR=$DATA_PREP_MAIN_DIR_NAME/$WINDOW_SIZE/K3
 DATA_TRAIN_DIR=$DATA_PREP_DIR/$TRAIN_CONFIG
 
 python step4_train.py \
+--n_clusters 4 \
 --window_size $WINDOW_SIZE \
 --tfrecords_dir output/$DATA_PREP_DIR/tfrecords \
 --checkpoint_dir output/$DATA_TRAIN_DIR/checkpoints
 
 python step5_eval_over_tfrecords.py \
+--n_clusters 4 \
 --window_size $WINDOW_SIZE \
 --checkpoint_dir output/$DATA_TRAIN_DIR/checkpoints \
 --output_dir output/$DATA_TRAIN_DIR/eval \
