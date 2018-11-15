@@ -1,3 +1,7 @@
+# METADATA
+
+qsub -S /bin/bash -N experiment_0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_0_metadata.sh
+
 # DATA PREPROCESSING
 
 qsub -S /bin/bash -N experiment_1_data_preprocessing -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_1_data_preprocessing.sh
