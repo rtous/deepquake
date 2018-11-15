@@ -23,9 +23,16 @@ DATA=data.$JOB_ID
 CURRENT_ENVIRONMENT=`ls -d $CSCRATCH`/deepquake_virtualenv
 source $CURRENT_ENVIRONMENT/bin/activate
 
-### Run
+### Run with all the incoming parameters
 cd $CSCRATCH/deepquake/
-"$1"
+INPUT=""
+for var in "$@"
+do
+    INPUT=$INPUT" "$var
+done
+echo $INPUT
+"$INPUT"
+#"$1"
 
 ### Copy stdout and stderr (now in files within the execution node) outside:
 cp $HOME/* $CSCRATCH/deepquake/output/
