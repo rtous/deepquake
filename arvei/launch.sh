@@ -31,7 +31,7 @@ do
     INPUT=$INPUT" "$var
 done
 echo $INPUT
-"$INPUT"
+sh $INPUT
 #"$1"
 
 ### Copy stdout and stderr (now in files within the execution node) outside:
