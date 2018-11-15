@@ -2,7 +2,20 @@
 
 #set -x #echo on
 
-EXPERIMENT_NAME=data_preprocessing_clusters
+EXPERIMENT_NAME=data_preprocessing_k3
+
+# 0. METADATA
+python step0_preprocess0_metadata.py \
+--input_path input/datos1/sfiles_nordicformat \
+--output_path output/data_prep_k3_datos1/catalog.json
+
+python step0_preprocess0_metadata.py \
+--input_path input/datos2/sfiles_nordicformat \
+--output_path output/data_prep_k3_datos2/catalog.json
+
+python step0_preprocess0_metadata.py \
+--input_path input/datos3/sfiles_nordicformat \
+--output_path output/data_prep_k3_datos3/catalog.json
 
 ###################################
 # 1. DATOS 1 
