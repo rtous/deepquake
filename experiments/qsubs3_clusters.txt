@@ -6,3 +6,7 @@ qsub -S /bin/bash -N experiment_6_data_preprocessing_k3 -M rtous@ac.upc.edu -l b
 
 qsub -S /bin/bash -N experiment_6_train_model1_datos1_10_k3 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/experiment_6_train_model1_datos1_10_k3.sh
 
+
+
+
+qsub -S /bin/bash -N experiment_6_data_preprocessing_k3 -M rtous@ac.upc.edu -l big ./arvei/launch.sh experiments/launch_batch.sh
