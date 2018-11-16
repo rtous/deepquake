@@ -40,6 +40,7 @@ import fnmatch
 from obspy.core.utcdatetime import UTCDateTime
 from sklearn.metrics import confusion_matrix
 import logging
+import results
 
 
 truePositives = 0
@@ -213,6 +214,7 @@ if __name__ == "__main__":
     parser.add_argument("--component_N",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
     parser.add_argument("--component_E",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file    
     parser.add_argument("--n_clusters",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file 
+    parser.add_argument("--round",type=int) #Optional, number or experiments round  
     args = parser.parse_args()
 
     cfg = config.Config(args)
@@ -247,6 +249,10 @@ if __name__ == "__main__":
 
     precision = 0
     recall = 0
+    accuracy = 0
+    f1 = 0
+    locationAccuracy = 0
+
 
     if truePositives+falsePositives>0:
         precision = 100*float(truePositives)/(truePositives+falsePositives)
@@ -261,6 +267,7 @@ if __name__ == "__main__":
         print("[validation] cannot compute recall as truePositives+falseNegatives == 0")
 
     if truePositives+falsePositives+trueNegatives+falseNegatives>0:
+        accuracy = 100*float(truePositives+trueNegatives)/(truePositives+falsePositives+trueNegatives+falseNegatives)
         print("[validation] accuracy = "+str(100*float(truePositives+trueNegatives)/(truePositives+falsePositives+trueNegatives+falseNegatives))+"%")
     else:
         print("[validation] cannot compute accuracy as truePositives+falsePositives+trueNegatives+falseNegatives == 0")
@@ -276,6 +283,20 @@ if __name__ == "__main__":
         print("[validation] location accuracy = "+str(locationAccuracy)+"%")
     else:
         print("[validation] cannot compute location accuracy as locationHit+locationMiss == 0")
+
+    #Save result as a .json file
+    dataset = os.path.basename(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(args.tfrecords_dir))))))
+    round = 1
+    if args.round is not None:
+        round = args.round
+    if cfg.component_N == False:
+        n_traces = 1
+    else:
+        n_traces = 3
+    result = results.Result(cfg.window_size, n_traces, cfg.n_clusters, cfg.model,
+        truePositives, falsePositives, trueNegatives, falseNegatives, 
+        accuracy, precision, recall, f1, locationAccuracy, round, dataset)
+    result.export_json("output/eval_"+str(round)+"_"+dataset+"_"+str(cfg.window_size)+"_"+str(cfg.n_clusters)+"_"+str(cfg.n_traces)+"_"+cfg.model+".json")
 
 
     #if args.redirect_stdout_stderr:  

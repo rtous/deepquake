@@ -133,6 +133,7 @@ if __name__ == "__main__":
     cfg = config.Config(args)
 
     #Load metadata (ONLY WHEN LOCATION DETECTION)
+    cat = None
     if args.catalog_path is not None:
         cat = catalog.Catalog()
         cat.import_json(args.catalog_path)

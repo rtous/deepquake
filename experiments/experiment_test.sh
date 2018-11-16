@@ -1,50 +1,72 @@
-#!/bin/bash
-
-EXPERIMENT_NAME=test
-INPUT_DATA_DIR=datos1
-
-
-CONFIG_FILE=experiments/config_$EXPERIMENT_NAME.ini
-#CONFIG_FILE=experiments/config_model2b.ini
-DATA_PREP_DIR=data_prep_$EXPERIMENT_NAME
-DATA_TRAIN_DIR=train_$EXPERIMENT_NAME
-WINDOW_SIZE=50
+python step0_preprocess0_metadata.py \
+--input_path input/datos1/sfiles_nordicformat \
+--output_path output/data_prep_datos1/catalog.json
 
 python step0_preprocess0_metadata.py \
---input_path input/$INPUT_DATA_DIR/sfiles_nordicformat \
---output_path output/$DATA_PREP_DIR/catalog.json
+--input_path input/datos2/sfiles_nordicformat \
+--output_path output/data_prep_datos2/catalog.json
 
 python step1_preprocess1_get_windows.py \
 --debug 1 \
---window_size $WINDOW_SIZE \
---raw_data_dir input/$INPUT_DATA_DIR/mseed \
---catalog_path output/$DATA_PREP_DIR/catalog.json \
---prep_data_dir output/$DATA_PREP_DIR \
+--window_size 10 \
+--raw_data_dir input/datos1/mseed \
+--catalog_path output/data_prep_datos1/catalog.json \
+--prep_data_dir output/data_prep_test1/10 \
 --station CRUV
 
-python step2_preprocess2_create_tfrecords_positives.py \
+python step1_preprocess1_get_windows.py \
 --debug 1 \
---window_size $WINDOW_SIZE \
---prep_data_dir output/$DATA_PREP_DIR \
---tfrecords_dir output/$DATA_PREP_DIR/tfrecords
+--window_size 50 \
+--raw_data_dir input/datos1/mseed \
+--catalog_path output/data_prep_datos1/catalog.json \
+--prep_data_dir output/data_prep_test1/50 \
+--station CRUV
 
-python step3_preprocess3_create_tfrecords_negatives.py \
+python step1_preprocess1_get_windows.py \
 --debug 1 \
---window_size $WINDOW_SIZE \
---prep_data_dir output/$DATA_PREP_DIR \
---tfrecords_dir output/$DATA_PREP_DIR/tfrecords
+--window_size 10 \
+--raw_data_dir input/datos2/mseed \
+--catalog_path output/data_prep_datos2/catalog.json \
+--prep_data_dir output/data_prep_test2/10 \
+--station BAUV
 
-python step4_train.py \
---window_size $WINDOW_SIZE \
+python step1_preprocess1_get_windows.py \
 --debug 1 \
---config_file_path $CONFIG_FILE \
---tfrecords_dir output/$DATA_PREP_DIR/tfrecords \
---checkpoint_dir output/$DATA_TRAIN_DIR/checkpoints
+--window_size 50 \
+--raw_data_dir input/datos2/mseed \
+--catalog_path output/data_prep_datos2/catalog.json \
+--prep_data_dir output/data_prep_test2/50 \
+--station BAUV
 
-python step5_eval_over_tfrecords.py \
---window_size $WINDOW_SIZE \
---debug 1 \
---config_file_path $CONFIG_FILE \
---checkpoint_dir output/$DATA_TRAIN_DIR/checkpoints \
---output_dir output/$DATA_TRAIN_DIR/eval \
---tfrecords_dir output/$DATA_PREP_DIR/tfrecords/test
+./experiments/step1_preprocess2_join_dirs.sh test1 test2 10
+./experiments/step1_preprocess2_join_dirs.sh test1 test2 50
+
+#DATOS 1
+
+./experiments/step1_preprocess3_tfrecords.sh test1 10 2 3
+./experiments/step1_preprocess3_tfrecords.sh test1 50 2 3 
+
+./experiments/step1_preprocess3_tfrecords.sh test1 10 2 1
+./experiments/step1_preprocess3_tfrecords.sh test1 50 2 1 
+
+./experiments/step2_train.sh test1 10 2 3 model1 experiments/config_test.ini
+./experiments/step2_train.sh test1 50 2 3 model1 experiments/config_test.ini
+
+./experiments/step2_train.sh test1 10 2 1 model1 experiments/config_test.ini
+./experiments/step2_train.sh test1 50 2 1 model1 experiments/config_test.ini
+
+#DATOS 2
+
+./experiments/step1_preprocess3_tfrecords.sh test2 10 2 1
+./experiments/step1_preprocess3_tfrecords.sh test2 50 2 1 
+
+./experiments/step2_train.sh test2 10 2 1 model1 experiments/config_test.ini
+./experiments/step2_train.sh test2 50 2 1 model1 experiments/config_test.ini
+
+#DATOS 1 + DATOS 2
+
+./experiments/step1_preprocess3_tfrecords.sh test1_test2 10 2 1
+./experiments/step1_preprocess3_tfrecords.sh test1_test2 50 2 1 
+
+./experiments/step2_train.sh test1_test2 10 2 1 model1 experiments/config_test.ini
+./experiments/step2_train.sh test1_test2 50 2 1 model1 experiments/config_test.ini

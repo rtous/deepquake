@@ -28,6 +28,7 @@ import matplotlib.pyplot as plt
 import obspy
 import datetime as dt
 from openquake.hazardlib.geo.geodetic import distance
+import sys
 
 def preprocess_stream(stream):
     stream = stream.detrend('constant')
@@ -73,10 +74,16 @@ def select_components(stream, cfg):
     stream_select = None
     if cfg.component_Z:
         stream_select = stream.select(component="Z")
+        if len(stream_select) == 0:
+            print ("[utils.select_components] \033[91m ERROR!!\033[0m Selected component is empty (trying to extract three components tfrecords with mseed with just 1?).")
+            sys.exit(0)
         #print ("[check select_components] component Z selected.")
     if cfg.component_N:
         #print ("[check select_components] component N selected.")
         streamN = stream.select(component="N")
+        if len(streamN) == 0:
+            print ("[utils.select_components] \033[91m ERROR!!\033[0m Selected component is empty (trying to extract three components tfrecords with mseed with just 1?).")
+            sys.exit(0)
         if stream_select == None:
             stream_select = streamN
         else:
@@ -84,6 +91,9 @@ def select_components(stream, cfg):
     if cfg.component_E:
         #print ("[check select_components] component E selected.")
         streamE = stream.select(component="E")
+        if len(streamE) == 0:
+            print ("[utils.select_components] \033[91m ERROR!!\033[0m Selected component is empty (trying to extract three components tfrecords with mseed with just 1?).")
+            sys.exit(0)
         if stream_select == None:
             stream_select = streamE
         else:

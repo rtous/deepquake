@@ -1,0 +1,18 @@
+{
+    "dataset": "datos1",
+    "window_size": 10,
+    "n_traces": 1,
+    "n_clusters": 1,
+    "model": "experiments/config_model2.ini",
+    "truePositives": 1,
+    "falsePositives": 1,
+    "trueNegatives": 1,
+    "falseNegatives": 1,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "locationAccuracy": 1.0,
+    "round": 1,  
+    "dataset": "datos1"  
+}

@@ -1,0 +1,30 @@
+# DATOS 2
+
+## MODEL 1
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_10_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 10 2 1 model1 config_default.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_20_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 20 2 1 model1 config_default.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_30_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 30 2 1 model1 config_default.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_40_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 40 2 1 model1 config_default.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_50_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 50 2 1 model1 config_default.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_60_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 60 2 1 model1 config_default.ini
+
+## MODEL 2
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_10_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 10 2 1 model2 experiments/config_model2.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_20_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 20 2 1 model2 experiments/config_model2.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_30_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 30 2 1 model2 experiments/config_model2.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_40_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 40 2 1 model2 experiments/config_model2.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_50_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 50 2 1 model2 experiments/config_model2.ini
+
+qsub -S /bin/bash -N run_v1_step2_train_datos1_datos2_datos3_60_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1_datos2_datos3 60 2 1 model2 experiments/config_model2.ini
+

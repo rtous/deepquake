@@ -131,7 +131,7 @@ def createDirectories(base_dir, plot):
         os.makedirs(os.path.join(base_dir, cfg.png_noise_dir))
 
 def processSingleFile(input_stream, cat, output_dir, plot, onlyStation):    
-    processMseed(input_stream, cat, output_dir, station, plot, onlyStation)
+    processMseed(input_stream, cat, output_dir, plot, onlyStation)
 
 def processDirectory(input_stream_dir, cat, output_dir, plot, onlyPattern, onlyStation):
     stream_files = [file for file in os.listdir(input_stream_dir) if

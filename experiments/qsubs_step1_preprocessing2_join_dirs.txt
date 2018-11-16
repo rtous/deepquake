@@ -1,0 +1,32 @@
+# JOIN DIRS
+
+# DATOS 1 + DATOS 2
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1 datos2 10
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_20 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1 datos2 20
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_30 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1 datos2 30
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_40 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1 datos2 40
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1 datos2 50
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_60 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1 datos2 60
+
+# (DATOS 1 + DATOS 2) + DATOS 3
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_datos3_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1_datos2 datos3 10
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_datos3_20 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1_datos2 datos3 20
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_datos3_30 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1_datos2 datos3 30
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_datos3_40 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1_datos2 datos3 40
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_datos3_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1_datos2 datos3 50
+
+qsub -S /bin/bash -N run_v1_step1_preprocess2_join_dirs_datos1_datos2_datos3_60 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess2_join_dirs.sh datos1_datos2 datos3 60
+
+
+

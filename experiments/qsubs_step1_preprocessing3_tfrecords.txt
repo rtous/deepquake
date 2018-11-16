@@ -1,0 +1,67 @@
+# DATOS 1
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 10 2 3 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_10_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 10 2 1
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_20 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 20 2 3 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_20_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 20 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_30 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 30 2 3 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_30_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 30 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_40 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 40 2 3 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_40_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 40 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 50 2 3 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_50_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 50 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_60 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 60 2 3 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_60_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1 60 2 1 
+
+# DATOS 2
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos2_10_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos2 10 2 1
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos2_20_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos2 20 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos2_30_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos2 30 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos2_40_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos2 40 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos2_50_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos2 50 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos2_60_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos2 60 2 1 
+
+# DATOS 1 + DATOS 2
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_10_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2 10 2 1
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_20_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2 20 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_30_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2 30 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_40_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2 40 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_50_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2 50 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_60_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2 60 2 1
+
+# DATOS 1 + DATOS 2 + DATOS 3
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_datos3_10_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2_datos3 10 2 1
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_datos3_20_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2_datos3 20 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_datos3_30_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2_datos3 30 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_datos3_40_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2_datos3 40 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_datos3_50_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2_datos3 50 2 1 
+
+qsub -S /bin/bash -N run_v1_step1_preprocess3_tfrecords_datos1_datos2_datos3_60_Z -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step1_preprocess3_tfrecords.sh datos1_datos2_datos3 60 2 1

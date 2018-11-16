@@ -5,12 +5,12 @@ TRAIN_CONFIG=train_default
 ###################################
 # 1. DATOS 1 
 ################################### 
-INPUT_DATA_DIR=$2
+INPUT_DATA_DIR=datos1
 
 # 50s
-WINDOW_SIZE=$3
+WINDOW_SIZE=50
 DATA_PREP_MAIN_DIR_NAME=data_prep_$INPUT_DATA_DIR
-DATA_PREP_DIR=$DATA_PREP_MAIN_DIR_NAME/$WINDOW_SIZE/$1
+DATA_PREP_DIR=$DATA_PREP_MAIN_DIR_NAME/$WINDOW_SIZE/K3
 DATA_TRAIN_DIR=$DATA_PREP_DIR/$TRAIN_CONFIG
 
 python step4_train.py \
