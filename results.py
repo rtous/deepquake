@@ -37,12 +37,12 @@ class Results():
         self.results = []
 
     @staticmethod
-    def harvest_results(round):
+    def harvest_results(path, round):
         rs = Results()
-        result_files = [file for file in os.listdir("output") if
+        result_files = [file for file in os.listdir(path) if
                     fnmatch.fnmatch(file, "*.json")]
         for result_file in result_files:
-            r = Result.import_json(os.path.join("output", result_file))
+            r = Result.import_json(os.path.join(path, result_file))
             if r.round == round:
                 rs.results.append(r)
         return rs
@@ -203,24 +203,40 @@ class Result():
             jdata["round"] = self.round
             jdata["dataset"] = self.dataset
             json.dump(jdata, f, indent=4)
-        
+
 if __name__ == "__main__":
-    print ("\033[92m******************** TESTING RESULTS MODULE *******************\033[0m ")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--results_path",type=str, default="output",
+                        help="path to mseed DIRECTORY to analyze")
+    args = parser.parse_args()
+
+    rs = Results.harvest_results(args.results_path, round = 1)
     
-    r = Result.import_json("result_template.json")
-    r.export_json("borrar.json")
-    print("TEST 1 OK :-)")
-
-    rs = Results.harvest_results(round = 1)
-    print("TEST 2 OK :-)")
-
-    with open("output/results_fmeasures.dat", "w") as f:
+    with open(args.results_path+"/results_fmeasures.dat", "w") as f:
         rs.export_gnuplot_fmeasures(f)
         rs.export_gnuplot_fmeasures(sys.stdout)
 
-    with open("output/results_location_CL4.dat", "w") as f:
+    with open(args.results_path+"/results_location_CL4.dat", "w") as f:
         rs.export_gnuplot_location_accuracy_per_windowsize(4, f)
         rs.export_gnuplot_location_accuracy_per_windowsize(4, sys.stdout)
+        
+#if __name__ == "__main__":
+#    print ("\033[92m******************** TESTING RESULTS MODULE *******************\033[0m ")
+#    
+#    r = Result.import_json("result_template.json")
+#    r.export_json("borrar.json")
+#    print("TEST 1 OK :-)")
+#
+#    rs = Results.harvest_results(round = 1)
+#    print("TEST 2 OK :-)")
+#
+#    with open("output/results_fmeasures.dat", "w") as f:
+#        rs.export_gnuplot_fmeasures(f)
+#        rs.export_gnuplot_fmeasures(sys.stdout)
+#
+#    with open("output/results_location_CL4.dat", "w") as f:
+#        rs.export_gnuplot_location_accuracy_per_windowsize(4, f)
+#        rs.export_gnuplot_location_accuracy_per_windowsize(4, sys.stdout)
 
 
 
