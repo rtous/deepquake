@@ -89,7 +89,7 @@ class Results():
 
         #Only one mathching the given criteria is expected
         if len(rs) != 1:
-            print ("[results] \033[91m ERROR!!\033[0m Expecting one result but found "+str(len(rs))+" .")
+            print ("[results] \033[91m ERROR!!\033[0m Wrong number of results found "+str(len(rs))+" for "+"dataset="+dataset+", windows_size="+str(windows_size)+", model="+model+", n_traces="+str(n_traces)+", n_clusters="+str(n_clusters))
             sys.exit(0)
         else:
             return rs[0]
@@ -216,9 +216,9 @@ if __name__ == "__main__":
         rs.export_gnuplot_fmeasures(f)
         rs.export_gnuplot_fmeasures(sys.stdout)
 
-    with open(args.results_path+"/results_location_CL4.dat", "w") as f:
-        rs.export_gnuplot_location_accuracy_per_windowsize(4, f)
-        rs.export_gnuplot_location_accuracy_per_windowsize(4, sys.stdout)
+    #with open(args.results_path+"/results_location_CL4.dat", "w") as f:
+    #    rs.export_gnuplot_location_accuracy_per_windowsize(4, f)
+    #    rs.export_gnuplot_location_accuracy_per_windowsize(4, sys.stdout)
         
 #if __name__ == "__main__":
 #    print ("\033[92m******************** TESTING RESULTS MODULE *******************\033[0m ")
