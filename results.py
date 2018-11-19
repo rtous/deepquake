@@ -10,6 +10,7 @@ import sys
 import csv
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 import numpy as np
+
 # Single result file:
 #{
 #            "dataset": "datos1",
@@ -67,15 +68,24 @@ class Results():
                 models.append(r.model)
         return models
 
-    def get_result(self, dataset, windows_size, model, n_traces): 
+    def get_result(self, dataset, windows_size, model, n_traces, n_clusters): 
+        #We assume that only results for a given round have been harvested.
         #print("get result("+dataset+", "+str(windows_size)+", "+model+", "+str(n_traces)+")")
+        rs = []
         for r in self.results:
-            if r.dataset == dataset and r.window_size == windows_size and r.model == model and r.n_traces == n_traces:
-                return r
+            if r.dataset == dataset and r.window_size == windows_size and r.model == model and r.n_traces == n_traces and r.n_clusters == n_clusters:
+                rs.append(r)
 
-    def any_result(self, dataset, windows_size, model, n_traces): 
+        #Only one mathching the given criteria is expected
+        if len(rs) != 1:
+            print ("[results] \033[91m ERROR!!\033[0m Expecting one result but found "+str(len(rs))+" .")
+            sys.exit(0)
+        else:
+            return rs[0]
+
+    def any_result(self, dataset, windows_size, model, n_traces, n_clusters): 
         for r in self.results:
-            if r.dataset == dataset and r.window_size == windows_size and r.model == model and r.n_traces == n_traces:
+            if r.dataset == dataset and r.window_size == windows_size and r.model == model and r.n_traces == n_traces and r.n_clusters == n_clusters:
                 return True
         return False
 
@@ -92,14 +102,15 @@ class Results():
             sys.stdout.write(dataset+" (Z component)\t\t") 
             for model in models:  
                 for windows_size in windows_sizes:
-                    r =  self.get_result(dataset, windows_size, model, 1)
+                    r =  self.get_result(dataset, windows_size, model, 1, 2)
                     sys.stdout.write(str(r.f1)+"\t")  
-            if self.any_result(dataset, windows_sizes[0], models[0], 3):
+            #Not all datasets have results with 3 components
+            if self.any_result(dataset, windows_sizes[0], models[0], 3, 2):
                 print
                 sys.stdout.write(dataset+" (3 components)\t\t") 
                 for model in models:  
                     for windows_size in windows_sizes:
-                        r =  self.get_result(dataset, windows_size, model, 3)
+                        r =  self.get_result(dataset, windows_size, model, 3, 2)
                         sys.stdout.write(str(r.f1)+"\t") 
         print          
 

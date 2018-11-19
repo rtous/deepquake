@@ -41,6 +41,7 @@ from obspy.core.utcdatetime import UTCDateTime
 from sklearn.metrics import confusion_matrix
 import logging
 import results
+import datetime
 
 
 truePositives = 0
@@ -296,7 +297,12 @@ if __name__ == "__main__":
     result = results.Result(cfg.window_size, n_traces, cfg.n_clusters, cfg.model,
         truePositives, falsePositives, trueNegatives, falseNegatives, 
         accuracy, precision, recall, f1, locationAccuracy, round, dataset)
-    result.export_json("output/eval_"+str(round)+"_"+dataset+"_"+str(cfg.window_size)+"_"+str(cfg.n_clusters)+"_"+str(cfg.n_traces)+"_"+cfg.model+".json")
+
+
+    now = datetime.datetime.now()
+    now_str = str(now.year)+str(now.month).zfill(2)+str(now.day).zfill(2)+str(now.hour).zfill(2)+str(now.minute).zfill(2)+str(now.second).zfill(2) 
+    filename = "output/eval_"+now_str+"_"+str(round)+"_"+dataset+"_"+str(cfg.window_size)+"_"+str(cfg.n_clusters)+"_"+str(cfg.n_traces)+"_"+cfg.model+".json"
+    result.export_json(filename)
 
 
     #if args.redirect_stdout_stderr:  
