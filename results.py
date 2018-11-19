@@ -52,6 +52,7 @@ class Results():
         for r in self.results:
             if r.dataset not in datasets:
                 datasets.append(r.dataset)
+        datasets.sort()
         return datasets
 
     def get_list_of_window_sizes(self): 
@@ -59,6 +60,7 @@ class Results():
         for r in self.results:
             if r.window_size not in window_sizes:
                 window_sizes.append(r.window_size)
+        window_sizes.sort()
         return window_sizes
 
     def get_list_of_models(self): 
@@ -66,7 +68,16 @@ class Results():
         for r in self.results:
             if r.model not in models:
                 models.append(r.model)
+        models.sort()
         return models
+
+    def get_list_of_n_clusters(self): 
+        clusterings = []
+        for r in self.results:
+            if r.n_clusters not in clusterings:
+                clusterings.append(r.n_clusters)
+        clusterings.sort()
+        return clusterings
 
     def get_result(self, dataset, windows_size, model, n_traces, n_clusters): 
         #We assume that only results for a given round have been harvested.
@@ -89,30 +100,59 @@ class Results():
                 return True
         return False
 
-    def export_gnuplot(self): 
+    def export_gnuplot_fmeasures(self, writer): 
         datasets = self.get_list_of_datasets()
         models = self.get_list_of_models()
         windows_sizes = self.get_list_of_window_sizes()
-        sys.stdout.write("\t\t\t\t")
+        writer.write("Dataset")
+        writer.write("\t\t\t\t")
         for model in models:  
             for windows_size in windows_sizes: 
-                sys.stdout.write("\t" + model + "-" + str(windows_size))        
+                writer.write("\t" + model + "-" + str(windows_size))        
         for dataset in datasets:
-            print
-            sys.stdout.write(dataset+" (Z component)\t\t") 
+            writer.write("\n")
+            writer.write("\""+dataset+" (Z component)\"\t\t") 
             for model in models:  
                 for windows_size in windows_sizes:
                     r =  self.get_result(dataset, windows_size, model, 1, 2)
-                    sys.stdout.write(str(r.f1)+"\t")  
+                    writer.write(str(r.f1)+"\t")  
             #Not all datasets have results with 3 components
             if self.any_result(dataset, windows_sizes[0], models[0], 3, 2):
-                print
-                sys.stdout.write(dataset+" (3 components)\t\t") 
+                writer.write("\n") 
+                writer.write("\""+dataset+" (3 components)\"\t\t") 
                 for model in models:  
                     for windows_size in windows_sizes:
                         r =  self.get_result(dataset, windows_size, model, 3, 2)
-                        sys.stdout.write(str(r.f1)+"\t") 
-        print          
+                        writer.write(str(r.f1)+"\t") 
+        writer.write("\n")       
+
+
+    def export_gnuplot_location_accuracy_per_windowsize(self, n_clusters, writer):
+        datasets = self.get_list_of_datasets()
+        models = self.get_list_of_models()
+        windows_sizes = self.get_list_of_window_sizes()
+        writer.write("Dataset")
+        writer.write("\t\t\t\t") 
+        for model in models:  
+            for windows_size in windows_sizes: 
+                writer.write("\t" + model + "-" + str(windows_size))        
+        for dataset in datasets:
+            writer.write("\n") 
+            writer.write("\""+dataset+" (Z component)\"\t\t") 
+            for model in models:  
+                for windows_size in windows_sizes:
+                    r =  self.get_result(dataset, windows_size, model, 1, n_clusters)
+                    writer.write(str(r.locationAccuracy)+"\t")  
+            #Not all datasets have results with 3 components
+            if self.any_result(dataset, windows_sizes[0], models[0], 3, n_clusters):
+                writer.write("\n")
+                writer.write("\""+dataset+" (3 components)\"\t\t") 
+                for model in models:  
+                    for windows_size in windows_sizes:
+                        r =  self.get_result(dataset, windows_size, model, 3, n_clusters)
+                        writer.write(str(r.locationAccuracy)+"\t") 
+        writer.write("\n")       
+
 
 class Result():
     def __init__(self, window_size, n_traces, n_clusters, model,
@@ -174,7 +214,13 @@ if __name__ == "__main__":
     rs = Results.harvest_results(round = 1)
     print("TEST 2 OK :-)")
 
-    rs.export_gnuplot()
+    with open("output/results_fmeasures.dat", "w") as f:
+        rs.export_gnuplot_fmeasures(f)
+        rs.export_gnuplot_fmeasures(sys.stdout)
+
+    with open("output/results_location_CL4.dat", "w") as f:
+        rs.export_gnuplot_location_accuracy_per_windowsize(4, f)
+        rs.export_gnuplot_location_accuracy_per_windowsize(4, sys.stdout)
 
 
 
