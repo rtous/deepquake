@@ -22,11 +22,11 @@ set ztics border in scale 0,0 nomirror norotate  offset character 0, 0, 0 autoju
 #set xlabel "#workers" 
 set xlabel  offset character 0, -2, 0 font "" textcolor lt -1 norotate
 set ylabel "Accuracy" 
-set yrange [0.3:1]
+set yrange [30:100]
 # i = 23
 set term png
-set output "output/results_location_CL4.png"
-plot newhistogram "", 'output/results_location_CL4.dat' using 2:xtic(1) t col lc rgb 'light-gray' fs pattern 3, '' u 3 t col lc rgb 'dark-gray' fs pattern 3, '' u 4 t col lc rgb 'black' fs pattern 1, '' u 5 t col lc rgb 'black' fs pattern 2
+set output "experiments/results/results_location_CL4.png"
+plot newhistogram "", 'experiments/results/results_location_CL4.dat' using 2:xtic(1) t col lc rgb 'light-gray' fs pattern 3, '' u 3 t col lc rgb 'dark-gray' fs pattern 3, '' u 4 t col lc rgb 'black' fs pattern 1, '' u 5 t col lc rgb 'black' fs pattern 2
 
 
 

@@ -1,0 +1,17 @@
+{
+    "f1": 57.21153846153846, 
+    "window_size": 50, 
+    "truePositives": 119, 
+    "n_clusters": 2, 
+    "trueNegatives": 2367, 
+    "precision": 57.21153846153846, 
+    "round": 1, 
+    "recall": 57.21153846153846, 
+    "falseNegatives": 89, 
+    "n_traces": 1, 
+    "falsePositives": 89, 
+    "model": "ConvNetQuake", 
+    "dataset": "data_prep_datos1_datos2_datos3", 
+    "locationAccuracy": 100.0, 
+    "accuracy": 93.31831831831832
+}
