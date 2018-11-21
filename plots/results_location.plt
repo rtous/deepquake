@@ -21,15 +21,15 @@ set ztics border in scale 0,0 nomirror norotate  offset character 0, 0, 0 autoju
 #set title "F-measure results of the different models over the different datasets" 
 #set xlabel "#workers" 
 set xlabel  offset character 0, -2, 0 font "" textcolor lt -1 norotate
-set ylabel "P-wave detection F-measure (%)" 
-set yrange [20:100]
+set ylabel "Location accuracy (%)" 
+set yrange [30:100]
 # i = 23
 set term png
-set output "experiments/results/results_fmeasures.png"
-plot newhistogram "", 'experiments/results/results_fmeasures_edited.dat' using 2:xtic(1) t col lc rgb 'light-gray' fs pattern 3,  \
-'' u 6 t col lc rgb 'dark-gray' fs pattern 3,  \
-'' u 8 t col lc rgb 'black' fs pattern 1, \
-'' u 12 t col lc rgb 'black' fs pattern 2
+set output "experiments/results/results_location.png"
+plot newhistogram "", 'experiments/results/results_location_edited.dat' using 2:xtic(1) t col lc rgb 'light-gray' fs pattern 3,  \
+'' u 3 t col lc rgb 'dark-gray' fs pattern 3,  \
+'' u 4 t col lc rgb 'black' fs pattern 1,  \
+'' u 5 t col lc rgb 'black' fs pattern 2
 
 
 

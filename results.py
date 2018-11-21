@@ -230,6 +230,10 @@ if __name__ == "__main__":
         rs.export_gnuplot_location_accuracy_per_windowsize(4, f)
         rs.export_gnuplot_location_accuracy_per_windowsize(4, sys.stdout)
 
+    with open(args.results_path+"/results_location_CL6.dat", "w") as f:
+        rs.export_gnuplot_location_accuracy_per_windowsize(6, f)
+        rs.export_gnuplot_location_accuracy_per_windowsize(6, sys.stdout)
+
     #with open(args.results_path+"/results_location_CL6.dat", "w") as f:
     #    rs.export_gnuplot_location_accuracy_per_windowsize(6, f)
     #    rs.export_gnuplot_location_accuracy_per_windowsize(6, sys.stdout)
@@ -249,8 +253,6 @@ if __name__ == "__main__":
     with open(args.results_path+"/window_sizes_CL2_CO1_model1_datos1_datos2_datos3.dat", "w") as f:
         rs.export_gnuplot_windowsizes("data_prep_datos1_datos2_datos3", "ConvNetQuake", 1, 2, f)
         rs.export_gnuplot_windowsizes("data_prep_datos1_datos2_datos3", "ConvNetQuake", 1, 2, sys.stdout)
-
-
 
     with open(args.results_path+"/window_sizes_CL2_CO1_model2_datos1.dat", "w") as f:
         rs.export_gnuplot_windowsizes("data_prep_datos1", "ConvNetQuake2", 1, 2, f)
