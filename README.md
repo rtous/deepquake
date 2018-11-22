@@ -33,7 +33,7 @@ The input data must be located within the input folder (from the root of the rep
 
 ```
 input
-	|-funvisis
+	|-datos1
 		|-mseed
 		|-sfiles_nordicformat
 ```

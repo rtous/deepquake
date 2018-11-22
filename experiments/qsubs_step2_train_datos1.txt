@@ -2,52 +2,52 @@
 
 ## MODEL 1
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_10_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 10 2 3 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_10_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 10 2 3 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_10_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 10 2 1 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_10_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 10 2 1 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_20_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 20 2 3 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_20_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 20 2 3 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_20_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 20 2 1 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_20_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 20 2 1 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_30_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 30 2 3 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_30_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 30 2 3 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_30_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 30 2 1 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_30_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 30 2 1 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_40_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 40 2 3 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_40_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 40 2 3 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_40_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 40 2 1 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_40_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 40 2 1 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_50_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 50 2 3 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_50_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 50 2 3 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_50_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 50 2 1 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_50_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 50 2 1 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_60_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 60 2 3 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_60_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 60 2 3 model1 config_default.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_60_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 60 2 1 model1 config_default.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_60_Z_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 60 2 1 model1 config_default.ini
 
 ## MODEL 2
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_10_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 10 2 3 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_10_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 10 2 3 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_10_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 10 2 1 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_10_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 10 2 1 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_20_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 20 2 3 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_20_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 20 2 3 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_20_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 20 2 1 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_20_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 20 2 1 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_30_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 30 2 3 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_30_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 30 2 3 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_30_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 30 2 1 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_30_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 30 2 1 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_40_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 40 2 3 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_40_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 40 2 3 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_40_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 40 2 1 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_40_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 40 2 1 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_50_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 50 2 3 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_50_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 50 2 3 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_50_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 50 2 1 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_50_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 50 2 1 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_60_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 60 2 3 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_60_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 60 2 3 model2 experiments/config_model2.ini
 
-qsub -S /bin/bash -N run_v1_step2_train_datos1_60_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./experiments/step2_train.sh datos1 60 2 1 model2 experiments/config_model2.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos1_60_Z_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1 60 2 1 model2 experiments/config_model2.ini
