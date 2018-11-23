@@ -117,11 +117,11 @@ Check the contents of the "output/data_prep_quickstart/10 directory". You will f
 output
 	|-data_prep_quickstart
 		|-10
-		    |-mseed
+            |-mseed
             |-mseed_event_windows
-		    |-mseed_noise
+            |-mseed_noise
             |-png
-		    |-png_event_windows
+            |-png_event_windows
             |-png_noise
 ```
 
@@ -156,16 +156,16 @@ It did read the "output/data_prep_quickstart/10/mseed_event_windows" folder and 
 
 ```
 output
-	|-data_prep_quickstart
-		|-10
-		    |-CL2
+    |-data_prep_quickstart
+        |-10
+            |-CL2
                 |-CO1
-		            |-tfrecords
+                    |-tfrecords
                         |-test
-		                    |-positive
+                            |-positive
                                 |-positives.tfrecords
                         |-train
-		                    |-positive
+                            |-positive
                                 |-positives.tfrecords
 ```
 Ths "CL2" and "CO1" subfolders mean "two classes" (event and no event) and "1 component" (only Z) respectively. You can generate different training/test datasets (e.g. with all the components and more classes if you need location detection) with this tool without the need to do the costly step 1 again. 
