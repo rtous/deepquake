@@ -115,8 +115,8 @@ Check the contents of the "output/data_prep_quickstart/10 directory". You will f
 
 ```
 output
-	|-data_prep_quickstart
-		|-10
+    |-data_prep_quickstart
+        |-10
             |-mseed
             |-mseed_event_windows
             |-mseed_noise
@@ -159,21 +159,6 @@ output
     |-data_prep_quickstart
         |-10
             |-CL2
-                |-CO1
-                    |-tfrecords
-                        |-test
-                            |-positive
-                                |-positives.tfrecords
-                        |-train
-                            |-positive
-                                |-positives.tfrecords
-```
-
-```
-output
-	|-data_prep_quickstart
-		|-10
-			|-CL2
                 |-CO1
                     |-tfrecords
                         |-test
