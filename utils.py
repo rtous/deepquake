@@ -40,11 +40,11 @@ def obspyDateTime2PythonDateTime(odt):
 def check_stream(stream, cfg, check_n_traces=True): 
     if check_n_traces and len(stream) != cfg.n_traces:
         if cfg.debug:
-            print ("[check stream] \033[91m WARNING!!\033[0m Only "+str(len(stream))+" channels.")
+            print ("[check stream] \033[93m WARNING!!\033[0m Only "+str(len(stream))+" channels.")
         return False
     if stream[0].stats.sampling_rate != 100.0:
         if cfg.debug:
-            print ("[check stream] \033[91m WARNING!!\033[0m Wrong sampling rate ("+str(stream[0].stats.sampling_rate)+").")
+            print ("[check stream] \033[93m WARNING!!\033[0m Wrong sampling rate ("+str(stream[0].stats.sampling_rate)+").")
         return False
 
     theoretical_data_size = 0
@@ -57,7 +57,7 @@ def check_stream(stream, cfg, check_n_traces=True):
 
     if data_size != theoretical_data_size:
         if cfg.debug:
-            print ("[check stream] \033[91m WARNING!!\033[0m Not enough data points  ("+str(data_size)+").")
+            print ("[check stream] \033[93m WARNING!!\033[0m Not enough data points  ("+str(data_size)+").")
         return False 
     return True
 

@@ -17,7 +17,7 @@ class Catalog():
    
     def import_sfiles(self, input_metadata_dir):
         #This imports a nordic format sfile into our own catalog object
-        print ("[preprocessing metadata] \033[91m WARNING:\033[0m sfiles need to have names such as 01-1259-00M.S201804")
+        print ("[preprocessing metadata] \033[94m INFO:\033[0m Remember that sfiles need to have names such as 01-1259-00M.S201804")
         metadata_files = [file for file in os.listdir(input_metadata_dir) if
             fnmatch.fnmatch(file, "*")]
         print "[preprocessing metadata] List of metadata files to anlayze: ", metadata_files

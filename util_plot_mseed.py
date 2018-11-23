@@ -74,8 +74,8 @@ def processSingleFile(file, args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stream_path",type=str,default=None,
+    parser.add_argument("--stream_path",type=str, required=True,
                         help="path to mseed to analyze")
-    parser.add_argument("--output_dir",type=str,default=None)
+    parser.add_argument("--output_dir",type=str, required=True)
     args = parser.parse_args()
     main(args)

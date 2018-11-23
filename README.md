@@ -1,8 +1,10 @@
 # DeepQuake
 
-## 1 Setup environment (local machine)
+## Setup
 
-NOTE: I tried the setup both on Mac (El Capitan) and Linux. Each one required its own tricks, which are probably not well documented here, but nothing extraordinary. 
+### 1 Setup environment (local machine)
+
+NOTE: We tried the setup both on Mac and Linux. As the project many old libraries (including tensorflow 0.12) the setup may become troublesome (each time we do it we found new problems). Good luck.
 
 Let's first create and activate a Python's virtualenv (let's assume you save your Python virtualenvs within MY_VIRTUALENVS folder, e.g. $HOME/virtualenvs):
  
@@ -25,11 +27,11 @@ Install all the dependencies listed within requirements.txt:
 
 	pip install -r requirements.txt
 
-NOTE: According to the ConvNetQuake repo they used tensorflow 0.11. I tried with 0.12 and it works. However, this version are very old (currently 1.8) and we should consider updating at some point. 
+NOTE: According to the ConvNetQuake repo they used tensorflow 0.11. We tried with 0.12 and it works. However, this version is very old (currently 1.12) and we plan updating at some point.
 
-## 2.1 Prepare the input data (FUNVISIS dataset)
+### 2.1 Prepare the input data (pre-pre-processing)
 
-The input data must be located within the input folder (from the root of the repo):
+We work with multiple datasets (currently "datos1", "datos2" and "datos3"). Each dataset must be located within the "input" folder (from the root of the repo) and must have the following structure:
 
 ```
 input
@@ -38,136 +40,205 @@ input
 		|-sfiles_nordicformat
 ```
 
-Currently the input data is part of the repository for convenience. If these data would become too big we would remove them. 
+We call "pre-pre-processing" the process of adapting the raw data provided by the experts into this structure and the proper file formats. The datasets that you will find in the repo are already pre-pre-processed. However, if you need to include a new dataset you should consider the requirements described in the following subsections.
 
-Currently the data includes:
+NOTE: Currently the input data is part of the repository for convenience. If these data would become too big we would remove them. Currently the data includes:
 
-* Data for 5 events and many stations, +50 (AGIV, AUA1, BAUV, BBGH...).
-* Sampled at 100Hz, 3-channels
-* Event time windows is higher than 10s:
-	*2015-01-10-0517-00S (total time 449.0s)
-	*2015-02-05-0420-00S (total time 1199.0s)
-	*2015-02-05-0538-00S (total time 1199.0s)
-	*2015-02-05-0703-00S (total time 1199.0s)
-	*2015-02-14-1027-00S (total time 449.0s)
+### 2.1.1 .mseed files
 
-* Each event has a .mseed for all the stations and a metadata in Nordic Format (easy process if translated to obspy with seisobs) 
-* Provides also .mseed splits by station and channel (not using them now).
+Requirements of the "mseed" folder of a dataset:
 
-## 2.2 Utils for inspecting the data
+* The "mseed" folder contains seismograms in mseed format. All the files MUST have the .mseed extension (you can use the utility "util_add_mseed_extension.py" if you need to fix a new dataset. 
+* All the seismograms should be sampled at 100Hz. 
+* The seismograms can be have the three components (like "datos1") or just one (like "datos2" and "datos3). The seismograms can have waves from multiple stations (like "datos1") or for one station (like "datos2" and "datos3"). The code is ready to deal with the different variants automatically. 
+* The code will not work if each components of a seismogram is located in a different file. You can use "util_join_components.py" to fix that.
 
-Plotting a complete mseed file (all stations, all channels):
+Let's start by plotting different variants of valid input .mseed files:
 
-	cd 
-	cd deepquake
-	export PYTHONPATH=.
-	python util_plot_mseed.py --stream_path input/funvisis/mseed/2015-01-10-0517-00S.MAN___161
+	python util_plot_mseed.py --stream_path input/datos3/mseed/2018-03-03-1929-00M.BENV__001_HH_1Z.mseed --output_dir output/plots
+	python util_plot_mseed.py --stream_path input/datos1/mseed/2015-01-10-0517-00S.mseed --output_dir output/quickstart
 
-NOTE: Results within the output directory.
+### sfiles metadata
 
-The following utility allows to read the S-File metadata (shows some from the terminal, write them to output/metadata.xml):
+While the .mseed files include some metadata (station code and times basically) the information of the events (origin, magnitude, P-wave arrival at each station) need to be located in seisan s-files (Nordic format). If you need to do a pre-pre-processing (dealing with new, raw data) you need to consider the following:
+
+* The sfile filename MUST have the format 01-1259-00M.S201804 (for 01/04/2018 at 12:59). 
+* Internally an sfile should have (at least) the kind of structure that you will find in the sfiles in the "datos3" dataset.
+* At the end of each line of the stations P-wave arrival section there must be a white space (tricky).  
+
+Pre-pre-processing of raw metadata may be difficult as each new dataset comes in a different variant. We created many utilities to deal with that (e.g. "util_datos3_bigsfile2sfiles.py" and "util_mseed_name2sfile_name.py"). Hope you don't need them.
+
+You can inspect the content of an S-File metadata with the utility "util_inspect_sfile.py" this way: 
 	
-	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0420-00L.S201502
-	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0538-00L.S201502
-	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/05-0703-00L.S201502
-	python util_read_metadata.py --stream_path input/funvisis/sfiles_nordicformat/10-0517-00L.S201501 
+	python util_inspect_sfile.py --stream_path input/datos3/sfiles_nordicformat/01-0000-00M.S200601 --output_path output/quickstart/metadata.xml
 
-The following utility allows to join .mseed files containing the different components:
+NOTE: Don't worry about the sfiles complexity, during the preprocessing we will convert all the messy sfiles of each dataset into a single and simple .json file with our own metadata format.
 
-python util_join_components.py \
---streamHHN_path input/funvisis/other/CAPV/CAPV.VE..HHN.2017.323 \
---streamHHE_path input/funvisis/other/CAPV/CAPV.VE..HHE.2017.323 \
---streamHHZ_path input/funvisis/other/CAPV/CAPV.VE..HHZ.2017.323 \
---output_stream_path input/funvisis/other/CAPV.VE.2017.323
+## 2 A full execution cycle (preprocessing -> training -> evaluation)
 
-## Note about the tools usage
+### Note about the tools parametrization (you may skip this if doing a quick start)
 
-* By default tools read parameters from the config_default.ini file.
+* By default tools read parameters from the config_default.ini file. 
 * Some parameters can be (some times need to be) overriden with command line arguments. This is the recommended way of overriding the defaults.
-* You can also override a subset of parameters specifying your own config file with the --config_file_path argument. 
+* You can also override a subset of parameters specifying your own config file with the --config_file_path argument. This may be convenient when many parameters need to be overriden the same way for a set of experiments (e.g. the configuration of a new model with different layers, kernel size, etc.) 
 
-WARNING: When passing boolean arguments we will use 0 or 1 (not in the config files, where we will use false and true).
+WARNING: When specifying boolean command line arguments we will use 0 or 1 because of a limitation of the argparse module. When specifying boolean parameters in the .ini config files we will use "true" and "false", with all letters in lower-case.
 
-## 2.3 Step 1. Preprocessing 1. Converting FUNVISIS to ConvNetQuake format
 
-The following utility will:
+### 2.0 Step 0. Preprocessing 0. Gather all the metadata of a dataset and put it within a .json file.
 
-1. split the data of all the events into station-level mseed
-2. Extract windows noise from all the events
+Run the following command (ignore the warnings):
 
-	python step1_preprocess1_funvisis2oklahoma.py \
-	--config_file_path experiments/config_test.ini \
-	--raw_data_dir input/data_raw_default/mseed \
-	--raw_metadata_dir input/data_raw_default/sfiles_nordicformat \
-	--prep_data_dir output/data_prep_test
+	python step0_preprocess0_metadata.py \
+	--input_path input/datos1/sfiles_nordicformat \
+	--output_path output/data_prep_quickstart/catalog.json
 
-To save .png plots use:
+Check the content of the output/data_prep_quickstart/catalog.json file. 
 
-	--plot_station True
-	--plot_positives True
-	--plot_negatives True
+### 2.1 Step 1. Preprocessing 1. Splitting the seismograms into small windows.
 
-## 2.4 Step 2. Preprocessing 2. Generating tfrecords for positives
+Now we will split all the .mseed files into small windows of "window_size" seconds (e.g. 10 seconds) and just one station. If the input seismograms include the three components we will obtain three-component windows (even if we plan to just use one, we will specify that later).
+
+Run the following command:
+
+	python step1_preprocess1_get_windows.py \
+	--debug 1 \
+	--window_size 10 \
+	--raw_data_dir input/datos1/mseed \
+	--catalog_path output/data_prep_quickstart/catalog.json \
+	--prep_data_dir output/data_prep_quickstart/10 \
+	--station CRUV
+
+We have included a special argument (--station CRUV) that limits the processing only to the CRUV station to make things faster. You will not use this argument in real experiments.
+
+Check the contents of the "output/data_prep_quickstart/10 directory". You will find:
+
+```
+output
+	|-data_prep_quickstart
+		|-10
+		    |-mseed
+            |-mseed_event_windows
+		    |-mseed_noise
+            |-png
+		    |-png_event_windows
+            |-png_noise
+```
+
+The only folders that we really need to proceed are "mseed_event_windows" and "mseed_noise". They contain the windows that (according to "data_prep_quickstart/catalog.json") include a P-wave and the windows that not respectivelly. 
+
+The "mseed" folder contains a replica of the input .mseed files but as one-file-per-station. We will use them to perform some optional detection experiments at the end. 
+
+The "png*" folders contain plots but they are now empty because we did not specify the "--plot 1" argument. It is recommended that you generate plots at the beginning, but not later as it takes a lot of time. Retype the command and wait:
+
+	python step1_preprocess1_get_windows.py \
+	--debug 1 \
+	--window_size 10 \
+	--raw_data_dir input/datos1/mseed \
+	--catalog_path output/data_prep_quickstart/catalog.json \
+	--prep_data_dir output/data_prep_quickstart/10 \
+	--station CRUV \
+	-- plot 1
+
+
+### 2.2 Step 2. Preprocessing 2. Generating tfrecords for positives
+
+Run the following:
 
 	python step2_preprocess2_create_tfrecords_positives.py \
-	--config_file_path experiments/config_test.ini \
-	--prep_data_dir output/data_prep_test \
-	--tfrecords_dir output/data_prep_test/tfrecords
+	--window_size 10 \
+	--component_N 0 \
+	--component_E 0 \
+	--prep_data_dir output/data_prep_quickstart/10 \
+	--tfrecords_dir output/data_prep_quickstart/10/CL2/CO1/tfrecords
 
-In order to convert just a subset of files you may do:
+It did read the "output/data_prep_quickstart/10/mseed_event_windows" folder and did generate the "positives" part of a training and test datasets this way:
 
-	python step2_preprocess2_create_tfrecords_positives.py \
-	--config_file_path experiments/config_test.ini \
-	--prep_data_dir output/data_prep_test \
-	--pattern 2015-02-05-0420-00S*.mseed \
-	--tfrecords_dir output/data_prep_test/tfrecords \
-	--file_name 2015-02-05-0420-00S.tfrecords
+```
+output
+	|-data_prep_quickstart
+		|-10
+		    |-CL2
+                |-CO1
+		            |-tfrecords
+                        |-test
+		                    |-positive
+                                |-positives.tfrecords
+                        |-train
+		                    |-positive
+                                |-positives.tfrecords
+```
+Ths "CL2" and "CO1" subfolders mean "two classes" (event and no event) and "1 component" (only Z) respectively. You can generate different training/test datasets (e.g. with all the components and more classes if you need location detection) with this tool without the need to do the costly step 1 again. 
 
-## 2.5 Step 3. Preprocessing 3. Generating tfrecords for negatives
+### 2.3 Step 3. Preprocessing 3. Generating tfrecords for negatives
 
-	python step2_preprocess2_create_tfrecords_negatives.py \
-	--config_file_path experiments/config_test.ini \
-	--prep_data_dir output/data_prep_test \
-	--tfrecords_dir output/data_prep_test/tfrecords
+Run the following:
 
-In order to convert just a subset of files you may do:
+	python step3_preprocess3_create_tfrecords_negatives.py \
+	--window_size 10 \
+	--component_N 0 \
+	--component_E 0 \
+	--prep_data_dir output/data_prep_quickstart/10 \
+	--tfrecords_dir output/data_prep_quickstart/10/CL2/CO1/tfrecords
 
-	python step2_preprocess2_create_tfrecords_negatives.py \
-	--config_file_path experiments/config_test.ini \
-	--prep_data_dir output/data_prep_test \
-	--pattern 2015-02-05-0420-00S*.mseed \
-	--tfrecords_dir output/data_prep_test/tfrecords \
-	--file_name 2015-02-05-0420-00S.tfrecords
 
-## 2.6 Step 4. Train
+### 2.4 Step 4. Train
+
+Let's do a short training with the ConvNetQuake original model (model 1). We will use a special configuration in file "experiments/config_test.ini" to limit the number of training steps. Let's run:
 
 	python step4_train.py \
-	--config_file_path experiments/config_test.ini \
-	--tfrecords_dir output/data_prep_test/tfrecords \
-	--checkpoint_dir output/train_test/checkpoints
+    --config_file_path experiments/config_test_model1.ini \
+	--component_N 0 \
+	--component_E 0 \
+	--n_clusters 2 \
+	--window_size 10 \
+	--tfrecords_dir output/data_prep_quickstart/10/CL2/CO1/tfrecords \
+	--checkpoint_dir output/data_prep_quickstart/10/CL2/CO1/model1/checkpoints
 
-## 2.7 Step 5. Eval
+### 2.5 Step 5. Eval
 
-	python step5_eval.py \
-	--config_file_path experiments/config_test.ini \
-	--stream_path output/data_prep_test/mseed \
-	--checkpoint_dir output/train_test/checkpoints \
-	--output_dir output/train_test/eval
+Let's eval the generated model against the test dataset (20% of the data):
 
-You may specify a filename pattern:
+	python step5_eval_over_tfrecords.py \
+	--config_file_path experiments/config_test_model1.ini \
+	--component_N 0 \
+	--component_E 0 \
+	--n_clusters 2 \
+	--window_size 10 \
+	--checkpoint_dir output/data_prep_quickstart/10/CL2/CO1/model1/checkpoints \
+	--output_dir output/data_prep_quickstart/10/CL2/CO1/model1/eval \
+	--tfrecords_dir output/data_prep_quickstart/10/CL2/CO1/tfrecords/test
 
-	python step5_eval.py \
-	--config_file_path experiments/config_test.ini \
-	--stream_path output/data_prep_test/mseed \
-	--checkpoint_dir output/train_test/checkpoints \
-	--pattern 2015-02-05-0420-00S \
-	--output_dir output/train_test/eval
+The evaluation will show the results but will also generate a file like this at the root of the output folder:
 
-## 2.8 Preliminary conclusions
+output
+	|-eval_20181123111049_1_data_prep_quickstart_10_2_1_ConvNetQuake.json
 
-* 500s windows from funvisis >>> 10s windows from ConvNetQuake
-* Predicting with ConvNetQuake model over funvisis finds too much events
-* Using 50s windows worked better than 10s. Other values to be tested
+This file contains the results in .json format. When running over a cluster, retrieving these files and processing them with some of the automation utilities provided by the report is critical in order to generate reports, plots and papers.  
+
+
+### 2.6 Step 6. Detect over raw data (OPTIONAL)
+
+While the evaluation step is enough to assess the performance of a model, you may be curious to apply the model to real data.  
+
+	python step6_eval_over_mseed.py \
+	--config_file_path experiments/config_test_model1.ini \
+	--component_N 0 \
+	--component_E 0 \
+	--n_clusters 2 \
+	--window_size 10 \
+	--checkpoint_dir output/data_prep_quickstart/10/CL2/CO1/model1/checkpoints \
+	--output_dir output/data_prep_quickstart/10/CL2/CO1/model1/eval \
+	--catalog_path output/data_prep_quickstart/catalog.json \
+	--stream_path output/data_prep_quickstart/10/mseed
+
+It will try detecting P-waves over all the files within "output/data_prep_quickstart/10/mseed". The tool will generate some nice plots within the "output/data_prep_quickstart/10/CL2/CO1/model1/eval" folder. 
+
+
+
+
+
+
 
 ## 2.9 Troubleshooting
 

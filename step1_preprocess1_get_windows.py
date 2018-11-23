@@ -105,28 +105,28 @@ def main(input_stream, input_metadata, output_dir, plot, onlyPattern, onlyStatio
 def createDirectories(base_dir, plot):
 
     if os.path.exists(os.path.join(base_dir, cfg.mseed_dir)):
-        print ("[obtain training windows] \033[91m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.mseed_dir))
+        print ("[obtain training windows] \033[93m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.mseed_dir))
         shutil.rmtree(os.path.join(base_dir, cfg.mseed_dir)) 
     os.makedirs(os.path.join(base_dir, cfg.mseed_dir)) 
     if os.path.exists(os.path.join(base_dir, cfg.mseed_event_dir)):
-        print ("[obtain training windows] \033[91m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.mseed_event_dir))
+        print ("[obtain training windows] \033[93m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.mseed_event_dir))
         shutil.rmtree(os.path.join(base_dir, cfg.mseed_event_dir)) 
     os.makedirs(os.path.join(base_dir, cfg.mseed_event_dir))
     if os.path.exists(os.path.join(base_dir, cfg.mseed_noise_dir)):
-        print ("[obtain training windows] \033[91m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.mseed_noise_dir))
+        print ("[obtain training windows] \033[93m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.mseed_noise_dir))
         shutil.rmtree(os.path.join(base_dir, cfg.mseed_noise_dir))
     os.makedirs(os.path.join(base_dir, cfg.mseed_noise_dir))
     if plot:
         if os.path.exists(os.path.join(base_dir, cfg.png_dir)):
-            print ("[obtain training windows] \033[91m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.png_dir))
+            print ("[obtain training windows] \033[93m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.png_dir))
             shutil.rmtree(os.path.join(base_dir, cfg.png_dir)) 
         os.makedirs(os.path.join(base_dir, cfg.png_dir))
         if os.path.exists(os.path.join(base_dir, cfg.png_event_dir)):
-            print ("[obtain training windows] \033[91m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.png_event_dir))
+            print ("[obtain training windows] \033[93m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.png_event_dir))
             shutil.rmtree(os.path.join(base_dir, cfg.png_event_dir)) 
         os.makedirs(os.path.join(base_dir, cfg.png_event_dir))
         if os.path.exists(os.path.join(base_dir, cfg.png_noise_dir)):
-            print ("[obtain training windows] \033[91m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.mseed_event_dir))
+            print ("[obtain training windows] \033[93m WARNING!!\033[0m Target directory already existed but has been deleted: "+os.path.join(base_dir, cfg.mseed_event_dir))
             shutil.rmtree(os.path.join(base_dir, cfg.mseed_event_dir)) 
         os.makedirs(os.path.join(base_dir, cfg.png_noise_dir))
 

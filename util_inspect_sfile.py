@@ -6,6 +6,10 @@ import re
 import seisobs #https://github.com/d-chambers/seisobs
 
 def main(args):
+    # Create dir to store the plot
+    if not os.path.exists(os.path.dirname(args.output_path)):
+        os.makedirs(os.path.dirname(args.output_path))
+
     dir_path = args.stream_path
 
     #nordic format to obspy format
@@ -13,7 +17,7 @@ def main(args):
     print(cat)
 
     #write to .xml
-    cat.write('output/metadata.xml', format='QUAKEML', nsmap={'my_ns': 'http://test.org/xmlns/0.1'})
+    cat.write(args.output_path, format='QUAKEML', nsmap={'my_ns': 'http://test.org/xmlns/0.1'})
 
     print("Resource ID = "+str(cat.resource_id))
     for event in cat.events:
@@ -32,7 +36,8 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stream_path",type=str,default=None,
+    parser.add_argument("--stream_path",type=str, required=True,
                         help="path to mseed to analyze")
+    parser.add_argument("--output_path",type=str, required=True)
     args = parser.parse_args()
     main(args)
