@@ -1,10 +1,10 @@
 # DeepQuake
 
-## Setup
+## 1 Setup
 
-### 1 Setup environment (local machine)
+### 1.1 Setup environment (local machine)
 
-NOTE: We tried the setup both on Mac and Linux. As the project many old libraries (including tensorflow 0.12) the setup may become troublesome (each time we do it we found new problems). Good luck.
+NOTE: We tried the setup both on Mac and Linux. As the project involves many old libraries (including tensorflow 0.12) the setup may become troublesome (each time we do it we found new problems). Good luck.
 
 Let's first create and activate a Python's virtualenv (let's assume you save your Python virtualenvs within MY_VIRTUALENVS folder, e.g. $HOME/virtualenvs):
  
@@ -17,7 +17,7 @@ Now download the repository from GiHub into your home directory or wherever you 
 	git clone https://github.com/rtous/deepquake.git
 	cd deepquake
 
-WARNING: An "ouput" directory will be created after running some of the programs. This directory will not be part of the repository (is listed within .gitignore).
+INFO: An "ouput" directory will be created after running some of the programs. This directory will not be part of the repository (is listed within .gitignore).
 
 In case you don't have pip installed let's install it:
 
@@ -29,7 +29,7 @@ Install all the dependencies listed within requirements.txt:
 
 NOTE: According to the ConvNetQuake repo they used tensorflow 0.11. We tried with 0.12 and it works. However, this version is very old (currently 1.12) and we plan updating at some point.
 
-### 2.1 Prepare the input data (pre-pre-processing)
+### 1.2 Prepare the input data (pre-pre-processing)
 
 We work with multiple datasets (currently "datos1", "datos2" and "datos3"). Each dataset must be located within the "input" folder (from the root of the repo) and must have the following structure:
 
@@ -42,9 +42,9 @@ input
 
 We call "pre-pre-processing" the process of adapting the raw data provided by the experts into this structure and the proper file formats. The datasets that you will find in the repo are already pre-pre-processed. However, if you need to include a new dataset you should consider the requirements described in the following subsections.
 
-NOTE: Currently the input data is part of the repository for convenience. If these data would become too big we would remove them. Currently the data includes:
+NOTE: Currently the input data is part of the repository for convenience. If these data would become too big we would remove them.
 
-### 2.1.1 .mseed files
+### 1.2.1 .mseed files
 
 Requirements of the "mseed" folder of a dataset:
 
@@ -58,7 +58,7 @@ Let's start by plotting different variants of valid input .mseed files:
 	python util_plot_mseed.py --stream_path input/datos3/mseed/2018-03-03-1929-00M.BENV__001_HH_1Z.mseed --output_dir output/plots
 	python util_plot_mseed.py --stream_path input/datos1/mseed/2015-01-10-0517-00S.mseed --output_dir output/quickstart
 
-### sfiles metadata
+### 1.2.2 sfiles metadata
 
 While the .mseed files include some metadata (station code and times basically) the information of the events (origin, magnitude, P-wave arrival at each station) need to be located in seisan s-files (Nordic format). If you need to do a pre-pre-processing (dealing with new, raw data) you need to consider the following:
 
