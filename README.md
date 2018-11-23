@@ -210,10 +210,10 @@ Let's eval the generated model against the test dataset (20% of the data):
 	--tfrecords_dir output/data_prep_quickstart/10/CL2/CO1/tfrecords/test
 
 The evaluation will show the results but will also generate a file like this at the root of the output folder:
-
+```
 output
-	|-eval_20181123111049_1_data_prep_quickstart_10_2_1_ConvNetQuake.json
-
+    |-eval_20181123111049_1_data_prep_quickstart_10_2_1_ConvNetQuake.json
+```
 This file contains the results in .json format. When running over a cluster, retrieving these files and processing them with some of the automation utilities provided by the report is critical in order to generate reports, plots and papers.  
 
 
@@ -235,16 +235,42 @@ While the evaluation step is enough to assess the performance of a model, you ma
 It will try detecting P-waves over all the files within "output/data_prep_quickstart/10/mseed". The tool will generate some nice plots within the "output/data_prep_quickstart/10/CL2/CO1/model1/eval" folder. 
 
 
+## 3 Tools for running experiments in a cluster and processing the results automatically 
+
+Real experiments are usually submitted to a computing cluster. The following sections explain some utilities to facilitate this task.  
+
+### 3.1 Scripts
+
+The "scripts" folder includes some bash scripts to make things easier. For instance, if you would like to perform the training and evaluation with the improved model (model 2) you could do it with simple running:
+
+	./scripts/step4_and_5_train_and_eval_over_tfrecords.sh quickstart 10 2 1 model2 experiments/config_test_model2.ini
 
 
+### 3.2 The "experiments" folder
+
+Within the "experiments" folders you will find the configuration files (and some special configuration files such as the ones used for location detection) used in the experiments that we have already done. In this folder you will also find .txt files with the qsub commands that we submitted to the Arvei cluster. In order to launch experiments on Arvei read this:
+
+* [Launching experiments on Arvei](arvei/arvei_user_guide.md)
+
+* [Some comments about using Arvei](arvei/arvei_notes.md)
 
 
+### 3.3 Processing the results
 
-## 2.9 Troubleshooting
+The repo includes some utilities to automate the processing of results. The script:
+
+	bring_results_from_server.sh
+
+Performs an scp of all result .json files into the local experiments/results folder. 
+
+The tool "results.py" includes utilities to gather all results and generate plots, etc. You can use it as a module or run it (it has a main that generate some plots, but you may need to change that).
+
+
+## 4 Troubleshooting
 
 	"tensorflow.python.framework.errors_impl.InternalError: Unable to get element from the feed as bytes." -> cannot find the checkpoint file
 
-	"ValueError: string_input_producer requires a non-null input tensor" -> the training directoris should be "positive" and "negative" without "s" at the end.
+	"ValueError: string_input_producer requires a non-null input tensor" -> the training directories should be "positive" and "negative" without "s" at the end.
 
 	"InvalidArgumentError (see above for traceback): Name: <unknown>, Feature: end_time is required but could not be found." -> Using old positives/negatives (downloaded), generate new ones
 
@@ -254,135 +280,4 @@ It will try detecting P-waves over all the files within "output/data_prep_quicks
 
 	"tf.errors.OutOfRangeError" -> a parameter from config .ini is not being passed correctly. Harcode it in config.py instead.
 
-## 2.10 TODO
-
-* WARNING: the arrival times of some stations are missing, are we wrongly considering them as noise??
-
-
-* Intensive testing of different parameters
-* Overlapping detections fussion 
-* (arvei) use local scratch in arvei instead of nas (LOW PRIORITY)
-* preserve the execution environment just in case (specially arvei) (LOW PRIORITY)
-	* keep tensorflow 0.12.0 wheel somewhere (pip install tensorflow==0.12.0 stop working) 
-	* keep openquake.hazardlib==0.22.0 from https://github.com/gem/oq-hazardlib/releases 
-	* keep a full copy of the arvei virtualenv somewhere
-* window skipping gap. 
-* tensorboard traces
-
-DONE:
-
-* leave one out cross validation (tested but discarded, too much training time)
-* (arvei) move .out and .err instead of redirecting stderr and stdout 
-* Change step1_preprocess1_funvisis2oklahoma.py to generate training samples trough a pure sliding window
-* making plotting optional
-* Extract Funvisis data for ALL stations
-* Prepare my own noise and see how it looks like
-* (ignored) metadata 5/2 21:50 does not have stream. Stream 14/02 does not have metadata
-* (ignored) data from stations HEL and URI is flat. Some signals from other stations are not complete
-
-## 2.11 Lessons learned
-
-* Ar
-
-/* ——————————————————————————————————- */
-/* ——————————————————————————————————- */
-/* ——————————————————————————————————- */
-
-## ANNEX 1. Running tperol/ConvNetQuake
-
-Input:
-
-* Input 1: 47 1-month 3-channel 100Hz .mseed files (2 stations, 13 GSOK027, 34 GSOK029).
-* Continous records (not divided by events) for years 2014, 2015, 2016.
-* Input 2: A .csv catalog of around 3K events for these years
-
-Workflow:
- 
-1. Cluster locations in the catalog into 6 regions (kmeans, Voronoi map)
-2. Use the catalog info to extract the waveforms for the 3K events from the 47 input streams. Pick only 10 second per event. (the positives)
-3. (optional) augment these data (x2)
-4. Generate +700K synthetic noise windows (the negatives)
-5. Get 90% for training, 10% for test. 
-6. Train with a CNN with a 10x100x3 input and 7 outputs (6 locations, 1 no event).
-
-Results:
-
-* Acceptable (but low) location accuracy (around 76%)
-* 100% recall
-* 93% precission
-
-Open issues
-
-* Why 10 seconds?
-* It's ok treating data from both stations the same way?
-
-Get the repo:
-
-	git clone https://github.com/tperol/ConvNetQuake.git
-	cd /vol/ConvNetQuake
-
-### A1.1 Predict
-
-	mkdir -p data/streams
-	#DOWNLOAD data/streams/GS0K029_5-2015.mseed into data/streams
-	export PYTHONPATH=.
-	mkdir -p models/convnetquake
-	#DOWNLOAD models/convnetquake/model-32000 into folder models/convnetquake
-	#DOWNLOAD models/convnetquake/checkpoint into folder models/convnetquake
-	./bin/predict_from_stream.py --stream_path data/streams/GSOK027_8-2014.mseed \
-	--checkpoint_dir models/convnetquake --n_clusters 6 \
-	--window_step 11 --output output/july_detections/from_stream \
-	--max_windows 8640
-
-	(takes about 3-5 minutes, results within the output dir)
-
-### A1.2 Train with already preprocessed data 
-	
-	mkdir -p data/6_clusters
-	#DOWNLOAD data/6_clusters/detection/train into data/6_clusters (Note: +4GB!!)
-	./bin/train --dataset data/6_clusters/train --checkpoint_dir output/convnetquake --n_clusters 6
-
-	(takes few hours but with less than 5 minuts you can see that it works)
-
-### A1.3 Preprocess the data your own
-
-Cluster events (generate region centroids):
-
-	mkdir data/catalogs
-	#DOWNLOAD data/catalogs/OK_2014-2015-2016.csv into data/catalogs
-	./bin/preprocess/cluster_events --src data/catalogs/OK_2014-2015-2016.csv --dst data/6_clusters --n_components 6 --model KMeans
-	#This outputs in data/6_clusters: catalog_with_cluster_ids.csv: catalog of labeled events + clusters_metadata.json: number of events per clusters.
-
-Match training data to clusters (regions):
-
-	./bin/preprocess/create_dataset_events.py --stream_dir data/streams --catalog data/6_clusters/catalog_with_cluster_ids.csv --output_dir data/6_clusters/events --save_mseed True --plot False
-	#A data/6_clusters/events deixa les dades per a l'entrenament
-
-Data augmentation:
-
-	./bin/preprocess/data_augmentation.py --tfrecords data/6_clusters/events --output data/6_clusters/augmented_data/augmented_stetch_std1-2.tfrecords --std_factor 1.2
-
-Noise windows:
-
-	#DOWNLOAD data/catalogs/OK_2014-Benz_catalog-2016.csv into data/catalogs
-	./bin/preprocess/create_dataset_noise.py --stream_path data/streams/GSOK027_8-2014.mseed --catalog data/catalogs/Benz_catalog.csv --output_dir data/noise_OK029/noise_august --plot
-
-The training data should be within a directory with this structure:
-	
-	train
-		|- positive 
-		|- negative
-
-Now you can run step 2.2 again to train with your own data.
-
-## ANNEX 2. Using a Docker container 
-
-	(I'm not actually using this because of memory constraints)
-
-	docker build -t deepquake:latest -f Dockerfile .
-	docker run -it --name deepquake -v //Users/rtous/DockerVolume:/vol -d -p 8080:8080 deepquake:latest
-	docker exec -it deepquake bash
-	cd vol
-
-	(Note: basic tests require about 8GB of memory so using Docker may not be a good idea depending on your hardware. Be sure to change the memory limit on Docker preferences.)
 
