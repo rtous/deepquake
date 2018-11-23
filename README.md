@@ -168,6 +168,21 @@ output
                             |-positive
                                 |-positives.tfrecords
 ```
+
+```
+output
+	|-data_prep_quickstart
+		|-10
+			|-CL2
+                |-CO1
+                    |-tfrecords
+                        |-test
+                            |-positive
+                                |-positives.tfrecords
+                        |-train
+                            |-positive
+                                |-positives.tfrecords
+```
 Ths "CL2" and "CO1" subfolders mean "two classes" (event and no event) and "1 component" (only Z) respectively. You can generate different training/test datasets (e.g. with all the components and more classes if you need location detection) with this tool without the need to do the costly step 1 again. 
 
 ### 2.3 Step 3. Preprocessing 3. Generating tfrecords for negatives
