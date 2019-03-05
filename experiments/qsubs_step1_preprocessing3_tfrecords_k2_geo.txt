@@ -1,0 +1,41 @@
+# 1 DATA PREPROCESSING (50 seconds)
+
+# 1.1 METADATA
+
+./scripts/step0_metadata.sh
+
+
+# 1.2 GET WINDOWS
+
+# DATOS 1
+
+./scripts/step1_preprocess1_get_windows.sh datos1 50
+
+# DATOS 2
+
+./scripts/step1_preprocess1_get_windows.sh datos2 50
+
+# DATOS 3
+
+./scripts/step1_preprocess1_get_windows.sh datos3 50
+
+
+# 1.3 JOIN DIRS
+
+# DATOS 1 + DATOS 2
+
+./scripts/step1_preprocess1bis_join_dirs.sh datos1 datos2 50
+
+# (DATOS 1 + DATOS 2) + DATOS 3
+
+./arvei/launch.sh ./scripts/step1_preprocess1bis_join_dirs.sh datos1_datos2 datos3 50
+
+
+# 1.4 GET TFRECORDS (K=3)
+
+./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos1_datos2_datos3 50 3 1 experiments/clusters_all_k2_geo.json
+
+
+# 2 TRAINING (MODEL 2)
+
+./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos1_datos2_datos3 50 3 1 model2 experiments/config_model2.ini
