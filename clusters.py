@@ -34,10 +34,11 @@ class Clusters():
                 p2 = np.array([c.lat2,c.lon2])
                 p3 = np.array([lat,lon])
                 d = np.cross(p2-p1,p3-p1)/np.linalg.norm(p2-p1)
+                #print ("[clusters] dist ("+str(lat)+", "+str(lon)+") to cluster "+str(c.id)+"=="+str(d))
                 if min_distance == None or min_distance > d:
                     min_distance = d
                     c_with_min_distance = c
-                return c_with_min_distance
+            return c_with_min_distance
         else:
             print ("[clusters] \033[91m ERROR!!\033[0m Wrong value for clusters type = "+self.type)
             sys.exit(0)  

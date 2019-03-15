@@ -98,7 +98,7 @@ def write(stream_files, subfolder):
             lat, lon, depth = cat.getLatLongDepth(stream_start_time, stream_end_time, station)
             c = clusters.nearest_cluster(lat, lon, depth)
             cluster_id = c.id
-            print("[tfrecords positives] Assigning cluster "+str(cluster_id)+" to event.")
+            print("[tfrecords positives] Assigning cluster "+str(cluster_id)+" to event (lat =  "+str(lat)+", lon = "+str(lon)+").")
         #cluster_id = filtered_catalog.cluster_id.values[event_n]
 
         n_traces = len(st_event_select)

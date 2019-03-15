@@ -99,6 +99,16 @@ class Catalog():
                 jevents["events"].append(jevent)
             json.dump(jevents, f, indent=4)
 
+    def export_javascript(self, path):
+        with open(path, 'w') as f:
+            i = 0
+            for e in self.events:
+                f.write("t"+str(i)+": {\n")
+                f.write("center: {lat: "+str(e.lat)+", lng:"+str(e.lon)+"},\n")
+                f.write("population: "+str(e.mag)+"\n")
+                f.write("},\n")
+                i = i + 1
+
     def import_json(self, path):
         with open(path) as f:  
             jdata = json.load(f)
@@ -155,19 +165,19 @@ class Detection():
         self.station = station
         self.ptime = ptime
 
-#if __name__ == "__main__":
-#    print ("\033[92m******************** STEP 1/5. PREPROCESSING STEP 1/4. IMPORT METADATA *******************\033[0m ")
-#    parser = argparse.ArgumentParser()
-#    parser.add_argument("--input_path", type=str)
-#    parser.add_argument("--output_path", type=str)
-#    args = parser.parse_args()
-#    if not os.path.exists(os.path.dirname(args.output_path)):
-#        os.makedirs(os.path.dirname(args.output_path))
-#    c = Catalog()
-#    c.import_sfiles(args.input_path)
-#    c.export_json(args.output_path)
-#    c.import_json(args.output_path)
-#    c.export_json("out2.json")
+if __name__ == "__main__":
+    print ("\033[92m******************** CATALOG TOOL *******************\033[0m ")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input_path", type=str)
+    parser.add_argument("--output_path", type=str)
+    args = parser.parse_args()
+    if not os.path.exists(os.path.dirname(args.output_path)):
+        os.makedirs(os.path.dirname(args.output_path))
+    c = Catalog()
+    #c.import_sfiles(args.input_path)
+    #c.export_json(args.output_path)
+    c.import_json(args.input_path)
+    c.export_javascript(args.output_path)
 
 
     
