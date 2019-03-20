@@ -16,16 +16,18 @@ if __name__ == "__main__":
         first_line = True
         i = 0
         for line in ins:
-            if line == "\n":
+            if line.isspace():
                 first_line = True
                 i = i + 1 
             elif first_line:
                 #tokens = line.split(" ")
                 #sfile_name = tokens[2]+"-"+tokens[3]+"-"+tokens[4]+".S"+tokens[0]+tokens[1]
-                sfile_name = "01-0000-00M.S20"+"%02d" % (i,)+"01"
+                sfile_name = "01-0000-00M.S"+"%04d" % (i+1900,)+"01"
                 dest_file = open(args.output_path+"/"+sfile_name, 'a')
                 dest_file.write(line)
                 first_line = False
             else:
+                line = line.rstrip()
                 dest_file.write(line[:-1]+" "+"\n")
-                
+
+

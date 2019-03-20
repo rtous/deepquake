@@ -41,7 +41,10 @@ class Catalog():
             lat = obspyCatalogMeta.events[0].origins[0].latitude
             lon = obspyCatalogMeta.events[0].origins[0].longitude
             depth = obspyCatalogMeta.events[0].origins[0].depth
-            mag = obspyCatalogMeta.events[0].magnitudes[0].mag
+            if len(obspyCatalogMeta.events[0].magnitudes) > 0:
+                mag = obspyCatalogMeta.events[0].magnitudes[0].mag
+            else:
+                mag = -1 #TODO
             #cluster = nearest_centroid_model.predict([[lat, lon]])[0]
             #e = Event(eventOriginTime, lat, lon, depth, mag, cluster)
             e = Event(eventOriginTime, lat, lon, depth, mag)
