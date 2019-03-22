@@ -90,6 +90,9 @@ def write(stream_files, subfolder):
         st_event_select = utils.select_components(st_event, cfg) 
 
         #LOCATION CLUSTERS
+        lat = 0
+        lon = 0
+        depth = 0
         cluster_id = 0 #We work with only one location for the moment (cluster id = 0)
         if cat is not None:
             stream_start_time = st_event[0].stats.starttime
@@ -104,14 +107,14 @@ def write(stream_files, subfolder):
             print("[tfrecords positives] Assigning cluster "+str(cluster_id)+" to event (lat =  "+str(lat)+", lon = "+str(lon)+").")
         #cluster_id = filtered_catalog.cluster_id.values[event_n]
 
-        if cluster_id > 0: #no clustering or a valid cluster
+        if cluster_id >= 0: #no clustering or a valid cluster
             n_traces = len(st_event_select)
             if utils.check_stream(st_event_select, cfg):
                 #print("[tfrecords positives] Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
                 # Write tfrecords
                 writer.write(st_event_select, cluster_id) 
         else:
-            print ("[tfrecords positives] \033[91m WARNING!!\033[0m Discarding point as no cluster found for the given lat, lon, depth")
+            print ("[tfrecords positives] \033[91m WARNING!!\033[0m Discarding point as no cluster found for the given lat="+str(lat)+", lon="+str(lon)+", depth="+str(depth))
 
     # Cleanup writer
     print("[tfrecords positives] Number of windows written={}".format(writer._written))

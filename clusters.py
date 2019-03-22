@@ -163,6 +163,15 @@ if __name__ == "__main__":
     else:
         print("No nearest cluster (polygon) found.")
 
+    cs = Clusters()
+    print("polygons (Valencia)...")
+    cs.import_json("experiments/clusters_all_k3_geo_polygons.json")
+    c = cs.nearest_cluster(9.895, -69.438, 0.0) 
+    if c is not None:
+        print("Nearest cluster id = "+str(c.id))
+        print("Nearest cluster label = "+str(c.label))
+    else:
+        print("No nearest cluster (polygon) found.")
 
 
 

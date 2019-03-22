@@ -2,28 +2,58 @@
 
 # 1.1 METADATA
 
-./scripts/step0_metadata.sh
+python util_datos3_bigsfile2sfiles.py --bigsfile_path=../deepquake_data/datos4/arrival_times2017.txt --output_path=../deepquake_data/datos4/sfiles_nordicformat
+python util_datos3_bigsfile2sfiles.py --bigsfile_path=../deepquake_data/datos5/arrival_times.txt --output_path=../deepquake_data/datos5/sfiles_nordicformat
 
 python step0_preprocess0_metadata.py \
 --input_path ../deepquake_data/datos4/sfiles_nordicformat \
 --output_path output/data_prep_datos4/catalog.json
 
+python step0_preprocess0_metadata.py \
+--input_path ../deepquake_data/datos5/sfiles_nordicformat \
+--output_path output/data_prep_datos5/catalog.json
+
 
 # 1.2 GET WINDOWS
 
-# DATOS 4
+python util_add_mseed_extension.py --stream_path=../deepquake_data/datos4/mseed
+python util_add_mseed_extension.py --stream_path=../deepquake_data/datos5/mseed
 
 python step1_preprocess1_get_windows.py \
 --debug 1 \
 --window_size 50 \
 --raw_data_dir ../deepquake_data/datos4/mseed \
 --catalog_path output/data_prep_datos4/catalog.json \
---prep_data_dir output/data_prep_datos4/50/CL3G
+--prep_data_dir output/data_prep_datos4/50
+
+python step1_preprocess1_get_windows.py \
+--debug 1 \
+--window_size 50 \
+--raw_data_dir ../deepquake_data/datos5/mseed \
+--catalog_path output/data_prep_datos5/catalog.json \
+--prep_data_dir output/data_prep_datos5/50
 
 
 # 1.4 GET TFRECORDS (K=3)
 
-./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos4 50 4 1 experiments/clusters_all_k3_geo_polygons.json
+python step2_preprocess2_create_tfrecords_positives.py \
+--catalog_path output/data_prep_datos4/catalog.json \
+--clusters_file_path experiments/clusters_all_k3_geo_polygons.json \
+--window_size 50 \
+--component_N 0 \
+--component_E 0 \
+--prep_data_dir output/data_prep_datos4/50 \
+--tfrecords_dir output/data_prep_datos4/50/CL3G/CO1/tfrecords
+
+python step2_preprocess2_create_tfrecords_positives.py \
+--catalog_path output/data_prep_datos5/catalog.json \
+--clusters_file_path experiments/clusters_all_k3_geo_polygons.json \
+--window_size 50 \
+--component_N 0 \
+--component_E 0 \
+--prep_data_dir output/data_prep_datos5/50 \
+--tfrecords_dir output/data_prep_datos5/50/CL3G/CO1/tfrecords
+
 
 
 # 2 TRAINING (MODEL 2)
