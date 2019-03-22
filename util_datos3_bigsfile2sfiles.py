@@ -28,6 +28,6 @@ if __name__ == "__main__":
                 first_line = False
             else:
                 line = line.rstrip()
-                dest_file.write(line[:-1]+" "+"\n")
+                dest_file.write(line[:-1]+"  "+"\n")
 
 

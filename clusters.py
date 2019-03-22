@@ -10,6 +10,8 @@ import sys
 import csv
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 import numpy as np
+from shapely.geometry import Polygon
+from shapely.geometry import Point
 
 class Clusters():
 
@@ -39,6 +41,14 @@ class Clusters():
                     min_distance = d
                     c_with_min_distance = c
             return c_with_min_distance
+        elif self.type == "polygons":
+            p = Point(lat, lon)
+            for c in self.clusters:
+                #print("checking cluster "+c.label)
+                poly = Polygon(((c.x1, c.y1), (c.x2, c.y2), (c.x3, c.y3), (c.x4, c.y4)))
+                if p.within(poly):
+                    return c
+            return None #this clustering can result in None. The earthquake should be discarded during the generation of tfrecords.
         else:
             print ("[clusters] \033[91m ERROR!!\033[0m Wrong value for clusters type = "+self.type)
             sys.exit(0)  
@@ -67,6 +77,11 @@ class Clusters():
                 for jcluster in jdata['clusters']:
                     c = LineCluster(jcluster['lat1'], jcluster['lon1'], jcluster['lat2'], jcluster['lon2'], jcluster['id'], jcluster['label'])
                     self.clusters.append(c)
+            elif jdata['clusters_type'] == "polygons":
+                self.type = "polygons"
+                for jcluster in jdata['clusters']:
+                    c = PolygonCluster(jcluster['x1'], jcluster['y1'], jcluster['x2'], jcluster['y2'], jcluster['x3'], jcluster['y3'], jcluster['x4'], jcluster['y4'], jcluster['id'], jcluster['label'])
+                    self.clusters.append(c)
             else:
                 print ("[clusters] \033[91m ERROR!!\033[0m Unrecognized clusters option: "+jdata['clusters_type'])
                 sys.exit(0)   
@@ -87,6 +102,19 @@ class LineCluster():
         self.lon2 = lon2
         self.id = id
         self.label = label
+
+class PolygonCluster():
+    def __init__(self, x1, y1, x2, y2, x3, y3, x4, y4, id, label):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+        self.x3 = x3
+        self.y3 = y3
+        self.x4 = x4
+        self.y4 = y4
+        self.id = id
+        self.label = label
         
 if __name__ == "__main__":
     print ("\033[92m******************** TESTING CLUSTERING MODULE *******************\033[0m ")
@@ -94,16 +122,46 @@ if __name__ == "__main__":
     #parser.add_argument("--clusters_file_path", type=str)
     #args = parser.parse_args()
     cs = Clusters()
+    print("kmeans...")
     cs.import_json("clusters_kmeans_template.json")
     c = cs.nearest_cluster(41.47744336, 2.07199462, 0.0)
     print("Nearest cluster id = "+str(c.id))
     print("Nearest cluster label = "+str(c.label))
 
     cs = Clusters()
+    print("lines...")
     cs.import_json("clusters_lines_template.json")
     c = cs.nearest_cluster(41.47744336, 2.07199462, 0.0)
     print("Nearest cluster id = "+str(c.id))
     print("Nearest cluster label = "+str(c.label))
+
+    cs = Clusters()
+    print("polygons (Andorra)...")
+    cs.import_json("clusters_polygons_template.json")
+    c = cs.nearest_cluster(42.505479, 1.581206, 0.0) 
+    if c is not None:
+        print("Nearest cluster id = "+str(c.id))
+        print("Nearest cluster label = "+str(c.label))
+    else:
+        print("No nearest cluster (polygon) found.")
+    cs = Clusters()
+    print("polygons (Cubelles)...")
+    cs.import_json("clusters_polygons_template.json")
+    c = cs.nearest_cluster(41.209584, 1.627644, 0.0) 
+    if c is not None:
+        print("Nearest cluster id = "+str(c.id))
+        print("Nearest cluster label = "+str(c.label))
+    else:
+        print("No nearest cluster (polygon) found.")
+    cs = Clusters()
+    print("polygons (Huesca)...")
+    cs.import_json("clusters_polygons_template.json")
+    c = cs.nearest_cluster(42.138258, -0.401985, 0.0) 
+    if c is not None:
+        print("Nearest cluster id = "+str(c.id))
+        print("Nearest cluster label = "+str(c.label))
+    else:
+        print("No nearest cluster (polygon) found.")
 
 
 

@@ -97,15 +97,21 @@ def write(stream_files, subfolder):
             station = st_event[0].stats.station
             lat, lon, depth = cat.getLatLongDepth(stream_start_time, stream_end_time, station)
             c = clusters.nearest_cluster(lat, lon, depth)
-            cluster_id = c.id
+            if c is not None: #can be None in case of polygons-based clustering
+                cluster_id = c.id
+            else:
+                cluster_id = -1 #signaling that the earthquake has to be discarded
             print("[tfrecords positives] Assigning cluster "+str(cluster_id)+" to event (lat =  "+str(lat)+", lon = "+str(lon)+").")
         #cluster_id = filtered_catalog.cluster_id.values[event_n]
 
-        n_traces = len(st_event_select)
-        if utils.check_stream(st_event_select, cfg):
-            #print("[tfrecords positives] Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
-            # Write tfrecords
-            writer.write(st_event_select, cluster_id) 
+        if cluster_id > 0: #no clustering or a valid cluster
+            n_traces = len(st_event_select)
+            if utils.check_stream(st_event_select, cfg):
+                #print("[tfrecords positives] Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
+                # Write tfrecords
+                writer.write(st_event_select, cluster_id) 
+        else:
+            print ("[tfrecords positives] \033[91m WARNING!!\033[0m Discarding point as no cluster found for the given lat, lon, depth")
 
     # Cleanup writer
     print("[tfrecords positives] Number of windows written={}".format(writer._written))

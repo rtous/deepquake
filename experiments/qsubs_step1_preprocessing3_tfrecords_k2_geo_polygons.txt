@@ -1,0 +1,31 @@
+# 1 DATA PREPROCESSING (50 seconds)
+
+# 1.1 METADATA
+
+./scripts/step0_metadata.sh
+
+python step0_preprocess0_metadata.py \
+--input_path ../deepquake_data/datos4/sfiles_nordicformat \
+--output_path output/data_prep_datos4/catalog.json
+
+
+# 1.2 GET WINDOWS
+
+# DATOS 4
+
+python step1_preprocess1_get_windows.py \
+--debug 1 \
+--window_size 50 \
+--raw_data_dir ../deepquake_data/datos4/mseed \
+--catalog_path output/data_prep_datos4/catalog.json \
+--prep_data_dir output/data_prep_datos4/50/CL3G
+
+
+# 1.4 GET TFRECORDS (K=3)
+
+./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos4 50 4 1 experiments/clusters_all_k3_geo_polygons.json
+
+
+# 2 TRAINING (MODEL 2)
+
+./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos4 50 4 1 model2 experiments/config_model2.ini
