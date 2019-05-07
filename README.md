@@ -4,7 +4,17 @@
 
 ### 1.1 Setup environment (local machine)
 
+WARNING: This repository only works with Python 2.7. 
+
 NOTE: We tried the setup both on Mac and Linux. As the project involves many old libraries (including tensorflow 0.12) the setup may become troublesome (each time we do it we found new problems). Good luck.
+
+In case you don't have pip installed let's install it:
+
+	sudo curl https://bootstrap.pypa.io/get-pip.py | sudo python
+
+In case you don't have virtualenv installed let's install it:
+
+	sudo pip install virtualenv
 
 Let's first create and activate a Python's virtualenv (let's assume you save your Python virtualenvs within MY_VIRTUALENVS folder, e.g. $HOME/virtualenvs):
  
@@ -19,13 +29,9 @@ Now download the repository from GiHub into your home directory or wherever you 
 
 INFO: An "ouput" directory will be created after running some of the programs. This directory will not be part of the repository (is listed within .gitignore).
 
-In case you don't have pip installed let's install it:
-
-	curl https://bootstrap.pypa.io/get-pip.py | python
-
 Install all the dependencies listed within requirements.txt:
 
-	pip install -r requirements.txt
+	xargs -L 1 pip install < requirements.txt
 
 NOTE: According to the ConvNetQuake repo they used tensorflow 0.11. We tried with 0.12 and it works. However, this version is very old (currently 1.12) and we plan updating at some point.
 
