@@ -1,0 +1,25 @@
+# DATOS 1
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_10_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 10 6 3 experiments/clusters_all_k5.json
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_10_Z_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 10 6 1 experiments/clusters_all_k5.json 
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_20_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 20 6 3 experiments/clusters_all_k5.json  
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_20_Z_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 20 6 1 experiments/clusters_all_k5.json  
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_30_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 30 6 3 experiments/clusters_all_k5.json  
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_30_Z_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 30 6 1 experiments/clusters_all_k5.json  
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_40_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 40 6 3 experiments/clusters_all_k5.json  
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_40_Z_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 40 6 1 experiments/clusters_all_k5.json  
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 6 3 experiments/clusters_all_k5.json  
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_Z_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 6 1 experiments/clusters_all_k5.json  
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_60_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 60 6 3 experiments/clusters_all_k5.json  
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_60_Z_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 60 6 1 experiments/clusters_all_k5.json  

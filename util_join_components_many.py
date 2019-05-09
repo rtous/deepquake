@@ -36,18 +36,7 @@ import time
 import pandas as pd
 import utils
 
-def join_many(streamHHN_path, streamHHE_path, ):
-	stream_files = [file for file in os.listdir(args.stream_path) if
-                    fnmatch.fnmatch(file, "*1Z")]
-
-    for stream_file in stream_files:
-        stream_file_without_component_code = stream_file[0:-2]
-        tokens = stream_file_without_extension.split("-")
-        #2018-03-03-1929-00M
-        sfile_name = tokens[2]+"-"+tokens[3]+"-"+tokens[4]+".S"+tokens[0]+tokens[1]
-        #03-1908-S201803
-        print(sfile_name)
-
+        
 def read_stream(stream_path):
     print "+ Loading Stream {}".format(stream_path)
     stream = utils.read(stream_path)
@@ -56,25 +45,31 @@ def read_stream(stream_path):
     return stream
 
 def main(args):
-    streamHHN = read_stream(args.streamHHN_path)
-    streamHHE = read_stream(args.streamHHE_path)
-    streamHHZ = read_stream(args.streamHHZ_path)
-    resultStream = streamHHN
-    resultStream += streamHHE
-    resultStream += streamHHZ
+    stream_files = [file for file in os.listdir(args.input_dir_path) if
+                    fnmatch.fnmatch(file, "*1Z")]
 
-    resultStream.write(args.output_stream_path+".mseed", format="MSEED") 
-
+    for stream_file in stream_files:
+        stream_file_without_component_code = stream_file[0:-2]
+        try:
+	        streamHHN = read_stream(args.input_dir_path+"/"+stream_file_without_component_code+"2N")
+	        streamHHE = read_stream(args.input_dir_path+"/"+stream_file_without_component_code+"3E")
+	        streamHHZ = read_stream(args.input_dir_path+"/"+stream_file_without_component_code+"1Z")
+	        resultStream = streamHHN
+	        resultStream += streamHHE
+	        resultStream += streamHHZ
+	        target_path =args.output_dir_path+"/"+stream_file[0:-3]+".mseed"
+	        print("writing to "+target_path)
+	        resultStream.write(target_path, format="MSEED") 
+        except Exception, err:
+	        print Exception, err
+	        print("\033[91m ERROR:\033[0m Failed to process components for "+target_path)
 
 if __name__ == "__main__":
+	#python util_join_components_many.py --input_dir_path=/Users/rtous/Downloads/DeteccionSismos/Datos_full/datos_carabobo --output_dir_path=/Users/rtous/DockerVolume/data/deepquake/datos5/mseed
     parser = argparse.ArgumentParser()
-    parser.add_argument("--streamHHN_path",type=str, default=None,
-                        help="path to mseed")
-    parser.add_argument("--streamHHE_path",type=str, default=None,
-                        help="path to mseed")
-    parser.add_argument("--streamHHZ_path",type=str, default=None,
-                        help="path to mseed")
-    parser.add_argument("--output_stream_path",type=str, default=None,
+    parser.add_argument("--input_dir_path",type=str, default=None,
+                        help="path to directory with separate files for each component")
+    parser.add_argument("--output_dir_path",type=str, default=None,
                         help="path to output mseed")
     args = parser.parse_args()
     main(args)

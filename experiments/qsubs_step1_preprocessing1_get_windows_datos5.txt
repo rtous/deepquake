@@ -1,0 +1,18 @@
+# DATA PREPROCESSING
+
+qsub -S /bin/bash -N run_v1_step0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step0_metadata.sh
+
+# DATOS 5
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 10
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_20 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 20
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_30 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 30
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_40 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 40
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 50
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_60 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 60
+
