@@ -40,6 +40,8 @@ import utils
 import catalog
 import shutil
 
+from obspy.signal.trigger import classic_sta_lta
+
 #total_streams = 0
 #total_station_streams = 0
 #total_negatives = 0
@@ -168,6 +170,17 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
 
             substream = stream.select(station=station)
 
+            ###########
+            #DEBUG: STA_LTA
+            #df = substream[0].stats.sampling_rate
+            #cft = classic_sta_lta(substream[0], int(5 * df), int(10 * df))
+            #for trig in cft:
+            #    if trig > 1.99:
+            #        print(trig)
+            ###########
+
+
+
             ptime = cat.getPtime(stream_start_time, stream_end_time, station)
 
             if ptime is not None:
@@ -202,6 +215,12 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
                         #Do not use negatives 
 
                         #window_ptime = cat.getPtime(window_start, window_end, station)
+
+
+                        #FILTER?
+                        #win_filt = win.copy()
+                        if cfg.filterfreq >= 0.0:
+                            win.filter('lowpass', freq=cfg.filterfreq, corners=2, zerophase=True)
 
                         if (window_start <= event_window_start) and (window_end >= event_window_end): #positive: #positive
                             win.write(os.path.join(output_dir, cfg.mseed_event_dir)+"/"+utils.fileNameWithoutExtension(stream_file)+"_"+station+"_"+str(idx)+".mseed", format="MSEED") 
@@ -244,6 +263,7 @@ if __name__ == "__main__":
     parser.add_argument("--station",type=str, default=None)
     parser.add_argument("--pattern",type=str, default=None)
     parser.add_argument("--window_size", type=int, required=True)
+    parser.add_argument("--filterfreq",type=float, default=argparse.SUPPRESS)
     parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
     args = parser.parse_args()
 
@@ -258,6 +278,10 @@ if __name__ == "__main__":
     else:
         pattern = args.pattern
 
+    if cfg.filterfreq == 0:
+        print ("[obtain training windows] \033[93m WARNING!!\033[0m Frequency filter disabled")
+    else:
+        print ("[obtain training windows] \033[93m WARNING!!\033[0m Frequency filter enabled (lowpass, "+str(cfg.filterfreq)+")")
     main(args.raw_data_dir, cat, args.prep_data_dir, args.plot, args.pattern, args.station)
 
 

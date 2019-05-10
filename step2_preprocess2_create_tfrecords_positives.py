@@ -31,6 +31,7 @@ import utils
 import random
 import catalog
 import clusters
+from obspy.signal.trigger import classic_sta_lta
 
 
 def preprocess_stream(stream):
@@ -112,6 +113,15 @@ def write(stream_files, subfolder):
             if utils.check_stream(st_event_select, cfg):
                 #print("[tfrecords positives] Writing sample with dimensions "+str(cfg.WINDOW_SIZE)+"x"+str(st_event[0].stats.sampling_rate)+"x"+str(n_traces))
                 # Write tfrecords
+
+                #DEBUG: STA_LTA
+                #df = st_event_select[0].stats.sampling_rate
+                #cft = classic_sta_lta(st_event_select[0], int(5 * df), int(10 * df))
+                #for trig in cft:
+                #    if trig != .0:
+                #        print(trig)
+
+
                 writer.write(st_event_select, cluster_id) 
         else:
             print ("[tfrecords positives] \033[91m WARNING!!\033[0m Discarding point as no cluster found for the given lat="+str(lat)+", lon="+str(lon)+", depth="+str(depth))

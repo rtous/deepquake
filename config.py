@@ -22,6 +22,9 @@ class Config(object):
         default_config = configparser.ConfigParser()
         default_config.read("config_default.ini")   
         self.read_attribute('debug', BOOLEAN, default_config, config, args)
+
+        #preprocessing
+        self.read_attribute('filterfreq', FLOAT, default_config, config, args)
         self.read_attribute('sampling_rate', INT, default_config, config, args)
         self.read_attribute('window_size', INT, default_config, config, args)
         self.read_attribute('pwave_window', INT, default_config, config, args)

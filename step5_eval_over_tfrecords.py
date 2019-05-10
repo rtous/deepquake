@@ -278,6 +278,29 @@ if __name__ == "__main__":
         print("[validation] f1 = "+str(f1)+"%")
     else:
         print("[validation] cannot compute f1 as precision+recall == 0")
+    #fall-out or false positive rate (FPR)
+    #proportion of non-relevant (negative) documents that are retrieved, out of all non-relevant documents available
+    #if falsePositives+trueNegatives>0:
+    #    fallout = 100*float(falsePositives)/(falsePositives+trueNegatives)
+    #    print("[validation] fallout = "+str(100*fallout)+"%")
+    #else:
+    #    print("[validation] cannot compute fallout as falsePositives+trueNegatives == 0")
+
+    #specificity, selectivity or true negative rate (TNR)
+    #which gives you work are false positives (negatives not properly classified)
+    #specificity measures how well you calssify negatives
+    if falsePositives+trueNegatives>0:
+        specificity = 100*float(trueNegatives)/(falsePositives+trueNegatives)
+        print("[validation] specificity = "+str(specificity)+"%")
+    else:
+        print("[validation] cannot compute specificity as falsePositives+trueNegatives == 0")
+
+    #balanced accuracy
+    if specificity+recall>0:
+        balanced_accuracy = specificity+recall/2.0
+        print("[validation] balanced accuracy = "+str(balanced_accuracy)+"%")
+    else:
+        print("[validation] cannot compute balanced accuracy as specificity+recall == 0")
 
     if (locationHit+locationMiss)>0:
         locationAccuracy = 100*float(locationHit)/(locationHit+locationMiss)

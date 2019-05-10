@@ -1,0 +1,56 @@
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model1 config_default.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model2 experiments/config_model2.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model3 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model3 experiments/config_model3.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model4 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model4 experiments/config_model4.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model5 experiments/config_model5.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model6 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model6 experiments/config_model6.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model7 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model7 experiments/config_model7.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model8 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model8 experiments/config_model8.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model9 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model9 experiments/config_model9.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model10 experiments/config_model10.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model11 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model11 experiments/config_model11.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model12 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model12 experiments/config_model12.ini
+
+
+
+
+
+model3: f1 = 67.4160861305%
+	- 4 conv (=model2, 4 menys que convnetquake) , 3 fc (=model2, 2 més que convnetquake) , ksize = convnetquake, pooling = true
+	- =model2 però amb ksize de convnetquake
+model4: f1 = 67.0901287554%
+	- =model2 però sense pooling i amb ksize de convnetquake
+model5: f1 = 56.2523900574%
+	- 2 conv (2 menys que model 2, 6 menys que convnetquake) , 3 fc (1 menys que model2, 1 més que convnetquake) , ksize = convnetquake, pooling = false
+	- xarxa menys simple
+model6: f1 = 71.3343799058%
+	- conventquake però amb pooling
+model7: f1 = 78.6195286195%
+	- convnetquake però amb ksize de model2 
+model8: f1 = 76.6728781975%
+	- convnetquake però amb 2 fc (com model2)
+model9: f1 = 77.8262328078%
+	- convnetquake però amb ksize de model2 i 2 fc (com model2)
+model10: f1 = 77.3688592839%
+	- convnetquake però amb ksize de model2 i una capa menys de conv
+model11: f1 = f1 = 73.679154659%
+	- convnetquake però amb ksize de model2 + pooling
+model12: f1 = 80.2426343154%
+	- convnetquake però amb ksize de model2 + 1 capa més de conv
+
+
+----------------------------
+20.000 steps:
+
+
