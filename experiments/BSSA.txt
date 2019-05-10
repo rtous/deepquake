@@ -22,6 +22,10 @@ qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_
 
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model12 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model12 experiments/config_model12.ini
 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model13 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model13 experiments/config_model13.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model14 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14 experiments/config_model14.ini
+
 
 
 
@@ -33,7 +37,7 @@ model4: f1 = 67.0901287554%
 	- =model2 però sense pooling i amb ksize de convnetquake
 model5: f1 = 56.2523900574%
 	- 2 conv (2 menys que model 2, 6 menys que convnetquake) , 3 fc (1 menys que model2, 1 més que convnetquake) , ksize = convnetquake, pooling = false
-	- xarxa menys simple
+	- xarxa més simple
 model6: f1 = 71.3343799058%
 	- conventquake però amb pooling
 model7: f1 = 78.6195286195%
@@ -48,9 +52,15 @@ model11: f1 = f1 = 73.679154659%
 	- convnetquake però amb ksize de model2 + pooling
 model12: f1 = 80.2426343154%
 	- convnetquake però amb ksize de model2 + 1 capa més de conv
+model13: f1 = 
+	- convnetquake però amb ksize de model2 + 2 capa més de conv
+model14: f1 = 
+	- convnetquake però amb ksize de model2 + cap capa de conv
 
 
 ----------------------------
 20.000 steps:
+
+model2: 75.1778360165%
 
 
