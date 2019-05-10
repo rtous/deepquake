@@ -2,7 +2,7 @@ reset
 
 #set title "small vs. big batch size"
 
-set xlabel "window size (seconds)"
+set xlabel "window size (s)"
 
 #set xtics nomirror
 #set xtics 128
