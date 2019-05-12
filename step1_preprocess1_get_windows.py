@@ -195,6 +195,10 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
                     customPlot(substream, ptime, os.path.join(output_dir, cfg.png_dir)+"/"+utils.fileNameWithoutExtension(stream_file)+"_"+station+".png")
                 substream.write(os.path.join(output_dir, cfg.mseed_dir)+"/"+utils.fileNameWithoutExtension(stream_file)+"_"+station+".mseed", format="MSEED") 
 
+                #Simplified preprocessing
+                #if cfg.only_one_positive:
+                #    one_positive = substream.slice(starttime=ptime - cfg.window_size/2, endtime=ptime + cfg.window_size/2, keep_empty_traces=False, nearest_sample=True)
+
                 #Slice the input stream vertically, by time
                 sys.stdout.write("[obtain training windows] Extracting positive and negative windows and saving into "+output_dir+":\n")
                 win_gen = substream.slide(window_length=cfg.window_size,

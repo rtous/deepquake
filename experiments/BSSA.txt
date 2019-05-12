@@ -26,9 +26,17 @@ qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_
 
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model14 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14 experiments/config_model14.ini
 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model15 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model15 experiments/config_model15.ini
 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model16 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model16 experiments/config_model16.ini
 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model17 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model17 experiments/config_model17.ini
 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model18 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model18 experiments/config_model18.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos4_50_model19 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model19 experiments/config_model19.ini
+
+-------------------------
 
 model3: f1 = 67.4160861305%
 	- 4 conv (=model2, 4 menys que convnetquake) , 3 fc (=model2, 2 més que convnetquake) , ksize = convnetquake, pooling = true
@@ -56,11 +64,30 @@ model13: f1 =
 	- convnetquake però amb ksize de model2 + 2 capa més de conv
 model14: f1 = 
 	- convnetquake però amb ksize de model2 + cap capa de conv
-
+model15: f1 = 
+	- model12 meitat batch size i learning rate
+model16: f1 =
+	- model12 + pooling
+model17: f1 =
+	- model12 + pooling + 1fc layer more
+model18: f1 =
+	- model12 + 1fc layer more
+model19: f1 =
+	- model12 + 2fc layer more
 
 ----------------------------
 20.000 steps:
 
-model2: 75.1778360165%
+model1: f1 = 76.2549537649%
+model2: f1 = 75.1778360165%
+
+----------------------------
+10.000 steps:
+model12: f1 = 81.3874485965%
+model13: f1 = 79.8642917727%
+model15: f1 = 79.3565683646%
+model16: f1 = 75.2827140549%
+model17: f1 = 78.7783595113%
+model19: f1 = 80.4761904762%
 
 

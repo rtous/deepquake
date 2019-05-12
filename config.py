@@ -55,6 +55,7 @@ class Config(object):
         
         #tfrecords
         self.read_attribute('random_seed', INT, default_config, config, args)
+        self.read_attribute('balance', BOOLEAN, default_config, config, args)
 
         #model
         self.read_attribute('model', STRING, default_config, config, args)

@@ -42,12 +42,21 @@ def main(_):
 
     stream_files = [file for file in os.listdir(os.path.join(dataset_dir, cfg.mseed_noise_dir)) if
                     fnmatch.fnmatch(file, args.pattern)]  
-    total_negatives = len(stream_files)
+    
     print("[tfrecords negatives] Matching files: "+str(len(stream_files)))
 
     # Divide training and validation datasets
     random.seed(cfg.random_seed)
     random.shuffle(stream_files)
+
+    if cfg.balance:
+        stream_files_positives = [file for file in os.listdir(os.path.join(dataset_dir, cfg.mseed_event_dir)) if
+                    fnmatch.fnmatch(file, args.pattern)]
+        total_positives = len(stream_files_positives)
+        stream_files = stream_files[0:total_positives]
+        print ("[tfrecords negatives] \033[93m WARNING!!\033[0m Balancing dataset, only "+str(len(stream_files))+" negatives used.")
+
+    total_negatives = len(stream_files)
     stream_files_train = stream_files[:int(0.8*total_negatives)-1]
     stream_files_validation = stream_files[int(0.8*total_negatives):]
 
@@ -107,6 +116,7 @@ if __name__ == "__main__":
     parser.add_argument("--file_name",type=str, default="negatives.tfrecords")
     parser.add_argument("--window_size", type=int, required=True)
     parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
+    parser.add_argument("--balance",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
 
     #parser.add_argument("--redirect_stdout_stderr",type=bool, default=False)
 
