@@ -49,9 +49,9 @@ from obspy.signal.trigger import classic_sta_lta
 #total_discarded = 0
 #total_time = 0
 
-def preprocess_stream(stream):
-    stream = stream.detrend('constant')
-    return stream.normalize()
+#def preprocess_stream(stream):
+#    stream = stream.detrend('constant')
+#    return stream.normalize()
 
 def obspyDateTime2PythonDateTime(odt):
     return dt.datetime(odt.year, odt.month, odt.day, odt.hour, odt.minute, odt.second)
@@ -60,8 +60,9 @@ def customPlot(st, timeP, outfile):
     fig = plt.figure()
     st.plot(fig=fig)
     plt.axvline(x=obspyDateTime2PythonDateTime(timeP), linewidth=2, color='g')
-    plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.window_size), linewidth=2, color='g')
-    plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.window_avoid_negatives), linewidth=2, color='g')
+    #plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.window_size), linewidth=2, color='r')
+    plt.axvline(x=obspyDateTime2PythonDateTime(timeP-cfg.window_avoid_negatives_before), linewidth=2, color='b')
+    plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.window_avoid_negatives_after), linewidth=2, color='b')
 
     total_time = st[-1].stats.endtime - st[0].stats.starttime
     max_windows = int((total_time - cfg.window_size) / cfg.window_step_negatives)
@@ -152,7 +153,9 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
         print "[obtain training windows] Loading Stream {}".format(stream_file)
         stream = read(stream_path)
         print '[obtain training windows] Preprocessing stream'
-        stream = preprocess_stream(stream)
+        stream = utils.preprocess_stream(stream, cfg.filterfreq)
+
+
         stream_start_time = stream[0].stats.starttime
         stream_end_time = stream[-1].stats.endtime
         total_time = stream_start_time - stream_end_time 
@@ -199,6 +202,8 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
                 #if cfg.only_one_positive:
                 #    one_positive = substream.slice(starttime=ptime - cfg.window_size/2, endtime=ptime + cfg.window_size/2, keep_empty_traces=False, nearest_sample=True)
 
+                
+
                 #Slice the input stream vertically, by time
                 sys.stdout.write("[obtain training windows] Extracting positive and negative windows and saving into "+output_dir+":\n")
                 win_gen = substream.slide(window_length=cfg.window_size,
@@ -223,8 +228,8 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
 
                         #FILTER?
                         #win_filt = win.copy()
-                        if cfg.filterfreq >= 0.0:
-                            win.filter('lowpass', freq=cfg.filterfreq, corners=2, zerophase=True)
+                        #if cfg.filterfreq >= 0.0:
+                        #    win.filter('lowpass', freq=cfg.filterfreq, corners=2, zerophase=True)
 
                         if (window_start <= event_window_start) and (window_end >= event_window_end): #positive: #positive
                             win.write(os.path.join(output_dir, cfg.mseed_event_dir)+"/"+utils.fileNameWithoutExtension(stream_file)+"_"+station+"_"+str(idx)+".mseed", format="MSEED") 
@@ -232,7 +237,7 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
                                 win.plot(outfile=os.path.join(output_dir, cfg.png_event_dir)+"/"+utils.fileNameWithoutExtension(stream_file)+"_"+station+"_"+str(idx)+".png")
                             sys.stdout.write("\033[92m.\033[0m")
                             num_positives = num_positives+1
-                        elif (window_end < event_window_start-cfg.window_avoid_negatives) or (window_start > event_window_end+cfg.window_avoid_negatives):# negative
+                        elif (window_end < event_window_start-cfg.window_avoid_negatives_before) or (window_start > event_window_end+cfg.window_avoid_negatives_after):# negative
                             win.write(os.path.join(output_dir, cfg.mseed_noise_dir)+"/"+utils.fileNameWithoutExtension(stream_file)+"_"+station+"_noise"+str(idx)+".mseed", format="MSEED") 
                             if plot:
                                 win.plot(outfile=os.path.join(output_dir, cfg.png_noise_dir)+"/"+utils.fileNameWithoutExtension(stream_file)+"_"+station+"_noise"+str(idx)+".png")
@@ -267,7 +272,7 @@ if __name__ == "__main__":
     parser.add_argument("--station",type=str, default=None)
     parser.add_argument("--pattern",type=str, default=None)
     parser.add_argument("--window_size", type=int, required=True)
-    parser.add_argument("--filterfreq",type=float, default=argparse.SUPPRESS)
+    parser.add_argument("--filterfreq",type=bool, default=argparse.SUPPRESS)
     parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
     args = parser.parse_args()
 

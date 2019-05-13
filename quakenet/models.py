@@ -87,6 +87,7 @@ class ConvNetQuake(tflib.model.BaseModel):
         tf.contrib.layers.l2_regularizer(self.config.regularization),
         weights_list=tf.get_collection(tf.GraphKeys.WEIGHTS))
 
+#######################################################################
 
   def validation_metrics(self):
     if not hasattr(self, '_validation_metrics'):
@@ -203,8 +204,12 @@ class ConvNetQuake2(ConvNetQuake):
           tf.add_to_collection(tf.GraphKeys.ACTIVATIONS, current_layer)
           self.layers['pool{}'.format(i+1)] = current_layer
 
-    bs, width, _ = current_layer.get_shape().as_list()
-    current_layer = tf.reshape(current_layer, [bs, width*c], name="reshape")
+    bs, width, aux = current_layer.get_shape().as_list()
+    print("bs="+str(bs)+", width="+str(width)+", aux="+str(aux)+"")
+    if depth > 0:
+      current_layer = tf.reshape(current_layer, [bs, width*c], name="reshape")
+    else:
+      current_layer = tf.reshape(current_layer, [bs, width*aux], name="reshape")
 
     # FULLY CONNECTED LAYERS
     for i in range(0, self.config.num_fc_layers-1):
@@ -224,9 +229,10 @@ class ConvNetQuake2(ConvNetQuake):
     
     self.layers['class_prob'] = tf.nn.softmax(current_layer, name='class_prob')
     self.layers['class_prediction'] = tf.argmax(self.layers['class_prob'], 1, name='class_pred')
-
-    tf.contrib.layers.apply_regularization(
-        tf.contrib.layers.l2_regularizer(self.config.regularization),
-        weights_list=tf.get_collection(tf.GraphKeys.WEIGHTS))
+    
+    if depth > 0:
+      tf.contrib.layers.apply_regularization(
+          tf.contrib.layers.l2_regularizer(self.config.regularization),
+          weights_list=tf.get_collection(tf.GraphKeys.WEIGHTS))
 
 

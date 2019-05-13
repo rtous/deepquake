@@ -30,9 +30,15 @@ import datetime as dt
 from openquake.hazardlib.geo.geodetic import distance
 import sys
 
-def preprocess_stream(stream):
+def preprocess_stream(stream, filterfreq):
     stream = stream.detrend('constant')
-    return stream.normalize()
+    stream = stream.normalize()
+
+    if filterfreq:
+        stream = stream.taper(max_percentage=0.05, type="hann")
+        stream = stream.filter("bandpass", freqmin = 0.5, freqmax = 10.0)
+        #stream = stream.filter('lowpass', freq=20.0, corners=2, zerophase=True)
+    return stream
 
 def obspyDateTime2PythonDateTime(odt):
     return dt.datetime(odt.year, odt.month, odt.day, odt.hour, odt.minute, odt.second)

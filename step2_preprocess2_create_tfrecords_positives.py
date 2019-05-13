@@ -34,9 +34,9 @@ import clusters
 from obspy.signal.trigger import classic_sta_lta
 
 
-def preprocess_stream(stream):
-    stream = stream.detrend('constant')
-    return stream.normalize()
+#def preprocess_stream(stream):
+#    stream = stream.detrend('constant')
+#    return stream.normalize()
 
 
 def main(_):
@@ -85,7 +85,9 @@ def write(stream_files, subfolder):
         #print "[tfrecords positives] Loading Stream {}".format(stream_file)
         st_event = read(stream_path)
         #print '[tfrecords positives] Preprocessing stream'
-        st_event = preprocess_stream(st_event)  
+        
+        #No cal fer 2 vegades!
+        #st_event = utils.preprocess_stream(st_event, cfg.filterfreq)  
 
         #Select only the specified channels
         st_event_select = utils.select_components(st_event, cfg) 
