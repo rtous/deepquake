@@ -128,7 +128,7 @@ model2: f1 = 84.1332580463% f1 = 83.6288967706%
 model12: f1 = 90.7695335564%
 model14: fi = 50%
 
-Results with new preprocessing (WITH FILTER), 3 components, balanced, 10000 steps
+Results with new preprocessing (exclusion window WITH FILTER), 3 components, balanced, 10000 steps
 **************************************************
 
 qsub -S /bin/bash -N run_v1_step0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step0_metadata.sh
@@ -152,7 +152,7 @@ model4: f1 = 83.0627380237%
 model5: f1 = 81.3684016921%
 model12: f1 = 92.7739863509% accuracy = 92.9161747344%
 
-Results with new preprocessing (NOT FILTER), 3 components, balanced, 10000 steps
+Results with new preprocessing (exclusion window NOT FILTER), 3 components, balanced, 10000 steps
 **************************************************
 
 mv 50 50f
@@ -167,17 +167,29 @@ qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_
 
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model2 experiments/config_model2.ini
 
-model1: 
-model2: 
-model12: 
-model14: 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model14 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14 experiments/config_model14.ini
+
+model1: f1 = 87.6377952756% accuracy = 87.6426603699%
+model2: f1 = 84.2321943186% accuracy = 84.9271940181% 
+model12: f1 = 91.0779949681% accuracy = 90.9287682015%
+model14: f1 = 88.7396286053% accuracy = 88.7839433294%
 
 Results with new preprocessing (NO OVERLAPPING NOT FILTER), 3 components, balanced, 10000 steps
 **************************************************
 
 qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 50 50
 
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 2 3 
 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model1 config_default.ini
 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model2 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model2 experiments/config_model2.ini
 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model12 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model12 experiments/config_model12.ini
 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model14 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14 experiments/config_model14.ini
+
+model1: 
+model2: 
+model12: 
+model14: 

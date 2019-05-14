@@ -40,8 +40,8 @@ import utils
 def read_stream(stream_path):
     print "+ Loading Stream {}".format(stream_path)
     stream = utils.read(stream_path)
-    print '+ Preprocessing stream'
-    stream = utils.preprocess_stream(stream)
+    #print '+ Preprocessing stream'
+    #stream = utils.preprocess_stream(stream)
     return stream
 
 def main(args):
@@ -62,7 +62,7 @@ def main(args):
 	        resultStream.write(target_path, format="MSEED") 
         except Exception, err:
 	        print Exception, err
-	        print("\033[91m ERROR:\033[0m Failed to process components for "+target_path)
+	        print("\033[91m ERROR:\033[0m Failed to join components")
 
 if __name__ == "__main__":
 	#python util_join_components_many.py --input_dir_path=/Users/rtous/Downloads/DeteccionSismos/Datos_full/datos_carabobo --output_dir_path=/Users/rtous/DockerVolume/data/deepquake/datos5/mseed

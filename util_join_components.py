@@ -51,8 +51,8 @@ def join_many(streamHHN_path, streamHHE_path, ):
 def read_stream(stream_path):
     print "+ Loading Stream {}".format(stream_path)
     stream = utils.read(stream_path)
-    print '+ Preprocessing stream'
-    stream = utils.preprocess_stream(stream)
+    #print '+ Preprocessing stream'
+    #stream = utils.preprocess_stream(stream)
     return stream
 
 def main(args):
