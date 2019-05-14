@@ -1,0 +1,1004 @@
+./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 10 2 3 model1 config_default.ini
+python step4_train.py 	--config_file_path config_default.ini 	--n_clusters 2 	--window_size 10 	--tfrecords_dir output/data_prep_datos5/10/CL2/CO3/tfrecords 	--checkpoint_dir output/data_prep_datos5/10/CL2/CO3/model1/checkpoints
+[92m******************** STEP 4/5. TRAINING *******************[0m 
+[[94mCONFIG[0m] debug = False[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] sampling_rate = 100[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] window_size = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pwave_window = 0[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] window_step_negatives = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] window_avoid_negatives = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] component_Z = True[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] component_N = True[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] component_E = True[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] mean_velocity = 18000.0[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] mseed_dir = mseed[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] mseed_event_dir = mseed_event_windows[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] mseed_noise_dir = mseed_noise[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] png_dir = png[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] png_event_dir = png_event_windows[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] png_noise_dir = png_noise[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] output_tfrecords_dir_positives = positive[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] output_tfrecords_dir_negatives = negative[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] random_seed = 666[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] model = ConvNetQuake[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] num_conv_layers = 8[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] conv_stride = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] num_fc_layers = 1[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] fc_size = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling = False[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] n_clusters = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling_window = 5[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling_stride = 5[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] ksize = 3[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] learning_rate = 0.001[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] batch_size = 128[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] display_step = 50[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] n_threads = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] resume = False[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] profiling = False[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] add = 1[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] checkpoint_step = 1000[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] max_checkpoint_step = 5000[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] window_step_predict = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] save_sac = False[94m (OVERWRITTEN)[0m
+[train] path to positives = output/data_prep_datos5/10/CL2/CO3/tfrecords/train/positive
+[train] path to negaties = output/data_prep_datos5/10/CL2/CO3/tfrecords/train/negative
+[[94mINFO[0m] INPUT LAYER shape = 256x1001x3
+[[94mINFO[0m] LAYER conv1 shape = 256x501x32
+[[94mINFO[0m] LAYER conv2 shape = 256x251x32
+[[94mINFO[0m] LAYER conv3 shape = 256x126x32
+[[94mINFO[0m] LAYER conv4 shape = 256x63x32
+[[94mINFO[0m] LAYER conv5 shape = 256x32x32
+[[94mINFO[0m] LAYER conv6 shape = 256x16x32
+[[94mINFO[0m] LAYER conv7 shape = 256x8x32
+[[94mINFO[0m] LAYER conv8 shape = 256x4x32
+[[94mINFO[0m] LAST LAYER CONV RESHAPED shape = 256x128
+[[94mINFO[0m] FC LAYER shape = 256x2
+[train] Initializing all variables.
+[train] Starting data threads coordinator.
+[train] Starting optimization.
+Step 10 | 3s (296ms) | loss = 0.9404 | det. acc. = 58.2% | loc. acc. = 58.2%
+Step 20 | 5s (244ms) | loss = 0.8849 | det. acc. = 61.7% | loc. acc. = 61.7%
+Step 30 | 7s (227ms) | loss = 0.8606 | det. acc. = 62.5% | loc. acc. = 62.5%
+Step 40 | 9s (218ms) | loss = 0.8054 | det. acc. = 69.5% | loc. acc. = 69.5%
+Step 50 | 11s (212ms) | loss = 0.8449 | det. acc. = 66.8% | loc. acc. = 66.8%
+Step 60 | 12s (208ms) | loss = 0.8020 | det. acc. = 66.8% | loc. acc. = 66.8%
+Step 70 | 14s (205ms) | loss = 0.7156 | det. acc. = 73.0% | loc. acc. = 73.0%
+Step 80 | 16s (203ms) | loss = 0.7184 | det. acc. = 73.4% | loc. acc. = 73.4%
+Step 90 | 18s (202ms) | loss = 0.6654 | det. acc. = 77.7% | loc. acc. = 77.7%
+Step 100 | 20s (200ms) | loss = 0.6715 | det. acc. = 76.6% | loc. acc. = 76.6%
+Step 110 | 22s (199ms) | loss = 0.7350 | det. acc. = 72.3% | loc. acc. = 72.3%
+Step 120 | 24s (199ms) | loss = 0.6822 | det. acc. = 78.1% | loc. acc. = 78.1%
+Step 130 | 26s (198ms) | loss = 0.6431 | det. acc. = 76.6% | loc. acc. = 76.6%
+Step 140 | 28s (198ms) | loss = 0.6102 | det. acc. = 80.1% | loc. acc. = 80.1%
+Step 150 | 30s (197ms) | loss = 0.6317 | det. acc. = 81.6% | loc. acc. = 81.6%
+Step 160 | 31s (196ms) | loss = 0.5791 | det. acc. = 83.2% | loc. acc. = 83.2%
+Step 170 | 33s (196ms) | loss = 0.6147 | det. acc. = 79.3% | loc. acc. = 79.3%
+Step 180 | 35s (195ms) | loss = 0.6677 | det. acc. = 75.0% | loc. acc. = 75.0%
+Step 190 | 37s (195ms) | loss = 0.5404 | det. acc. = 82.8% | loc. acc. = 82.8%
+Step 200 | 39s (194ms) | loss = 0.6181 | det. acc. = 78.5% | loc. acc. = 78.5%
+Step 210 | 41s (194ms) | loss = 0.5874 | det. acc. = 78.5% | loc. acc. = 78.5%
+Step 220 | 42s (193ms) | loss = 0.5032 | det. acc. = 86.3% | loc. acc. = 86.3%
+Step 230 | 44s (193ms) | loss = 0.6062 | det. acc. = 79.3% | loc. acc. = 79.3%
+Step 240 | 46s (193ms) | loss = 0.5510 | det. acc. = 84.0% | loc. acc. = 84.0%
+Step 250 | 48s (192ms) | loss = 0.5756 | det. acc. = 81.2% | loc. acc. = 81.2%
+Step 260 | 50s (192ms) | loss = 0.5549 | det. acc. = 82.4% | loc. acc. = 82.4%
+Step 270 | 52s (192ms) | loss = 0.5160 | det. acc. = 84.0% | loc. acc. = 84.0%
+Step 280 | 54s (192ms) | loss = 0.5335 | det. acc. = 87.1% | loc. acc. = 87.1%
+Step 290 | 55s (191ms) | loss = 0.5826 | det. acc. = 83.6% | loc. acc. = 83.6%
+Step 300 | 57s (191ms) | loss = 0.5445 | det. acc. = 85.2% | loc. acc. = 85.2%
+Step 310 | 59s (191ms) | loss = 0.4706 | det. acc. = 89.8% | loc. acc. = 89.8%
+Step 320 | 61s (191ms) | loss = 0.5195 | det. acc. = 85.2% | loc. acc. = 85.2%
+Step 330 | 63s (191ms) | loss = 0.5210 | det. acc. = 81.6% | loc. acc. = 81.6%
+Step 340 | 65s (191ms) | loss = 0.4738 | det. acc. = 85.5% | loc. acc. = 85.5%
+Step 350 | 67s (191ms) | loss = 0.5726 | det. acc. = 80.5% | loc. acc. = 80.5%
+Step 360 | 69s (191ms) | loss = 0.6166 | det. acc. = 80.1% | loc. acc. = 80.1%
+Step 370 | 70s (190ms) | loss = 0.4305 | det. acc. = 88.3% | loc. acc. = 88.3%
+Step 380 | 72s (190ms) | loss = 0.4630 | det. acc. = 84.4% | loc. acc. = 84.4%
+Step 390 | 74s (190ms) | loss = 0.4783 | det. acc. = 85.9% | loc. acc. = 85.9%
+Step 400 | 76s (190ms) | loss = 0.4804 | det. acc. = 87.5% | loc. acc. = 87.5%
+Step 410 | 78s (190ms) | loss = 0.6424 | det. acc. = 83.2% | loc. acc. = 83.2%
+Step 420 | 80s (190ms) | loss = 0.4627 | det. acc. = 86.7% | loc. acc. = 86.7%
+Step 430 | 82s (190ms) | loss = 0.5507 | det. acc. = 84.8% | loc. acc. = 84.8%
+Step 440 | 84s (190ms) | loss = 0.4730 | det. acc. = 86.7% | loc. acc. = 86.7%
+Step 450 | 85s (190ms) | loss = 0.4895 | det. acc. = 85.9% | loc. acc. = 85.9%
+Step 460 | 87s (190ms) | loss = 0.4279 | det. acc. = 89.1% | loc. acc. = 89.1%
+Step 470 | 89s (190ms) | loss = 0.4554 | det. acc. = 89.8% | loc. acc. = 89.8%
+Step 480 | 91s (190ms) | loss = 0.4151 | det. acc. = 89.8% | loc. acc. = 89.8%
+Step 490 | 93s (189ms) | loss = 0.4281 | det. acc. = 89.5% | loc. acc. = 89.5%
+Step 500 | 95s (189ms) | loss = 0.4212 | det. acc. = 89.8% | loc. acc. = 89.8%
+Step 510 | 97s (189ms) | loss = 0.4551 | det. acc. = 84.8% | loc. acc. = 84.8%
+Step 520 | 98s (189ms) | loss = 0.4195 | det. acc. = 87.9% | loc. acc. = 87.9%
+Step 530 | 100s (189ms) | loss = 0.4870 | det. acc. = 85.9% | loc. acc. = 85.9%
+Step 540 | 102s (189ms) | loss = 0.5370 | det. acc. = 82.4% | loc. acc. = 82.4%
+Step 550 | 104s (189ms) | loss = 0.4813 | det. acc. = 85.5% | loc. acc. = 85.5%
+Step 560 | 106s (190ms) | loss = 0.4610 | det. acc. = 88.3% | loc. acc. = 88.3%
+Step 570 | 108s (190ms) | loss = 0.4473 | det. acc. = 89.1% | loc. acc. = 89.1%
+Step 580 | 110s (190ms) | loss = 0.4055 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 590 | 112s (190ms) | loss = 0.3986 | det. acc. = 89.8% | loc. acc. = 89.8%
+Step 600 | 114s (189ms) | loss = 0.4873 | det. acc. = 87.5% | loc. acc. = 87.5%
+Step 610 | 116s (189ms) | loss = 0.3905 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 620 | 117s (189ms) | loss = 0.4209 | det. acc. = 90.2% | loc. acc. = 90.2%
+Step 630 | 119s (189ms) | loss = 0.3815 | det. acc. = 90.6% | loc. acc. = 90.6%
+Step 640 | 121s (189ms) | loss = 0.4617 | det. acc. = 85.5% | loc. acc. = 85.5%
+Step 650 | 123s (189ms) | loss = 0.3920 | det. acc. = 90.6% | loc. acc. = 90.6%
+Step 660 | 125s (189ms) | loss = 0.3807 | det. acc. = 90.2% | loc. acc. = 90.2%
+Step 670 | 127s (189ms) | loss = 0.3710 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 680 | 129s (189ms) | loss = 0.3879 | det. acc. = 89.5% | loc. acc. = 89.5%
+Step 690 | 130s (189ms) | loss = 0.3655 | det. acc. = 89.5% | loc. acc. = 89.5%
+Step 700 | 132s (189ms) | loss = 0.3990 | det. acc. = 90.6% | loc. acc. = 90.6%
+Step 710 | 134s (189ms) | loss = 0.3873 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 720 | 136s (189ms) | loss = 0.3582 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 730 | 138s (189ms) | loss = 0.3367 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 740 | 140s (189ms) | loss = 0.3680 | det. acc. = 88.7% | loc. acc. = 88.7%
+Step 750 | 142s (189ms) | loss = 0.3656 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 760 | 144s (189ms) | loss = 0.3577 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 770 | 145s (189ms) | loss = 0.3809 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 780 | 147s (189ms) | loss = 0.3833 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 790 | 149s (189ms) | loss = 0.3135 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 800 | 151s (189ms) | loss = 0.4019 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 810 | 153s (189ms) | loss = 0.4137 | det. acc. = 87.5% | loc. acc. = 87.5%
+Step 820 | 155s (189ms) | loss = 0.3438 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 830 | 157s (189ms) | loss = 0.3919 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 840 | 158s (189ms) | loss = 0.3430 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 850 | 160s (188ms) | loss = 0.3318 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 860 | 162s (188ms) | loss = 0.3503 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 870 | 164s (188ms) | loss = 0.4347 | det. acc. = 89.8% | loc. acc. = 89.8%
+Step 880 | 166s (188ms) | loss = 0.3320 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 890 | 168s (188ms) | loss = 0.3990 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 900 | 170s (189ms) | loss = 0.3603 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 910 | 172s (189ms) | loss = 0.3734 | det. acc. = 90.6% | loc. acc. = 90.6%
+Step 920 | 173s (188ms) | loss = 0.3533 | det. acc. = 90.6% | loc. acc. = 90.6%
+Step 930 | 175s (188ms) | loss = 0.3527 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 940 | 177s (188ms) | loss = 0.3422 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 950 | 179s (188ms) | loss = 0.3444 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 960 | 181s (188ms) | loss = 0.2883 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 970 | 183s (188ms) | loss = 0.3503 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 980 | 185s (188ms) | loss = 0.4016 | det. acc. = 89.1% | loc. acc. = 89.1%
+Step 990 | 186s (188ms) | loss = 0.3791 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 1000 | 188s (188ms) | loss = 0.2973 | det. acc. = 95.3% | loc. acc. = 95.3%
+[train] Step 1000 | Saving checkpoint.
+Step 1010 | 191s (189ms) | loss = 0.3842 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 1020 | 193s (189ms) | loss = 0.3114 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1030 | 195s (189ms) | loss = 0.3696 | det. acc. = 90.2% | loc. acc. = 90.2%
+Step 1040 | 197s (189ms) | loss = 0.3734 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 1050 | 198s (189ms) | loss = 0.2955 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1060 | 200s (189ms) | loss = 0.3842 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 1070 | 202s (189ms) | loss = 0.3898 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1080 | 204s (189ms) | loss = 0.3114 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1090 | 206s (189ms) | loss = 0.4465 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 1100 | 208s (189ms) | loss = 0.3754 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 1110 | 210s (189ms) | loss = 0.3101 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1120 | 211s (189ms) | loss = 0.2768 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1130 | 213s (189ms) | loss = 0.3353 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 1140 | 215s (189ms) | loss = 0.3366 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1150 | 217s (189ms) | loss = 0.3692 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1160 | 219s (189ms) | loss = 0.3033 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 1170 | 221s (189ms) | loss = 0.3624 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1180 | 223s (189ms) | loss = 0.2493 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1190 | 225s (189ms) | loss = 0.2979 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1200 | 226s (189ms) | loss = 0.2987 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1210 | 228s (189ms) | loss = 0.2687 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1220 | 230s (189ms) | loss = 0.2788 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1230 | 232s (189ms) | loss = 0.2488 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 1240 | 234s (189ms) | loss = 0.2945 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1250 | 236s (189ms) | loss = 0.3173 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1260 | 238s (189ms) | loss = 0.2857 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1270 | 240s (189ms) | loss = 0.2958 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1280 | 241s (189ms) | loss = 0.3019 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1290 | 243s (189ms) | loss = 0.2877 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1300 | 245s (189ms) | loss = 0.3247 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 1310 | 247s (189ms) | loss = 0.3579 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1320 | 249s (188ms) | loss = 0.2738 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1330 | 251s (188ms) | loss = 0.2514 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 1340 | 253s (188ms) | loss = 0.3075 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1350 | 254s (188ms) | loss = 0.2806 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1360 | 256s (188ms) | loss = 0.3025 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1370 | 258s (188ms) | loss = 0.2665 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 1380 | 260s (188ms) | loss = 0.2799 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1390 | 262s (188ms) | loss = 0.2670 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1400 | 264s (188ms) | loss = 0.2147 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 1410 | 266s (188ms) | loss = 0.2864 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1420 | 267s (188ms) | loss = 0.3398 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1430 | 269s (188ms) | loss = 0.2782 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 1440 | 271s (188ms) | loss = 0.3483 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1450 | 273s (188ms) | loss = 0.3701 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1460 | 275s (188ms) | loss = 0.3705 | det. acc. = 90.2% | loc. acc. = 90.2%
+Step 1470 | 277s (188ms) | loss = 0.2984 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 1480 | 279s (188ms) | loss = 0.2556 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 1490 | 280s (188ms) | loss = 0.3354 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1500 | 282s (188ms) | loss = 0.3839 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 1510 | 284s (188ms) | loss = 0.2639 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1520 | 286s (188ms) | loss = 0.3661 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1530 | 288s (188ms) | loss = 0.2758 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1540 | 290s (188ms) | loss = 0.3134 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1550 | 292s (188ms) | loss = 0.2829 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1560 | 293s (188ms) | loss = 0.2609 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1570 | 295s (188ms) | loss = 0.2319 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 1580 | 297s (188ms) | loss = 0.2521 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1590 | 299s (188ms) | loss = 0.2224 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 1600 | 301s (188ms) | loss = 0.2547 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1610 | 303s (188ms) | loss = 0.2536 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1620 | 305s (188ms) | loss = 0.2619 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1630 | 307s (188ms) | loss = 0.2741 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1640 | 308s (188ms) | loss = 0.2618 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1650 | 310s (188ms) | loss = 0.2773 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1660 | 312s (188ms) | loss = 0.2610 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1670 | 314s (188ms) | loss = 0.2643 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1680 | 316s (188ms) | loss = 0.3078 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1690 | 318s (188ms) | loss = 0.2338 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 1700 | 320s (188ms) | loss = 0.2944 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1710 | 321s (188ms) | loss = 0.2500 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1720 | 323s (188ms) | loss = 0.3385 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1730 | 325s (188ms) | loss = 0.2734 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1740 | 327s (188ms) | loss = 0.3185 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1750 | 329s (188ms) | loss = 0.2594 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1760 | 331s (188ms) | loss = 0.2295 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 1770 | 333s (188ms) | loss = 0.2353 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 1780 | 335s (188ms) | loss = 0.2713 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1790 | 336s (188ms) | loss = 0.2509 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1800 | 338s (188ms) | loss = 0.2195 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 1810 | 340s (188ms) | loss = 0.2612 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 1820 | 342s (188ms) | loss = 0.2456 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 1830 | 344s (188ms) | loss = 0.2598 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1840 | 346s (188ms) | loss = 0.2206 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 1850 | 348s (188ms) | loss = 0.2461 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 1860 | 350s (188ms) | loss = 0.2593 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1870 | 351s (188ms) | loss = 0.2344 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 1880 | 353s (188ms) | loss = 0.2300 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 1890 | 355s (188ms) | loss = 0.3023 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1900 | 357s (188ms) | loss = 0.2419 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 1910 | 359s (188ms) | loss = 0.2487 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 1920 | 361s (188ms) | loss = 0.2409 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 1930 | 363s (188ms) | loss = 0.2383 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 1940 | 364s (188ms) | loss = 0.2151 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 1950 | 366s (188ms) | loss = 0.2633 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1960 | 368s (188ms) | loss = 0.2782 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1970 | 370s (188ms) | loss = 0.2906 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1980 | 372s (188ms) | loss = 0.2332 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 1990 | 374s (188ms) | loss = 0.2344 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2000 | 376s (188ms) | loss = 0.2352 | det. acc. = 98.0% | loc. acc. = 98.0%
+[train] Step 2000 | Saving checkpoint.
+Step 2010 | 378s (188ms) | loss = 0.2399 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2020 | 380s (188ms) | loss = 0.2440 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2030 | 382s (188ms) | loss = 0.2945 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2040 | 384s (188ms) | loss = 0.2125 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2050 | 386s (188ms) | loss = 0.2632 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2060 | 387s (188ms) | loss = 0.2464 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2070 | 389s (188ms) | loss = 0.2283 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2080 | 391s (188ms) | loss = 0.2374 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2090 | 393s (188ms) | loss = 0.2427 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2100 | 395s (188ms) | loss = 0.2900 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2110 | 397s (188ms) | loss = 0.2602 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2120 | 399s (188ms) | loss = 0.2669 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2130 | 401s (188ms) | loss = 0.2036 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 2140 | 402s (188ms) | loss = 0.2339 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2150 | 404s (188ms) | loss = 0.2344 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2160 | 406s (188ms) | loss = 0.2508 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2170 | 408s (188ms) | loss = 0.2412 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2180 | 410s (188ms) | loss = 0.2165 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2190 | 412s (188ms) | loss = 0.2654 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2200 | 414s (188ms) | loss = 0.2263 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2210 | 415s (188ms) | loss = 0.2318 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2220 | 417s (188ms) | loss = 0.2551 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2230 | 419s (188ms) | loss = 0.2370 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2240 | 421s (188ms) | loss = 0.3037 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2250 | 423s (188ms) | loss = 0.3100 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2260 | 425s (188ms) | loss = 0.2935 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2270 | 427s (188ms) | loss = 0.2119 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 2280 | 429s (188ms) | loss = 0.3096 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2290 | 431s (188ms) | loss = 0.2513 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2300 | 432s (188ms) | loss = 0.2348 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2310 | 434s (188ms) | loss = 0.2312 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2320 | 436s (188ms) | loss = 0.2377 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2330 | 438s (188ms) | loss = 0.2157 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2340 | 440s (188ms) | loss = 0.2537 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2350 | 442s (188ms) | loss = 0.2014 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 2360 | 444s (188ms) | loss = 0.2142 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2370 | 446s (188ms) | loss = 0.3300 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2380 | 448s (188ms) | loss = 0.2065 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 2390 | 449s (188ms) | loss = 0.3174 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2400 | 451s (188ms) | loss = 0.2093 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 2410 | 453s (188ms) | loss = 0.2095 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2420 | 455s (188ms) | loss = 0.2492 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2430 | 457s (188ms) | loss = 0.2115 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2440 | 459s (188ms) | loss = 0.2145 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2450 | 461s (188ms) | loss = 0.2345 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2460 | 463s (188ms) | loss = 0.2392 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2470 | 464s (188ms) | loss = 0.1979 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2480 | 466s (188ms) | loss = 0.2122 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2490 | 468s (188ms) | loss = 0.2091 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2500 | 470s (188ms) | loss = 0.2274 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2510 | 472s (188ms) | loss = 0.2682 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2520 | 474s (188ms) | loss = 0.2844 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2530 | 476s (188ms) | loss = 0.2427 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2540 | 478s (188ms) | loss = 0.2394 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2550 | 480s (188ms) | loss = 0.2157 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2560 | 482s (188ms) | loss = 0.1914 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 2570 | 483s (188ms) | loss = 0.2108 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2580 | 485s (188ms) | loss = 0.2432 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2590 | 487s (188ms) | loss = 0.2407 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2600 | 489s (188ms) | loss = 0.2332 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2610 | 491s (188ms) | loss = 0.2261 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 2620 | 493s (188ms) | loss = 0.2693 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2630 | 495s (188ms) | loss = 0.2439 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2640 | 496s (188ms) | loss = 0.2169 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2650 | 498s (188ms) | loss = 0.2298 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2660 | 500s (188ms) | loss = 0.2062 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2670 | 502s (188ms) | loss = 0.1993 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2680 | 504s (188ms) | loss = 0.2321 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2690 | 506s (188ms) | loss = 0.2060 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2700 | 508s (188ms) | loss = 0.2836 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2710 | 509s (188ms) | loss = 0.1950 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 2720 | 511s (188ms) | loss = 0.2131 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2730 | 513s (188ms) | loss = 0.2069 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2740 | 515s (188ms) | loss = 0.1924 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2750 | 517s (188ms) | loss = 0.2615 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2760 | 519s (188ms) | loss = 0.2163 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2770 | 521s (188ms) | loss = 0.2109 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 2780 | 522s (188ms) | loss = 0.2237 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2790 | 524s (188ms) | loss = 0.1884 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 2800 | 526s (188ms) | loss = 0.1977 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 2810 | 528s (188ms) | loss = 0.1871 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 2820 | 530s (188ms) | loss = 0.2007 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2830 | 532s (188ms) | loss = 0.2758 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2840 | 534s (188ms) | loss = 0.2457 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2850 | 536s (188ms) | loss = 0.2032 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2860 | 537s (188ms) | loss = 0.2424 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2870 | 539s (188ms) | loss = 0.2371 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2880 | 541s (188ms) | loss = 0.1761 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 2890 | 543s (188ms) | loss = 0.2750 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2900 | 545s (188ms) | loss = 0.1934 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2910 | 547s (188ms) | loss = 0.2180 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2920 | 549s (188ms) | loss = 0.1922 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 2930 | 551s (188ms) | loss = 0.1913 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 2940 | 552s (188ms) | loss = 0.2105 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2950 | 554s (188ms) | loss = 0.1898 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 2960 | 556s (188ms) | loss = 0.2051 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2970 | 558s (188ms) | loss = 0.2617 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2980 | 560s (188ms) | loss = 0.1997 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 2990 | 562s (188ms) | loss = 0.2130 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3000 | 564s (188ms) | loss = 0.2754 | det. acc. = 97.7% | loc. acc. = 97.7%
+[train] Step 3000 | Saving checkpoint.
+Step 3010 | 566s (188ms) | loss = 0.2580 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3020 | 568s (188ms) | loss = 0.2059 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3030 | 570s (188ms) | loss = 0.2208 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3040 | 572s (188ms) | loss = 0.1983 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3050 | 574s (188ms) | loss = 0.2096 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3060 | 575s (188ms) | loss = 0.2464 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3070 | 577s (188ms) | loss = 0.2401 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3080 | 579s (188ms) | loss = 0.2267 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3090 | 581s (188ms) | loss = 0.1842 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3100 | 583s (188ms) | loss = 0.2351 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3110 | 585s (188ms) | loss = 0.3334 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3120 | 587s (188ms) | loss = 0.2342 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3130 | 589s (188ms) | loss = 0.2085 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3140 | 591s (188ms) | loss = 0.1905 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3150 | 592s (188ms) | loss = 0.2027 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3160 | 594s (188ms) | loss = 0.2176 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3170 | 596s (188ms) | loss = 0.1865 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 3180 | 598s (188ms) | loss = 0.2817 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3190 | 600s (188ms) | loss = 0.1941 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3200 | 602s (188ms) | loss = 0.1921 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3210 | 604s (188ms) | loss = 0.1966 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3220 | 605s (188ms) | loss = 0.1883 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3230 | 607s (188ms) | loss = 0.2431 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 3240 | 609s (188ms) | loss = 0.1896 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3250 | 611s (188ms) | loss = 0.2308 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3260 | 613s (188ms) | loss = 0.2696 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3270 | 615s (188ms) | loss = 0.2771 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3280 | 617s (188ms) | loss = 0.2182 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3290 | 619s (188ms) | loss = 0.2282 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3300 | 620s (188ms) | loss = 0.1836 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3310 | 622s (188ms) | loss = 0.1860 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3320 | 624s (188ms) | loss = 0.2027 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3330 | 626s (188ms) | loss = 0.1725 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 3340 | 628s (188ms) | loss = 0.2189 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3350 | 630s (188ms) | loss = 0.1897 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3360 | 632s (188ms) | loss = 0.1916 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3370 | 634s (188ms) | loss = 0.1989 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3380 | 636s (188ms) | loss = 0.1863 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3390 | 638s (188ms) | loss = 0.1938 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3400 | 639s (188ms) | loss = 0.1972 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3410 | 641s (188ms) | loss = 0.1970 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3420 | 643s (188ms) | loss = 0.3126 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3430 | 645s (188ms) | loss = 0.2632 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3440 | 647s (188ms) | loss = 0.2292 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3450 | 649s (188ms) | loss = 0.1925 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3460 | 651s (188ms) | loss = 0.2117 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3470 | 652s (188ms) | loss = 0.1876 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3480 | 654s (188ms) | loss = 0.1704 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3490 | 656s (188ms) | loss = 0.1945 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3500 | 658s (188ms) | loss = 0.1967 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3510 | 660s (188ms) | loss = 0.2014 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3520 | 662s (188ms) | loss = 0.1948 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3530 | 664s (188ms) | loss = 0.1964 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3540 | 666s (188ms) | loss = 0.2726 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3550 | 668s (188ms) | loss = 0.2198 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3560 | 669s (188ms) | loss = 0.1919 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3570 | 671s (188ms) | loss = 0.2421 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3580 | 673s (188ms) | loss = 0.2772 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 3590 | 675s (188ms) | loss = 0.1925 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3600 | 677s (188ms) | loss = 0.1956 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3610 | 679s (188ms) | loss = 0.1845 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3620 | 681s (188ms) | loss = 0.1981 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3630 | 683s (188ms) | loss = 0.2182 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3640 | 684s (188ms) | loss = 0.2314 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3650 | 686s (188ms) | loss = 0.2222 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3660 | 688s (188ms) | loss = 0.1875 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3670 | 690s (188ms) | loss = 0.1904 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3680 | 692s (188ms) | loss = 0.2257 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3690 | 694s (188ms) | loss = 0.2362 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3700 | 696s (188ms) | loss = 0.1791 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3710 | 697s (188ms) | loss = 0.1768 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3720 | 699s (188ms) | loss = 0.2013 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3730 | 701s (188ms) | loss = 0.1799 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3740 | 703s (188ms) | loss = 0.1954 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3750 | 705s (188ms) | loss = 0.1827 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3760 | 707s (188ms) | loss = 0.2258 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 3770 | 709s (188ms) | loss = 0.2165 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3780 | 711s (188ms) | loss = 0.2602 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3790 | 712s (188ms) | loss = 0.1778 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3800 | 714s (188ms) | loss = 0.1896 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3810 | 716s (188ms) | loss = 0.2261 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3820 | 718s (188ms) | loss = 0.1776 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3830 | 720s (188ms) | loss = 0.1998 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3840 | 722s (188ms) | loss = 0.1930 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3850 | 724s (188ms) | loss = 0.2445 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 3860 | 726s (188ms) | loss = 0.1687 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 3870 | 727s (188ms) | loss = 0.1872 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3880 | 729s (188ms) | loss = 0.1893 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3890 | 731s (188ms) | loss = 0.2342 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3900 | 733s (188ms) | loss = 0.2030 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3910 | 735s (188ms) | loss = 0.1848 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3920 | 737s (188ms) | loss = 0.2073 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3930 | 739s (188ms) | loss = 0.2436 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3940 | 740s (188ms) | loss = 0.1753 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3950 | 742s (188ms) | loss = 0.2180 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3960 | 744s (188ms) | loss = 0.1703 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3970 | 746s (188ms) | loss = 0.1821 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3980 | 748s (188ms) | loss = 0.2007 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3990 | 750s (188ms) | loss = 0.1957 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 4000 | 752s (188ms) | loss = 0.1903 | det. acc. = 98.8% | loc. acc. = 98.8%
+[train] Step 4000 | Saving checkpoint.
+Step 4010 | 754s (188ms) | loss = 0.2282 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4020 | 756s (188ms) | loss = 0.1894 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4030 | 758s (188ms) | loss = 0.1770 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4040 | 760s (188ms) | loss = 0.3189 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4050 | 762s (188ms) | loss = 0.1790 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4060 | 763s (188ms) | loss = 0.1929 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4070 | 765s (188ms) | loss = 0.1623 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 4080 | 767s (188ms) | loss = 0.1871 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4090 | 769s (188ms) | loss = 0.1849 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4100 | 771s (188ms) | loss = 0.2185 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4110 | 773s (188ms) | loss = 0.1904 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4120 | 774s (188ms) | loss = 0.1980 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4130 | 776s (188ms) | loss = 0.1947 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4140 | 778s (188ms) | loss = 0.1797 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4150 | 780s (188ms) | loss = 0.2220 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 4160 | 782s (188ms) | loss = 0.1803 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4170 | 784s (188ms) | loss = 0.1656 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4180 | 786s (188ms) | loss = 0.1902 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4190 | 788s (188ms) | loss = 0.1842 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4200 | 790s (188ms) | loss = 0.2206 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4210 | 791s (188ms) | loss = 0.1667 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 4220 | 793s (188ms) | loss = 0.1736 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4230 | 795s (188ms) | loss = 0.1917 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4240 | 797s (188ms) | loss = 0.2274 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4250 | 799s (188ms) | loss = 0.1744 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4260 | 801s (188ms) | loss = 0.1852 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4270 | 803s (188ms) | loss = 0.1853 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4280 | 805s (188ms) | loss = 0.2158 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4290 | 806s (188ms) | loss = 0.1823 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4300 | 808s (188ms) | loss = 0.2274 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 4310 | 810s (188ms) | loss = 0.1788 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4320 | 812s (188ms) | loss = 0.1991 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 4330 | 814s (188ms) | loss = 0.2094 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4340 | 816s (188ms) | loss = 0.1871 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4350 | 818s (188ms) | loss = 0.2090 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4360 | 820s (188ms) | loss = 0.1862 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4370 | 821s (188ms) | loss = 0.1976 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4380 | 823s (188ms) | loss = 0.2449 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4390 | 825s (188ms) | loss = 0.1857 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4400 | 827s (188ms) | loss = 0.1750 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4410 | 829s (188ms) | loss = 0.2078 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4420 | 831s (188ms) | loss = 0.1865 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4430 | 833s (188ms) | loss = 0.1796 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4440 | 835s (188ms) | loss = 0.1632 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 4450 | 836s (188ms) | loss = 0.1798 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4460 | 838s (188ms) | loss = 0.1680 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4470 | 840s (188ms) | loss = 0.1895 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4480 | 842s (188ms) | loss = 0.1883 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4490 | 844s (188ms) | loss = 0.1737 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4500 | 846s (188ms) | loss = 0.2008 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4510 | 848s (188ms) | loss = 0.1762 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4520 | 849s (188ms) | loss = 0.2051 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4530 | 851s (188ms) | loss = 0.1868 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4540 | 853s (188ms) | loss = 0.1844 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4550 | 855s (188ms) | loss = 0.1727 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4560 | 857s (188ms) | loss = 0.2234 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4570 | 859s (188ms) | loss = 0.2002 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4580 | 861s (188ms) | loss = 0.2045 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 4590 | 863s (188ms) | loss = 0.1902 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4600 | 865s (188ms) | loss = 0.2239 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4610 | 866s (188ms) | loss = 0.1857 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4620 | 868s (188ms) | loss = 0.1782 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4630 | 870s (188ms) | loss = 0.1802 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4640 | 872s (188ms) | loss = 0.1901 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4650 | 874s (188ms) | loss = 0.2031 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4660 | 876s (188ms) | loss = 0.1864 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4670 | 878s (188ms) | loss = 0.1914 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4680 | 879s (188ms) | loss = 0.1874 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4690 | 881s (188ms) | loss = 0.1917 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4700 | 883s (188ms) | loss = 0.1866 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4710 | 885s (188ms) | loss = 0.1721 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4720 | 887s (188ms) | loss = 0.2019 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4730 | 889s (188ms) | loss = 0.1887 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4740 | 891s (188ms) | loss = 0.1978 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4750 | 893s (188ms) | loss = 0.1830 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4760 | 894s (188ms) | loss = 0.1754 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4770 | 896s (188ms) | loss = 0.1634 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4780 | 898s (188ms) | loss = 0.1718 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4790 | 900s (188ms) | loss = 0.2445 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4800 | 902s (188ms) | loss = 0.2416 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 4810 | 904s (188ms) | loss = 0.2037 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4820 | 906s (188ms) | loss = 0.1736 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4830 | 908s (188ms) | loss = 0.2535 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4840 | 909s (188ms) | loss = 0.1692 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4850 | 911s (188ms) | loss = 0.1733 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4860 | 913s (188ms) | loss = 0.1511 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 4870 | 915s (188ms) | loss = 0.2096 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4880 | 917s (188ms) | loss = 0.2201 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 4890 | 919s (188ms) | loss = 0.1850 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4900 | 921s (188ms) | loss = 0.1823 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4910 | 923s (188ms) | loss = 0.2009 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4920 | 924s (188ms) | loss = 0.1799 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4930 | 926s (188ms) | loss = 0.1604 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4940 | 928s (188ms) | loss = 0.1877 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4950 | 930s (188ms) | loss = 0.1618 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4960 | 932s (188ms) | loss = 0.1628 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4970 | 934s (188ms) | loss = 0.1782 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4980 | 936s (188ms) | loss = 0.1524 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4990 | 938s (188ms) | loss = 0.1815 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 5000 | 939s (188ms) | loss = 0.1708 | det. acc. = 98.8% | loc. acc. = 98.8%
+[train] Step 5000 | Saving checkpoint.
+[train] Shutting down data threads.
+[train] Waiting for all threads.
+[train] Optimization done.
+python step5_eval_over_tfrecords.py 	--config_file_path config_default.ini 	--n_clusters 2 	--window_size 10 	--checkpoint_dir output/data_prep_datos5/10/CL2/CO3/model1/checkpoints 	--output_dir output/data_prep_datos5/10/CL2/CO3/model1/eval 	--tfrecords_dir output/data_prep_datos5/10/CL2/CO3/tfrecords/test
+[92m******************** STEP 5/5. EVALUATION *******************[0m 
+[[94mCONFIG[0m] debug = False[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] sampling_rate = 100[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] window_size = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pwave_window = 0[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] window_step_negatives = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] window_avoid_negatives = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] component_Z = True[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] component_N = True[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] component_E = True[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] mean_velocity = 18000.0[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] mseed_dir = mseed[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] mseed_event_dir = mseed_event_windows[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] mseed_noise_dir = mseed_noise[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] png_dir = png[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] png_event_dir = png_event_windows[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] png_noise_dir = png_noise[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] output_tfrecords_dir_positives = positive[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] output_tfrecords_dir_negatives = negative[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] random_seed = 666[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] model = ConvNetQuake[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] num_conv_layers = 8[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] conv_stride = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] num_fc_layers = 1[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] fc_size = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling = False[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] n_clusters = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling_window = 5[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling_stride = 5[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] ksize = 3[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] learning_rate = 0.001[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] batch_size = 128[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] display_step = 50[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] n_threads = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] resume = False[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] profiling = False[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] add = 1[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] checkpoint_step = 1000[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] max_checkpoint_step = 5000[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] window_step_predict = 10[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] save_sac = False[94m (OVERWRITTEN)[0m
+[[94mINFO[0m] INPUT LAYER shape = 1x1001x3
+[[94mINFO[0m] LAYER conv1 shape = 1x501x32
+[[94mINFO[0m] LAYER conv2 shape = 1x251x32
+[[94mINFO[0m] LAYER conv3 shape = 1x126x32
+[[94mINFO[0m] LAYER conv4 shape = 1x63x32
+[[94mINFO[0m] LAYER conv5 shape = 1x32x32
+[[94mINFO[0m] LAYER conv6 shape = 1x16x32
+[[94mINFO[0m] LAYER conv7 shape = 1x8x32
+[[94mINFO[0m] LAYER conv8 shape = 1x4x32
+[[94mINFO[0m] LAST LAYER CONV RESHAPED shape = 1x128
+[[94mINFO[0m] FC LAYER shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/data_prep_datos5/10/CL2/CO3/model1/checkpoints/model-5000.
+Evaluating at step 5000
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+Evaluation completed (1 epochs).
+513 windows seen
+[[94mINFO[0m] INPUT LAYER shape = 1x1001x3
+[[94mINFO[0m] LAYER conv1 shape = 1x501x32
+[[94mINFO[0m] LAYER conv2 shape = 1x251x32
+[[94mINFO[0m] LAYER conv3 shape = 1x126x32
+[[94mINFO[0m] LAYER conv4 shape = 1x63x32
+[[94mINFO[0m] LAYER conv5 shape = 1x32x32
+[[94mINFO[0m] LAYER conv6 shape = 1x16x32
+[[94mINFO[0m] LAYER conv7 shape = 1x8x32
+[[94mINFO[0m] LAYER conv8 shape = 1x4x32
+[[94mINFO[0m] LAST LAYER CONV RESHAPED shape = 1x128
+[[94mINFO[0m] FC LAYER shape = 1x2
+[train] Loaded model at step 5000 from snapshot output/data_prep_datos5/10/CL2/CO3/model1/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+21016 windows seen
+[validation] true positives = 356
+[validation] false positives = 157
+[validation] true negatives = 20555
+[validation] false negatives = 461
+[validation] precision = 69.395711501%
+[validation] recall = 43.5740514076%
+[validation] accuracy = 97.1294532956%
+[validation] f1 = 53.5338345865%
+[validation] location accuracy = 100.0%
