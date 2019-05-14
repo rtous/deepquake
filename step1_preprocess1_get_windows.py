@@ -65,10 +65,10 @@ def customPlot(st, timeP, outfile):
     plt.axvline(x=obspyDateTime2PythonDateTime(timeP+cfg.window_avoid_negatives_after), linewidth=2, color='b')
 
     total_time = st[-1].stats.endtime - st[0].stats.starttime
-    max_windows = int((total_time - cfg.window_size) / cfg.window_step_negatives)
+    max_windows = int((total_time - cfg.window_size) / cfg.window_stride)
     #print(max_windows)
     for i in range(0, max_windows):
-        plt.axvline(x=obspyDateTime2PythonDateTime(st[0].stats.starttime+i*cfg.window_step_negatives), linewidth=1, color='r', linestyle='dashed')
+        plt.axvline(x=obspyDateTime2PythonDateTime(st[0].stats.starttime+i*cfg.window_stride), linewidth=1, color='r', linestyle='dashed')
     #plt.show()
     fig.savefig(outfile)   # save the figure to file
     plt.close(fig) 
@@ -207,10 +207,10 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
                 #Slice the input stream vertically, by time
                 sys.stdout.write("[obtain training windows] Extracting positive and negative windows and saving into "+output_dir+":\n")
                 win_gen = substream.slide(window_length=cfg.window_size,
-                           step=cfg.window_step_negatives,
+                           step=cfg.window_stride,
                            include_partial_windows=False)
                 total_time = substream[0].stats.endtime - substream[0].stats.starttime
-                max_windows = (total_time - cfg.window_size) / cfg.window_step_negatives
+                max_windows = (total_time - cfg.window_size) / cfg.window_stride
                 num_negatives = 0
                 num_positives = 0
                 num_errors = 0
@@ -272,6 +272,7 @@ if __name__ == "__main__":
     parser.add_argument("--station",type=str, default=None)
     parser.add_argument("--pattern",type=str, default=None)
     parser.add_argument("--window_size", type=int, required=True)
+    parser.add_argument("--window_stride", type=int, required=True)
     parser.add_argument("--filterfreq",type=bool, default=argparse.SUPPRESS)
     parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
     args = parser.parse_args()

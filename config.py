@@ -28,7 +28,7 @@ class Config(object):
         self.read_attribute('sampling_rate', INT, default_config, config, args)
         self.read_attribute('window_size', INT, default_config, config, args)
         self.read_attribute('pwave_window', INT, default_config, config, args)
-        self.read_attribute('window_step_negatives', INT, default_config, config, args)
+        self.read_attribute('window_stride', INT, default_config, config, args)
         self.read_attribute('window_avoid_negatives_before', INT, default_config, config, args)
         self.read_attribute('window_avoid_negatives_after', INT, default_config, config, args)
         self.n_traces = 0
