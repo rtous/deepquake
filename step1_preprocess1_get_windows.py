@@ -153,7 +153,7 @@ def processMseed(stream_path, cat, output_dir, plot, onlyStation):
         print "[obtain training windows] Loading Stream {}".format(stream_file)
         stream = read(stream_path)
         print '[obtain training windows] Preprocessing stream'
-        stream = utils.preprocess_stream(stream, cfg.filterfreq)
+        stream = utils.preprocess_stream(stream)
 
 
         stream_start_time = stream[0].stats.starttime

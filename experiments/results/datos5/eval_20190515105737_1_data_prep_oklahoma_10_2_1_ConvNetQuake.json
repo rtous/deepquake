@@ -1,0 +1,17 @@
+{
+    "f1": 86.53846153846153, 
+    "window_size": 10, 
+    "truePositives": 270, 
+    "n_clusters": 2, 
+    "trueNegatives": 3849, 
+    "precision": 96.42857142857143, 
+    "round": 1, 
+    "recall": 78.48837209302326, 
+    "falseNegatives": 74, 
+    "n_traces": 1, 
+    "falsePositives": 10, 
+    "model": "ConvNetQuake", 
+    "dataset": "data_prep_oklahoma", 
+    "locationAccuracy": 100.0, 
+    "accuracy": 98.00142755174875
+}

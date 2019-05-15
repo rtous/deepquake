@@ -297,7 +297,7 @@ if __name__ == "__main__":
 
     #balanced accuracy
     if specificity+recall>0:
-        balanced_accuracy = specificity+recall/2.0
+        balanced_accuracy = (specificity+recall)/2.0
         print("[validation] balanced accuracy = "+str(balanced_accuracy)+"%")
     else:
         print("[validation] cannot compute balanced accuracy as specificity+recall == 0")

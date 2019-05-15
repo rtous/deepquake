@@ -98,8 +98,9 @@ if __name__ == '__main__':
   #if args.redirect_stdout_stderr:
   #    stdout_stderr_file = open(os.path.join(checkpoint_dir, 'stdout_stderr_file.txt'), 'w')
   #    sys.stdout = stderr = stdout_stderr_file
-
+  startt = time.time()
   main(args)
-
+  time = (time.time()-startt)/60
+  print("TIME = "+str(time)+" minutes")
   #if args.redirect_stdout_stderr:  
   #      stdout_stderr_file.close()

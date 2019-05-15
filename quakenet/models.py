@@ -87,6 +87,8 @@ class ConvNetQuake(tflib.model.BaseModel):
         tf.contrib.layers.l2_regularizer(self.config.regularization),
         weights_list=tf.get_collection(tf.GraphKeys.WEIGHTS))
 
+    print("NUM PARAMS: "+str(np.sum([np.prod(v.get_shape().as_list()) for v in tf.trainable_variables()])))
+
 #######################################################################
 
   def validation_metrics(self):
@@ -234,5 +236,8 @@ class ConvNetQuake2(ConvNetQuake):
       tf.contrib.layers.apply_regularization(
           tf.contrib.layers.l2_regularizer(self.config.regularization),
           weights_list=tf.get_collection(tf.GraphKeys.WEIGHTS))
+
+    print("NUM PARAMS: "+str(np.sum([np.prod(v.get_shape().as_list()) for v in tf.trainable_variables()])))
+
 
 

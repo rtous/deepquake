@@ -1,0 +1,59 @@
+
+VALENCIA:
+model2
+    50s, 5s, 3comp, balanced, filtering: 
+    [validation] true positives = 4682
+    [validation] false positives = 397
+    [validation] true negatives = 4867
+    [validation] false negatives = 212
+    [validation] precision = 92.1835006891%
+    [validation] recall = 95.6681651001%
+    [validation] accuracy = 94.0047253396%
+    [validation] f1 = 93.8935124837%
+    [validation] location accuracy = 100.0%
+
+    1 comp:
+    menys overlapping:
+    sense filtering:
+    sense balancing:
+
+    10s:
+    20s:
+    30s:
+    40s
+    60s:
+
+convnetquake
+    50s, NO OVERLAPPING, 1comp, no balanced, no filtering:
+
+
+*******************************************************************************************
+
+OKLAHOMA:
+model2
+    10s, NO OVERLAPPING, 1comp, balanced, filtering: 
+    [validation] true positives = 272
+    [validation] false positives = 8
+    [validation] true negatives = 278
+    [validation] false negatives = 2
+    [validation] precision = 97.1428571429%
+    [validation] recall = 99.2700729927%
+    [validation] accuracy = 98.2142857143%
+    [validation] f1 = 98.1949458484%
+    [validation] specificity = 97.2027972028%
+    [validation] balanced accuracy = 98.2364350977%
+    [validation] location accuracy = 100.0%
+
+convnetquake
+    10s, NO OVERLAPPING, 1comp, not balanced, not filtering: 
+    [validation] true positives = 270
+    [validation] false positives = 10
+    [validation] true negatives = 275
+    [validation] false negatives = 5
+    [validation] precision = 96.4285714286%
+    [validation] recall = 98.1818181818%
+    [validation] accuracy = 97.3214285714%
+    [validation] f1 = 97.2972972973%
+    [validation] specificity = 96.4912280702%
+    [validation] balanced accuracy = 145.582137161%
+    [validation] location accuracy = 100.0%

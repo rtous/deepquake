@@ -87,8 +87,9 @@ def write(stream_files, subfolder):
         #print '[tfrecords negatives] Preprocessing stream'
         
 
-        #No cal fer 2 vegades!
-        #st_event = utils.preprocess_stream(st_event, cfg.filterfreq)
+        #filtrem
+        if cfg.filterfreq:
+            st_event = utils.filter_stream(st_event)  
 
         #Select only the specified channels
         st_event_select = utils.select_components(st_event, cfg) 

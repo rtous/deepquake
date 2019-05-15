@@ -174,7 +174,7 @@ model2: f1 = 84.2321943186% accuracy = 84.9271940181%
 model12: f1 = 91.0779949681% accuracy = 90.9287682015%
 model14: f1 = 88.7396286053% accuracy = 88.7839433294%
 
-Results with new preprocessing (NO OVERLAPPING NOT FILTER), 3 components, balanced, 10000 steps
+Results with new preprocessing (NO OVERLAPPING FILTER), 3 components, balanced, 10000 steps
 **************************************************
 
 qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 50 50
@@ -189,7 +189,23 @@ qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_
 
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model14 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14 experiments/config_model14.ini
 
-model1: 
-model2: 
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14b experiments/config_model14b.ini
+
+model1: f1 = 82.7788649706% accuracy = 82.7450980392%
+model2: f1 = 86.186770428% accuracy = 86.0784313725% 
+model12: f1 = 88.1720430108% accuracy = 88.137254902%
+model14: f1 = 82.7160493827% accuracy = 83.5294117647%
+
+
+Results with new preprocessing (MORE OVERLAPPING, FILTER), 3 components, balanced, 10000 steps
+**************************************************
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 50 5
+
+model1: f1 = 90.2436618329% accuracy = 90.2638314629%
+model2: f1 = 92.2154491856% accuracy = 92.3311675527%
 model12: 
-model14: 
+model14: f1 = 92.4997523036% accuracy = 92.5477456192%
+model14b: f1 = 93.8935124837% accuracy = 94.0047253396% (2000 steps)
+		  f1 = 94.2396996344% accuracy = 94.2606812365% (5000 steps)
+
