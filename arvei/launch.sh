@@ -14,6 +14,9 @@
 CSCRATCH=/scratch/nas/4/`whoami`
 DATA=data.$JOB_ID
 
+### Borrar antics logs
+#rm $HOME/*
+
 ### Crear zona de datos local y transferir datos
 #mkdir $DATA
 #rsync $CSCRATCH/exSimul/data $DATA

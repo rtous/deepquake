@@ -1,0 +1,6 @@
+/var/spool/gridengine/execd/arvei-1701/job_scripts/5339808: line 1: !/bin/bash: No such file or directory
+/scratch/nas/4/rtous/deepquake_virtualenv/local/lib/python2.7/site-packages/obspy/core/trace.py:2120: UserWarning: Attempting to normalize by dividing through zero. This is not allowed and the data will thus not be changed.
+  warnings.warn(msg)
+/scratch/nas/4/rtous/deepquake_virtualenv/local/lib/python2.7/site-packages/obspy/io/mseed/core.py:733: UserWarning: The encoding specified in trace.stats.mseed.encoding does not match the dtype of the data.
+A suitable encoding will be chosen.
+  warnings.warn(msg, UserWarning)
