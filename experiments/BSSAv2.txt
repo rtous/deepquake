@@ -33,6 +33,8 @@ k=3
 ###########
 qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_5_f_b_k3 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 4 3 experiments/clusters_datos5_k3.json
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_b_model14b_k3 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 4 3 model14b experiments/config_model14b.ini
+(also with convnetquake)
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_b_convnetquake_k3 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 4 3 convnetquake experiments/config_convnetquake.ini
 
 k=5
 ###########
