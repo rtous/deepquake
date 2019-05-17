@@ -1,0 +1,40 @@
+{
+    "clusters_type" : "kmeans",
+    "clusters": [
+        {
+            "lat": 10.28178662,
+            "lon":  -68.12195701, 
+            "depth": 0, 
+            "id": 0,
+            "label": "first cluster"
+        }, 
+        {
+            "lat": 10.14946875, 
+            "lon": -67.24640625, 
+            "depth": 0, 
+            "id": 1,
+            "label": "second cluster"
+        },
+        {
+            "lat": 9.8685, 
+            "lon": -68.6689 , 
+            "depth": 0, 
+            "id": 2,
+            "label": "third cluster"
+        },
+        {
+            "lat": 10.58081481, 
+            "lon": -68.77040741, 
+            "depth": 0, 
+            "id": 3,
+            "label": "fourth cluster"
+        },
+        {
+            "lat": 10.338, 
+            "lon": -67.70964789, 
+            "depth": 0, 
+            "id": 4,
+            "label": "fifth cluster"
+        }
+    ]
+}

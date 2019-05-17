@@ -1,0 +1,97 @@
+./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 4 3 experiments/clusters_datos5_k3.json
+[92m******************** STEP 2/5. PREPROCESSING STEP 2/3. POSITIVE TRAINING WINDOWS -> TFRECORDS *******************[0m 
+[[94mCONFIG[0m] debug = False
+[[94mCONFIG[0m] filterfreq = True
+[[94mCONFIG[0m] sampling_rate = 100
+[[94mCONFIG[0m] window_size = 50[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pwave_window = 0
+[[94mCONFIG[0m] window_stride = 10
+[[94mCONFIG[0m] window_avoid_negatives_before = 10
+[[94mCONFIG[0m] window_avoid_negatives_after = 500
+[[94mCONFIG[0m] component_Z = True
+[[94mCONFIG[0m] component_N = True
+[[94mCONFIG[0m] component_E = True
+[[94mCONFIG[0m] mean_velocity = 18000.0
+[[94mCONFIG[0m] mseed_dir = mseed
+[[94mCONFIG[0m] mseed_event_dir = mseed_event_windows
+[[94mCONFIG[0m] mseed_noise_dir = mseed_noise
+[[94mCONFIG[0m] png_dir = png
+[[94mCONFIG[0m] png_event_dir = png_event_windows
+[[94mCONFIG[0m] png_noise_dir = png_noise
+[[94mCONFIG[0m] output_tfrecords_dir_positives = positive
+[[94mCONFIG[0m] output_tfrecords_dir_negatives = negative
+[[94mCONFIG[0m] random_seed = 666
+[[94mCONFIG[0m] balance = True
+[[94mCONFIG[0m] model = ConvNetQuake
+[[94mCONFIG[0m] num_conv_layers = 8
+[[94mCONFIG[0m] conv_stride = 2
+[[94mCONFIG[0m] num_fc_layers = 1
+[[94mCONFIG[0m] fc_size = 10
+[[94mCONFIG[0m] pooling = False
+[[94mCONFIG[0m] n_clusters = 2
+[[94mCONFIG[0m] pooling_window = 5
+[[94mCONFIG[0m] pooling_stride = 5
+[[94mCONFIG[0m] ksize = 3
+[[94mCONFIG[0m] learning_rate = 0.001
+[[94mCONFIG[0m] batch_size = 128
+[[94mCONFIG[0m] display_step = 50
+[[94mCONFIG[0m] n_threads = 2
+[[94mCONFIG[0m] resume = False
+[[94mCONFIG[0m] profiling = False
+[[94mCONFIG[0m] add = 1
+[[94mCONFIG[0m] checkpoint_step = 1000
+[[94mCONFIG[0m] max_checkpoint_step = 5000
+[[94mCONFIG[0m] window_step_predict = 10
+[[94mCONFIG[0m] save_sac = False
+[92m******************** STEP 3/5. PREPROCESSING STEP 3/3. NEGATIVE TRAINING WINDOWS -> TFRECORDS *******************[0m 
+[[94mCONFIG[0m] debug = False
+[[94mCONFIG[0m] filterfreq = True
+[[94mCONFIG[0m] sampling_rate = 100
+[[94mCONFIG[0m] window_size = 50[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pwave_window = 0
+[[94mCONFIG[0m] window_stride = 10
+[[94mCONFIG[0m] window_avoid_negatives_before = 10
+[[94mCONFIG[0m] window_avoid_negatives_after = 500
+[[94mCONFIG[0m] component_Z = True
+[[94mCONFIG[0m] component_N = True
+[[94mCONFIG[0m] component_E = True
+[[94mCONFIG[0m] mean_velocity = 18000.0
+[[94mCONFIG[0m] mseed_dir = mseed
+[[94mCONFIG[0m] mseed_event_dir = mseed_event_windows
+[[94mCONFIG[0m] mseed_noise_dir = mseed_noise
+[[94mCONFIG[0m] png_dir = png
+[[94mCONFIG[0m] png_event_dir = png_event_windows
+[[94mCONFIG[0m] png_noise_dir = png_noise
+[[94mCONFIG[0m] output_tfrecords_dir_positives = positive
+[[94mCONFIG[0m] output_tfrecords_dir_negatives = negative
+[[94mCONFIG[0m] random_seed = 666
+[[94mCONFIG[0m] balance = True
+[[94mCONFIG[0m] model = ConvNetQuake
+[[94mCONFIG[0m] num_conv_layers = 8
+[[94mCONFIG[0m] conv_stride = 2
+[[94mCONFIG[0m] num_fc_layers = 1
+[[94mCONFIG[0m] fc_size = 10
+[[94mCONFIG[0m] pooling = False
+[[94mCONFIG[0m] n_clusters = 2
+[[94mCONFIG[0m] pooling_window = 5
+[[94mCONFIG[0m] pooling_stride = 5
+[[94mCONFIG[0m] ksize = 3
+[[94mCONFIG[0m] learning_rate = 0.001
+[[94mCONFIG[0m] batch_size = 128
+[[94mCONFIG[0m] display_step = 50
+[[94mCONFIG[0m] n_threads = 2
+[[94mCONFIG[0m] resume = False
+[[94mCONFIG[0m] profiling = False
+[[94mCONFIG[0m] add = 1
+[[94mCONFIG[0m] checkpoint_step = 1000
+[[94mCONFIG[0m] max_checkpoint_step = 5000
+[[94mCONFIG[0m] window_step_predict = 10
+[[94mCONFIG[0m] save_sac = False
+[tfrecords negatives] Converting .mseed files into tfrecords...
+[tfrecords negatives] Input directory: output/data_prep_datos5/50/mseed_noise
+[tfrecords negatives] Output directory: output/data_prep_datos5/50/CL4/CO3/tfrecords/negative
+[tfrecords negatives] File pattern: *.mseed
+[tfrecords negatives] Matching files: 47434
+[tfrecords negatives] [93m WARNING!![0m Balancing dataset, only 30492 negatives used.
+[tfrecords negatives] Number of windows written=24392
+[tfrecords negatives] Number of windows written=6099
