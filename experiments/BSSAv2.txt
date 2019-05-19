@@ -35,13 +35,22 @@ qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_b_model14b_k3 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 4 3 model14b experiments/config_model14b.ini
 (also with convnetquake)
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_b_convnetquake_k3 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 4 3 convnetquake experiments/config_convnetquake.ini
+rm -rf output/data_prep_datos5/50/CL4
 
 k=5
 ###########
 qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_5_f_b_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 6 3 experiments/clusters_datos5_k5.json
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_b_model14b_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 6 3 model14b experiments/config_model14b.ini
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_b_convnetquake_k5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 6 3 convnetquake experiments/config_convnetquake.ini
+rm -rf output/data_prep_datos5/50/CL6
 
 
+sense balancejar
+################
+(modifiquem balanced = false)
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_5_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 2 3
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_nb_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14b experiments/config_model14b.ini
+(modifiquem balanced = true)
 
 #generar catalog.json i finestres (UPC-UCV-60-5-balanced-filtered4VALENCIA)
 ###########################################################################
