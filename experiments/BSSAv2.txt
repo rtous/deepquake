@@ -52,33 +52,109 @@ qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_nb_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14b experiments/config_model14b.ini
 (modifiquem balanced = true)
 
-#generar catalog.json i finestres (UPC-UCV-60-5-balanced-filtered4VALENCIA)
-###########################################################################
-rm -rf output/data_prep_datos5
-qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_60_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 60 5
-qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_60_5_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 60 2 3
-qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_60_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 60 2 3 model14b experiments/config_model14b.ini
+#######################################################
+FASE 2: Impacte grandària finestres
+########################################################
 
-#generar catalog.json i finestres (UPC-UCV-40-5-balanced-filtered4VALENCIA)
+#10s
 ###########################################################################
 rm -rf output/data_prep_datos5
+
+qsub -S /bin/bash -N run_v1_step0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step0_metadata.sh
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_10_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 10 5
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_10_5_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 10 2 3
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_10_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 10 2 3 model14b experiments/config_model14b.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_10_5_f_b_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 10 2 3 convnetquake experiments/config_convnetquake.ini
+
+#20s
+###########################################################################
+rm -rf output/data_prep_datos5
+
+qsub -S /bin/bash -N run_v1_step0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step0_metadata.sh
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_20_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 20 5
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_20_5_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 20 2 3
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_20_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 20 2 3 model14b experiments/config_model14b.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_20_5_f_b_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 20 2 3 convnetquake experiments/config_convnetquake.ini
+
+#30s
+###########################################################################
+rm -rf output/data_prep_datos5
+
+qsub -S /bin/bash -N run_v1_step0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step0_metadata.sh
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_30_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 30 5
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_30_5_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 30 2 3
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_30_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 30 2 3 model14b experiments/config_model14b.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_30_5_f_b_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 30 2 3 convnetquake experiments/config_convnetquake.ini
+
+#40s
+###########################################################################
+rm -rf output/data_prep_datos5
+
+qsub -S /bin/bash -N run_v1_step0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step0_metadata.sh
+
 qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_40_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 40 5
+
 qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_40_5_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 40 2 3
+
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_40_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 40 2 3 model14b experiments/config_model14b.ini
 
-#assegurem que és millor que convnetquake
-###########################################################################
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_40_5_f_b_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 40 2 3 convnetquake experiments/config_convnetquake.ini
 
-mv output/data_prep_datos5/50 output/data_prep_datos5/50nice
-
-#generar catalog.json i finestres (UPC-UCV-50-5-balanced-filtered4VALENCIA)
+#60s
 ###########################################################################
+rm -rf output/data_prep_datos5
+
+qsub -S /bin/bash -N run_v1_step0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step0_metadata.sh
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_60_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 60 5
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_60_5_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 60 2 3
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_60_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 60 2 3 model14b experiments/config_model14b.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_60_5_f_b_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 60 2 3 convnetquake experiments/config_convnetquake.ini
+
+#######################################################
+FASE 3: Impacte paràmetres
+########################################################
+
+# sense overlapping
+###########################################################################
+(esborrar totes les dades)
 qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_50_50 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 50 50
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_50_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 2 3
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_50_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14b experiments/config_model14b.ini
+
+
+#CONVNETQUAKE SENSE PREPROCESSING
+###########################################################################
+(esborrar només els tfrecords)
 (canviar preprocessing per: not balanced i not filtered)
 qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_50_nf_nb -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 2 3
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_50_nf_nb_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model1 experiments/config_convnetquake.ini
 (mirar balanced accuracy)
 
-#######################################################
-FASE 2: Impacte paràmetres
-########################################################
+
+# sense filtering
+###########################################################################
+(esborrar totes les dades)
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_50_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 50 5
+
+(deshabilitar filtering)
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_5_nf_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 2 3
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_nf_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14b experiments/config_model14b.ini
