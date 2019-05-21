@@ -1,0 +1,2941 @@
+./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 20 2 3 model14b experiments/config_model14b.ini
+python step4_train.py 	--config_file_path experiments/config_model14b.ini 	--n_clusters 2 	--window_size 20 	--tfrecords_dir output/data_prep_datos5/20/CL2/CO3/tfrecords 	--checkpoint_dir output/data_prep_datos5/20/CL2/CO3/model14b/checkpoints
+[92m******************** STEP 4/5. TRAINING *******************[0m 
+[[94mCONFIG[0m] debug = False
+[[94mCONFIG[0m] filterfreq = True
+[[94mCONFIG[0m] sampling_rate = 100
+[[94mCONFIG[0m] window_size = 20[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pwave_window = 0
+[[94mCONFIG[0m] window_stride = 10
+[[94mCONFIG[0m] window_avoid_negatives_before = 10
+[[94mCONFIG[0m] window_avoid_negatives_after = 500
+[[94mCONFIG[0m] component_Z = True
+[[94mCONFIG[0m] component_N = True
+[[94mCONFIG[0m] component_E = True
+[[94mCONFIG[0m] mean_velocity = 18000.0
+[[94mCONFIG[0m] mseed_dir = mseed
+[[94mCONFIG[0m] mseed_event_dir = mseed_event_windows
+[[94mCONFIG[0m] mseed_noise_dir = mseed_noise
+[[94mCONFIG[0m] png_dir = png
+[[94mCONFIG[0m] png_event_dir = png_event_windows
+[[94mCONFIG[0m] png_noise_dir = png_noise
+[[94mCONFIG[0m] output_tfrecords_dir_positives = positive
+[[94mCONFIG[0m] output_tfrecords_dir_negatives = negative
+[[94mCONFIG[0m] random_seed = 666
+[[94mCONFIG[0m] balance = True
+[[94mCONFIG[0m] model = ConvNetQuake2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] num_conv_layers = 4[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] conv_stride = 5[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] num_fc_layers = 3[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] fc_size = 10
+[[94mCONFIG[0m] pooling = True[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] n_clusters = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling_window = 5[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling_stride = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] ksize = 20[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] learning_rate = 0.001
+[[94mCONFIG[0m] batch_size = 128
+[[94mCONFIG[0m] display_step = 50
+[[94mCONFIG[0m] n_threads = 2
+[[94mCONFIG[0m] resume = False
+[[94mCONFIG[0m] profiling = False
+[[94mCONFIG[0m] add = 1
+[[94mCONFIG[0m] checkpoint_step = 1000
+[[94mCONFIG[0m] max_checkpoint_step = 5000
+[[94mCONFIG[0m] window_step_predict = 10
+[[94mCONFIG[0m] save_sac = False
+[train] path to positives = output/data_prep_datos5/20/CL2/CO3/tfrecords/train/positive
+[train] path to negaties = output/data_prep_datos5/20/CL2/CO3/tfrecords/train/negative
+[[94mINFO[0m] LAYER input shape = 256x2001x3
+[[94mINFO[0m] LAYER conv1 shape = 256x1001x32
+[[94mINFO[0m] LAYER max_pool1 shape = 256x501x32
+[[94mINFO[0m] LAYER conv2 shape = 256x251x32
+[[94mINFO[0m] LAYER max_pool2 shape = 256x126x32
+[[94mINFO[0m] LAYER conv3 shape = 256x63x32
+[[94mINFO[0m] LAYER max_pool3 shape = 256x32x32
+[[94mINFO[0m] LAYER conv4 shape = 256x16x32
+[[94mINFO[0m] LAYER max_pool4 shape = 256x8x32
+bs=256, width=8, aux=32
+[[94mINFO[0m] FC LAYER 1 shape = 256x10
+[[94mINFO[0m] FC LAYER 2 shape = 256x10
+[[94mINFO[0m] FC LAYER LOGITS shape = 256x2
+NUM PARAMS: 66190
+[train] Initializing all variables.
+[train] Starting data threads coordinator.
+[train] Starting optimization.
+Step 10 | 20s (2049ms) | loss = 0.6950 | det. acc. = 74.2% | loc. acc. = 74.2%
+Step 20 | 34s (1718ms) | loss = 0.6417 | det. acc. = 78.9% | loc. acc. = 78.9%
+Step 30 | 48s (1605ms) | loss = 0.5438 | det. acc. = 83.2% | loc. acc. = 83.2%
+Step 40 | 62s (1549ms) | loss = 0.5121 | det. acc. = 85.9% | loc. acc. = 85.9%
+Step 50 | 76s (1514ms) | loss = 0.5281 | det. acc. = 82.4% | loc. acc. = 82.4%
+Step 60 | 90s (1492ms) | loss = 0.5702 | det. acc. = 82.4% | loc. acc. = 82.4%
+Step 70 | 103s (1473ms) | loss = 0.5118 | det. acc. = 82.4% | loc. acc. = 82.4%
+Step 80 | 117s (1461ms) | loss = 0.4438 | det. acc. = 86.7% | loc. acc. = 86.7%
+Step 90 | 131s (1450ms) | loss = 0.4528 | det. acc. = 85.9% | loc. acc. = 85.9%
+Step 100 | 144s (1441ms) | loss = 0.3428 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 110 | 158s (1433ms) | loss = 0.4291 | det. acc. = 87.1% | loc. acc. = 87.1%
+Step 120 | 171s (1426ms) | loss = 0.4958 | det. acc. = 84.0% | loc. acc. = 84.0%
+Step 130 | 185s (1421ms) | loss = 0.4119 | det. acc. = 89.5% | loc. acc. = 89.5%
+Step 140 | 198s (1417ms) | loss = 0.3499 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 150 | 212s (1414ms) | loss = 0.4105 | det. acc. = 88.3% | loc. acc. = 88.3%
+Step 160 | 226s (1411ms) | loss = 0.4041 | det. acc. = 88.7% | loc. acc. = 88.7%
+Step 170 | 239s (1407ms) | loss = 0.4152 | det. acc. = 90.2% | loc. acc. = 90.2%
+Step 180 | 253s (1404ms) | loss = 0.3236 | det. acc. = 91.4% | loc. acc. = 91.4%
+Step 190 | 266s (1401ms) | loss = 0.3267 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 200 | 280s (1399ms) | loss = 0.3505 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 210 | 293s (1397ms) | loss = 0.3441 | det. acc. = 91.4% | loc. acc. = 91.4%
+Step 220 | 307s (1396ms) | loss = 0.3276 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 230 | 321s (1394ms) | loss = 0.3011 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 240 | 334s (1393ms) | loss = 0.2660 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 250 | 348s (1391ms) | loss = 0.2580 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 260 | 361s (1390ms) | loss = 0.3244 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 270 | 375s (1389ms) | loss = 0.3349 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 280 | 389s (1389ms) | loss = 0.3710 | det. acc. = 89.8% | loc. acc. = 89.8%
+Step 290 | 403s (1388ms) | loss = 0.3474 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 300 | 416s (1388ms) | loss = 0.3565 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 310 | 430s (1387ms) | loss = 0.3156 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 320 | 444s (1387ms) | loss = 0.2637 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 330 | 457s (1386ms) | loss = 0.2775 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 340 | 471s (1385ms) | loss = 0.2270 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 350 | 484s (1384ms) | loss = 0.3235 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 360 | 498s (1383ms) | loss = 0.2684 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 370 | 512s (1383ms) | loss = 0.3707 | det. acc. = 89.1% | loc. acc. = 89.1%
+Step 380 | 525s (1382ms) | loss = 0.2979 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 390 | 539s (1382ms) | loss = 0.3289 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 400 | 552s (1381ms) | loss = 0.2568 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 410 | 566s (1381ms) | loss = 0.2872 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 420 | 580s (1380ms) | loss = 0.2587 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 430 | 593s (1380ms) | loss = 0.3250 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 440 | 607s (1379ms) | loss = 0.2528 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 450 | 621s (1379ms) | loss = 0.3443 | det. acc. = 90.6% | loc. acc. = 90.6%
+Step 460 | 634s (1379ms) | loss = 0.3034 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 470 | 648s (1378ms) | loss = 0.2168 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 480 | 661s (1378ms) | loss = 0.2719 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 490 | 675s (1378ms) | loss = 0.2668 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 500 | 689s (1377ms) | loss = 0.2405 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 510 | 702s (1377ms) | loss = 0.2867 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 520 | 716s (1377ms) | loss = 0.2310 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 530 | 730s (1377ms) | loss = 0.2773 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 540 | 744s (1377ms) | loss = 0.2845 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 550 | 757s (1377ms) | loss = 0.2137 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 560 | 771s (1376ms) | loss = 0.2357 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 570 | 784s (1376ms) | loss = 0.2538 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 580 | 798s (1376ms) | loss = 0.2633 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 590 | 812s (1376ms) | loss = 0.2506 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 600 | 825s (1376ms) | loss = 0.2413 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 610 | 839s (1375ms) | loss = 0.2789 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 620 | 853s (1375ms) | loss = 0.2879 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 630 | 866s (1375ms) | loss = 0.2670 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 640 | 880s (1375ms) | loss = 0.2131 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 650 | 893s (1374ms) | loss = 0.2220 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 660 | 907s (1374ms) | loss = 0.2637 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 670 | 920s (1374ms) | loss = 0.2156 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 680 | 934s (1374ms) | loss = 0.2542 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 690 | 948s (1373ms) | loss = 0.2808 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 700 | 961s (1373ms) | loss = 0.2515 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 710 | 975s (1373ms) | loss = 0.1823 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 720 | 989s (1373ms) | loss = 0.2946 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 730 | 1002s (1373ms) | loss = 0.2188 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 740 | 1016s (1373ms) | loss = 0.2788 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 750 | 1029s (1372ms) | loss = 0.2628 | det. acc. = 91.4% | loc. acc. = 91.4%
+Step 760 | 1043s (1372ms) | loss = 0.3050 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 770 | 1057s (1372ms) | loss = 0.2285 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 780 | 1070s (1372ms) | loss = 0.2699 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 790 | 1084s (1372ms) | loss = 0.2450 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 800 | 1097s (1372ms) | loss = 0.2210 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 810 | 1111s (1372ms) | loss = 0.3129 | det. acc. = 91.4% | loc. acc. = 91.4%
+Step 820 | 1125s (1371ms) | loss = 0.2489 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 830 | 1138s (1371ms) | loss = 0.2886 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 840 | 1152s (1371ms) | loss = 0.2208 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 850 | 1165s (1371ms) | loss = 0.3199 | det. acc. = 89.8% | loc. acc. = 89.8%
+Step 860 | 1179s (1371ms) | loss = 0.3010 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 870 | 1192s (1370ms) | loss = 0.2239 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 880 | 1206s (1370ms) | loss = 0.2081 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 890 | 1219s (1370ms) | loss = 0.3094 | det. acc. = 89.8% | loc. acc. = 89.8%
+Step 900 | 1233s (1370ms) | loss = 0.2643 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 910 | 1247s (1370ms) | loss = 0.3132 | det. acc. = 89.1% | loc. acc. = 89.1%
+Step 920 | 1260s (1370ms) | loss = 0.2290 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 930 | 1274s (1370ms) | loss = 0.2812 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 940 | 1287s (1370ms) | loss = 0.2290 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 950 | 1301s (1370ms) | loss = 0.1926 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 960 | 1315s (1369ms) | loss = 0.2380 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 970 | 1328s (1369ms) | loss = 0.2468 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 980 | 1342s (1369ms) | loss = 0.2267 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 990 | 1356s (1369ms) | loss = 0.1953 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1000 | 1369s (1369ms) | loss = 0.2073 | det. acc. = 95.7% | loc. acc. = 95.7%
+[train] Step 1000 | Saving checkpoint.
+Step 1010 | 1384s (1370ms) | loss = 0.2756 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1020 | 1398s (1370ms) | loss = 0.2694 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1030 | 1411s (1370ms) | loss = 0.2810 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1040 | 1425s (1370ms) | loss = 0.2360 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1050 | 1439s (1370ms) | loss = 0.2190 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1060 | 1452s (1370ms) | loss = 0.2144 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 1070 | 1466s (1370ms) | loss = 0.2545 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 1080 | 1480s (1370ms) | loss = 0.2139 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1090 | 1493s (1370ms) | loss = 0.1616 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1100 | 1506s (1369ms) | loss = 0.2627 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 1110 | 1520s (1369ms) | loss = 0.2753 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 1120 | 1534s (1369ms) | loss = 0.2875 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 1130 | 1547s (1369ms) | loss = 0.1563 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1140 | 1561s (1369ms) | loss = 0.2025 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1150 | 1574s (1369ms) | loss = 0.2060 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1160 | 1588s (1369ms) | loss = 0.2604 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1170 | 1601s (1369ms) | loss = 0.1969 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1180 | 1615s (1369ms) | loss = 0.2616 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 1190 | 1628s (1368ms) | loss = 0.2082 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1200 | 1642s (1368ms) | loss = 0.3150 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 1210 | 1656s (1368ms) | loss = 0.1913 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1220 | 1669s (1368ms) | loss = 0.2622 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 1230 | 1683s (1368ms) | loss = 0.2122 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1240 | 1696s (1368ms) | loss = 0.1511 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 1250 | 1710s (1368ms) | loss = 0.1894 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1260 | 1724s (1368ms) | loss = 0.1733 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1270 | 1737s (1368ms) | loss = 0.2153 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1280 | 1751s (1368ms) | loss = 0.1802 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1290 | 1764s (1368ms) | loss = 0.2365 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1300 | 1778s (1368ms) | loss = 0.1838 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 1310 | 1792s (1368ms) | loss = 0.1943 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1320 | 1805s (1368ms) | loss = 0.2061 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1330 | 1819s (1368ms) | loss = 0.2423 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1340 | 1833s (1368ms) | loss = 0.2043 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1350 | 1846s (1368ms) | loss = 0.2327 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1360 | 1860s (1368ms) | loss = 0.2358 | det. acc. = 91.0% | loc. acc. = 91.0%
+Step 1370 | 1874s (1368ms) | loss = 0.2226 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1380 | 1887s (1368ms) | loss = 0.2541 | det. acc. = 91.8% | loc. acc. = 91.8%
+Step 1390 | 1901s (1368ms) | loss = 0.2117 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1400 | 1915s (1368ms) | loss = 0.2132 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 1410 | 1928s (1367ms) | loss = 0.1672 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1420 | 1942s (1367ms) | loss = 0.2533 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1430 | 1955s (1367ms) | loss = 0.1824 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1440 | 1969s (1367ms) | loss = 0.1776 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 1450 | 1983s (1367ms) | loss = 0.2293 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1460 | 1996s (1367ms) | loss = 0.2115 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1470 | 2010s (1367ms) | loss = 0.2356 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1480 | 2024s (1367ms) | loss = 0.2074 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1490 | 2037s (1367ms) | loss = 0.1836 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1500 | 2051s (1367ms) | loss = 0.1738 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1510 | 2064s (1367ms) | loss = 0.2311 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1520 | 2078s (1367ms) | loss = 0.1930 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1530 | 2091s (1367ms) | loss = 0.2106 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1540 | 2104s (1367ms) | loss = 0.2694 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 1550 | 2118s (1367ms) | loss = 0.2042 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1560 | 2132s (1366ms) | loss = 0.1738 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1570 | 2145s (1366ms) | loss = 0.2260 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 1580 | 2159s (1367ms) | loss = 0.1995 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 1590 | 2173s (1367ms) | loss = 0.1709 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1600 | 2187s (1367ms) | loss = 0.1933 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1610 | 2202s (1367ms) | loss = 0.1153 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 1620 | 2216s (1368ms) | loss = 0.2680 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1630 | 2231s (1369ms) | loss = 0.1693 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1640 | 2246s (1369ms) | loss = 0.1646 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1650 | 2260s (1370ms) | loss = 0.2124 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1660 | 2275s (1371ms) | loss = 0.2261 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1670 | 2291s (1372ms) | loss = 0.2230 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1680 | 2306s (1373ms) | loss = 0.2089 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 1690 | 2321s (1374ms) | loss = 0.1261 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 1700 | 2337s (1375ms) | loss = 0.1547 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1710 | 2353s (1376ms) | loss = 0.2299 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 1720 | 2368s (1377ms) | loss = 0.2349 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1730 | 2384s (1378ms) | loss = 0.1001 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 1740 | 2400s (1379ms) | loss = 0.1757 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1750 | 2416s (1381ms) | loss = 0.1944 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1760 | 2432s (1382ms) | loss = 0.2269 | det. acc. = 92.6% | loc. acc. = 92.6%
+Step 1770 | 2448s (1383ms) | loss = 0.1918 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1780 | 2464s (1384ms) | loss = 0.1669 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1790 | 2481s (1386ms) | loss = 0.1987 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 1800 | 2497s (1387ms) | loss = 0.1548 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1810 | 2514s (1389ms) | loss = 0.2519 | det. acc. = 94.1% | loc. acc. = 94.1%
+Step 1820 | 2530s (1390ms) | loss = 0.1874 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 1830 | 2547s (1392ms) | loss = 0.1614 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 1840 | 2564s (1393ms) | loss = 0.2218 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1850 | 2581s (1395ms) | loss = 0.1502 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1860 | 2597s (1397ms) | loss = 0.1955 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 1870 | 2614s (1398ms) | loss = 0.2137 | det. acc. = 93.0% | loc. acc. = 93.0%
+Step 1880 | 2631s (1400ms) | loss = 0.1894 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1890 | 2649s (1401ms) | loss = 0.2174 | det. acc. = 93.8% | loc. acc. = 93.8%
+Step 1900 | 2666s (1403ms) | loss = 0.1664 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1910 | 2683s (1405ms) | loss = 0.1347 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1920 | 2700s (1406ms) | loss = 0.1846 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1930 | 2718s (1408ms) | loss = 0.1404 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 1940 | 2735s (1410ms) | loss = 0.1404 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 1950 | 2753s (1412ms) | loss = 0.1869 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1960 | 2770s (1413ms) | loss = 0.1725 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 1970 | 2788s (1415ms) | loss = 0.1480 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 1980 | 2805s (1417ms) | loss = 0.1707 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 1990 | 2823s (1419ms) | loss = 0.1451 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2000 | 2842s (1421ms) | loss = 0.2328 | det. acc. = 93.0% | loc. acc. = 93.0%
+[train] Step 2000 | Saving checkpoint.
+Step 2010 | 2861s (1423ms) | loss = 0.1673 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2020 | 2879s (1425ms) | loss = 0.1375 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2030 | 2897s (1427ms) | loss = 0.1888 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2040 | 2915s (1429ms) | loss = 0.2054 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2050 | 2933s (1431ms) | loss = 0.1737 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2060 | 2952s (1433ms) | loss = 0.1616 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2070 | 2970s (1435ms) | loss = 0.2087 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 2080 | 2989s (1437ms) | loss = 0.2263 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 2090 | 3007s (1439ms) | loss = 0.1767 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2100 | 3026s (1441ms) | loss = 0.2116 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 2110 | 3045s (1443ms) | loss = 0.1484 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2120 | 3064s (1445ms) | loss = 0.1893 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2130 | 3084s (1448ms) | loss = 0.1423 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2140 | 3103s (1450ms) | loss = 0.1682 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2150 | 3123s (1453ms) | loss = 0.1968 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 2160 | 3143s (1455ms) | loss = 0.1484 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 2170 | 3163s (1458ms) | loss = 0.1877 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 2180 | 3184s (1461ms) | loss = 0.1662 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2190 | 3204s (1463ms) | loss = 0.1315 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2200 | 3225s (1466ms) | loss = 0.1418 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2210 | 3246s (1469ms) | loss = 0.1643 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2220 | 3267s (1472ms) | loss = 0.1651 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 2230 | 3289s (1475ms) | loss = 0.2218 | det. acc. = 92.2% | loc. acc. = 92.2%
+Step 2240 | 3311s (1478ms) | loss = 0.1429 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2250 | 3333s (1481ms) | loss = 0.1374 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2260 | 3355s (1484ms) | loss = 0.1239 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2270 | 3377s (1488ms) | loss = 0.1523 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2280 | 3400s (1491ms) | loss = 0.1625 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2290 | 3422s (1494ms) | loss = 0.1718 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 2300 | 3445s (1498ms) | loss = 0.1478 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2310 | 3469s (1502ms) | loss = 0.2150 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 2320 | 3492s (1505ms) | loss = 0.1663 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 2330 | 3516s (1509ms) | loss = 0.1456 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2340 | 3540s (1513ms) | loss = 0.1167 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2350 | 3564s (1516ms) | loss = 0.1812 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2360 | 3588s (1520ms) | loss = 0.1378 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2370 | 3613s (1524ms) | loss = 0.0969 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2380 | 3638s (1529ms) | loss = 0.1921 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2390 | 3664s (1533ms) | loss = 0.1656 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2400 | 3690s (1537ms) | loss = 0.1371 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2410 | 3716s (1542ms) | loss = 0.1602 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2420 | 3742s (1546ms) | loss = 0.1912 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 2430 | 3769s (1551ms) | loss = 0.1649 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2440 | 3796s (1556ms) | loss = 0.1322 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2450 | 3824s (1561ms) | loss = 0.1276 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2460 | 3852s (1566ms) | loss = 0.1313 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2470 | 3880s (1571ms) | loss = 0.1223 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2480 | 3909s (1576ms) | loss = 0.1633 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2490 | 3938s (1581ms) | loss = 0.1351 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2500 | 3967s (1587ms) | loss = 0.1196 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2510 | 3997s (1593ms) | loss = 0.1705 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2520 | 4027s (1598ms) | loss = 0.1308 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2530 | 4058s (1604ms) | loss = 0.1937 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 2540 | 4089s (1610ms) | loss = 0.1351 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2550 | 4120s (1616ms) | loss = 0.1367 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2560 | 4152s (1622ms) | loss = 0.1554 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2570 | 4184s (1628ms) | loss = 0.1405 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2580 | 4217s (1634ms) | loss = 0.1658 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2590 | 4250s (1641ms) | loss = 0.1321 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2600 | 4283s (1647ms) | loss = 0.1532 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 2610 | 4317s (1654ms) | loss = 0.1130 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2620 | 4352s (1661ms) | loss = 0.1287 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2630 | 4386s (1668ms) | loss = 0.1315 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2640 | 4421s (1675ms) | loss = 0.1027 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 2650 | 4456s (1682ms) | loss = 0.1508 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2660 | 4492s (1689ms) | loss = 0.1498 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2670 | 4528s (1696ms) | loss = 0.1389 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2680 | 4565s (1703ms) | loss = 0.1237 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2690 | 4602s (1711ms) | loss = 0.1607 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2700 | 4640s (1719ms) | loss = 0.1510 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2710 | 4678s (1726ms) | loss = 0.1919 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 2720 | 4716s (1734ms) | loss = 0.1526 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2730 | 4755s (1742ms) | loss = 0.1485 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2740 | 4794s (1749ms) | loss = 0.1602 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2750 | 4833s (1757ms) | loss = 0.1351 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2760 | 4873s (1765ms) | loss = 0.1181 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2770 | 4913s (1774ms) | loss = 0.1635 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2780 | 4953s (1782ms) | loss = 0.2477 | det. acc. = 93.4% | loc. acc. = 93.4%
+Step 2790 | 4994s (1790ms) | loss = 0.1775 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2800 | 5036s (1798ms) | loss = 0.1612 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 2810 | 5078s (1807ms) | loss = 0.1187 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2820 | 5120s (1816ms) | loss = 0.1235 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2830 | 5163s (1824ms) | loss = 0.1838 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2840 | 5206s (1833ms) | loss = 0.1022 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2850 | 5256s (1844ms) | loss = 0.1328 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2860 | 5306s (1855ms) | loss = 0.1408 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2870 | 5350s (1864ms) | loss = 0.0946 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 2880 | 5395s (1873ms) | loss = 0.1855 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 2890 | 5440s (1882ms) | loss = 0.0986 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2900 | 5486s (1892ms) | loss = 0.1488 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 2910 | 5532s (1901ms) | loss = 0.1547 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 2920 | 5578s (1910ms) | loss = 0.1337 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2930 | 5625s (1920ms) | loss = 0.1198 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2940 | 5673s (1929ms) | loss = 0.1179 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 2950 | 5720s (1939ms) | loss = 0.1119 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 2960 | 5767s (1948ms) | loss = 0.1214 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2970 | 5816s (1958ms) | loss = 0.1373 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 2980 | 5864s (1968ms) | loss = 0.1420 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 2990 | 5913s (1978ms) | loss = 0.1340 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3000 | 5963s (1988ms) | loss = 0.1251 | det. acc. = 97.7% | loc. acc. = 97.7%
+[train] Step 3000 | Saving checkpoint.
+Step 3010 | 6014s (1998ms) | loss = 0.1570 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 3020 | 6064s (2008ms) | loss = 0.1148 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3030 | 6114s (2018ms) | loss = 0.1217 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3040 | 6165s (2028ms) | loss = 0.1167 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3050 | 6217s (2038ms) | loss = 0.1487 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 3060 | 6268s (2048ms) | loss = 0.1220 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3070 | 6320s (2059ms) | loss = 0.1346 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3080 | 6373s (2069ms) | loss = 0.1665 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 3090 | 6426s (2080ms) | loss = 0.1391 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3100 | 6479s (2090ms) | loss = 0.2324 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3110 | 6532s (2100ms) | loss = 0.1301 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3120 | 6585s (2111ms) | loss = 0.1439 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3130 | 6639s (2121ms) | loss = 0.1379 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3140 | 6692s (2131ms) | loss = 0.1273 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3150 | 6747s (2142ms) | loss = 0.0878 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3160 | 6801s (2152ms) | loss = 0.1526 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 3170 | 6857s (2163ms) | loss = 0.1381 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3180 | 6912s (2174ms) | loss = 0.1092 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3190 | 6968s (2184ms) | loss = 0.1242 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3200 | 7025s (2195ms) | loss = 0.0930 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3210 | 7081s (2206ms) | loss = 0.1256 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3220 | 7139s (2217ms) | loss = 0.1152 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3230 | 7196s (2228ms) | loss = 0.1081 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3240 | 7254s (2239ms) | loss = 0.1062 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3250 | 7312s (2250ms) | loss = 0.1231 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3260 | 7372s (2261ms) | loss = 0.1315 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3270 | 7430s (2272ms) | loss = 0.1179 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3280 | 7489s (2283ms) | loss = 0.0953 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3290 | 7548s (2294ms) | loss = 0.1336 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3300 | 7608s (2306ms) | loss = 0.1367 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3310 | 7669s (2317ms) | loss = 0.0994 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3320 | 7729s (2328ms) | loss = 0.1251 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3330 | 7790s (2339ms) | loss = 0.1565 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3340 | 7851s (2350ms) | loss = 0.1321 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3350 | 7912s (2362ms) | loss = 0.1683 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 3360 | 7973s (2373ms) | loss = 0.1430 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3370 | 8035s (2384ms) | loss = 0.1294 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3380 | 8097s (2396ms) | loss = 0.1301 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3390 | 8159s (2407ms) | loss = 0.1045 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3400 | 8223s (2418ms) | loss = 0.1084 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3410 | 8286s (2430ms) | loss = 0.1372 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 3420 | 8350s (2441ms) | loss = 0.1849 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 3430 | 8413s (2453ms) | loss = 0.1152 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3440 | 8477s (2464ms) | loss = 0.0819 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3450 | 8541s (2476ms) | loss = 0.1670 | det. acc. = 94.9% | loc. acc. = 94.9%
+Step 3460 | 8606s (2487ms) | loss = 0.0932 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3470 | 8671s (2499ms) | loss = 0.0888 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3480 | 8736s (2510ms) | loss = 0.1116 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3490 | 8802s (2522ms) | loss = 0.1359 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3500 | 8868s (2534ms) | loss = 0.1186 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3510 | 8933s (2545ms) | loss = 0.1047 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3520 | 9000s (2557ms) | loss = 0.1529 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3530 | 9067s (2568ms) | loss = 0.0923 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3540 | 9133s (2580ms) | loss = 0.1174 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3550 | 9200s (2591ms) | loss = 0.1424 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3560 | 9266s (2603ms) | loss = 0.1476 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3570 | 9333s (2614ms) | loss = 0.1703 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 3580 | 9399s (2626ms) | loss = 0.1296 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3590 | 9467s (2637ms) | loss = 0.1959 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 3600 | 9534s (2648ms) | loss = 0.1336 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 3610 | 9603s (2660ms) | loss = 0.1092 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3620 | 9671s (2672ms) | loss = 0.1177 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3630 | 9740s (2683ms) | loss = 0.0939 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3640 | 9809s (2695ms) | loss = 0.1033 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3650 | 9878s (2706ms) | loss = 0.0930 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3660 | 9947s (2718ms) | loss = 0.1156 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3670 | 10016s (2729ms) | loss = 0.0959 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3680 | 10087s (2741ms) | loss = 0.0789 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3690 | 10157s (2753ms) | loss = 0.1530 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3700 | 10227s (2764ms) | loss = 0.1298 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3710 | 10300s (2776ms) | loss = 0.1009 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3720 | 10372s (2788ms) | loss = 0.1063 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3730 | 10444s (2800ms) | loss = 0.0820 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3740 | 10515s (2812ms) | loss = 0.1427 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 3750 | 10587s (2823ms) | loss = 0.2326 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 3760 | 10659s (2835ms) | loss = 0.1926 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 3770 | 10730s (2846ms) | loss = 0.1404 | det. acc. = 95.7% | loc. acc. = 95.7%
+Step 3780 | 10802s (2858ms) | loss = 0.1321 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3790 | 10874s (2869ms) | loss = 0.2127 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 3800 | 10946s (2880ms) | loss = 0.1085 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3810 | 11018s (2892ms) | loss = 0.1190 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3820 | 11091s (2903ms) | loss = 0.1408 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 3830 | 11164s (2915ms) | loss = 0.1517 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 3840 | 11237s (2926ms) | loss = 0.1590 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3850 | 11310s (2938ms) | loss = 0.1159 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3860 | 11384s (2949ms) | loss = 0.1076 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 3870 | 11458s (2961ms) | loss = 0.0989 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3880 | 11532s (2972ms) | loss = 0.1170 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3890 | 11606s (2984ms) | loss = 0.1019 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 3900 | 11681s (2995ms) | loss = 0.1155 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3910 | 11756s (3007ms) | loss = 0.0924 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3920 | 11831s (3018ms) | loss = 0.1071 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 3930 | 11906s (3030ms) | loss = 0.0754 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 3940 | 11982s (3041ms) | loss = 0.0690 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 3950 | 12058s (3053ms) | loss = 0.1038 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3960 | 12133s (3064ms) | loss = 0.1142 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 3970 | 12210s (3075ms) | loss = 0.1016 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 3980 | 12287s (3087ms) | loss = 0.1089 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 3990 | 12363s (3099ms) | loss = 0.1037 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 4000 | 12440s (3110ms) | loss = 0.1267 | det. acc. = 97.7% | loc. acc. = 97.7%
+[train] Step 4000 | Saving checkpoint.
+Step 4010 | 12519s (3122ms) | loss = 0.0780 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 4020 | 12596s (3133ms) | loss = 0.1063 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4030 | 12673s (3145ms) | loss = 0.1171 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 4040 | 12751s (3156ms) | loss = 0.0949 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4050 | 12829s (3168ms) | loss = 0.0912 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4060 | 12907s (3179ms) | loss = 0.1120 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4070 | 12986s (3191ms) | loss = 0.0850 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4080 | 13064s (3202ms) | loss = 0.0969 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4090 | 13143s (3213ms) | loss = 0.0844 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4100 | 13221s (3225ms) | loss = 0.0898 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4110 | 13301s (3236ms) | loss = 0.1100 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4120 | 13382s (3248ms) | loss = 0.0824 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4130 | 13463s (3260ms) | loss = 0.0784 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4140 | 13545s (3272ms) | loss = 0.0878 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4150 | 13626s (3283ms) | loss = 0.1038 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4160 | 13708s (3295ms) | loss = 0.1335 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 4170 | 13789s (3307ms) | loss = 0.0973 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4180 | 13871s (3319ms) | loss = 0.1169 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4190 | 13954s (3330ms) | loss = 0.1201 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4200 | 14038s (3342ms) | loss = 0.1124 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4210 | 14122s (3354ms) | loss = 0.1653 | det. acc. = 96.1% | loc. acc. = 96.1%
+Step 4220 | 14204s (3366ms) | loss = 0.1547 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 4230 | 14287s (3378ms) | loss = 0.1887 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 4240 | 14371s (3389ms) | loss = 0.1826 | det. acc. = 95.3% | loc. acc. = 95.3%
+Step 4250 | 14453s (3401ms) | loss = 0.1276 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 4260 | 14536s (3412ms) | loss = 0.0994 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4270 | 14618s (3424ms) | loss = 0.1357 | det. acc. = 96.5% | loc. acc. = 96.5%
+Step 4280 | 14702s (3435ms) | loss = 0.1404 | det. acc. = 96.9% | loc. acc. = 96.9%
+Step 4290 | 14785s (3446ms) | loss = 0.1208 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4300 | 14870s (3458ms) | loss = 0.0999 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4310 | 14953s (3469ms) | loss = 0.1125 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 4320 | 15038s (3481ms) | loss = 0.1163 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4330 | 15124s (3493ms) | loss = 0.0947 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4340 | 15210s (3505ms) | loss = 0.2387 | det. acc. = 94.5% | loc. acc. = 94.5%
+Step 4350 | 15294s (3516ms) | loss = 0.1544 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 4360 | 15379s (3527ms) | loss = 0.1270 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4370 | 15464s (3539ms) | loss = 0.1141 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4380 | 15550s (3550ms) | loss = 0.1249 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4390 | 15635s (3561ms) | loss = 0.0904 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4400 | 15721s (3573ms) | loss = 0.0964 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4410 | 15809s (3585ms) | loss = 0.0921 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4420 | 15897s (3597ms) | loss = 0.0923 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4430 | 15984s (3608ms) | loss = 0.1174 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4440 | 16071s (3620ms) | loss = 0.0995 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4450 | 16159s (3631ms) | loss = 0.0868 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4460 | 16247s (3643ms) | loss = 0.0930 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4470 | 16335s (3654ms) | loss = 0.0790 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4480 | 16423s (3666ms) | loss = 0.1124 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4490 | 16513s (3678ms) | loss = 0.0892 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4500 | 16603s (3689ms) | loss = 0.1128 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4510 | 16691s (3701ms) | loss = 0.1105 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4520 | 16781s (3713ms) | loss = 0.1104 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4530 | 16870s (3724ms) | loss = 0.0992 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4540 | 16960s (3736ms) | loss = 0.0799 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4550 | 17051s (3747ms) | loss = 0.0843 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4560 | 17142s (3759ms) | loss = 0.0870 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4570 | 17234s (3771ms) | loss = 0.0736 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 4580 | 17325s (3783ms) | loss = 0.0965 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4590 | 17418s (3795ms) | loss = 0.1170 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4600 | 17509s (3806ms) | loss = 0.0909 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4610 | 17601s (3818ms) | loss = 0.1154 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4620 | 17693s (3830ms) | loss = 0.1085 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4630 | 17786s (3842ms) | loss = 0.0751 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4640 | 17879s (3853ms) | loss = 0.0848 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4650 | 17972s (3865ms) | loss = 0.1012 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4660 | 18066s (3877ms) | loss = 0.0760 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 4670 | 18160s (3889ms) | loss = 0.0971 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4680 | 18255s (3901ms) | loss = 0.1097 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4690 | 18349s (3912ms) | loss = 0.0994 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4700 | 18445s (3925ms) | loss = 0.0837 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4710 | 18540s (3936ms) | loss = 0.0832 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4720 | 18636s (3948ms) | loss = 0.0823 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4730 | 18732s (3960ms) | loss = 0.0854 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4740 | 18827s (3972ms) | loss = 0.1032 | det. acc. = 97.7% | loc. acc. = 97.7%
+Step 4750 | 18925s (3984ms) | loss = 0.0851 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4760 | 19023s (3996ms) | loss = 0.0816 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4770 | 19118s (4008ms) | loss = 0.1087 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 4780 | 19215s (4020ms) | loss = 0.0819 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4790 | 19312s (4032ms) | loss = 0.1245 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 4800 | 19412s (4044ms) | loss = 0.1075 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4810 | 19511s (4056ms) | loss = 0.0898 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4820 | 19609s (4068ms) | loss = 0.1004 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4830 | 19720s (4083ms) | loss = 0.0837 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4840 | 19820s (4095ms) | loss = 0.1475 | det. acc. = 97.3% | loc. acc. = 97.3%
+Step 4850 | 19920s (4107ms) | loss = 0.0963 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4860 | 20020s (4119ms) | loss = 0.1078 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4870 | 20119s (4131ms) | loss = 0.1182 | det. acc. = 98.0% | loc. acc. = 98.0%
+Step 4880 | 20220s (4143ms) | loss = 0.0817 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4890 | 20321s (4156ms) | loss = 0.0887 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4900 | 20423s (4168ms) | loss = 0.0855 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4910 | 20525s (4180ms) | loss = 0.1258 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4920 | 20626s (4192ms) | loss = 0.0763 | det. acc. = 99.6% | loc. acc. = 99.6%
+Step 4930 | 20728s (4205ms) | loss = 0.0882 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4940 | 20831s (4217ms) | loss = 0.0633 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 4950 | 20935s (4229ms) | loss = 0.0894 | det. acc. = 99.2% | loc. acc. = 99.2%
+Step 4960 | 21039s (4242ms) | loss = 0.0745 | det. acc. = 100.0% | loc. acc. = 100.0%
+Step 4970 | 21144s (4254ms) | loss = 0.1291 | det. acc. = 98.4% | loc. acc. = 98.4%
+Step 4980 | 21249s (4267ms) | loss = 0.0744 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 4990 | 21356s (4280ms) | loss = 0.1001 | det. acc. = 98.8% | loc. acc. = 98.8%
+Step 5000 | 21461s (4292ms) | loss = 0.0774 | det. acc. = 100.0% | loc. acc. = 100.0%
+[train] Step 5000 | Saving checkpoint.
+[train] Shutting down data threads.
+[train] Waiting for all threads.
+[train] Optimization done.
+TIME = 357.81306955 minutes
+python step5_eval_over_tfrecords.py 	--config_file_path experiments/config_model14b.ini 	--n_clusters 2 	--window_size 20 	--checkpoint_dir output/data_prep_datos5/20/CL2/CO3/model14b/checkpoints 	--output_dir output/data_prep_datos5/20/CL2/CO3/model14b/eval 	--tfrecords_dir output/data_prep_datos5/20/CL2/CO3/tfrecords/test
+[92m******************** STEP 5/5. EVALUATION *******************[0m 
+[[94mCONFIG[0m] debug = False
+[[94mCONFIG[0m] filterfreq = True
+[[94mCONFIG[0m] sampling_rate = 100
+[[94mCONFIG[0m] window_size = 20[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pwave_window = 0
+[[94mCONFIG[0m] window_stride = 10
+[[94mCONFIG[0m] window_avoid_negatives_before = 10
+[[94mCONFIG[0m] window_avoid_negatives_after = 500
+[[94mCONFIG[0m] component_Z = True
+[[94mCONFIG[0m] component_N = True
+[[94mCONFIG[0m] component_E = True
+[[94mCONFIG[0m] mean_velocity = 18000.0
+[[94mCONFIG[0m] mseed_dir = mseed
+[[94mCONFIG[0m] mseed_event_dir = mseed_event_windows
+[[94mCONFIG[0m] mseed_noise_dir = mseed_noise
+[[94mCONFIG[0m] png_dir = png
+[[94mCONFIG[0m] png_event_dir = png_event_windows
+[[94mCONFIG[0m] png_noise_dir = png_noise
+[[94mCONFIG[0m] output_tfrecords_dir_positives = positive
+[[94mCONFIG[0m] output_tfrecords_dir_negatives = negative
+[[94mCONFIG[0m] random_seed = 666
+[[94mCONFIG[0m] balance = True
+[[94mCONFIG[0m] model = ConvNetQuake2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] num_conv_layers = 4[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] conv_stride = 5[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] num_fc_layers = 3[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] fc_size = 10
+[[94mCONFIG[0m] pooling = True[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] n_clusters = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling_window = 5[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] pooling_stride = 2[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] ksize = 20[94m (OVERWRITTEN)[0m
+[[94mCONFIG[0m] learning_rate = 0.001
+[[94mCONFIG[0m] batch_size = 128
+[[94mCONFIG[0m] display_step = 50
+[[94mCONFIG[0m] n_threads = 2
+[[94mCONFIG[0m] resume = False
+[[94mCONFIG[0m] profiling = False
+[[94mCONFIG[0m] add = 1
+[[94mCONFIG[0m] checkpoint_step = 1000
+[[94mCONFIG[0m] max_checkpoint_step = 5000
+[[94mCONFIG[0m] window_step_predict = 10
+[[94mCONFIG[0m] save_sac = False
+[[94mINFO[0m] LAYER input shape = 1x2001x3
+[[94mINFO[0m] LAYER conv1 shape = 1x1001x32
+[[94mINFO[0m] LAYER max_pool1 shape = 1x501x32
+[[94mINFO[0m] LAYER conv2 shape = 1x251x32
+[[94mINFO[0m] LAYER max_pool2 shape = 1x126x32
+[[94mINFO[0m] LAYER conv3 shape = 1x63x32
+[[94mINFO[0m] LAYER max_pool3 shape = 1x32x32
+[[94mINFO[0m] LAYER conv4 shape = 1x16x32
+[[94mINFO[0m] LAYER max_pool4 shape = 1x8x32
+bs=1, width=8, aux=32
+[[94mINFO[0m] FC LAYER 1 shape = 1x10
+[[94mINFO[0m] FC LAYER 2 shape = 1x10
+[[94mINFO[0m] FC LAYER LOGITS shape = 1x2
+NUM PARAMS: 66190
+[train] Loaded model at step 5000 from snapshot output/data_prep_datos5/20/CL2/CO3/model14b/checkpoints/model-5000.
+Evaluating at step 5000
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+Evaluation completed (1 epochs).
+2456 windows seen
+[[94mINFO[0m] LAYER input shape = 1x2001x3
+[[94mINFO[0m] LAYER conv1 shape = 1x1001x32
+[[94mINFO[0m] LAYER max_pool1 shape = 1x501x32
+[[94mINFO[0m] LAYER conv2 shape = 1x251x32
+[[94mINFO[0m] LAYER max_pool2 shape = 1x126x32
+[[94mINFO[0m] LAYER conv3 shape = 1x63x32
+[[94mINFO[0m] LAYER max_pool3 shape = 1x32x32
+[[94mINFO[0m] LAYER conv4 shape = 1x16x32
+[[94mINFO[0m] LAYER max_pool4 shape = 1x8x32
+bs=1, width=8, aux=32
+[[94mINFO[0m] FC LAYER 1 shape = 1x10
+[[94mINFO[0m] FC LAYER 2 shape = 1x10
+[[94mINFO[0m] FC LAYER LOGITS shape = 1x2
+NUM PARAMS: 66190
+[train] Loaded model at step 5000 from snapshot output/data_prep_datos5/20/CL2/CO3/model14b/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+2456 windows seen
+[validation] true positives = 2275
+[validation] false positives = 181
+[validation] true negatives = 2202
+[validation] false negatives = 254
+[validation] precision = 92.6302931596%
+[validation] recall = 89.9565045473%
+[validation] accuracy = 91.1441368078%
+[validation] f1 = 91.2738214644%
+[validation] specificity = 92.4045321024%
+[validation] balanced accuracy = 91.1805183248%
+[validation] location accuracy = 100.0%
