@@ -70,11 +70,11 @@ qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_10_
 
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_10_5_f_b_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 10 2 3 convnetquake experiments/config_convnetquake.ini
 
+rm -rf output/data_prep_datos5/10
+
 #20s
 ###########################################################################
 rm -rf output/data_prep_datos5
-
-qsub -S /bin/bash -N run_v1_step0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step0_metadata.sh
 
 qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_20_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 20 5
 
@@ -84,11 +84,10 @@ qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_20_
 
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_20_5_f_b_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 20 2 3 convnetquake experiments/config_convnetquake.ini
 
+rm -rf output/data_prep_datos5/20
+
 #30s
 ###########################################################################
-rm -rf output/data_prep_datos5
-
-qsub -S /bin/bash -N run_v1_step0_metadata -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step0_metadata.sh
 
 qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_30_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 30 5
 
