@@ -139,15 +139,29 @@ qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos
 
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_50_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14b experiments/config_model14b.ini
 
+rm -rf output/data_prep_datos5/50/CL2
+
 
 #CONVNETQUAKE SENSE PREPROCESSING
 ###########################################################################
+# 50s
 (esborrar només els tfrecords)
 (canviar preprocessing per: not balanced i not filtered)
+
 qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_50_nf_nb -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 2 3
-qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_50_nf_nb_model1 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model1 experiments/config_convnetquake.ini
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_50_nf_nb_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 convnetquake experiments/config_convnetquake.ini
 (mirar balanced accuracy)
 
+rm -rf output/data_prep_datos5/50
+
+#10s
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_10_10 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 10 10
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_10_10_nf_nb -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 10 2 3
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_10_10_nf_nb_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 10 2 3 convnetquake experiments/config_convnetquake.ini
+(mirar balanced accuracy)
 
 # sense filtering
 ###########################################################################
