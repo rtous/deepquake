@@ -163,12 +163,48 @@ qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_10_10_nf_nb_convnetquake -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 10 2 3 convnetquake experiments/config_convnetquake.ini
 (mirar balanced accuracy)
 
+rm -rf output/data_prep_datos5/10
+(habilitar balanceig i filtering)
+
 # sense filtering
 ###########################################################################
-(esborrar totes les dades)
+
 qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_50_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 50 5
 
 (deshabilitar filtering)
 qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_5_nf_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 2 3
 
 qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_nf_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14b experiments/config_model14b.ini
+
+(habilitar filtering)
+
+# model definitiu
+###########################################################################
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_50_5_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 50 2 3
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 50 2 3 model14b experiments/config_model14b.ini
+
+# Dataset OKLAHOMA
+###########################################################################
+mirar BSSA_oklahoma.txt
+
+# Generar plots
+###########################################################################
+màquina local:
+
+python step6_eval_over_mseed.py \
+--config_file_path experiments/config_model14b.ini \
+--component_N 1 \
+--component_E 1 \
+--n_clusters 2 \
+--window_size 50 \
+--checkpoint_dir output/data_prep_quickstart/10/CL2/CO3/model14b/checkpoints \
+--output_dir output/data_prep_datos5/50/CL2/CO3/model14b/eval \
+--catalog_path output/data_prep_datos5/catalog.json \
+--stream_path output/data_prep_datos5/50/mseed
+
+remot:
+
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step6_eval_over_mseed.sh datos5 50 2 3 model14b experiments/config_model14b.ini output/data_prep_datos5/50/mseed output/data_prep_datos5/catalog.json
+
+

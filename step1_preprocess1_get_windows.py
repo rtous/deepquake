@@ -273,7 +273,7 @@ if __name__ == "__main__":
     parser.add_argument("--pattern",type=str, default=None)
     parser.add_argument("--window_size", type=int, required=True)
     parser.add_argument("--window_stride", type=int, required=True)
-    parser.add_argument("--filterfreq",type=bool, default=argparse.SUPPRESS)
+    #parser.add_argument("--filterfreq",type=bool, default=argparse.SUPPRESS)
     parser.add_argument("--debug",type=int, default=argparse.SUPPRESS) #Optional, we will use the value from the config file
     args = parser.parse_args()
 
@@ -288,10 +288,10 @@ if __name__ == "__main__":
     else:
         pattern = args.pattern
 
-    if cfg.filterfreq == 0:
-        print ("[obtain training windows] \033[93m WARNING!!\033[0m Frequency filter disabled")
-    else:
-        print ("[obtain training windows] \033[93m WARNING!!\033[0m Frequency filter enabled (lowpass, "+str(cfg.filterfreq)+")")
+    #if cfg.filterfreq == 0:
+    #    print ("[obtain training windows] \033[93m WARNING!!\033[0m Frequency filter disabled")
+    #else:
+    #    print ("[obtain training windows] \033[93m WARNING!!\033[0m Frequency filter enabled (lowpass, "+str(cfg.filterfreq)+")")
     main(args.raw_data_dir, cat, args.prep_data_dir, args.plot, args.pattern, args.station)
 
 

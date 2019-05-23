@@ -1,3 +1,26 @@
+#ARA AMB CODI CONVNETQUAKE
+#per obtenir les finestres cal executar el codi de convnetquake
+
+./setpath.sh
+
+#Finestres amb event de 10 sense solape
+./bin/preprocess/create_dataset_events.py --stream_dir ../data/oklahoma/\
+--catalog data/6_clusters/catalog_with_cluster_ids.csv \
+--output_dir data/oklahoma/6_clusters/events \
+--save_mseed True --plot True
+
+#Soroll
+./bin/preprocess/create_dataset_noise.py \
+--stream_path ../data/oklahoma/GSOK029_8-2014.mseed \
+--catalog data/catalogs/Benz_catalog.csv \
+--output_dir data/noise_OK029/noise_august
+
+Per generar amb un win.size diferent o amb solape caldria modificar el codi.
+
+Al tenir separades les finestres no em calen ja els catàlegs si vull fer classificació binaria i puc generar jo mateix els tfrecords.
+
+#ARA AMB CODI DEEPQUAKE
+
 #Per no filtrar i no balancejar modifico temporalment config_default.ini
 ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh oklahoma 10 2 1
 

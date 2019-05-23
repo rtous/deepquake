@@ -110,6 +110,7 @@ Run the following command:
 	python step1_preprocess1_get_windows.py \
 	--debug 1 \
 	--window_size 10 \
+	--window_stride 10 \
 	--raw_data_dir input/datos1/mseed \
 	--catalog_path output/data_prep_quickstart/catalog.json \
 	--prep_data_dir output/data_prep_quickstart/10 \
@@ -136,16 +137,17 @@ The only folders that we really need to proceed are "mseed_event_windows" and "m
 The "mseed" folder contains a replica of the input .mseed files but as one-file-per-station. We will use them to perform some optional detection experiments at the end. 
 
 The "png*" folders contain plots but they are now empty because we did not specify the "--plot 1" argument. It is recommended that you generate plots at the beginning, but not later as it takes a lot of time. Retype the command and wait:
-
+```
 	python step1_preprocess1_get_windows.py \
 	--debug 1 \
 	--window_size 10 \
+	--window_stride 10 \
 	--raw_data_dir input/datos1/mseed \
 	--catalog_path output/data_prep_quickstart/catalog.json \
 	--prep_data_dir output/data_prep_quickstart/10 \
 	--station CRUV \
-	-- plot 1
-
+	--plot 1
+```
 
 ### 2.2 Step 2. Preprocessing 2. Generating tfrecords for positives
 
