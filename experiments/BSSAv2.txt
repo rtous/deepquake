@@ -205,6 +205,6 @@ python step6_eval_over_mseed.py \
 
 remot:
 
-qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_50_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step6_eval_over_mseed.sh datos5 50 2 3 model14b experiments/config_model14b.ini output/data_prep_datos5/50/mseed output/data_prep_datos5/catalog.json
+qsub -S /bin/bash -N run_v1_step6_eval_over_mseed_datos5_50_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step6_eval_over_mseed.sh datos5 50 2 3 model14b experiments/config_model14b.ini output/data_prep_datos5/50/mseed output/data_prep_datos5/catalog.json
 
 

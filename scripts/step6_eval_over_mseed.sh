@@ -22,7 +22,7 @@ if [ "$4" = "3" ]; then
 	--catalog_path $8 \
 	--stream_path $7"
 
-	python step5_eval_over_tfrecords.py \
+	python step6_eval_over_mseed.py \
 	--config_file_path $CONFIG_FILE \
 	--n_clusters $3 \
 	--window_size $WINDOW_SIZE \
