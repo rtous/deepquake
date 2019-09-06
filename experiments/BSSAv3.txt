@@ -1,0 +1,195 @@
+This experiments are to test a trained UPC-UCV over the OKLAHOMA dataset.
+
+1. Train UPC-UCV with CARABOBO
+
+1.1 Preprocessing 1 CARABOBO: Obtaining the 10 sec windows (by default it's balancing and freq filtering)
+
+NOTE: We use 10 sec windows as OKLAHOMA
+NOTE: We use the better overlapping (5) 
+
+
+qsub -S /bin/bash -N run_v1_step1_preprocess1_get_windows_datos5_10_5 -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step1_preprocess1_get_windows.sh datos5 10 5
+
+1.2 Preprocessing 2 CARABOBO: Obtaining the tfrecords
+
+NOTE: We use 1 component as OKLAHOMA 
+
+qsub -S /bin/bash -N run_v1_step2_and_3_preprocess2_and_3_create_tfrecords_datos5_10_5_f_b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh datos5 10 2 1
+
+1.3 Train CARABOBO (10 sec, max overlapping, filtering, balanced, 1 component)
+s
+qsub -S /bin/bash -N run_v1_step4_and_5_train_and_eval_over_tfrecords_datos5_10_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step4_and_5_train_and_eval_over_tfrecords.sh datos5 10 2 1 model14b experiments/config_model14b.ini
+
+2. Test UPC-UCV with OKLAHOMA
+
+qsub -S /bin/bash -N run_v1_step5_eval_over_tfrecords_oklahoma_10_5_f_b_model14b -M rtous@ac.upc.edu -l big ./arvei/launch.sh ./scripts/step5_eval_over_tfrecords.sh oklahoma 10 2 1 model14b_carabobo experiments/config_model14b.ini output/data_prep_datos5/10/CL2/CO1/model14b/checkpoints
+
+
+
+******************** STEP 5/5. EVALUATION ******************* 
+[CONFIG] debug = False
+[CONFIG] filterfreq = True
+[CONFIG] sampling_rate = 100
+[CONFIG] window_size = 10 (OVERWRITTEN)
+[CONFIG] pwave_window = 0
+[CONFIG] window_stride = 10
+[CONFIG] window_avoid_negatives_before = 10
+[CONFIG] window_avoid_negatives_after = 500
+[CONFIG] component_Z = True
+[CONFIG] component_N = False (OVERWRITTEN)
+[CONFIG] component_E = False (OVERWRITTEN)
+[CONFIG] mean_velocity = 18000.0
+[CONFIG] mseed_dir = mseed
+[CONFIG] mseed_event_dir = mseed_event_windows
+[CONFIG] mseed_noise_dir = mseed_noise
+[CONFIG] png_dir = png
+[CONFIG] png_event_dir = png_event_windows
+[CONFIG] png_noise_dir = png_noise
+[CONFIG] output_tfrecords_dir_positives = positive
+[CONFIG] output_tfrecords_dir_negatives = negative
+[CONFIG] random_seed = 666
+[CONFIG] balance = True
+[CONFIG] model = ConvNetQuake2 (OVERWRITTEN)
+[CONFIG] num_conv_layers = 4 (OVERWRITTEN)
+[CONFIG] conv_stride = 5 (OVERWRITTEN)
+[CONFIG] num_fc_layers = 3 (OVERWRITTEN)
+[CONFIG] fc_size = 10
+[CONFIG] pooling = True (OVERWRITTEN)
+[CONFIG] n_clusters = 2 (OVERWRITTEN)
+[CONFIG] pooling_window = 5 (OVERWRITTEN)
+[CONFIG] pooling_stride = 2 (OVERWRITTEN)
+[CONFIG] ksize = 20 (OVERWRITTEN)
+[CONFIG] learning_rate = 0.001
+[CONFIG] batch_size = 128
+[CONFIG] display_step = 50
+[CONFIG] n_threads = 2
+[CONFIG] resume = False
+[CONFIG] profiling = False
+[CONFIG] add = 1
+[CONFIG] checkpoint_step = 1000
+[CONFIG] max_checkpoint_step = 5000
+[CONFIG] window_step_predict = 10
+[CONFIG] save_sac = False
+[INFO] LAYER input shape = 1x1001x1
+[INFO] LAYER conv1 shape = 1x501x32
+[INFO] LAYER max_pool1 shape = 1x251x32
+[INFO] LAYER conv2 shape = 1x126x32
+[INFO] LAYER max_pool2 shape = 1x63x32
+[INFO] LAYER conv3 shape = 1x32x32
+[INFO] LAYER max_pool3 shape = 1x16x32
+[INFO] LAYER conv4 shape = 1x8x32
+[INFO] LAYER max_pool4 shape = 1x4x32
+bs=1, width=4, aux=32
+[INFO] FC LAYER 1 shape = 1x10
+[INFO] FC LAYER 2 shape = 1x10
+[INFO] FC LAYER LOGITS shape = 1x2
+NUM PARAMS: 63630
+[train] Loaded model at step 5000 from snapshot output/data_prep_datos5/10/CL2/CO1/model14b/checkpoints/model-5000.
+Evaluating at step 5000
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+TRUE POSITIVE: batch_true_label = 0; batch_pred_label[0] = 1
+Evaluation completed (1 epochs).
+280 windows seen
+[INFO] LAYER input shape = 1x1001x1
+[INFO] LAYER conv1 shape = 1x501x32
+[INFO] LAYER max_pool1 shape = 1x251x32
+[INFO] LAYER conv2 shape = 1x126x32
+[INFO] LAYER max_pool2 shape = 1x63x32
+[INFO] LAYER conv3 shape = 1x32x32
+[INFO] LAYER max_pool3 shape = 1x16x32
+[INFO] LAYER conv4 shape = 1x8x32
+[INFO] LAYER max_pool4 shape = 1x4x32
+bs=1, width=4, aux=32
+[INFO] FC LAYER 1 shape = 1x10
+[INFO] FC LAYER 2 shape = 1x10
+[INFO] FC LAYER LOGITS shape = 1x2
+NUM PARAMS: 63630
+[train] Loaded model at step 5000 from snapshot output/data_prep_datos5/10/CL2/CO1/model14b/checkpoints/model-5000.
+Evaluating at step 5000
+Evaluation completed (1 epochs).
+280 windows seen
+[validation] true positives = 73
+[validation] false positives = 207
+[validation] true negatives = 280
+[validation] false negatives = 0
+[validation] precision = 26.0714285714%
+[validation] recall = 100.0%
+[validation] accuracy = 63.0357142857%
+[validation] f1 = 41.3597733711%
+[validation] specificity = 57.4948665298%
+[validation] balanced accuracy = 78.7474332649%
+[validation] location accuracy = 100.0%
+
+
+3. Test UPC-UCV with OKLAHOMA
