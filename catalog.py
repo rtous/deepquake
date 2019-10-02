@@ -28,6 +28,9 @@ class Catalog():
         #nearest_centroid_model.fit(centroids, centroid_numbers)
 
         for metadata_file in metadata_files:
+            #WARNING: Nordic Format lines start with a whitespace and have 80 characters
+            #NORDIC FORMAT: http://seis.geus.net/software/seisan/node240.html
+            #See fields here: https://docs.obspy.org/packages/autogen/obspy.core.event.event.Event.html#obspy.core.event.event.Event
             #1. Process metadata
             print("[preprocessing metadata] Reading metadata file "+os.path.join(input_metadata_dir, metadata_file))
             obspyCatalogMeta = seisobs.seis2cat(os.path.join(input_metadata_dir, metadata_file)) 
@@ -47,13 +50,33 @@ class Catalog():
                 mag = -1 #TODO
             #cluster = nearest_centroid_model.predict([[lat, lon]])[0]
             #e = Event(eventOriginTime, lat, lon, depth, mag, cluster)
-            e = Event(eventOriginTime, lat, lon, depth, mag)
+            eventid = obspyCatalogMeta.events[0].resource_id.id
+            e = Event(eventOriginTime, lat, lon, depth, mag, eventid)
             self.events.append(e)
+            print("APPEND")
             for pick in obspyCatalogMeta.events[0].picks:
                 if pick.phase_hint == 'P':
                     station_code = pick.waveform_id.station_code
                     d = Detection(station_code, pick.time)
                     e.detections.append(d)
+                    print(pick.waveform_id.get_seed_string())
+            #for comment in sobspyCatalogMeta.events[0].comment:
+            #    print("COMMENT:"+comment)
+
+            #print("ID:")
+            #print obspyCatalogMeta.events[0].resource_id.id
+            #print obspyCatalogMeta.events[0].event_descriptions
+            #for desc in obspyCatalogMeta.events[0].event_descriptions:
+            #    print("DESC:"+str(desc.text))
+            #print("CATALOG:"+obspyCatalogMeta.description)
+            #print("COMMENTS:")
+            #for ccomment in obspyCatalogMeta.comments:
+            #    print("ccomment:"+ccomment)
+            #print("CATALOG:"+obspyCatalogMeta.description)
+            #print obspyCatalogMeta.resource_id.get_referred_object()
+            #print obspyCatalogMeta.creation_info.agency_uri
+
+
 
     def import_txt(self, input_txtfile_path):
         #This imports a summary containing only locations and origin times for events in txt with tab delimiters
@@ -90,12 +113,15 @@ class Catalog():
         with open(path, 'w') as f:
             jevents = {"events":[]}  
             for e in self.events:
+                print("FOUND EVENT")
                 jevent = {"detections":[]}
                 jevent["eventOriginTime"] = str(e.eventOriginTime)
                 jevent["lat"] = e.lat
                 jevent["lon"] = e.lon
                 jevent["depth"] = e.depth
                 jevent["mag"] = e.mag
+                jevent["eventid"] = e.eventid
+
                 #jevent["cluster"] = e.cluster
                 for d in e.detections:
                     jevent["detections"].append({"station":d.station, "ptime":str(d.ptime)})
@@ -117,7 +143,7 @@ class Catalog():
             jdata = json.load(f)
             for jevent in jdata['events']:
                 #e = Event(UTCDateTime(jevent['eventOriginTime']), jevent['lat'], jevent['lon'], jevent['depth'], jevent['mag'], jevent['cluster'])
-                e = Event(UTCDateTime(jevent['eventOriginTime']), jevent['lat'], jevent['lon'], jevent['depth'], jevent['mag'])
+                e = Event(UTCDateTime(jevent['eventOriginTime']), jevent['lat'], jevent['lon'], jevent['depth'], jevent['mag'], jevent['eventid'])
                 self.events.append(e)
                 for jdetection in jevent['detections']:
                     d = Detection(jdetection['station'], UTCDateTime(jdetection['ptime']))
@@ -154,13 +180,15 @@ class Catalog():
 
 class Event():
     #def __init__(self, eventOriginTime, lat, lon, depth, mag, cluster):
-    def __init__(self, eventOriginTime, lat, lon, depth, mag):
+    def __init__(self, eventOriginTime, lat, lon, depth, mag, eventid):
         self.eventOriginTime = eventOriginTime
         self.lat = lat
         self.lon = lon
         self.depth = depth
         self.detections = [] 
         self.mag = mag
+        self.eventid = eventid
+
         #self.cluster = cluster
 
 class Detection():

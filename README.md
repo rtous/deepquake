@@ -33,9 +33,11 @@ Install all the dependencies listed within requirements.txt:
 
 	xargs -L 1 pip install < requirements.txt
 
-NOTE: According to the ConvNetQuake repo they used tensorflow 0.11. We tried with 0.12 and it works. However, this version is very old (currently 1.12) and we plan updating at some point.
+*NOTE: According to the ConvNetQuake repo they used tensorflow 0.11. We tried with 0.12 and it works. However, this version is very old (currently 1.12) and we plan updating at some point.
 
 ### 1.2 Prepare the input data (pre-pre-processing)
+
+*NOTE: The raw data used here (both the files with the waveforms and the metadata) comes from comes from (https://www.geosig.com/files/GS_SEISAN_9_0_1.pdf)[SEISAN], a seismic analysis software suite.
 
 We work with multiple datasets (currently "datos1", "datos2" and "datos3"). Each dataset must be located within the "input" folder (from the root of the repo) and must have the following structure:
 
@@ -66,7 +68,7 @@ Let's start by plotting different variants of valid input .mseed files:
 
 ### 1.2.2 sfiles metadata
 
-While the .mseed files include some metadata (station code and times basically) the information of the events (origin, magnitude, P-wave arrival at each station) need to be located in seisan s-files (Nordic format). If you need to do a pre-pre-processing (dealing with new, raw data) you need to consider the following:
+While the .mseed files include some metadata (station code and times basically) the expert-generated metadata (the groundtruth) about the events (origin, magnitude, P-wave arrival at each station) is located in SEISAN's s-files (in Nordic format). If you need to do a pre-pre-processing (dealing with new, raw data) you need to consider the following:
 
 * The sfile filename MUST have the format 01-1259-00M.S201804 (for 01/04/2018 at 12:59). 
 * Internally an sfile should have (at least) the kind of structure that you will find in the sfiles in the "datos3" dataset.
@@ -78,7 +80,11 @@ You can inspect the content of an S-File metadata with the utility "util_inspect
 	
 	python util_inspect_sfile.py --stream_path input/datos3/sfiles_nordicformat/01-0000-00M.S200601 --output_path output/quickstart/metadata.xml
 
-NOTE: Don't worry about the sfiles complexity, during the preprocessing we will convert all the messy sfiles of each dataset into a single and simple .json file with our own metadata format.
+*NOTE: Don't worry about the sfiles complexity, during the preprocessing we will convert all the messy sfiles of each dataset into a single and simple .json file with our own metadata format.
+
+*NOTE: SEISAN programs produce output files with the extension .out preceded by the name of the program. The original groundtruth metadata used here were obtained with the SEISAN's SELECT tool, which generates a file named select.out. From this file, we extracted the desired Nordic format fragments with:
+
+	grep -e "2019 \|2019-\|BAUV HZ\|BENV HZ\|MAPV HZ\|TACV HZ\|^[[:space:]]*$" select.out > arrival_times_v2.txt
 
 ## 2 A full execution cycle (preprocessing -> training -> evaluation)
 

@@ -308,7 +308,11 @@ class Seisob(object):
                     self.warn(msg)
                     continue
                 df.loc[len(df)] = {'linetype':slin.slinetype, 'series':slin.sseries}
-        self._validate_sdf(df, sfile)
+        try:
+            self._validate_sdf(df, sfile)
+        except (ValueError):
+            print("load_sfile_into_df: ERROR:"+str(ValueError))
+            raise
         return df
     
     def _load_event(self, sdf, sfile):
@@ -327,9 +331,26 @@ class Seisob(object):
         evdi['origins'] = origins
         evdi['magnitudes'] = magnitudes
         evdi['amplitudes'] = amplitudes   
-        evdi['resource_id'] = self._gen_event_resource_id(sfile)
+        #evdi['resource_id'] = self._gen_event_resource_id(sfile)
         evdi['comments'] = self.get_comments(sdf)
+        
+
+
+        #RUBEN########
+        print("PICKING FILE NAME!")
+        df6 = sdf2df(sdf, '6', self)
+        print(df6)
+        print("MSEED="+df6.iloc[0].mseed)
+        com = obspy.core.event.Comment(text=df6.iloc[0].mseed)
+        evdi['comments'].append(com)
+        print(evdi['comments'])
+        ############
+
         evdi['event_descriptions'] = self._make_description(sdf)
+        #evdi['event_descriptions'] = obspy.core.event.EventDescription(df6.iloc[0].mseed)
+        evdi['resource_id'] = obspy.core.event.ResourceIdentifier(df6.iloc[0].mseed)
+        
+
         eve = obspy.core.event.Event(**evdi)
         # set preferred origin and magnitudes
         if len(origins):
@@ -664,6 +685,7 @@ class Seisob(object):
                     yield os.path.join(normpath, fil)
     
     def _validate_sdf(self, sdf, sfile):
+        print("_validate_sdf")
         """
         Function to validate the seisan dataframes
         """
@@ -720,6 +742,7 @@ class Sline(object):
     object for storing sline info.
     """
     def __init__(self, sline=None, validate=True, seiob=None):
+        print("Sline")
         self.slinetype = None
         self.sseries = None
         self.seiob = seiob
@@ -727,7 +750,11 @@ class Sline(object):
             msg = 'sline must be a string or None'
             raise ValueError(msg)
         if sline:
-            self.read_line(sline, validate)
+            try:
+                self.read_line(sline, validate)
+            except ValueError:
+                print("failed to read_line")
+                raise
         
     def read_line(self, sline, validate):
         """
@@ -741,7 +768,11 @@ class Sline(object):
             the specs module
         """
         sline = sline.rstrip(os.linesep)
-        ltype = self._classify_line(sline)
+        try:
+            ltype = self._classify_line(sline)
+        except ValueError:
+            raise
+
         self.slinetype = ltype
         self.sline = sline
         if ltype == '4':
@@ -786,8 +817,8 @@ class Sline(object):
         """
         if len(sline) != 80:
             msg = 'the following line did not have 80 characters % s' % sline
+            print(msg)
             raise ValueError(msg)
-
         elif sline[79] == ' ':
             return '4'
         elif len(sline.strip()) < 1:
@@ -796,6 +827,7 @@ class Sline(object):
             return sline[79]
             
     def load_sfile_stream(self, arg):
+        print("load_sfile_stream")
         """
         Function to load the seisan file linked to an s-file into an obspy 
         stream
@@ -866,6 +898,7 @@ def _sdf2df_helper(sdf, linetype):
     df = pd.DataFrame(columns=cols)
     for ind, row in sdflt.iterrows():
         df.loc[len(df)] = row.series
+        #print(row.series)
     return df
     
 ## Assign_wfid_methods, four functions for getting nslc codes
