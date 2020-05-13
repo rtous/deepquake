@@ -41,11 +41,19 @@ from obspy.core.utcdatetime import UTCDateTime
 import logging
 import catalog
 
+from sys import getsizeof
+import os
+import psutil
+import inspect
+
 evaluation = False
 truePositives = 0
 falsePositives = 0
 trueNegatives = 0
 falseNegatives = 0
+
+perf_total_time = 0
+perf_total_predictions = 0
 
 def customPlot(st, outfile, predictions, windowsMissed, true_positive_dic, false_positive_dic, false_negative_dic, showMissed=False, ):
     fig = plt.figure()
@@ -89,6 +97,9 @@ def customPlot(st, outfile, predictions, windowsMissed, true_positive_dic, false
 def main(args):    
     global evaluation
 
+    global perf_total_predictions
+    global perf_total_time
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     if not os.path.exists(checkpoint_dir):
@@ -109,7 +120,21 @@ def main(args):
                        checkpoint_dir,
                        is_training=False)
     sess = tf.Session() 
+
+    #memory
+    process = psutil.Process(os.getpid())
+    mi = process.memory_info()
+    rss_before, vms_before = mi.rss, mi.vms
+    ###
+
     model.load(sess)
+
+    mi = process.memory_info()
+    rss_after, vms_after = mi.rss, mi.vms
+    print("Size of model (megas) = "+str((rss_after-rss_before)/1000000.0))
+    print("Size of model (megas) = "+str((vms_after-vms_before)/1000000.0))
+    #print("Size of model (megas) = "+str((shared_after-shared_before)/1000000))
+
     print '[classify] Evaluating using model at step {}'.format(
             sess.run(model.global_step))
 
@@ -120,6 +145,8 @@ def main(args):
         print ("[classify] \033[91m ERROR!!\033[0m No files match the file pattern "+args.pattern+".")
         sys.exit(0)
 
+
+    
     for stream_file in stream_files:
     	stream_file_without_extension = os.path.split(stream_file)[-1].split(".mseed")[0]
         if args.catalog_path is None:
@@ -154,6 +181,7 @@ def main(args):
         #cat = load_catalog(metadata_path)
         #cat = filter_catalog(cat)
     sess.close()
+    print("Average time per prediction in secs = "+str(perf_total_time/perf_total_predictions))
 
     if evaluation:
         print("[classify] true positives = "+str(truePositives))
@@ -183,6 +211,9 @@ def predict(path, stream_file, sess, model, samples, cat):
     global falsePositives
     global trueNegatives
     global falseNegatives
+
+    global perf_total_predictions
+    global perf_total_time
 
     # Load stream
     stream_path = path+"/"+stream_file #TODO join
@@ -324,8 +355,15 @@ def predict(path, stream_file, sess, model, samples, cat):
             if utils.check_stream(win, cfg):
                 feed_dict = {samples['data']: utils.fetch_window_data(win, cfg),
                             samples['cluster_id']: np.array([0])}
+                perf_start_time = time.time()
                 sample, class_prob_, cluster_id = sess.run(to_fetch,
                                                         feed_dict)
+                perf_end_time = time.time()
+                perf_elapsed_time = perf_end_time - perf_start_time
+                perf_total_time = perf_total_time + perf_elapsed_time
+                perf_total_predictions = perf_total_predictions + 1
+                print("Prediction time = "+str(perf_elapsed_time))
+                print("Average time per prediction in secs = "+str(perf_total_time/perf_total_predictions))
             else:
                 missed_dic["start_time"].append(win[0].stats.starttime)
                 continue

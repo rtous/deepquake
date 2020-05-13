@@ -35,30 +35,59 @@ Install all the dependencies listed within requirements.txt:
 
 *NOTE: According to the ConvNetQuake repo they used tensorflow 0.11. We tried with 0.12 and it works. However, this version is very old (currently 1.12) and we plan updating at some point.
 
-### 1.2 Prepare the input data (pre-pre-processing)
 
-*NOTE: The raw data used here (both the files with the waveforms and the metadata) comes from comes from (https://www.geosig.com/files/GS_SEISAN_9_0_1.pdf)[SEISAN], a seismic analysis software suite.
+## 2. Running the UPC-UCV model 
 
-We work with multiple datasets (currently "datos1", "datos2" and "datos3"). Each dataset must be located within the "input" folder (from the root of the repo) and must have the following structure:
+You can directly test the UPC-UCV model over a couple of example streams (at input/CARABOBO_lite/mseed) running:
+
+	./scripts/step6_eval_over_mseed.sh CARABOBO_lite 50 2 3 models/model14b models/model14b/config_model14b.ini input/CARABOBO_lite/mseed input/CARABOBO_lite/catalog.json output/test
+
+
+## 3. Training the model over an small demo dataset
+
+	./scripts/step0_metadata.sh CARABOBO_lite
+
+	./scripts/step1_preprocess1_get_windows.sh CARABOBO_lite 50 10
+
+	./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh CARABOBO_lite 50 2 3
+
+	./scripts/step4_and_5_train_and_eval_over_tfrecords.sh CARABOBO_lite 50 2 3 model14b models/model14b/config_model14b_lite.ini
+
+	./scripts/step6_eval_over_mseed.sh CARABOBO_lite 50 2 3 output/data_prep_CARABOBO_lite/50/CL2/CO3/model14b models/model14b/config_model14b.ini input/CARABOBO_lite/mseed input/CARABOBO_lite/catalog.json output/test 
+
+## 4. Training the model over the CARABOBO2019 dataset
+
+First download the CARABOBO2019 dataset and place it within the "input" directory:
+
+	cd input
+
+	git clone https://github.com/rtous/CARABOBO2019.git
+
+Then perform the steps from the previous section replacing "CARABOBO_lite" with "CARABOBO2019".
+
+
+## ANNEX 1. Input data preparation 
+
+The different deepquake tools work over a given DATASET. The input files of a DATASET must be located within the "input" folder (from the root of the repo) and must have the following structure:
 
 ```
 input
-	|-datos1
+	|-DATASET
 		|-mseed
 		|-sfiles_nordicformat
 ```
 
-We call "pre-pre-processing" the process of adapting the raw data provided by the experts into this structure and the proper file formats. The datasets that you will find in the repo are already pre-pre-processed. However, if you need to include a new dataset you should consider the requirements described in the following subsections.
+The CARABOBO2019 dataset is ready to be processed by the deepquake tools. However, in order to process another dataset you should perform the following steps.
 
-NOTE: Currently the input data is part of the repository for convenience. If these data would become too big we would remove them.
+*NOTE: The raw data used here (both the files with the waveforms and the metadata) comes from comes from (https://www.geosig.com/files/GS_SEISAN_9_0_1.pdf)[SEISAN], a seismic analysis software suite.
 
-### 1.2.1 .mseed files
+### A.1 .mseed files
 
 Requirements of the "mseed" folder of a dataset:
 
 * The "mseed" folder contains seismograms in mseed format. All the files MUST have the .mseed extension (you can use the utility "util_add_mseed_extension.py" if you need to fix a new dataset. 
 * All the seismograms should be sampled at 100Hz. 
-* The seismograms can be have the three components (like "datos1") or just one (like "datos2" and "datos3). The seismograms can have waves from multiple stations (like "datos1") or for one station (like "datos2" and "datos3"). The code is ready to deal with the different variants automatically. 
+* The seismograms can be have the three components or just one. The seismograms can have waves from multiple stations or for one station. The code is ready to deal with the different variants automatically. 
 * The code will not work if each components of a seismogram is located in a different file. You can use "util_join_components.py" to fix that.
 
 Let's start by plotting different variants of valid input .mseed files:
@@ -66,7 +95,7 @@ Let's start by plotting different variants of valid input .mseed files:
 	python util_plot_mseed.py --stream_path input/datos3/mseed/2018-03-03-1929-00M.BENV__001_HH_1Z.mseed --output_dir output/plots
 	python util_plot_mseed.py --stream_path input/datos1/mseed/2015-01-10-0517-00S.mseed --output_dir output/quickstart
 
-### 1.2.2 sfiles metadata
+### A.2 sfiles metadata
 
 While the .mseed files include some metadata (station code and times basically) the expert-generated metadata (the groundtruth) about the events (origin, magnitude, P-wave arrival at each station) is located in SEISAN's s-files (in Nordic format). If you need to do a pre-pre-processing (dealing with new, raw data) you need to consider the following:
 
@@ -85,6 +114,10 @@ You can inspect the content of an S-File metadata with the utility "util_inspect
 *NOTE: SEISAN programs produce output files with the extension .out preceded by the name of the program. The original groundtruth metadata used here were obtained with the SEISAN's SELECT tool, which generates a file named select.out. From this file, we extracted the desired Nordic format fragments with:
 
 	grep -e "2019 \|2019-\|BAUV HZ\|BENV HZ\|MAPV HZ\|TACV HZ\|^[[:space:]]*$" select.out > arrival_times_v2.txt
+
+
+	python util_bigsfile2sfiles.py --bigsfile_path input/CARABOBO2019 --output_path input/CARABOBO2019/sfiles_nordicformat
+
 
 ## 2 A full execution cycle (preprocessing -> training -> evaluation)
 

@@ -1,10 +1,16 @@
 #!/bin/bash
 
-#./experiments/step0_metadata.sh
+#./experiments/step0_metadata.sh [preprocessing dir name]
+
+DATA_PREP_MAIN_DIR_NAME=data_prep_$1
+
+echo "python step0_preprocess0_metadata.py \
+--input_path input/$DATA_PREP_MAIN_DIR_NAME/sfiles_nordicformat \
+--output_path output/$DATA_PREP_MAIN_DIR_NAME/catalog.json"
 
 python step0_preprocess0_metadata.py \
---input_path input/datos5/sfiles_nordicformat \
---output_path output/data_prep_datos5/catalog.json
+--input_path input/$1/sfiles_nordicformat \
+--output_path output/$DATA_PREP_MAIN_DIR_NAME/catalog.json
 
 #python step0_preprocess0_metadata.py \
 #--input_path input/datos1/sfiles_nordicformat \

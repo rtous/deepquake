@@ -8,6 +8,7 @@ import fnmatch
 import seisobs #https://github.com/d-chambers/seisobs
 import sys 
 import csv
+import traceback
 #from sklearn.neighbors.nearest_centroid import NearestCentroid
 
 class Catalog():
@@ -15,7 +16,7 @@ class Catalog():
     def __init__(self):
         self.events = []
    
-    def import_sfiles(self, input_metadata_dir):
+    def import_sfiles(self, input_metadata_dir): #NEW VERSION
         #This imports a nordic format sfile into our own catalog object
         print ("[preprocessing metadata] \033[94m INFO:\033[0m Remember that sfiles need to have names such as 01-1259-00M.S201804")
         metadata_files = [file for file in os.listdir(input_metadata_dir) if
@@ -27,56 +28,60 @@ class Catalog():
         #nearest_centroid_model = NearestCentroid()
         #nearest_centroid_model.fit(centroids, centroid_numbers)
 
-        for metadata_file in metadata_files:
+        for metadata_file in metadata_files: 
             #WARNING: Nordic Format lines start with a whitespace and have 80 characters
             #NORDIC FORMAT: http://seis.geus.net/software/seisan/node240.html
             #See fields here: https://docs.obspy.org/packages/autogen/obspy.core.event.event.Event.html#obspy.core.event.event.Event
             #1. Process metadata
             print("[preprocessing metadata] Reading metadata file "+os.path.join(input_metadata_dir, metadata_file))
-            obspyCatalogMeta = seisobs.seis2cat(os.path.join(input_metadata_dir, metadata_file)) 
-            
-            if len(obspyCatalogMeta.events) == 0 :
-                print ("[preprocessing metadata] \033[91m ERROR!!\033[0m Cannot process metadata sfile "+os.path.join(input_metadata_dir, metadata_file))
-                sys.exit(0)
 
-            #print("[preprocessing metadata] Imported sfile "+str(obspyCatalogMeta.events[0]))
-            eventOriginTime = obspyCatalogMeta.events[0].origins[0].time
-            lat = obspyCatalogMeta.events[0].origins[0].latitude
-            lon = obspyCatalogMeta.events[0].origins[0].longitude
-            depth = obspyCatalogMeta.events[0].origins[0].depth
-            if len(obspyCatalogMeta.events[0].magnitudes) > 0:
-                mag = obspyCatalogMeta.events[0].magnitudes[0].mag
-            else:
-                mag = -1 #TODO
-            #cluster = nearest_centroid_model.predict([[lat, lon]])[0]
-            #e = Event(eventOriginTime, lat, lon, depth, mag, cluster)
-            eventid = obspyCatalogMeta.events[0].resource_id.id
-            e = Event(eventOriginTime, lat, lon, depth, mag, eventid)
-            self.events.append(e)
-            print("APPEND")
-            for pick in obspyCatalogMeta.events[0].picks:
-                if pick.phase_hint == 'P':
-                    station_code = pick.waveform_id.station_code
-                    d = Detection(station_code, pick.time)
-                    e.detections.append(d)
-                    print(pick.waveform_id.get_seed_string())
-            #for comment in sobspyCatalogMeta.events[0].comment:
-            #    print("COMMENT:"+comment)
+            try:
+                obspyCatalogMeta = seisobs.seis2cat(os.path.join(input_metadata_dir, metadata_file)) 
+                
+                if len(obspyCatalogMeta.events) == 0 :
+                    print ("[preprocessing metadata] \033[91m ERROR!!\033[0m Cannot process metadata sfile "+os.path.join(input_metadata_dir, metadata_file))
+                    sys.exit(0)
 
-            #print("ID:")
-            #print obspyCatalogMeta.events[0].resource_id.id
-            #print obspyCatalogMeta.events[0].event_descriptions
-            #for desc in obspyCatalogMeta.events[0].event_descriptions:
-            #    print("DESC:"+str(desc.text))
-            #print("CATALOG:"+obspyCatalogMeta.description)
-            #print("COMMENTS:")
-            #for ccomment in obspyCatalogMeta.comments:
-            #    print("ccomment:"+ccomment)
-            #print("CATALOG:"+obspyCatalogMeta.description)
-            #print obspyCatalogMeta.resource_id.get_referred_object()
-            #print obspyCatalogMeta.creation_info.agency_uri
+                #print("[preprocessing metadata] Imported sfile "+str(obspyCatalogMeta.events[0]))
+                eventOriginTime = obspyCatalogMeta.events[0].origins[0].time
+                lat = obspyCatalogMeta.events[0].origins[0].latitude
+                lon = obspyCatalogMeta.events[0].origins[0].longitude
+                depth = obspyCatalogMeta.events[0].origins[0].depth
+                if len(obspyCatalogMeta.events[0].magnitudes) > 0:
+                    mag = obspyCatalogMeta.events[0].magnitudes[0].mag
+                else:
+                    mag = -1 #TODO
+                #cluster = nearest_centroid_model.predict([[lat, lon]])[0]
+                #e = Event(eventOriginTime, lat, lon, depth, mag, cluster)
+                eventid = obspyCatalogMeta.events[0].resource_id.id
+                e = Event(eventOriginTime, lat, lon, depth, mag, eventid)
+                self.events.append(e)
+                #print("APPEND")
+                for pick in obspyCatalogMeta.events[0].picks:
+                    if pick.phase_hint == 'P':
+                        station_code = pick.waveform_id.station_code
+                        d = Detection(station_code, pick.time)
+                        e.detections.append(d)
+                        #print(pick.waveform_id.get_seed_string())
+                #for comment in sobspyCatalogMeta.events[0].comment:
+                #    print("COMMENT:"+comment)
 
-
+                #print("ID:")
+                #print obspyCatalogMeta.events[0].resource_id.id
+                #print obspyCatalogMeta.events[0].event_descriptions
+                #for desc in obspyCatalogMeta.events[0].event_descriptions:
+                #    print("DESC:"+str(desc.text))
+                #print("CATALOG:"+obspyCatalogMeta.description)
+                #print("COMMENTS:")
+                #for ccomment in obspyCatalogMeta.comments:
+                #    print("ccomment:"+ccomment)
+                #print("CATALOG:"+obspyCatalogMeta.description)
+                #print obspyCatalogMeta.resource_id.get_referred_object()
+                #print obspyCatalogMeta.creation_info.agency_uri
+                print ("\033[92mSuccessfully processed: "+metadata_file+"...\033[0m ")
+            except:
+                print ("\033[91mCannot process file: "+metadata_file+"...\033[0m ")
+                traceback.print_exc()
 
     def import_txt(self, input_txtfile_path):
         #This imports a summary containing only locations and origin times for events in txt with tab delimiters
