@@ -97,7 +97,7 @@ Run the following command:
 
 Alternatively, you can use the following script:
 
-./scripts/step1_preprocess1_get_windows.sh CARABOBO_lite 50 10
+	./scripts/step1_preprocess1_get_windows.sh CARABOBO_lite 50 10
 
 Check the contents of the "output/data_prep_quickstart/10 directory". You will find:
 
@@ -166,7 +166,7 @@ Run the following:
 
 Alternatively, you can use the following script to generate the tfrecords for both, the positives and the negatives:
 
-./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh CARABOBO_lite 50 2 3
+	./scripts/step2_and_3_preprocess2_and_3_create_tfrecords.sh CARABOBO_lite 50 2 3
 
 ### 5.4 Step 4. Train
 
@@ -179,7 +179,7 @@ Let's do a short training with the UPC-UCV model. We will use a special configur
 	--tfrecords_dir output/data_prep_CARABOBO_lite/50/CL2/CO3/tfrecords \
 	--checkpoint_dir output/data_prep_CARABOBO_lite/50/CL2/CO3/model14b/checkpoints
 
-### 2.5 Step 5. Eval
+### 5.5 Step 5. Eval
 
 Let's eval the generated model against the test dataset (20% of the data):
 
