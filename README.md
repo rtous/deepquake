@@ -3,7 +3,7 @@
 ## 1 Introduction
 
 This repository contains code for applying a deep convolutional neural network, called UPC-UCV, over single-station three-channel
-signal windows for P-wave earthquake detection and source region estimation in north central Venezuela. 
+signal windows for P-wave earthquake detection and source region estimation in north central Venezuela. The model is optimized and trained for the [CARABOBO2019](https://github.com/rtous/CARABOBO2019) dataset but it can be trained over other datasets as well. 
 
 ## 2 Acknowledgements
 
