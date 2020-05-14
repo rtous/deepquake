@@ -1,8 +1,28 @@
 # DeepQuake
 
-## 1 Setup
+## 1 Introduction
 
-### 1.1 Setup environment (local machine)
+This repository contains code for applying a deep convolutional neural network, called UPC-UCV, over single-station three-channel
+signal windows for P-wave earthquake detection and source region estimation in north central Venezuela. 
+
+## 2 Acknowledgements
+
+If you find this repository useful for your research, please cite the original publication:
+
+
+	@article{Tous2020,
+	    author = {R. Tous and L. Alvarado and B. Otero and L. Cruz and O. Rojas},
+	    title = {Deep Neural Networks for Earthquake Detection and Source Region Estimation in North Central Venezuela},
+	    journal = {Bulletin of the Seismological Society of America},
+	    number = {?},
+	    pages = {?--?},
+	    volume = {?},
+	    year = {2020}
+	}
+
+## 3 Setup
+
+### 3.1 Setup environment (local machine)
 
 WARNING: This repository only works with Python 2.7. 
 
@@ -36,7 +56,7 @@ Install all the dependencies listed within requirements.txt:
 *NOTE: According to the ConvNetQuake repo they used tensorflow 0.11. We tried with 0.12 and it works. However, this version is very old (currently 1.12) and we plan updating at some point.
 
 
-## 2. Running the UPC-UCV model 
+## 4. Quick start: running the UPC-UCV model 
 
 You can directly test the UPC-UCV model over a couple of example streams (at input/CARABOBO_lite/mseed) running:
 
@@ -79,7 +99,7 @@ input
 
 The CARABOBO2019 dataset is ready to be processed by the deepquake tools. However, in order to process another dataset you should perform the following steps.
 
-*NOTE: The raw data used here (both the files with the waveforms and the metadata) comes from comes from (https://www.geosig.com/files/GS_SEISAN_9_0_1.pdf)[SEISAN], a seismic analysis software suite.
+*NOTE: The raw data used here (both the files with the waveforms and the metadata) comes from (https://www.geosig.com/files/GS_SEISAN_9_0_1.pdf)[SEISAN], a seismic analysis software suite.
 
 ### A.1 .mseed files
 
