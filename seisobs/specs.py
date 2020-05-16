@@ -78,6 +78,7 @@ def validate1(ser):
     """
     Validation methods for linetype 1
     """
+    #print("validate1 "+str(ser))
     if not set(cn1).issubset(ser.index):
         msg = 'series does not have correct indicies'
         raise ValueError(msg)
@@ -89,8 +90,18 @@ def validate1(ser):
     
 specs['1'] = Spec(cs1, cn1, cf1, validate1)
 
+# format for line type 6
+cs6 = [(0,79), (79,80)]
+cn6 = ['mseed', 'linetype']
+cf6 = ['%s', '%s']
+
+def validate6(ser):
+    pass
+    
+specs['6'] = Spec(cs6, cn6, cf6, validate6)
+
 ## Format for line type 3 (comment) and other lines that arent used
-lines_not_used = ['2','5', '6', '7', '8', '9', 'A']
+lines_not_used = ['2','5','7', '8', '9', 'A']
 
 cs3 = [(0,79), (79,80)]
 cn3 = ['comment', 'linetype']
@@ -100,6 +111,7 @@ def validate3(ser):
     """
     validation params for linetype 3
     """
+    #print("validating "+ser)
     pass # nothing to see here folks, move along
     
 specs['3'] = Spec(cs3, cn3, cf3, validate3)

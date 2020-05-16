@@ -73,7 +73,7 @@ In this step you will generate the catalog.json file from a source catalog in No
 Run the following command (ignore the warnings):
 
 	python step0_preprocess0_metadata.py \
-	--input_path input/CARABOBO_lite /sfiles_nordicformat \
+	--input_path input/CARABOBO_lite/sfiles_nordicformat \
 	--output_path output/data_prep_CARABOBO_lite/catalog.json
 
 Check the content of the output/data_prep_CARABOBO_lite/catalog.json file. 
