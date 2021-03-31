@@ -18,7 +18,7 @@ tqdm==4.9.0
 python-gflags==3.1.2
 configparser==3.5.0
 requests==2.19.1
-lxml==4.2.1
+lxml==4.6.3
 obspy==1.0.2 
 EQcorrscan==0.1.6
 -e git+https://github.com/gem/oq-hazardlib.git@589fa31ddca3697e6b167082136dc0174a77bc16#egg=openquake.hazardlib
